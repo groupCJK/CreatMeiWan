@@ -283,6 +283,8 @@
     }else if (IS_IPHONE_6P){
         userImage.frame = CGRectMake(0, 0, dtScreenWidth/2-5, 200);
     }
+    userImage.contentMode = UIViewContentModeScaleAspectFill;
+    userImage.clipsToBounds = YES;
     [self addSubview:userImage];
     self.Head = userImage;
     UIImageView * huabian = [[UIImageView alloc]initWithFrame:CGRectMake(0, _Head.frame.size.height-2, _Head.frame.size.width, 2)];
