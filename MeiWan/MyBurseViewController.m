@@ -53,7 +53,7 @@
             if (status == 0) {
                 self.userDic = [json objectForKey:@"entity"];
                 self.balance.text = [NSString stringWithFormat:@"%.1f",[[self.userDic objectForKey:@"money"]doubleValue]];
-                self.TopUp.text = [NSString stringWithFormat:@"%@",self.userDic[@"money2"]];
+                self.TopUp.text = [NSString stringWithFormat:@"%.2f",[self.userDic[@"money2"] doubleValue]];
                 self.phone.text = self.userDic[@"alipayUsername"];
 
             }else if(status == 1){

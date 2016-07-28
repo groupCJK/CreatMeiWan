@@ -980,6 +980,64 @@ import UIKit
     
     }
     
+    public static func payWithAccountMoney(session:String!,peiwanId:NSNumber!,price:NSNumber!,hours:NSNumber!,tagIndex:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
+    
+        var parameters:Dictionary<String,AnyObject> = [:]
+        
+        if(session != nil){
+            parameters["session"]=session
+        }
+        if(price != nil){
+            parameters["peiwanId"]=peiwanId
+        }
+        if(price != nil){
+            parameters["price"]=price
+        }
+        if(price != nil){
+            parameters["hours"]=hours
+        }
+        if(price != nil){
+            parameters["tagIndex"]=tagIndex
+        }
+        
+        request(.GET, orderUrl+"payWithAccountMoney", parameters:parameters as? [String : NSObject])
+            .response { request, r, data, error in
+                
+                receiver(data:data!.gunzippedData(), error:error)
+        }
+
+
+    }
+    
+    public static func aliOrderSign(session:String!,peiwanId:NSNumber!,price:NSNumber!,hours:NSNumber!,tagIndex:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
+        
+        var parameters:Dictionary<String,AnyObject> = [:]
+        
+        if(session != nil){
+            parameters["session"]=session
+        }
+        if(price != nil){
+            parameters["peiwanId"]=peiwanId
+        }
+        if(price != nil){
+            parameters["price"]=price
+        }
+        if(price != nil){
+            parameters["hours"]=hours
+        }
+        if(price != nil){
+            parameters["tagIndex"]=tagIndex
+        }
+        
+        request(.GET, orderUrl+"aliOrderSign", parameters:parameters as? [String : NSObject])
+            .response { request, r, data, error in
+                
+                receiver(data:data!.gunzippedData(), error:error)
+        }
+        
+        
+    }
+
     
 }
 

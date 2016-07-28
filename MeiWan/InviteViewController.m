@@ -17,6 +17,8 @@
 #import "AliHelper.h"
 #import "setting.h"
 #import "PrepaidViewController.h"
+#import <AlipaySDK/AlipaySDK.h>
+
 
 @interface InviteViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,MBProgressHUDDelegate>
 {
@@ -57,6 +59,7 @@
 @property (nonatomic,assign) NSInteger tagIndex;
 @property (nonatomic,assign) int isWin;
 @property (nonatomic,strong) NSDictionary * orderInfoDic;
+@property (nonatomic,assign) CGFloat price;
 
 @end
 
@@ -397,54 +400,10 @@
         if ([[self.playerInfo objectForKey:@"isAudit"]intValue] == 0) {
             [ShowMessage showMessage:@"你所邀请的人没有经过资质审核"];
         }else{
-            //NSLog(@"%@",[self.playerInfo objectForKey:@"id"]);
-            MBProgressHUD*HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            HUD.delegate = self;
             
-            //常用的设置
-            //小矩形的背景色
-            HUD.color = [UIColor grayColor];//这儿表示无背景
-            //显示的文字
-            HUD.labelText = @"正在创建订单，请稍候";
-            //是否有庶罩
-            HUD.dimBackground = NO;
-            //NSLog(@"%d",self.playTime);
-            NSString *session = [PersistenceManager getLoginSession];
-            [UserConnector createOrder2:session peiwanId:[self.playerInfo objectForKey:@"id"] price:[NSNumber numberWithFloat:self.myRice] tagIndex:[NSNumber numberWithInteger:self.tagIndex] hours:[NSNumber numberWithInt:self.playTime]  receiver:^(NSData *data,NSError *error){
-                if (error) {
-                    [ShowMessage showMessage:@"服务器未响应"];
-                }else{
-                    SBJsonParser*parser=[[SBJsonParser alloc]init];
-                    NSMutableDictionary *json=[parser objectWithData:data];
-                    int status = [[json objectForKey:@"status"]intValue];
-                    NSLog(@"json%@",json);
-                    if (status == 0) {
-                        [HUD hide:YES afterDelay:0];
-                        self.orderInfoDic = [json objectForKey:@"entity"];
-                        NSDictionary *userInfo = [self.orderInfoDic objectForKey:@"user"];
-                        NSLog(@"orderinfodic%@",self.orderInfoDic);
-                        double count = [[userInfo objectForKey:@"money"]doubleValue];;
-                        NSString * money = [NSString stringWithFormat:@"余额（💰%.1f)",count];
-                        UIAlertView *payAlertView = [[UIAlertView alloc]initWithTitle:@"选择支付方式" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:money,@"支付宝",nil];
-                        [payAlertView show];
-                        //[self.navigationController popViewControllerAnimated:YES];
-                    }else if (status == 1){
-                        [HUD hide:YES afterDelay:0];
-                        [PersistenceManager setLoginSession:@""];
-                        LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
-                        lv.hidesBottomBarWhenPushed = YES;
-                        [self.navigationController pushViewController:lv animated:YES];
-                    }else if (status == 2){
-                        [HUD hide:YES afterDelay:0];
-                        [ShowMessage showMessage:@"教官不能对教官下单"];
-                    }else if (status == 3){
-                        [HUD hide:YES afterDelay:0];
-                        [ShowMessage showMessage:@"你所邀请的人没有经过资质审核"];
-                    }else{
-                        [HUD hide:YES afterDelay:0];
-                    }
-                }
-            }];
+            UIAlertView *payAlertView = [[UIAlertView alloc]initWithTitle:@"选择支付方式" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"余额支付",@"支付宝",nil];
+            
+            [payAlertView show];
         }
         
     }else{
@@ -460,9 +419,10 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) {
         
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"余额支付" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"如果使用余额支付,系统将会在您的余额中扣除费用。" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
         UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            //余额支付
             [self banecePay];
             
         }];
@@ -474,22 +434,7 @@
         
     }else if(buttonIndex == 2){
         //支付宝支付
-        NSLog(@"feiyong = %@",self.allRice.text);
-        double money = [self.allRice.text intValue];
-        [AliHelper aliPay:[[self.orderInfoDic objectForKey:@"id"]integerValue] price:money callback:^(NSDictionary *result){
-            NSInteger  resultNum= [[result objectForKey:@"resultStatus"]integerValue];
-            NSLog(@"%ld",(long)resultNum);
-            if (resultNum == 9000) {
-                
-                [ShowMessage showMessage:@"支付成功"];
-                [self.navigationController popViewControllerAnimated:YES];
-                
-            }else{
-                
-                [ShowMessage showMessage:@"支付失败"];
-                
-            }
-        }];
+        [self aliPay];
     }
     
 }
@@ -497,31 +442,120 @@
 - (void)banecePay
 {
     NSString *session = [PersistenceManager getLoginSession];
-    [UserConnector payWithAccountMoney:session orderId:[self.orderInfoDic objectForKey:@"id"] receiver:^(NSData *data, NSError *error){
+    [UserConnector payWithAccountMoney:session peiwanId:[self.playerInfo objectForKey:@"id"] price:[NSNumber numberWithFloat:_riceDownline] hours:[NSNumber numberWithInt:_playTime] tagIndex:[NSNumber numberWithInteger:self.tagIndex] receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        
         if (error) {
-            [ShowMessage showMessage:@"服务器未响应"];
+            
         }else{
-            SBJsonParser *parser = [[SBJsonParser alloc]init];
-            NSMutableDictionary *json = [parser objectWithData:data];
+            SBJsonParser*parser=[[SBJsonParser alloc]init];
+            NSMutableDictionary *json=[parser objectWithData:data];
             int status = [[json objectForKey:@"status"]intValue];
-            if (status == 0) {
-                [ShowMessage showMessage:@"支付成功"];
-                [self.navigationController popViewControllerAnimated:YES];
-            }else if (status == 1){
-                [PersistenceManager setLoginSession:@""];
-                LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
-                lv.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:lv animated:YES];
-                
-            }else if (status == 2){
-                [self showMessageAlert:@"订单状态异常"];
-            }else if (status == 3){
-                [self showMessageAlert2:@"余额不足是否去充值"];
+            switch (status) {
+                case 0:
+                {
+                    [self showMessageAlert:@"支付成功"];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+                    break;
+                case 1:
+                {
+                    /**没有登录*/
+                    [self loginAgain];
+                }
+                    break;
+                    
+                case 2:
+                {
+                    [self showMessageAlert:@"订单的状态异常"];
+                }
+                    break;
+                    
+                case 3:
+                {
+                    [self showMessageAlert:@"余额不足"];
+                }
+                    break;
+                    
+                case 4:
+                {
+                    [self showMessageAlert:@"你邀请的人没有完成达人认证"];
+                }
+                    break;
+                    
+                case 5:
+                {
+                    [self showMessageAlert:@"不能自己对自己下单"];
+                }
+                    break;
+                    
+                    
+                    
+                default:
+                    break;
+            }
+        }
+        
+    }];
+}
+
+- (void)aliPay
+{
+    NSString *session = [PersistenceManager getLoginSession];
+    [UserConnector aliOrderSign:session peiwanId:[self.playerInfo objectForKey:@"id"] price:[NSNumber numberWithFloat:_riceDownline] hours:[NSNumber numberWithInt:_playTime] tagIndex:[NSNumber numberWithInteger:self.tagIndex] receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (error) {
+            
+        }else{
+            SBJsonParser*parser=[[SBJsonParser alloc]init];
+            NSMutableDictionary *json=[parser objectWithData:data];
+            int status = [[json objectForKey:@"status"]intValue];
+            switch (status) {
+                case 0:
+                {
+                    [[AlipaySDK defaultService] payOrder:json[@"entity"] fromScheme:@"meiwan" callback:^(NSDictionary *resultDic) {
+                        
+                        NSInteger  resultNum= [[resultDic objectForKey:@"resultStatus"]integerValue];
+                        
+                        if (resultNum == 9000) {
+                            
+                            [self showMessageAlert:@"支付成功"];
+                            [self.navigationController popViewControllerAnimated:YES];
+                            
+                        }else{
+                            
+                            [self showMessageAlert:@"支付失败"];
+                            
+                        }
+
+                    }];
+                }
+                    break;
+                case 1:
+                {
+                    /**没有登录*/
+                    [self loginAgain];
+                }
+                    break;
+                    
+                case 2:
+                {
+                    [self showMessageAlert:@"你邀请的人没有完成达人认证"];
+                }
+                    break;
+                    
+                case 3:
+                {
+                    [self showMessageAlert:@"不能自己对自己下单"];
+                }
+                    break;
+                    
+                default:
+                    break;
             }
         }
     }];
-
+    
 }
+
 - (void)showMessageAlert:(NSString *)message
 {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
@@ -550,7 +584,14 @@
     [alertController addAction:sureAction];
     [self presentViewController:alertController animated:YES completion:nil];
 }
+- (void)loginAgain
+{
+    [PersistenceManager setLoginSession:@""];
+    LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
+    lv.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:lv animated:YES];
 
+}
 /*
  #pragma mark - Navigation
  

@@ -20,8 +20,6 @@
         [self addSubview:shanchu];
         self.shanchu = shanchu;
         UIImageView * tianjia = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tianjia"]];
-//        UIImage * images = [UIImage imageWithCGImage:[UIImage imageNamed:@"tianjia"].CGImage scale:1 orientation:UIImageOrientationRight];
-//        tianjia.image = images;
         tianjia.frame = CGRectMake([UIScreen mainScreen].bounds.size.width-30, 0, 30, 30);
         [self addSubview:tianjia];
         self.tianjia = tianjia;

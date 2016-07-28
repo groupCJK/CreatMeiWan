@@ -69,7 +69,7 @@
 
 -(void)creatTableView
 {
-    tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 100, Width, Height-64) style:UITableViewStylePlain];
+    tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 100, Width, Height-100) style:UITableViewStylePlain];
     tableview.delegate = self;
     tableview.dataSource = self;
     tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -109,6 +109,7 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     NSArray * imageArray = @[@"sing",@"video-chat",@"dining",@"sing-expert",@"go-nightclubbing",@"guide",@"shadow-with",@"practices",@"lol",@"all"];
     if (tableView == tableview) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"cell_index"];

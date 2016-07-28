@@ -589,7 +589,6 @@
 		2B5805B81D2A386800721653 /* label7.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805AF1D2A386800721653 /* label7.png */; };
 		2B5805B91D2A386800721653 /* label8.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805B01D2A386800721653 /* label8.png */; };
 		2B5805BA1D2A386800721653 /* label9.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805B11D2A386800721653 /* label9.png */; };
-		2B5805BE1D2A509D00721653 /* animationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5805BD1D2A509D00721653 /* animationView.m */; };
 		2B5B7D1E1D38932500CF5354 /* PlagerinfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5B7D1D1D38932500CF5354 /* PlagerinfoViewController.m */; };
 		2B5B7D2A1D3893C700CF5354 /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5B7D211D3893C700CF5354 /* CommentTableViewCell.m */; };
 		2B5B7D2B1D3893C700CF5354 /* FootprintTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5B7D231D3893C700CF5354 /* FootprintTableViewCell.m */; };
@@ -1639,8 +1638,6 @@
 		2B5805AF1D2A386800721653 /* label7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label7.png; sourceTree = "<group>"; };
 		2B5805B01D2A386800721653 /* label8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label8.png; sourceTree = "<group>"; };
 		2B5805B11D2A386800721653 /* label9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label9.png; sourceTree = "<group>"; };
-		2B5805BC1D2A509D00721653 /* animationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = animationView.h; sourceTree = "<group>"; };
-		2B5805BD1D2A509D00721653 /* animationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = animationView.m; sourceTree = "<group>"; };
 		2B5B7D1C1D38932500CF5354 /* PlagerinfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlagerinfoViewController.h; sourceTree = "<group>"; };
 		2B5B7D1D1D38932500CF5354 /* PlagerinfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlagerinfoViewController.m; sourceTree = "<group>"; };
 		2B5B7D201D3893C700CF5354 /* CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewCell.h; sourceTree = "<group>"; };
@@ -3849,8 +3846,6 @@
 		2B5805BB1D2A508100721653 /* animationVIew */ = {
 			isa = PBXGroup;
 			children = (
-				2B5805BC1D2A509D00721653 /* animationView.h */,
-				2B5805BD1D2A509D00721653 /* animationView.m */,
 				2BE25BF61D2B53A400D2AEAF /* animationCell.h */,
 				2BE25BF71D2B53A400D2AEAF /* animationCell.m */,
 			);
@@ -4310,7 +4305,6 @@
 				27F4F7901CF5F09F00A376E0 /* MoveActionViewController.m in Sources */,
 				27F4F7911CF5F09F00A376E0 /* AskForPlayWithViewController.m in Sources */,
 				27F4F7921CF5F09F00A376E0 /* AccusationViewController.m in Sources */,
-				2B5805BE1D2A509D00721653 /* animationView.m in Sources */,
 				18824A541B85D5920063EC03 /* SBJsonWriter.m in Sources */,
 				18CC8EDC1BC39CE1000281CE /* Alamofire.swift in Sources */,
 				2B5B7D2D1D3893C700CF5354 /* TimeLabelTableViewCell.m in Sources */,
