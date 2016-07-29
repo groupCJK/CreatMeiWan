@@ -7,17 +7,22 @@
 //
 
 #import "PersonTableViewController.h"
-#import "CorlorTransform.h"
 #import "UserInfoViewController.h"
 #import "MyMoveActionTableViewController.h"
 #import "AskForPlayWithViewController.h"
 #import "InviteRecordViewController.h"
 #import "MyBurseViewController.h"
 #import "PlayerBeingTableViewController.h"
+#import "FriendListTableViewController.h"
+#import "SettingPlayWithUIViewController.h"
+#import "LoginViewController.h"
+#import "MyBurseViewController.h"
+#import "FocusViewController.h"
+#import "FansViewController.h"
+
 #import "UserInfo.h"
 #import "CWStarRateView.h"
 #import "Meiwan-Swift.h"
-#import "SettingPlayWithUIViewController.h"
 #import "UMUUploaderManager.h"
 #import "NSString+NSHash.h"
 #import "NSString+Base64Encode.h"
@@ -26,33 +31,27 @@
 #import "setting.h"
 #import "RandNumber.h"
 #import "SBJson.h"
-#import "LoginViewController.h"
-#import "MyBurseViewController.h"
 #import "UIImageView+WebCache.h"
 #import "MBProgressHUD.h"
 #import "CompressImage.h"
-#import "setting.h"
-//#import "ECDeviceKit.h"
-@interface PersonTableViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UserInfoDelegate,SettingUserInfoDelegate,MyburseDelegate,MBProgressHUDDelegate>
-@property (strong, nonatomic) IBOutlet UIImageView *myhead;
-@property (strong, nonatomic) IBOutlet UILabel *myid;
-@property (strong, nonatomic) IBOutlet UIView *ageAndSex;
-@property (strong, nonatomic) IBOutlet UIImageView *sexImage;
-@property (strong, nonatomic) IBOutlet UILabel *age;
-@property (strong, nonatomic) IBOutlet UIView *starView;
-@property (strong, nonatomic) IBOutlet UIImageView *sound;
-@property (strong, nonatomic) IBOutlet UILabel *signature;
-@property (strong, nonatomic) IBOutlet UILabel *score;
+#import "CorlorTransform.h"
+
+@interface PersonTableViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UserInfoDelegate,SettingUserInfoDelegate,MyburseDelegate,MBProgressHUDDelegate,UIGestureRecognizerDelegate>
+
+@property (weak, nonatomic) IBOutlet UIView *userInfoHeaderView;
 @property (strong, nonatomic) IBOutlet UILabel *askfor;
 @property (strong, nonatomic) IBOutlet UILabel *mywallet;
 @property (strong, nonatomic) IBOutlet UIImageView *imgwallet;
 @property (strong, nonatomic) IBOutlet UITableViewCell *recordCenter;
+@property (strong, nonatomic) UIImageView *headimage;
 
 @property (nonatomic, strong) NSDictionary *userInfoDic;
 @property (nonatomic, strong) UserInfo *userinfo;
 @property (strong, nonatomic) CWStarRateView *starRateView;
 @property (nonatomic, strong) UIView *clearView;
 @property (nonatomic, strong) UIView *reloginView;
+@property (nonatomic, strong) NSDictionary *userInfoData;
+
 @end
 
 @implementation PersonTableViewController
@@ -64,14 +63,14 @@
     self.title = @"个人";
     [self.navigationController.navigationBar setBarTintColor:[CorlorTransform colorWithHexString:@"#3f90a4"]];
     self.navigationController.navigationBar.titleTextAttributes=[NSDictionary dictionaryWithObject:[UIColor whiteColor]forKey:NSForegroundColorAttributeName];
-
-     //初始化界面
-    [self initUI];
+    
+    //初始化界面
+    //    [self initUI];
     //获得个人信息，更新界面
     self.userInfoDic = [PersistenceManager getLoginUser];
     self.userinfo = [[UserInfo alloc]initWithDictionary: [PersistenceManager getLoginUser]];
-    [self updateUI];
- 
+    //    [self updateUI];
+    
 }
 -(void)pushToLogin{
     [self pushToLoginController];
@@ -81,7 +80,7 @@
 }
 -(void)pushToLoginController{
     [PersistenceManager setLoginSession:@""];
-
+    
     LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
     lv.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:lv animated:YES];
@@ -104,32 +103,41 @@
     self.userInfoDic = userInfo;
     [PersistenceManager setLoginUser:userInfo];
     [self updateUI];
-
-}
--(void)initUI{
-    self.ageAndSex.layer.cornerRadius = 3;
-    self.myhead.layer.cornerRadius = 40;
-    [self.myhead.layer setMasksToBounds:YES];
-    self.starRateView = [[CWStarRateView alloc] initWithFrame:self.starView.bounds numberOfStars:5];
-    self.starRateView.scorePercent = 0;
-    self.starRateView.allowIncompleteStar = YES;
-    self.starRateView.userInteractionEnabled = NO;
-    self.starRateView.hasAnimation = YES;
-}
--(void)updateUI{
-    NSURL *url = [NSURL URLWithString:self.userinfo.headUrl];
-   // NSLog(@"%@",url);
-    [self.myhead setImageWithURL:url];
-    self.myid.text = [NSString stringWithFormat:@"%@",self.userinfo.nickname];
-    if (self.userinfo.gender == 0) {
-        self.sexImage.image = [UIImage imageNamed:@"peiwan_male"];
-        self.ageAndSex.backgroundColor = [CorlorTransform colorWithHexString:@"#007aff" andAlpha:88/255.0];
-    }else{
-        self.sexImage.image = [UIImage imageNamed:@"peiwan_female"];
-        self.ageAndSex.backgroundColor = [CorlorTransform colorWithHexString:@"#ffc0cb"];
-    }
     
-    [[EaseMob sharedInstance].chatManager setApnsNickname:self.userinfo.nickname];
+}
+
+-(void)updateUI{
+    
+    self.userInfoHeaderView.frame = CGRectMake(0, 0, dtScreenWidth, 200);
+    UIImageView *blackImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, dtScreenWidth, self.userInfoHeaderView.frame.size.height)];
+    blackImageView.image = [UIImage imageNamed:@"userInfoBlack.jpg"];
+    [self.userInfoHeaderView addSubview:blackImageView];
+    
+    self.headimage = [[UIImageView alloc] initWithFrame:CGRectMake((dtScreenWidth-90)/2, 10, 90, 90)];
+    self.headimage.layer.masksToBounds = YES;
+    self.headimage.layer.cornerRadius = 45.0f;
+    NSURL *url = [NSURL URLWithString:self.userinfo.headUrl];
+    [self.headimage setImageWithURL:url];
+    [self.userInfoHeaderView addSubview:self.headimage];
+    
+    UILabel *nickName = [[UILabel alloc] init];
+    nickName.text = [NSString stringWithFormat:@"%@",self.userinfo.nickname];
+    nickName.font = [UIFont systemFontOfSize:13.0f];
+    CGSize nameSize = [nickName.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:nickName.font,NSFontAttributeName, nil]];
+    CGFloat nameSizeH = nameSize.height;
+    CGFloat nameSizeW = nameSize.width;
+    nickName.frame = CGRectMake((dtScreenWidth-nameSizeW)/2-10,self.headimage.frame.origin.y+self.headimage.frame.size.height+10, nameSizeW, nameSizeH);
+    [self.userInfoHeaderView addSubview:nickName];
+    //单击进入个人资料
+    UITapGestureRecognizer* userInfoSingleRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(SingleUserInfoViewTap:)];
+    userInfoSingleRecognizer.numberOfTapsRequired = 1; // 单击
+    [self.userInfoHeaderView addGestureRecognizer:userInfoSingleRecognizer];
+    
+    //单击修改头像
+    self.headimage.userInteractionEnabled = YES;
+    UITapGestureRecognizer* headImageSingleRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(SingleHeadImageTap:)];
+    headImageSingleRecognizer.numberOfTapsRequired = 1; // 单击
+    [self.headimage addGestureRecognizer:headImageSingleRecognizer];
     
     NSDate *today = [NSDate date];
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
@@ -138,14 +146,115 @@
     int yearnow = year.intValue;
     int age = yearnow - self.userinfo.year;
     NSString *userAge = [NSString stringWithFormat:@"%d",age];
-    self.age.text = userAge;
-
-    self.signature.text = self.userinfo.mydescription;
-
-    self.starRateView.scorePercent = self.userinfo.rateAmount/self.userinfo.rateNumber/5.0;
-    [self.starView addSubview:self.starRateView];
+    UILabel *ageLabel = [[UILabel alloc] init];
+    ageLabel.text = userAge;
+    ageLabel.textColor = [UIColor whiteColor];
+    ageLabel.font = [UIFont systemFontOfSize:13.0f];
+    CGSize ageSize = [ageLabel.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:ageLabel.font,NSFontAttributeName, nil]];
+    CGFloat ageSizeH = ageSize.height;
+    CGFloat ageSizeW = ageSize.width;
+    ageLabel.frame = CGRectMake(2, 2, ageSizeW, ageSizeH);
     
-    self.score.text = [NSString stringWithFormat:@"%0.1f",self.userinfo.rateAmount/self.userinfo.rateNumber];
+    UIImageView *seximage = [[UIImageView alloc] initWithFrame:CGRectMake(ageLabel.frame.size.width+5, 4, 10, 10)];
+    UIView *sexAgeView= [[UIView alloc] initWithFrame:CGRectMake(nickName.frame.origin.x+nickName.frame.size.width+5, self.headimage.frame.origin.y+self.headimage.frame.size.height+10, ageLabel.frame.size.width+seximage.frame.size.width+10, ageSizeH+2)];
+    sexAgeView.layer.masksToBounds = YES;
+    sexAgeView.layer.cornerRadius = 2.0f;
+    
+    if (self.userinfo.gender == 0) {
+        seximage.image = [UIImage imageNamed:@"nansheng_logo"];
+        sexAgeView.backgroundColor = [CorlorTransform colorWithHexString:@"#007aff" andAlpha:88/255.0];
+        
+    }else{
+        seximage.image = [UIImage imageNamed:@"nvsheng_logo"];
+        sexAgeView.backgroundColor = [CorlorTransform colorWithHexString:@"#ffc0cb"];
+    }
+    [sexAgeView addSubview:ageLabel];
+    [sexAgeView addSubview:seximage];
+    [self.userInfoHeaderView addSubview:sexAgeView];
+    
+    UILabel *signLabel = [[UILabel alloc] initWithFrame:CGRectMake((dtScreenWidth-(dtScreenWidth-100))/2,nickName.frame.origin.y+nameSizeH+6, dtScreenWidth-100, 10)];
+    signLabel.textAlignment = NSTextAlignmentCenter;
+    signLabel.text = self.userinfo.mydescription;
+    signLabel.font = [UIFont systemFontOfSize:13.0f];
+    [self.userInfoHeaderView addSubview:signLabel];
+    
+    UIView *blackView = [[UIView alloc] initWithFrame:CGRectMake(0, self.userInfoHeaderView.frame.size.height-50, dtScreenWidth, 50)];
+    blackView.backgroundColor = [UIColor blackColor];
+    blackView.alpha = 0.4f;
+    [self.userInfoHeaderView addSubview:blackView];
+    
+    //动态
+    UIView *dynamicView = [[UIView alloc] initWithFrame:CGRectMake(0, self.userInfoHeaderView.frame.size.height-50, dtScreenWidth/3, 50)];
+    [self.userInfoHeaderView addSubview:dynamicView];
+    
+    UIImageView *dynamicImage = [[UIImageView alloc] initWithFrame:CGRectMake((dynamicView.frame.size.width-20)/2, (dynamicView.frame.size.height-20)/2, 20, 20)];
+    dynamicImage.image = [UIImage imageNamed:@"icon_wodedongtai"];
+    [dynamicView addSubview:dynamicImage];
+    
+    UILabel *dynamic = [[UILabel alloc] init];
+    NSString *dynamicStr = [NSString stringWithFormat:@"%@",[self.userInfoData objectForKey:@"stateCount"]];
+    dynamic.text = dynamicStr;
+    dynamic.textColor = [UIColor whiteColor];
+    dynamic.font = [UIFont systemFontOfSize:13.0f];
+    CGSize dynamicSize = [dynamic.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:dynamic.font,NSFontAttributeName, nil]];
+    CGFloat dynamicSizeH = dynamicSize.height;
+    CGFloat dynamicSizeW = dynamicSize.width;
+    dynamic.frame = CGRectMake(dynamicImage.frame.origin.x+dynamicImage.frame.size.width+2, dynamicImage.frame.origin.y+3, dynamicSizeW, dynamicSizeH);
+    [dynamicView addSubview:dynamic];
+    
+    // 单击的动态模块
+    UITapGestureRecognizer* dynamicSingleRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(SingleDynamicTap:)];
+    dynamicSingleRecognizer.numberOfTapsRequired = 1; // 单击
+    [dynamicView addGestureRecognizer:dynamicSingleRecognizer];
+    
+    //关注
+    UIView *attentionView = [[UIView alloc] initWithFrame:CGRectMake(dynamicView.frame.size.width, dynamicView.frame.origin.y, dtScreenWidth/3, 50)];
+    [self.userInfoHeaderView addSubview:attentionView];
+    UIImageView *attentionImage = [[UIImageView alloc] initWithFrame:CGRectMake((attentionView.frame.size.width-20)/2, (attentionView.frame.size.height-20)/2, 20, 20)];
+    attentionImage.image = [UIImage imageNamed:@"icon_guanzhu"];
+    [attentionView addSubview:attentionImage];
+    
+    UILabel *attention = [[UILabel alloc] initWithFrame:CGRectMake(attentionImage.frame.origin.x+attentionImage.frame.size.width+2, attentionImage.frame.origin.y+6, 20, 10)];
+    attention.textColor = [UIColor whiteColor];
+    attention.font = [UIFont systemFontOfSize:13.0f];
+    NSString *attentionStr = [NSString stringWithFormat:@"%@",[self.userInfoData objectForKey:@"watchCount"]];
+    attention.text = attentionStr;
+    CGSize attentionSize = [attention.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:attention.font,NSFontAttributeName, nil]];
+    CGFloat attentionSizeH = attentionSize.height;
+    CGFloat attentionSizeW = attentionSize.width;
+    attention.frame = CGRectMake(attentionImage.frame.origin.x+attentionImage.frame.size.width+2, attentionImage.frame.origin.y+3, attentionSizeW, attentionSizeH);
+    [attentionView addSubview:attention];
+    
+    // 单击粉丝模块
+    UITapGestureRecognizer* attentionSingleRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(SingleFansTap:)];
+    attentionSingleRecognizer.numberOfTapsRequired = 1; // 单击
+    [attentionView addGestureRecognizer:attentionSingleRecognizer];
+    
+    //粉丝
+    UIView *fansView = [[UIView alloc] initWithFrame:CGRectMake(dynamicView.frame.size.width*2, dynamicView.frame.origin.y, dtScreenWidth/3, 50)];
+    [self.userInfoHeaderView addSubview:fansView];
+    UIImageView *fansImage = [[UIImageView alloc] initWithFrame:CGRectMake((fansView.frame.size.width-20)/2, (fansView.frame.size.height-20)/2, 20, 20)];
+    fansImage.image = [UIImage imageNamed:@"icon_wodefensi"];
+    [fansView addSubview:fansImage];
+    
+    UILabel *fans = [[UILabel alloc] init];
+    NSString *fansStr = [NSString stringWithFormat:@"%@",[self.userInfoData objectForKey:@"followCount"]];
+    fans.text = fansStr;
+    fans.textColor = [UIColor whiteColor];
+    fans.font = [UIFont systemFontOfSize:13.0f];
+    CGSize fansSize = [fans.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:fans.font,NSFontAttributeName, nil]];
+    CGFloat fansSizeSizeH = fansSize.height;
+    CGFloat fansSizeSizeW = fansSize.width;
+    fans.frame = CGRectMake(fansImage.frame.origin.x+fansImage.frame.size.width+2, fansImage.frame.origin.y+3, fansSizeSizeW, fansSizeSizeH);
+    [fansView addSubview:fans];
+    
+    // 单击的关注模块
+    UITapGestureRecognizer* fansSingleRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(SingleAttentionTap:)];
+    fansSingleRecognizer.numberOfTapsRequired = 1; // 单击
+    [fansView addGestureRecognizer:fansSingleRecognizer];
+    
+    [[EaseMob sharedInstance].chatManager setApnsNickname:self.userinfo.nickname];
+    
     NSString *thesame = [NSString stringWithFormat:@"%ld",self.userinfo.userId];
     if ([thesame isEqualToString:@"100000"] || [thesame isEqualToString:@"100001"]) {
         self.mywallet.text = @"安全设置";
@@ -165,6 +274,57 @@
         self.askfor.text = @"达人设置";
     }
 }
+
+- (void)loadUserData{
+    NSString *sesstion = [PersistenceManager getLoginSession];
+    [UserConnector getLoginedUser:sesstion receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (error) {
+            [ShowMessage showMessage:@"服务器未响应"];
+        }else{
+            SBJsonParser*parser=[[SBJsonParser alloc]init];
+            NSMutableDictionary *json = [parser objectWithData:data];
+            int status = [[json objectForKey:@"status"]intValue];
+            if (status == 0) {
+                self.userInfoData = [json objectForKey:@"entity"];
+                [self updateUI];
+            }
+        }
+    }];
+}
+
+-(void)SingleDynamicTap:(UITapGestureRecognizer*)recognizer
+{
+    NSLog(@"动态");
+    
+    [self performSegueWithIdentifier:@"mymove" sender:self.userinfo];
+}
+
+-(void)SingleFansTap:(UITapGestureRecognizer*)recognizer
+{
+    NSLog(@"粉丝");
+    [self performSegueWithIdentifier:@"fansList" sender:nil];
+}
+
+-(void)SingleAttentionTap:(UITapGestureRecognizer*)recognizer
+{
+    NSLog(@"关注");
+    
+    [self performSegueWithIdentifier:@"focusList" sender:nil];
+}
+
+-(void)SingleUserInfoViewTap:(UITapGestureRecognizer*)recognizer
+{
+    NSLog(@"用户资料");
+    
+    [self performSegueWithIdentifier:@"userInfo" sender:self.userInfoDic];
+}
+
+- (void)SingleHeadImageTap:(UITapGestureRecognizer*)recognizer{
+    NSLog(@"点击头像");
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"选择图片" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从相册选取", nil];
+    [alert show];
+}
+
 - (IBAction)jumptoUserInfo:(UITapGestureRecognizer *)sender {
     [self performSegueWithIdentifier:@"userInfo" sender:nil];
 }
@@ -176,6 +336,8 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     UIImagePickerController *ipc = [[UIImagePickerController alloc]init];
     ipc.delegate = self;
+    //    ipc.navigationBar.backgroundColor = [CorlorTransform colorWithHexString:@"#3f90a4"];//系统导航栏透明未解决
+    [[ipc navigationBar] setTintColor:[CorlorTransform colorWithHexString:@"#3f90a4"]];
     if (buttonIndex == 1) {
         //NSLog(@"1");
         if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
@@ -183,10 +345,10 @@
             [ipc setSourceType:UIImagePickerControllerSourceTypeCamera];
             ipc.allowsEditing = YES;
             ipc.showsCameraControls  = YES;
-
             [self presentViewController:ipc animated:YES completion:nil];
+            
         }else{
-             //NSLog(@"硬件不支持");
+            //NSLog(@"硬件不支持");
         }
     }
     if (buttonIndex == 2) {
@@ -196,16 +358,16 @@
     }
     
 }
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary*)info{
     
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-  
     
     if ([mediaType isEqualToString:@"public.image"]){
         
         //切忌不可直接使用originImage，因为这是没有经过格式化的图片数据，可能会导致选择的图片颠倒或是失真等现象的发生，从UIImagePickerControllerOriginalImage中的Origin可以看出，很原始，哈哈
         UIImage *originImage = [info objectForKey:UIImagePickerControllerEditedImage];
-    
+        
         //图片压缩，因为原图都是很大的，不必要传原图
         UIImage *scaleImage = [CompressImage compressImage:originImage];
         if (scaleImage == nil) {
@@ -216,6 +378,8 @@
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
+
+#pragma mark 图片上传
 -(void)passImage:(UIImage *)image{
     MBProgressHUD*HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     HUD.delegate = self;
@@ -227,7 +391,7 @@
     HUD.labelText = @"正在上传";
     //是否有庶罩
     HUD.dimBackground = NO;
-
+    
     NSData *data = UIImagePNGRepresentation(image);
     NSDictionary * fileInfo = [UMUUploaderManager fetchFileInfoDictionaryWith:data];
     NSDictionary * signaturePolicyDic =[self constructingSignatureAndPolicyWithFileInfo:fileInfo];
@@ -260,18 +424,17 @@
                     int status = [[json objectForKey:@"status"]intValue];
                     if (status == 0) {
                         [HUD hide:YES afterDelay:0];
-                        self.myhead.image = image;
+                        self.headimage.image = image;
                         [ShowMessage showMessage:@"头像上传成功"];
                         self.userInfoDic = [json objectForKey:@"entity"];
                         self.userinfo = [[UserInfo alloc]initWithDictionary:self.userInfoDic];
+                        [self updateUI];
                     }else if(status == 1){
                         [PersistenceManager setLoginSession:@""];
                         
                         LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
                         lv.hidesBottomBarWhenPushed = YES;
                         [self.navigationController pushViewController:lv animated:YES];
-                        
-                        
                     }
                 }
             }];
@@ -284,9 +447,8 @@
         }
         
     }];
-    
-    
 }
+
 - (NSDictionary *)constructingSignatureAndPolicyWithFileInfo:(NSDictionary *)fileInfo
 {
     //#warning 您需要加上自己的bucket和secret
@@ -317,16 +479,18 @@
              @"policy":[self dictionaryToJSONStringBase64Encoding:mutableDic],
              @"bucket":bucket};
 }
+
 - (NSString *)dictionaryToJSONStringBase64Encoding:(NSDictionary *)dic
 {
     id paramesData = [NSJSONSerialization dataWithJSONObject:dic options:0 error:nil];
     NSString *jsonString = [[NSString alloc] initWithData:paramesData encoding:NSUTF8StringEncoding];
     return [jsonString base64encode];
 }
-    
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     self.tabBarController.tabBar.hidden = NO;
+    [self loadUserData];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -334,10 +498,11 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
     if ([segue.identifier isEqualToString:@"userInfo"]) {
         UserInfoViewController *uv = segue.destinationViewController;
         uv.myuserInfo = self.userinfo;
-         uv.delegate = self;
+        uv.delegate = self;
         
     }
     if ([segue.identifier isEqualToString:@"mymove"]) {
@@ -360,7 +525,15 @@
     if ([segue.identifier isEqualToString:@"playerbeing"]) {
         PlayerBeingTableViewController *pv = segue.destinationViewController;
         pv.hidesBottomBarWhenPushed = YES;
-     }
+    }
+    if ([segue.identifier isEqualToString:@"fansList"]) {
+        FansViewController *flv = segue.destinationViewController;
+        flv.hidesBottomBarWhenPushed = YES;
+    }
+    if ([segue.identifier isEqualToString:@"focusList"]) {
+        FocusViewController *fov = segue.destinationViewController;
+        fov.hidesBottomBarWhenPushed = YES;
+    }
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

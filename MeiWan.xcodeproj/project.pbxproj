@@ -607,6 +607,16 @@
 		2BDFA9581D33485F00E33681 /* PlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDFA9571D33485F00E33681 /* PlayerView.xib */; };
 		2BE25BF81D2B53A400D2AEAF /* animationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE25BF71D2B53A400D2AEAF /* animationCell.m */; };
 		2BE5E2661D1A40790031361C /* HotCountCellChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5E2651D1A40790031361C /* HotCountCellChange.m */; };
+		98EFD3531D4AE816002A1913 /* FocusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD3501D4AE816002A1913 /* FocusViewController.m */; };
+		98EFD3541D4AE816002A1913 /* FocusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD3501D4AE816002A1913 /* FocusViewController.m */; };
+		98EFD3551D4AE816002A1913 /* FansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD3521D4AE816002A1913 /* FansViewController.m */; };
+		98EFD3561D4AE816002A1913 /* FansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD3521D4AE816002A1913 /* FansViewController.m */; };
+		98EFD35C1D4AE82C002A1913 /* FocusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD3591D4AE82C002A1913 /* FocusTableViewCell.m */; };
+		98EFD35D1D4AE82C002A1913 /* FocusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD3591D4AE82C002A1913 /* FocusTableViewCell.m */; };
+		98EFD35E1D4AE82C002A1913 /* FansTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD35B1D4AE82C002A1913 /* FansTableViewCell.m */; };
+		98EFD35F1D4AE82C002A1913 /* FansTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD35B1D4AE82C002A1913 /* FansTableViewCell.m */; };
+		98EFD3611D4AEB39002A1913 /* userInfoBlack.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 98EFD3601D4AEB39002A1913 /* userInfoBlack.jpg */; };
+		98EFD3621D4AEB39002A1913 /* userInfoBlack.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 98EFD3601D4AEB39002A1913 /* userInfoBlack.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1672,6 +1682,15 @@
 		2BE25BF71D2B53A400D2AEAF /* animationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = animationCell.m; path = ../animationCell.m; sourceTree = "<group>"; };
 		2BE5E2641D1A40790031361C /* HotCountCellChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotCountCellChange.h; sourceTree = "<group>"; };
 		2BE5E2651D1A40790031361C /* HotCountCellChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotCountCellChange.m; sourceTree = "<group>"; };
+		98EFD34F1D4AE816002A1913 /* FocusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FocusViewController.h; sourceTree = "<group>"; };
+		98EFD3501D4AE816002A1913 /* FocusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusViewController.m; sourceTree = "<group>"; };
+		98EFD3511D4AE816002A1913 /* FansViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FansViewController.h; sourceTree = "<group>"; };
+		98EFD3521D4AE816002A1913 /* FansViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FansViewController.m; sourceTree = "<group>"; };
+		98EFD3581D4AE82C002A1913 /* FocusTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FocusTableViewCell.h; sourceTree = "<group>"; };
+		98EFD3591D4AE82C002A1913 /* FocusTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusTableViewCell.m; sourceTree = "<group>"; };
+		98EFD35A1D4AE82C002A1913 /* FansTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FansTableViewCell.h; sourceTree = "<group>"; };
+		98EFD35B1D4AE82C002A1913 /* FansTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FansTableViewCell.m; sourceTree = "<group>"; };
+		98EFD3601D4AEB39002A1913 /* userInfoBlack.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = userInfoBlack.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3796,10 +3815,16 @@
 		27E0A0C51CE1759F00D5FE31 /* Control */ = {
 			isa = PBXGroup;
 			children = (
+				98EFD3601D4AEB39002A1913 /* userInfoBlack.jpg */,
 				27587CB71CF5A7A500B78F92 /* PersonTableViewController.h */,
 				27587CB61CF5A7A500B78F92 /* PersonTableViewController.m */,
 				183D53401B871C6900500663 /* UserInfoViewController.h */,
 				183D53411B871C6900500663 /* UserInfoViewController.m */,
+				98EFD34F1D4AE816002A1913 /* FocusViewController.h */,
+				98EFD3501D4AE816002A1913 /* FocusViewController.m */,
+				98EFD3511D4AE816002A1913 /* FansViewController.h */,
+				98EFD3521D4AE816002A1913 /* FansViewController.m */,
+				98EFD3571D4AE81A002A1913 /* cell */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -3885,6 +3910,17 @@
 				2BDAF7A21D228762008B05EA /* blackNameTableViewCell.m */,
 			);
 			name = view;
+			sourceTree = "<group>";
+		};
+		98EFD3571D4AE81A002A1913 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				98EFD3581D4AE82C002A1913 /* FocusTableViewCell.h */,
+				98EFD3591D4AE82C002A1913 /* FocusTableViewCell.m */,
+				98EFD35A1D4AE82C002A1913 /* FansTableViewCell.h */,
+				98EFD35B1D4AE82C002A1913 /* FansTableViewCell.m */,
+			);
+			name = cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -4227,6 +4263,7 @@
 				27CA5A541CEEACCB00CC6956 /* peiwan_default_head.png in Resources */,
 				27587AC71CF5824F00B78F92 /* chatBar_colorMore_video@2x.png in Resources */,
 				27587A771CF5824F00B78F92 /* VoiceSearchFeedback011.png in Resources */,
+				98EFD3611D4AEB39002A1913 /* userInfoBlack.jpg in Resources */,
 				27CA5A3A1CEEACCB00CC6956 /* default-568@2x.png in Resources */,
 				27ADB8501CFEF67F00F11453 /* pai-hang-bang2@2x.png in Resources */,
 				27ADB8301CFEBD5F00F11453 /* Profile.png in Resources */,
@@ -4289,6 +4326,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98EFD3621D4AEB39002A1913 /* userInfoBlack.jpg in Resources */,
 				2731398A1D1286B200712E1F /* near2@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4330,6 +4368,7 @@
 				27587C511CF5861900B78F92 /* UIImageView+EMWebCache.m in Sources */,
 				27587C8A1CF5861A00B78F92 /* EaseTextView.m in Sources */,
 				18EB4E501B8081C5000AE087 /* AssesserInfoViewController.m in Sources */,
+				98EFD3551D4AE816002A1913 /* FansViewController.m in Sources */,
 				27587C3A1CF5861900B78F92 /* MWCaptionView.m in Sources */,
 				27587C561CF5861900B78F92 /* PSTCollectionViewController.m in Sources */,
 				2B5B7D2C1D3893C700CF5354 /* playerInfoTableViewCell.m in Sources */,
@@ -4397,6 +4436,8 @@
 				27587C8C1CF5861A00B78F92 /* EaseFacialView.m in Sources */,
 				18F6D2C51B8FF42A00B1F0C3 /* MoveActionViewCell.m in Sources */,
 				1883F92B1B9E89F5004A19BA /* LOLHelper.swift in Sources */,
+				98EFD35C1D4AE82C002A1913 /* FocusTableViewCell.m in Sources */,
+				98EFD35E1D4AE82C002A1913 /* FansTableViewCell.m in Sources */,
 				18DDB9BA1BB4E548003E4163 /* PeiwanHeadViewController.m in Sources */,
 				27587C851CF5861A00B78F92 /* EaseBubbleView+Voice.m in Sources */,
 				1872A6F91BF4304B007EC158 /* DiscussCell.m in Sources */,
@@ -4534,6 +4575,7 @@
 				18CC8EE31BC39CE1000281CE /* Request.swift in Sources */,
 				27587C791CF5861A00B78F92 /* EaseRefreshTableViewController.m in Sources */,
 				18E579F61B7DDDB000771063 /* UIRefreshControl+AFNetworking.m in Sources */,
+				98EFD3531D4AE816002A1913 /* FocusViewController.m in Sources */,
 				18EF7A231B74B67F005A4F64 /* main.m in Sources */,
 				0446C71F1D0946EB005A3684 /* AddPlayGameViewController.m in Sources */,
 				27587C741CF5861A00B78F92 /* EaseEmotionEscape.m in Sources */,
@@ -4574,6 +4616,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				18EF7A3D1B74B67F005A4F64 /* MeiWanTests.m in Sources */,
+				98EFD3541D4AE816002A1913 /* FocusViewController.m in Sources */,
+				98EFD35D1D4AE82C002A1913 /* FocusTableViewCell.m in Sources */,
+				98EFD3561D4AE816002A1913 /* FansViewController.m in Sources */,
+				98EFD35F1D4AE82C002A1913 /* FansTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

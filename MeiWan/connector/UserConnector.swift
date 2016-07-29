@@ -1037,6 +1037,23 @@ import UIKit
         
         
     }
+    
+    //查找关注列表
+    public static func findMyFocus(session:String!,receiver:(data:NSData?,error:NSError?)->()){
+        var parameters:Dictionary<String,AnyObject> = [:]
+        parameters["session"]=session
+        request(.GET, userUrl+"findFollowersByUserId", parameters:parameters as? [String : NSObject])
+            .response { request, r, data, error in
+                if (error != nil){
+                    let str = array[0];
+                    array .removeFirst();
+                    array.append(str);
+                    userUrl = array[0];
+                }
+                
+                receiver(data:data!.gunzippedData(), error:error)
+        }
+    }
 
     
 }
