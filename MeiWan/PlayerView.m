@@ -75,11 +75,7 @@
     self.distance = [[UILabel alloc]init];
     if ([[playerInfo objectForKey:@"distance"]intValue]>1000)
     {
-        if ([[_playerInfo objectForKey:@"distance"]integerValue]>100) {
-            self.distance.text = @"太遥远";
-        }else{
-            self.distance.text = [NSString stringWithFormat:@"%.1f km", [[_playerInfo objectForKey:@"distance"] doubleValue]/1000];
-        }
+        self.distance.text = [NSString stringWithFormat:@"%.1f km", [[_playerInfo objectForKey:@"distance"] doubleValue]/1000];
     }
     else
     {

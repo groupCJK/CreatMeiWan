@@ -59,7 +59,7 @@
 	<string>“请点击”“允许”以允许访问
 若不允许，您将无法在美玩中获取到附近的美玩达人，无法发送和共享地理位置。</string>
 	<key>NSlocationAlwaysUsageDescription</key>
-	<string></string>
+	<string>使用定位</string>
 	<key>UIBackgroundModes</key>
 	<array/>
 	<key>UIMainStoryboardFile</key>

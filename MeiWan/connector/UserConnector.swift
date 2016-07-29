@@ -10,15 +10,16 @@ import UIKit
 
 
 @objc public class UserConnector: NSObject {
-//    private static var array:Array = ["https://chuangjk.com:8443/peiwan-server/rest/users/","https://web.chuangjk.com:8443/peiwan-server/rest/users/"];
-//    
-//    
-//    private static var userUrl = array[0];
-//    private static let orderUrl="https://chuangjk.com:8443/peiwan-server/rest/orders/";
+    
+//    private static let userUrl=setting.getIp()+"peiwan-server/rest/users/";
+//    private static let orderUrl=setting.getIp()+"peiwan-server/rest/orders/";
 
-    private static let userUrl=setting.getIp()+"peiwan-server/rest/users/";
-    private static let orderUrl=setting.getIp()+"peiwan-server/rest/orders/";
-
+    private static func UserURL()->String?{
+        return setting.getIp()+"peiwan-server/rest/users/";
+    }
+    private static func OrderURL()->String?{
+        return setting.getIp()+"peiwan-server/rest/orders/";
+    }
     public static func acceptInvalidSSLCerts() {
         let manager = Manager.sharedInstance
         
@@ -46,13 +47,10 @@ import UIKit
     public static func login(username:String,password:String,receiver:(data:NSData?,error:NSError?)->()){
 
         
-        request(.GET, userUrl+"login", parameters:["username":username,"password":password])
+        request(.GET, UserURL()!+"login", parameters:["username":username,"password":password])
             .response { request, response, data, error in
-                if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                if ((error) != nil){
+                    setting .adjustIps()
                     
                 }
                 
@@ -67,14 +65,14 @@ import UIKit
         if(session != nil){
             parameters.setValue(session,forKey:"session")
         }
-        request(.GET, userUrl+"update", parameters:parameters as? [String : AnyObject])
+        request(.GET, UserURL()!+"update", parameters:parameters as? [String : AnyObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                if ((error) != nil){
+                    setting .adjustIps()
+                }else{
+                    
                 }
+
                 
                 receiver(data:data!, error:error)
         }
@@ -109,7 +107,7 @@ import UIKit
         if(mode != nil){
             parameters["mode"]=mode
         }
-        request(.GET, userUrl+"aroundPeiwan", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"aroundPeiwan", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if ((error) != nil){
                 }else{
@@ -133,12 +131,11 @@ import UIKit
         parameters["headUrl"]=headUrl
         parameters["city"]=city
         parameters["district"]=district
-        request(.GET, userUrl+"register", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"register", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
                     if ((error) != nil){
                     }else{
-                        setting .adjustIps()
                     }                }
                 
                 receiver(data:data, error:error)
@@ -152,13 +149,11 @@ import UIKit
             parameters["session"]=session
         }
         parameters["userId"]=userId
-        request(.GET, userUrl+"findPeiwanById", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"findPeiwanById", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                 }
                 
                 receiver(data:data, error:error)
@@ -170,13 +165,11 @@ import UIKit
     public static func findRoles(userId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
         parameters["userId"]=userId
-        request(.GET, userUrl+"findRoles", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"findRoles", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                 }
                 
                 receiver(data:data, error:error)
@@ -189,13 +182,11 @@ import UIKit
         parameters["peiwanId"]=peiwanId
         parameters["offset"]=offset
         parameters["limit"]=limit
-        request(.GET, userUrl+"findOrderEvaluationByUserId", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"findOrderEvaluationByUserId", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                 }
                 
                 receiver(data:data, error:error)
@@ -206,13 +197,11 @@ import UIKit
     public static func peiwanNetbars(peiwanId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
         parameters["peiwanId"]=peiwanId
-        request(.GET, userUrl+"peiwanNetbars", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"peiwanNetbars", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                 }
                 
                 receiver(data:data, error:error)
@@ -224,13 +213,11 @@ import UIKit
         var parameters:Dictionary<String,AnyObject> = [:]
         parameters["phone"]=phone;
         parameters["sign"]=sign;
-        request(.GET, userUrl+"sendCode", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"sendCode", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                 
                 }
                 
@@ -243,13 +230,11 @@ import UIKit
         var parameters:Dictionary<String,AnyObject> = [:]
         parameters["phone"]=phone;
         parameters["sign"]=sign;
-        request(.GET, userUrl+"sendCode2", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"sendCode2", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -261,13 +246,11 @@ import UIKit
     public static func findMyFriends(session:String!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
         parameters["session"]=session
-        request(.GET, userUrl+"findMyFriends", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"findMyFriends", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -280,13 +263,11 @@ import UIKit
         var parameters:Dictionary<String,AnyObject> = [:]
         parameters["session"]=session
         parameters["friendId"]=friendId
-        request(.GET, userUrl+"addFriend", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"addFriend", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -299,13 +280,11 @@ import UIKit
         var parameters:Dictionary<String,AnyObject> = [:]
         parameters["session"]=session
         parameters["friendId"]=friendId
-        request(.GET, userUrl+"deleteFriend", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"deleteFriend", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -319,13 +298,11 @@ import UIKit
         parameters["session"]=session
         parameters["peiwanId"]=peiwanId
         parameters["contentIndex"]=contentIndex
-        request(.GET, userUrl+"accusation", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"accusation", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -337,13 +314,11 @@ import UIKit
     public static func findNetbarPhoto(netbarId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
         parameters["netbarId"]=netbarId
-        request(.GET, userUrl+"findNetbarPhoto", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"findNetbarPhoto", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -357,13 +332,11 @@ import UIKit
         parameters["session"]=session
         parameters["part"]=part
         parameters["name"]=name
-        request(.GET, userUrl+"addRole", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"addRole", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -376,13 +349,11 @@ import UIKit
         var parameters:Dictionary<String,AnyObject> = [:]
         parameters["session"]=session
         parameters["lolRoleId"]=lolRoleId
-        request(.GET, userUrl+"deleteRole", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"deleteRole", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -405,13 +376,11 @@ import UIKit
         parameters["type"]=type
         parameters["hours"]=hours
         parameters["isWin"]=isWin
-        request(.GET, orderUrl+"createOrder", parameters:parameters as? [String : NSObject])
+        request(.GET, OrderURL()!+"createOrder", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -437,13 +406,11 @@ import UIKit
         if(hours != nil){
             parameters["hours"]=hours
         }
-        request(.GET, orderUrl+"createOrder2", parameters:parameters as? [String : NSObject])
+        request(.GET, OrderURL()!+"createOrder2", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -458,13 +425,11 @@ import UIKit
         parameters["userId"]=userId
         parameters["offset"]=offset
         parameters["limit"]=limit
-        request(.GET, userUrl+"findStates2", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"findStates2", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -478,13 +443,11 @@ import UIKit
         parameters["session"]=session
         parameters["offset"]=offset
         parameters["limit"]=limit
-        request(.GET, userUrl+"findAroundStates", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"findAroundStates", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -499,13 +462,11 @@ import UIKit
         parameters["toId"] = toId
         parameters["content"]=content
         parameters["stateId"]=stateId
-        request(.GET, userUrl+"insertStateComment", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"insertStateComment", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -520,13 +481,11 @@ import UIKit
         parameters["toId"] = toId
         parameters["content"]=content
         parameters["stateCommentId"]=stateCommentId
-        request(.GET, userUrl+"insertStateReplay", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"insertStateReplay", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -539,13 +498,11 @@ import UIKit
         var parameters:Dictionary<String,AnyObject> = [:]
         parameters["session"]=session
         parameters["stateId"]=stateId
-        request(.GET, userUrl+"findStateComment", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"findStateComment", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -559,13 +516,11 @@ import UIKit
         parameters["session"]=session
         parameters["content"]=content
         parameters["statePhotos"]=statePhotos
-        request(.GET, userUrl+"insertState", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"insertState", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -578,13 +533,11 @@ import UIKit
         var parameters:Dictionary<String,AnyObject> = [:]
         parameters["session"]=session
         parameters["stateId"]=stateId
-        request(.GET, userUrl+"deleteState", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"deleteState", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -598,13 +551,11 @@ import UIKit
         parameters["session"] = session
         parameters["toId"] = toId
         parameters["stateId"] = stateId
-        request(.GET, userUrl+"likeUserState",parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"likeUserState",parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -618,13 +569,11 @@ import UIKit
         parameters["session"] = session
         parameters["toId"] = toId
         parameters["stateId"] = stateId
-        request(.GET, userUrl+"unlikeUserState",parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"unlikeUserState",parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -636,13 +585,11 @@ import UIKit
     public static func findUserTags(userId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
         parameters["userId"] = userId
-        request(.GET, userUrl+"findUserTags", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"findUserTags", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -656,13 +603,11 @@ import UIKit
         parameters["session"] = session
         parameters["offset"] = offset
         parameters["limit"] = limit
-        request(.GET, userUrl+"rankUsers", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"rankUsers", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -680,13 +625,11 @@ import UIKit
         parameters["headPhoto"]=headPhoto
         parameters["idPhoto"]=idPhoto
         parameters["address"]=address
-        request(.GET, userUrl+"createPeiwanForm", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"createPeiwanForm", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -700,13 +643,11 @@ import UIKit
         parameters["name"]=name
         parameters["offset"]=offset
         parameters["limit"]=limit
-        request(.GET, userUrl+"findNetbarLikeName", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"findNetbarLikeName", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -720,13 +661,11 @@ import UIKit
         parameters["session"]=session
         parameters["offset"]=offset
         parameters["limit"]=limit
-        request(.GET, orderUrl+"myOrders", parameters:parameters as? [String : NSObject])
+        request(.GET, OrderURL()!+"myOrders", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -739,13 +678,11 @@ import UIKit
         var parameters:Dictionary<String,AnyObject> = [:]
         parameters["session"]=session
         parameters["orderId"]=orderId
-        request(.GET, orderUrl+"acceptOrder", parameters:parameters as? [String : NSObject])
+        request(.GET, OrderURL()!+"acceptOrder", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -759,13 +696,11 @@ import UIKit
         parameters["session"]=session
         parameters["offset"]=offset
         parameters["limit"]=limit
-        request(.GET, orderUrl+"inviteMeOrders", parameters:parameters as? [String : NSObject])
+        request(.GET, OrderURL()!+"inviteMeOrders", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -778,13 +713,11 @@ import UIKit
         var parameters:Dictionary<String,AnyObject> = [:]
         parameters["session"]=session
         parameters["orderId"]=orderId
-        request(.GET, orderUrl+"orderOk", parameters:parameters as? [String : NSObject])
+        request(.GET, OrderURL()!+"orderOk", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -797,13 +730,11 @@ import UIKit
         var parameters:Dictionary<String,AnyObject> = [:]
         parameters["session"]=session
         parameters["orderId"]=orderId
-        request(.GET, orderUrl+"payWithAccountMoney", parameters:parameters as? [String : NSObject])
+        request(.GET, OrderURL()!+"payWithAccountMoney", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -819,13 +750,11 @@ import UIKit
         parameters["title"]=title
         parameters["content"]=content
         parameters["photos"]=photos
-        request(.GET, orderUrl+"sendComplain", parameters:parameters as? [String : NSObject])
+        request(.GET, OrderURL()!+"sendComplain", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -842,13 +771,11 @@ import UIKit
         parameters["point"]=point
         parameters["tagIndexs"]=tagIndexs
         parameters["content"]=content
-        request(.GET, orderUrl+"evaluationOrder", parameters:parameters as? [String : NSObject])
+        request(.GET, OrderURL()!+"evaluationOrder", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -861,13 +788,11 @@ import UIKit
         var parameters:Dictionary<String,AnyObject> = [:]
         parameters["session"]=session
         parameters["money"]=money
-        request(.GET, userUrl+"createCashRequest", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"createCashRequest", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -881,13 +806,11 @@ import UIKit
         parameters["session"]=session
         parameters["offset"]=offset
         parameters["limit"]=limit
-        request(.GET, userUrl+"myCashRequests", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"myCashRequests", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -901,13 +824,11 @@ import UIKit
         parameters["username"]=username
         parameters["password"]=password
         parameters["verifyCode"]=verifyCode
-        request(.GET, userUrl+"resetPassword", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"resetPassword", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -921,13 +842,11 @@ import UIKit
         parameters["session"]=session
         parameters["tagIndex"]=tagIndex
         parameters["price"]=price
-        request(.GET, userUrl+"addUserTimeTag", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"addUserTimeTag", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -941,13 +860,11 @@ import UIKit
         parameters["session"]=session
         parameters["tagIndex"]=tagIndex
         parameters["price"]=price
-        request(.GET, userUrl+"deleteUserTimeTag", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"deleteUserTimeTag", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -964,7 +881,7 @@ import UIKit
         if(money != nil){
             parameters["money"]=money
         }
-        request(.GET, orderUrl+"createRecharge", parameters:parameters as? [String : NSObject])
+        request(.GET, OrderURL()!+"createRecharge", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -974,14 +891,12 @@ import UIKit
     public static func getLoginedUser(session:String!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
         parameters["session"]=session
-        request(.GET, userUrl+"getLoginedUser", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"getLoginedUser", parameters:parameters as? [String : NSObject])
             
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 
@@ -1000,7 +915,7 @@ import UIKit
             parameters["price"]=price
         }
         
-        request(.GET, orderUrl+"aliRechargeSigh", parameters:parameters as? [String : NSObject])
+        request(.GET, OrderURL()!+"aliRechargeSigh", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -1029,7 +944,7 @@ import UIKit
             parameters["tagIndex"]=tagIndex
         }
         
-        request(.GET, orderUrl+"payWithAccountMoney", parameters:parameters as? [String : NSObject])
+        request(.GET, OrderURL()!+"payWithAccountMoney", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -1058,7 +973,7 @@ import UIKit
             parameters["tagIndex"]=tagIndex
         }
         
-        request(.GET, orderUrl+"aliOrderSign", parameters:parameters as? [String : NSObject])
+        request(.GET, OrderURL()!+"aliOrderSign", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -1071,13 +986,11 @@ import UIKit
     public static func findMyFocus(session:String!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
         parameters["session"]=session
-        request(.GET, userUrl+"findFollowersByUserId", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"findFollowersByUserId", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                        setting .adjustIps()
-                    }
+                    setting .adjustIps()
+
                     
                 }
                 

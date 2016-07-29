@@ -59,6 +59,19 @@
 
 #pragma mark - mapView Delegate
 
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    switch (status)
+    {        case kCLAuthorizationStatusNotDetermined:
+        if ([manager respondsToSelector:@selector(requestAlwaysAuthorization)])
+        {
+            [manager requestWhenInUseAuthorization];
+        }
+            break;
+           
+        default:
+            break;
+    }
+}
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
@@ -123,15 +136,17 @@
     // 设置代理
     _locationManager.delegate = self;
     // 设置定位精确度到米
-    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
     // 设置过滤器为无
-    _locationManager.distanceFilter = kCLDistanceFilterNone;
+    _locationManager.distanceFilter = kCLLocationAccuracyNearestTenMeters;
     // 开始定位
     [_locationManager requestAlwaysAuthorization];//这句话ios8以上版本使用。
     [_locationManager startUpdatingLocation];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initializeLocationService];
+
     tagIndexNumber = [[NSNumber alloc]init];
     tagIndexNumber = nil;
     titlelabel = @[@"线上点歌",@"视屏聊天",@"聚餐",@"线下K歌",@"夜店达人",@"叫醒服务",@"影伴",@"运动健身",@"LOL",@"全部"];
@@ -274,8 +289,8 @@
     [UserConnector aroundPeiwan:session gender:[self.searchDic objectForKey:@"gender"] minPrice:[self.searchDic objectForKey:@"minPrice"] maxPrice:[self.searchDic objectForKey:@"maxPrice"] isWin:nil offset:0 limit:self.playerInfoArray.count isRecommend:nil mode:[self.searchDic objectForKey:@"mode"] tagIndex:nil receiver:^(NSData *data,NSError *error){
         if (error) {
             [ShowMessage showMessage:@"服务器未响应"];
+
         }else{
-            
             SBJsonParser*parser=[[SBJsonParser alloc]init];
             NSMutableDictionary *json=[parser objectWithData:data];
             int status = [[json objectForKey:@"status"]intValue];
@@ -305,7 +320,6 @@
     iconlabel.text = @"全部";
     iconImage.image = [UIImage imageNamed:@"all"];
 
-    [self initializeLocationService];
 }
 //上拉刷新
 - (void)footerRereshing
