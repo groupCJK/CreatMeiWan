@@ -603,6 +603,7 @@
 		2BDFA9581D33485F00E33681 /* PlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDFA9571D33485F00E33681 /* PlayerView.xib */; };
 		2BE25BF81D2B53A400D2AEAF /* animationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE25BF71D2B53A400D2AEAF /* animationCell.m */; };
 		2BE5E2661D1A40790031361C /* HotCountCellChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5E2651D1A40790031361C /* HotCountCellChange.m */; };
+		9866077B1D4B3CB2007AF7C2 /* userInfoBlack.png in Resources */ = {isa = PBXBuildFile; fileRef = 9866077A1D4B3CB2007AF7C2 /* userInfoBlack.png */; };
 		98EFD3531D4AE816002A1913 /* FocusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD3501D4AE816002A1913 /* FocusViewController.m */; };
 		98EFD3541D4AE816002A1913 /* FocusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD3501D4AE816002A1913 /* FocusViewController.m */; };
 		98EFD3551D4AE816002A1913 /* FansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD3521D4AE816002A1913 /* FansViewController.m */; };
@@ -611,8 +612,6 @@
 		98EFD35D1D4AE82C002A1913 /* FocusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD3591D4AE82C002A1913 /* FocusTableViewCell.m */; };
 		98EFD35E1D4AE82C002A1913 /* FansTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD35B1D4AE82C002A1913 /* FansTableViewCell.m */; };
 		98EFD35F1D4AE82C002A1913 /* FansTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD35B1D4AE82C002A1913 /* FansTableViewCell.m */; };
-		98EFD3611D4AEB39002A1913 /* userInfoBlack.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 98EFD3601D4AEB39002A1913 /* userInfoBlack.jpg */; };
-		98EFD3621D4AEB39002A1913 /* userInfoBlack.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 98EFD3601D4AEB39002A1913 /* userInfoBlack.jpg */; };
 		98EFD3661D4AF19A002A1913 /* Myorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD3641D4AF19A002A1913 /* Myorder.m */; };
 		98EFD3671D4AF19A002A1913 /* Myorder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98EFD3651D4AF19A002A1913 /* Myorder.xib */; };
 /* End PBXBuildFile section */
@@ -1675,6 +1674,7 @@
 		2BE25BF71D2B53A400D2AEAF /* animationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = animationCell.m; path = ../animationCell.m; sourceTree = "<group>"; };
 		2BE5E2641D1A40790031361C /* HotCountCellChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotCountCellChange.h; sourceTree = "<group>"; };
 		2BE5E2651D1A40790031361C /* HotCountCellChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotCountCellChange.m; sourceTree = "<group>"; };
+		9866077A1D4B3CB2007AF7C2 /* userInfoBlack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userInfoBlack.png; sourceTree = "<group>"; };
 		98EFD34F1D4AE816002A1913 /* FocusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FocusViewController.h; sourceTree = "<group>"; };
 		98EFD3501D4AE816002A1913 /* FocusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusViewController.m; sourceTree = "<group>"; };
 		98EFD3511D4AE816002A1913 /* FansViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FansViewController.h; sourceTree = "<group>"; };
@@ -1683,7 +1683,6 @@
 		98EFD3591D4AE82C002A1913 /* FocusTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusTableViewCell.m; sourceTree = "<group>"; };
 		98EFD35A1D4AE82C002A1913 /* FansTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FansTableViewCell.h; sourceTree = "<group>"; };
 		98EFD35B1D4AE82C002A1913 /* FansTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FansTableViewCell.m; sourceTree = "<group>"; };
-		98EFD3601D4AEB39002A1913 /* userInfoBlack.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = userInfoBlack.jpg; sourceTree = "<group>"; };
 		98EFD3631D4AF19A002A1913 /* Myorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Myorder.h; sourceTree = "<group>"; };
 		98EFD3641D4AF19A002A1913 /* Myorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Myorder.m; sourceTree = "<group>"; };
 		98EFD3651D4AF19A002A1913 /* Myorder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Myorder.xib; sourceTree = "<group>"; };
@@ -3809,7 +3808,7 @@
 		27E0A0C51CE1759F00D5FE31 /* Control */ = {
 			isa = PBXGroup;
 			children = (
-				98EFD3601D4AEB39002A1913 /* userInfoBlack.jpg */,
+				9866077A1D4B3CB2007AF7C2 /* userInfoBlack.png */,
 				27587CB71CF5A7A500B78F92 /* PersonTableViewController.h */,
 				27587CB61CF5A7A500B78F92 /* PersonTableViewController.m */,
 				183D53401B871C6900500663 /* UserInfoViewController.h */,
@@ -4095,6 +4094,7 @@
 				27587AC01CF5824F00B78F92 /* chatBar_colorMore_audioCallSelected@2x.png in Resources */,
 				27CA5A311CEEACCB00CC6956 /* 2_loadingҳ.png in Resources */,
 				27587A831CF5824F00B78F92 /* VoiceSearchFeedback017.png in Resources */,
+				9866077B1D4B3CB2007AF7C2 /* userInfoBlack.png in Resources */,
 				27587AFF1CF5824F00B78F92 /* tabbar_contacts@2x.png in Resources */,
 				27CA5A631CEEACCB00CC6956 /* peiwan_me_dark@3x.png in Resources */,
 				27587A721CF5824F00B78F92 /* VoiceSearchFeedback008@2x.png in Resources */,
@@ -4271,7 +4271,6 @@
 				27CA5A541CEEACCB00CC6956 /* peiwan_default_head.png in Resources */,
 				27587AC71CF5824F00B78F92 /* chatBar_colorMore_video@2x.png in Resources */,
 				27587A771CF5824F00B78F92 /* VoiceSearchFeedback011.png in Resources */,
-				98EFD3611D4AEB39002A1913 /* userInfoBlack.jpg in Resources */,
 				27CA5A3A1CEEACCB00CC6956 /* default-568@2x.png in Resources */,
 				27ADB8501CFEF67F00F11453 /* pai-hang-bang2@2x.png in Resources */,
 				27ADB8301CFEBD5F00F11453 /* Profile.png in Resources */,
@@ -4334,7 +4333,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98EFD3621D4AEB39002A1913 /* userInfoBlack.jpg in Resources */,
 				2731398A1D1286B200712E1F /* near2@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

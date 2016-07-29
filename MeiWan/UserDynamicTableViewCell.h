@@ -35,4 +35,6 @@
 
 @property (nonatomic, strong)UILabel *errerLabel;
 
+@property (nonatomic, strong)UILabel *imageErrer;
+
 @end

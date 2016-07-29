@@ -164,6 +164,7 @@
         _fansTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, dtScreenWidth, dtScreenHeight) style:UITableViewStylePlain];
         _fansTableView.delegate = self;
         _fansTableView.dataSource = self;
+        _fansTableView.tableFooterView = [[UIView alloc] init];
         [self.view addSubview:_fansTableView];
     }
     return _fansTableView;

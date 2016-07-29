@@ -28,6 +28,8 @@
     [self addSubview:dynamic];
     self.dynamicTitleLabel = dynamic;
     
+    NSArray *imagearrs = [_dynamicDatas objectForKey:@"statePhotos"];
+    
     UILabel *dynamicLabel = [[UILabel alloc] initWithFrame:CGRectMake(dynamic.frame.origin.x, dynamic.frame.origin.y+dynamic.frame.size.height+8, self.frame.size.width-40, 10)];
     dynamicLabel.font = [UIFont systemFontOfSize:12.0f];
     NSString *dynamictext = [_dynamicDatas objectForKey:@"content"];
@@ -39,26 +41,34 @@
     self.dynamicLabel = dynamicLabel;
     [self addSubview:dynamicLabel];
     
-    NSArray *imagearrs = [_dynamicDatas objectForKey:@"statePhotos"];
-    
     if (imagearrs == nil) {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((self.frame.size.width-90)/2, (130-40)/2, 90, 40)];
         label.text = @"用户暂无动态";
         label.font = [UIFont systemFontOfSize:13.0f];
         [self addSubview:label];
         self.errerLabel = label;
+        self.dynamicLabel.hidden = YES;
     }else{
-        CGFloat kuan = ([UIScreen mainScreen].bounds.size.width-24-10-10)/3;
-        for (int i = 0; i < imagearrs.count; i++) {
-            UIImageView *dynamicImage = [[UIImageView alloc] initWithFrame:CGRectMake(24+i * (kuan+5), dynamicLabel.frame.origin.y+dynamicLabel.frame.size.height+8, kuan, kuan)];
-            NSURL *assessurl = imagearrs[i];
-            [dynamicImage setImageWithURL:assessurl];
-            dynamicImage.contentMode = UIViewContentModeScaleAspectFill;
-            dynamicImage.clipsToBounds = YES;
-            
-            [self addSubview:dynamicImage];
-            self.dynamicImage = dynamicImage;
+        NSString *str = imagearrs[0];
+        if ([str isKindOfClass:[NSNull class]]) {
+            UILabel *imageErrer = [[UILabel alloc] initWithFrame:CGRectMake((self.frame.size.width-100)/2, (130-40)/2+20, 100, 40)];
+            imageErrer.text = @"用户未发布图片";
+            imageErrer.font = [UIFont systemFontOfSize:13.0f];
+            [self addSubview:imageErrer];
+            self.imageErrer = imageErrer;
+        }else{
+            CGFloat kuan = ([UIScreen mainScreen].bounds.size.width-24-10-10)/3;
+            for (int i = 0; i < imagearrs.count; i++) {
+                UIImageView *dynamicImage = [[UIImageView alloc] initWithFrame:CGRectMake(24+i * (kuan+5), dynamicLabel.frame.origin.y+dynamicLabel.frame.size.height+8, kuan, kuan)];
+                NSURL *assessurl = imagearrs[i];
+                [dynamicImage setImageWithURL:assessurl];
+                dynamicImage.contentMode = UIViewContentModeScaleAspectFill;
+                dynamicImage.clipsToBounds = YES;
+                [self addSubview:dynamicImage];
+                self.dynamicImage = dynamicImage;
+            }
         }
+        
     }
     
     //    [self.delegate showState];
@@ -67,7 +77,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
-           }
+    }
     
     return self;
 }
@@ -92,7 +102,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 

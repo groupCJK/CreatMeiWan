@@ -110,7 +110,7 @@
     
     self.userInfoHeaderView.frame = CGRectMake(0, 0, dtScreenWidth, 200);
     UIImageView *blackImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, dtScreenWidth, self.userInfoHeaderView.frame.size.height)];
-    blackImageView.image = [UIImage imageNamed:@"userInfoBlack.jpg"];
+    blackImageView.image = [UIImage imageNamed:@"userInfoBlack"];
     [self.userInfoHeaderView addSubview:blackImageView];
     
     self.headimage = [[UIImageView alloc] initWithFrame:CGRectMake((dtScreenWidth-90)/2, 10, 90, 90)];
@@ -119,6 +119,11 @@
     NSURL *url = [NSURL URLWithString:self.userinfo.headUrl];
     [self.headimage setImageWithURL:url];
     [self.userInfoHeaderView addSubview:self.headimage];
+    
+    UIButton *eaditButton = [[UIButton alloc] initWithFrame:CGRectMake(dtScreenWidth-98, 200-70, 96, 20)];
+    [eaditButton setTitle:@"点击背景编辑资料" forState:UIControlStateNormal];
+    eaditButton.titleLabel.font = [UIFont systemFontOfSize:12.0f];
+    [blackImageView addSubview:eaditButton];
     
     UILabel *nickName = [[UILabel alloc] init];
     nickName.text = [NSString stringWithFormat:@"%@",self.userinfo.nickname];
@@ -161,11 +166,11 @@
     sexAgeView.layer.cornerRadius = 2.0f;
     
     if (self.userinfo.gender == 0) {
-        seximage.image = [UIImage imageNamed:@"nansheng_logo"];
+        seximage.image = [UIImage imageNamed:@"peiwan_male"];
         sexAgeView.backgroundColor = [CorlorTransform colorWithHexString:@"#007aff" andAlpha:88/255.0];
         
     }else{
-        seximage.image = [UIImage imageNamed:@"nvsheng_logo"];
+        seximage.image = [UIImage imageNamed:@"peiwan_female"];
         sexAgeView.backgroundColor = [CorlorTransform colorWithHexString:@"#ffc0cb"];
     }
     [sexAgeView addSubview:ageLabel];

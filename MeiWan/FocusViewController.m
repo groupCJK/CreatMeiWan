@@ -115,9 +115,10 @@
                 int status = [[json objectForKey:@"status"]intValue];
                 if (status == 0) {
 
+                    [ShowMessage showMessage:@"关注成功"];
                     [cell.focusButton setTitle:@"互相关注" forState:UIControlStateNormal];
+                    cell.focusButton.userInteractionEnabled = YES;
 
-                    
                 }else if (status == 1){
                     
                     [PersistenceManager setLoginSession:@""];
@@ -207,6 +208,7 @@
     _focusTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, dtScreenWidth, dtScreenHeight) style:UITableViewStylePlain];
     _focusTableView.delegate = self;
     _focusTableView.dataSource = self;
+    _focusTableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:_focusTableView];
 }
 
