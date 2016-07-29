@@ -119,7 +119,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    NSArray * imageArray = @[@"sing",@"video-chat",@"dining",@"sing-expert",@"go-nightclubbing",@"guide",@"shadow-with",@"practices",@"lol",@"all"];
+    NSArray * imageArray = @[@"sing",@"video-chat",@"dining",@"sing-expert",@"go-nightclubbing",@"clock",@"shadow-with",@"sports",@"lol",@"all"];
     if (tableView == tableview) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"cell_index"];
         if (!cell) {
@@ -351,7 +351,7 @@
         [UserConnector addUserTimeTag:session tagIndex:number price:price receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
           
             if (error) {
-                [ShowMessage showMessage:@"服务器未响应"];
+                [ShowMessage showMessage:@"添加失败"];
             }else{
                 SBJsonParser*parser=[[SBJsonParser alloc]init];
                 NSMutableDictionary *json=[parser objectWithData:data];
@@ -373,7 +373,7 @@
         [UserConnector addUserTimeTag:session tagIndex:number price:price receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
             if (error) {
                 NSLog(@"%@",error);
-                [ShowMessage showMessage:@"服务器未响应"];
+                [ShowMessage showMessage:@"添加失败"];
             }else{
                 SBJsonParser*parser=[[SBJsonParser alloc]init];
                 NSMutableDictionary *json=[parser objectWithData:data];
@@ -394,13 +394,14 @@
     NSNumber * number = [NSNumber numberWithInteger:integer];
     [UserConnector deleteUserTimeTag:session tagIndex:number price:nil receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
         if (error) {
-            [ShowMessage showMessage:@"服务器未响应"];
+            [ShowMessage showMessage:@"删除失败"];
+
         }else{
             SBJsonParser*parser=[[SBJsonParser alloc]init];
             NSMutableDictionary *json=[parser objectWithData:data];
             int status = [[json objectForKey:@"status"]intValue];
             if (status == 0) {
-                [ShowMessage showMessage:@"删除失败"];
+                [ShowMessage showMessage:@"删除成功"];
             }else{
                 
             }

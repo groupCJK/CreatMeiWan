@@ -76,13 +76,10 @@
             //                NSLog(@"%@",json);
             int status = [[json objectForKey:@"status"]intValue];
             if (status == 0) {
-                NSLog(@"_________________________________________________________________________________________");
 
             }else if(status == 1){
-                NSLog(@"*****************************************************************************************");
 
             }else{
-                NSLog(@"#########################################################################################");
 
             }
             
@@ -138,7 +135,7 @@
     tagIndexNumber = [[NSNumber alloc]init];
     tagIndexNumber = nil;
     titlelabel = @[@"线上点歌",@"视屏聊天",@"聚餐",@"线下K歌",@"夜店达人",@"叫醒服务",@"影伴",@"运动健身",@"LOL",@"全部"];
-    imageArray = @[@"sing",@"video-chat",@"dining",@"sing-expert",@"go-nightclubbing",@"guide",@"shadow-with",@"practices",@"lol",@"all"];
+    imageArray =  @[@"sing",@"video-chat",@"dining",@"sing-expert",@"go-nightclubbing",@"clock",@"shadow-with",@"sports",@"lol",@"all"];
     [self loginHuanxin];
 
     self.infoCount = 6;
