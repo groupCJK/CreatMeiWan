@@ -10,9 +10,10 @@ import UIKit
 
 
 @objc public class UserConnector: NSObject {
-    private static var array:Array = ["http://chuangjk.com:8082/peiwan-server/rest/users/","http://web.chuangjk.com:8081/peiwan-server/rest/users/-----"];
+    private static var array:Array = ["https://chuangjk.com:8443/peiwan-server/rest/users/","http://web.chuangjk.com:8081/peiwan-server/rest/users/-----"];
     private static var userUrl = array[0];
     private static let orderUrl="http://chuangjk.com:8082/peiwan-server/rest/orders/";
+
 
     public static func acceptInvalidSSLCerts() {
         let manager = Manager.sharedInstance
@@ -161,19 +162,20 @@ import UIKit
     }
     
     //通过ID寻找陪玩,阻塞
-    public static func findPeiwanById(session:String?,userId:NSNumber!)->NSData?{
-        //创建NSURL对象
-        let url:NSURL! = NSURL(string: userUrl+"findPeiwanById?session="+session!+"&userId="+userId.stringValue)
-        //创建请求对象
-        let urlRequest:NSMutableURLRequest = NSMutableURLRequest(URL: url)
-        urlRequest.HTTPMethod="GET"
-        //响应对象
-        var response:NSURLResponse?
-        //发送请求
-        let data:NSData? =  try! NSURLConnection.sendSynchronousRequest(urlRequest,returningResponse: &response)
-        return data
-    }
-    
+//    public static func findPeiwanById(session:String?,userId:NSNumber!)->NSData?{
+//        //创建NSURL对象
+//        let url:NSURL! = NSURL(string: userUrl+"findPeiwanById?session="+session!+"&userId="+userId.stringValue)
+//        //创建请求对象
+//        let urlRequest:NSMutableURLRequest = NSMutableURLRequest(URL: url)
+//        urlRequest.HTTPMethod="GET"
+//        //响应对象
+//
+//        var response:NSURLResponse?
+//        //发送请求
+//        let data:NSData? =  try! NSURLConnection.sendSynchronousRequest(urlRequest,returningResponse: &response)
+//        return data
+//    }
+  
     //寻找游戏角色
     public static func findRoles(userId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]

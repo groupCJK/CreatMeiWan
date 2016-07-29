@@ -51,11 +51,21 @@
     [super viewDidLoad];
     usertimeTags = [[NSMutableArray alloc]initWithCapacity:0];
     NSString *session = [PersistenceManager getLoginSession];
-    SBJsonParser*parser=[[SBJsonParser alloc]init];
-    NSMutableDictionary *json=[parser objectWithData:[UserConnector findPeiwanById:session userId:[NSNumber numberWithInteger:self.userInfo.userId]]];
-    NSDictionary * entity  =[json objectForKey:@"entity"];
-    usertimeTags = [entity objectForKey:@"userTimeTags"];
-    //NSLog(@"%@",usertimeTags);
+    [UserConnector findPeiwanById:session userId:[NSNumber numberWithInteger:self.userInfo.userId]receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (!error) {
+            SBJsonParser*parser=[[SBJsonParser alloc]init];
+            NSMutableDictionary *json=[parser objectWithData:data];
+            NSDictionary * entity  =[json objectForKey:@"entity"];
+            usertimeTags = [entity objectForKey:@"userTimeTags"];
+            [self creatTableView];
+        }else{
+            
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        
+
+    } ];
+        //NSLog(@"%@",usertimeTags);
     colorArray = @[@"#ff5d90",@"eb4f38",@"#ff6f36",@"#fdd32d",@"#36cdff",@"#ff3674",@"#7667e5",@"#f55d52",@"#ff5d90"];
     priceArray = @[@39,@69,@99,@129,@169];
     titleArray = @[@"线上点歌",@"视屏聊天",@"聚餐",@"线下K歌",@"夜店达人",@"叫醒服务",@"影伴",@"运动健身",@"LOL"];
@@ -63,7 +73,6 @@
     numberArray = [[NSMutableArray alloc]initWithCapacity:0];
     getArray  = [[NSMutableArray alloc]initWithCapacity:0];
     userdefaults  = [NSUserDefaults standardUserDefaults];
-    [self creatTableView];
     
 }
 
@@ -161,14 +170,7 @@
     if ([thesame isEqualToString:@"100000"] || [thesame isEqualToString:@"100001"]) {
         cell = [tableview cellForRowAtIndexPath:indexPath];
         indexpath = indexPath;
-        
-        usertimeTags = [[NSMutableArray alloc]initWithCapacity:0];
-        NSString *session = [PersistenceManager getLoginSession];
-        SBJsonParser*parser=[[SBJsonParser alloc]init];
-        NSMutableDictionary *json=[parser objectWithData:[UserConnector findPeiwanById:session userId:[NSNumber numberWithInteger:self.userInfo.userId]]];
-        NSDictionary * entity  =[json objectForKey:@"entity"];
-        usertimeTags = [entity objectForKey:@"userTimeTags"];
-        
+
         if (tableview == tableView) {
             cell = [tableview cellForRowAtIndexPath:indexPath];
             static int i = 0 ;i++;
@@ -205,25 +207,18 @@
         if (tableView==tableview) {
             cell = [tableview cellForRowAtIndexPath:indexPath];
             indexpath = indexPath;
-       
+            
             if (indexPath.row==5||indexPath.row==0) {
-                
-                
                 
                 if (cell.shanchu.hidden==NO) {
                     [self animationView:cell index:indexPath];
+                    [usertimeTags removeLastObject];
                 }else{
                     
-                    NSString *session = [PersistenceManager getLoginSession];
-                    SBJsonParser*parser=[[SBJsonParser alloc]init];
-                    NSMutableDictionary *json=[parser objectWithData:[UserConnector findPeiwanById:session userId:[NSNumber numberWithInteger:self.userInfo.userId]]];
-                    NSDictionary * entity  =[json objectForKey:@"entity"];
-                    usertimeTags = [entity objectForKey:@"userTimeTags"];
-                    
                     if (usertimeTags.count>=3) {
-                        
+                    
                     }else{
-                        
+                        [usertimeTags addObject:[NSString stringWithFormat:@"%ld",indexPath.row+1]];
                         Jiaoview = [[UIView alloc]initWithFrame:self.priceView.frame];
                         Jiaoview.backgroundColor = [UIColor blackColor];
                         [self.view addSubview:Jiaoview];
@@ -239,25 +234,17 @@
                     }
                 }
 
-                
             }else{
                 if (cell.shanchu.hidden==NO) {
                     [self animationView:cell index:indexPath];
+                    [usertimeTags removeLastObject];
                 }else{
-                    
-                    NSString *session = [PersistenceManager getLoginSession];
-                    SBJsonParser*parser=[[SBJsonParser alloc]init];
-                    NSMutableDictionary *json=[parser objectWithData:[UserConnector findPeiwanById:session userId:[NSNumber numberWithInteger:self.userInfo.userId]]];
-                    NSDictionary * entity  =[json objectForKey:@"entity"];
-                    usertimeTags = [entity objectForKey:@"userTimeTags"];
-                    
                     if (usertimeTags.count>=3) {
-                        
                     }else{
+                        [usertimeTags addObject:[NSString stringWithFormat:@"%ld",indexPath.row+1]];
                         self.priceView.hidden = NO;
                     }
                 }
-
             }
         
         }else{
@@ -327,7 +314,6 @@
         cell.tianjia.hidden = YES;
         cell.showImage.hidden = NO;
         cell.priceLabel.hidden = YES;
-       // NSLog(@"%@",priceArray[indexpathother]);
         NSInteger intege = [priceArray[indexpathother] integerValue];
         [self registerNetWorking:indexpath.row+1 price:[NSNumber numberWithInteger:intege]];
 
@@ -347,10 +333,8 @@
         cell.tianjia.hidden = YES;
         cell.showImage.hidden = NO;
         cell.priceLabel.hidden = YES;
-        
-        NSLog(@"%@------%ld",changePriceArray[senderID],indexpath.row+1);
         [self registerNetWorking:indexpath.row+1 price:changePriceArray[senderID]];
-        NSLog(@"chengong");
+
     }
 }
 
@@ -374,7 +358,7 @@
                
                 int status = [[json objectForKey:@"status"]intValue];
                 if (status == 0) {
-                    
+                    [ShowMessage showMessage:@"添加成功"];
                 }else{
                     
                 }
@@ -395,7 +379,7 @@
                 NSMutableDictionary *json=[parser objectWithData:data];
                 int status = [[json objectForKey:@"status"]intValue];
                 if (status == 0) {
-                    
+                    [ShowMessage showMessage:@"添加成功"];
                 }else{
                     
                 }
@@ -416,7 +400,7 @@
             NSMutableDictionary *json=[parser objectWithData:data];
             int status = [[json objectForKey:@"status"]intValue];
             if (status == 0) {
-                
+                [ShowMessage showMessage:@"删除失败"];
             }else{
                 
             }

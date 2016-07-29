@@ -52,7 +52,7 @@
                   moduleName = "MeiWan"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user_kevin/GitHub/Meiwan/MeiWan/DetailOrderViewController.m"
-                  timestampString = "491455269.907184"
+                  timestampString = "491471457.601029"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "304"
@@ -67,7 +67,7 @@
                   moduleName = "MeiWan"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user_kevin/GitHub/Meiwan/MeiWan/DetailOrderViewController.m"
-                  timestampString = "491455269.907459"
+                  timestampString = "491471457.601258"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "304"
@@ -283,6 +283,34 @@
                   offsetFromSymbolStart = "46">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            symbolName = ""
+            moduleName = "">
+            <Locations>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MeiWan/SettingPlayWithUIViewController.m"
+            timestampString = "491470757.782057"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
