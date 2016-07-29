@@ -82,6 +82,7 @@
     tableview.delegate = self;
     tableview.dataSource = self;
     tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableview.scrollEnabled = NO;
     [self.view addSubview:tableview];
     
     UIView * showView = [[UIView alloc]init];

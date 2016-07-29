@@ -10,7 +10,7 @@ import UIKit
 
 
 @objc public class UserConnector: NSObject {
-    private static var array:Array = ["https://chuangjk.com:8443/peiwan-server/rest/users/","http://web.chuangjk.com:8081/peiwan-server/rest/users/-----"];
+    private static var array:Array = ["https://chuangjk.com:8443/peiwan-server/rest/users/","https://web.chuangjk.com:8443/peiwan-server/rest/users/"];
     private static var userUrl = array[0];
     private static let orderUrl="http://chuangjk.com:8082/peiwan-server/rest/orders/";
 

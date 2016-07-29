@@ -13,8 +13,8 @@
 
 +(NSMutableArray *)ips{
     NSMutableArray * array = [[NSMutableArray alloc]init];
-    [array addObject:@"http://web.chuangjk.com:8081/"];
-    [array addObject:@"http://chuangjk.com:8082/"];
+    [array addObject:@"https://web.chuangjk.com:8443/"];
+    [array addObject:@"https://chuangjk.com:8443/"];
     [array shuffle];
     return array;
 }
