@@ -10,10 +10,14 @@ import UIKit
 
 
 @objc public class UserConnector: NSObject {
-    private static var array:Array = ["https://chuangjk.com:8443/peiwan-server/rest/users/","https://web.chuangjk.com:8443/peiwan-server/rest/users/"];
-    private static var userUrl = array[0];
-    private static let orderUrl="http://chuangjk.com:8082/peiwan-server/rest/orders/";
+//    private static var array:Array = ["https://chuangjk.com:8443/peiwan-server/rest/users/","https://web.chuangjk.com:8443/peiwan-server/rest/users/"];
+//    
+//    
+//    private static var userUrl = array[0];
+//    private static let orderUrl="https://chuangjk.com:8443/peiwan-server/rest/orders/";
 
+    private static let userUrl=setting.getIp()+"peiwan-server/rest/users/";
+    private static let orderUrl=setting.getIp()+"peiwan-server/rest/orders/";
 
     public static func acceptInvalidSSLCerts() {
         let manager = Manager.sharedInstance
@@ -40,13 +44,16 @@ import UIKit
     
     //登陆
     public static func login(username:String,password:String,receiver:(data:NSData?,error:NSError?)->()){
+
+        
         request(.GET, userUrl+"login", parameters:["username":username,"password":password])
             .response { request, response, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 //            var s = NSString(data: data!, encoding: NSUTF8StringEncoding)as String!
@@ -63,10 +70,10 @@ import UIKit
         request(.GET, userUrl+"update", parameters:parameters as? [String : AnyObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
                 }
                 
                 receiver(data:data!, error:error)
@@ -104,11 +111,9 @@ import UIKit
         }
         request(.GET, userUrl+"aroundPeiwan", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                if ((error) != nil){
+                }else{
+                    setting .adjustIps()
                 }
                 receiver(data:data!.gunzippedData(), error:error)
         }
@@ -131,11 +136,10 @@ import UIKit
         request(.GET, userUrl+"register", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
-                }
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }                }
                 
                 receiver(data:data, error:error)
         }
@@ -151,30 +155,16 @@ import UIKit
         request(.GET, userUrl+"findPeiwanById", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
                 }
                 
                 receiver(data:data, error:error)
         }
     }
     
-    //通过ID寻找陪玩,阻塞
-//    public static func findPeiwanById(session:String?,userId:NSNumber!)->NSData?{
-//        //创建NSURL对象
-//        let url:NSURL! = NSURL(string: userUrl+"findPeiwanById?session="+session!+"&userId="+userId.stringValue)
-//        //创建请求对象
-//        let urlRequest:NSMutableURLRequest = NSMutableURLRequest(URL: url)
-//        urlRequest.HTTPMethod="GET"
-//        //响应对象
-//
-//        var response:NSURLResponse?
-//        //发送请求
-//        let data:NSData? =  try! NSURLConnection.sendSynchronousRequest(urlRequest,returningResponse: &response)
-//        return data
-//    }
   
     //寻找游戏角色
     public static func findRoles(userId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
@@ -183,10 +173,10 @@ import UIKit
         request(.GET, userUrl+"findRoles", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
                 }
                 
                 receiver(data:data, error:error)
@@ -202,10 +192,10 @@ import UIKit
         request(.GET, userUrl+"findOrderEvaluationByUserId", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
                 }
                 
                 receiver(data:data, error:error)
@@ -219,10 +209,10 @@ import UIKit
         request(.GET, userUrl+"peiwanNetbars", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
                 }
                 
                 receiver(data:data, error:error)
@@ -237,10 +227,11 @@ import UIKit
         request(.GET, userUrl+"sendCode", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                
                 }
                 
                 receiver(data:data, error:error)
@@ -255,10 +246,11 @@ import UIKit
         request(.GET, userUrl+"sendCode2", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data, error:error)
@@ -272,10 +264,11 @@ import UIKit
         request(.GET, userUrl+"findMyFriends", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data, error:error)
@@ -290,10 +283,11 @@ import UIKit
         request(.GET, userUrl+"addFriend", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data, error:error)
@@ -308,10 +302,11 @@ import UIKit
         request(.GET, userUrl+"deleteFriend", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data, error:error)
@@ -327,10 +322,11 @@ import UIKit
         request(.GET, userUrl+"accusation", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data, error:error)
@@ -344,10 +340,11 @@ import UIKit
         request(.GET, userUrl+"findNetbarPhoto", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data, error:error)
@@ -363,10 +360,11 @@ import UIKit
         request(.GET, userUrl+"addRole", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data, error:error)
@@ -381,10 +379,11 @@ import UIKit
         request(.GET, userUrl+"deleteRole", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data, error:error)
@@ -409,10 +408,11 @@ import UIKit
         request(.GET, orderUrl+"createOrder", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data, error:error)
@@ -440,10 +440,11 @@ import UIKit
         request(.GET, orderUrl+"createOrder2", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data, error:error)
@@ -460,10 +461,11 @@ import UIKit
         request(.GET, userUrl+"findStates2", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -479,10 +481,11 @@ import UIKit
         request(.GET, userUrl+"findAroundStates", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -499,10 +502,11 @@ import UIKit
         request(.GET, userUrl+"insertStateComment", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data, error:error)
@@ -519,10 +523,11 @@ import UIKit
         request(.GET, userUrl+"insertStateReplay", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data, error:error)
@@ -537,10 +542,11 @@ import UIKit
         request(.GET, userUrl+"findStateComment", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -556,10 +562,11 @@ import UIKit
         request(.GET, userUrl+"insertState", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data, error:error)
@@ -574,10 +581,11 @@ import UIKit
         request(.GET, userUrl+"deleteState", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data, error:error)
@@ -593,10 +601,11 @@ import UIKit
         request(.GET, userUrl+"likeUserState",parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data, error:error)
@@ -612,10 +621,11 @@ import UIKit
         request(.GET, userUrl+"unlikeUserState",parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data, error:error)
@@ -629,10 +639,11 @@ import UIKit
         request(.GET, userUrl+"findUserTags", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -648,10 +659,11 @@ import UIKit
         request(.GET, userUrl+"rankUsers", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -671,10 +683,11 @@ import UIKit
         request(.GET, userUrl+"createPeiwanForm", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data, error:error)
@@ -690,10 +703,11 @@ import UIKit
         request(.GET, userUrl+"findNetbarLikeName", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data, error:error)
@@ -709,10 +723,11 @@ import UIKit
         request(.GET, orderUrl+"myOrders", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -727,10 +742,11 @@ import UIKit
         request(.GET, orderUrl+"acceptOrder", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data, error:error)
@@ -746,10 +762,11 @@ import UIKit
         request(.GET, orderUrl+"inviteMeOrders", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -764,10 +781,11 @@ import UIKit
         request(.GET, orderUrl+"orderOk", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data, error:error)
@@ -782,10 +800,11 @@ import UIKit
         request(.GET, orderUrl+"payWithAccountMoney", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data, error:error)
@@ -803,10 +822,11 @@ import UIKit
         request(.GET, orderUrl+"sendComplain", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data, error:error)
@@ -825,10 +845,11 @@ import UIKit
         request(.GET, orderUrl+"evaluationOrder", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data, error:error)
@@ -843,10 +864,11 @@ import UIKit
         request(.GET, userUrl+"createCashRequest", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -862,10 +884,11 @@ import UIKit
         request(.GET, userUrl+"myCashRequests", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -881,10 +904,11 @@ import UIKit
         request(.GET, userUrl+"resetPassword", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data, error:error)
@@ -900,10 +924,11 @@ import UIKit
         request(.GET, userUrl+"addUserTimeTag", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -919,10 +944,11 @@ import UIKit
         request(.GET, userUrl+"deleteUserTimeTag", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -952,10 +978,11 @@ import UIKit
             
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -1047,10 +1074,11 @@ import UIKit
         request(.GET, userUrl+"findFollowersByUserId", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error != nil){
-                    let str = array[0];
-                    array .removeFirst();
-                    array.append(str);
-                    userUrl = array[0];
+                    if ((error) != nil){
+                    }else{
+                        setting .adjustIps()
+                    }
+                    
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
