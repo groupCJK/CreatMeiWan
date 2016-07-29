@@ -3820,10 +3820,8 @@
 				27587CB61CF5A7A500B78F92 /* PersonTableViewController.m */,
 				183D53401B871C6900500663 /* UserInfoViewController.h */,
 				183D53411B871C6900500663 /* UserInfoViewController.m */,
-				98EFD34F1D4AE816002A1913 /* FocusViewController.h */,
-				98EFD3501D4AE816002A1913 /* FocusViewController.m */,
-				98EFD3511D4AE816002A1913 /* FansViewController.h */,
-				98EFD3521D4AE816002A1913 /* FansViewController.m */,
+				2B1B0AD11D4AF14B00F193A4 /* 粉丝 */,
+				2B1B0AD21D4AF15900F193A4 /* 我的关注 */,
 				98EFD3571D4AE81A002A1913 /* cell */,
 			);
 			name = Control;
@@ -3857,6 +3855,24 @@
 				18CD050C1B91547800B56288 /* MeiWan-Bridging-Header.h */,
 			);
 			name = Helper;
+			sourceTree = "<group>";
+		};
+		2B1B0AD11D4AF14B00F193A4 /* 粉丝 */ = {
+			isa = PBXGroup;
+			children = (
+				98EFD34F1D4AE816002A1913 /* FocusViewController.h */,
+				98EFD3501D4AE816002A1913 /* FocusViewController.m */,
+			);
+			name = "粉丝";
+			sourceTree = "<group>";
+		};
+		2B1B0AD21D4AF15900F193A4 /* 我的关注 */ = {
+			isa = PBXGroup;
+			children = (
+				98EFD3511D4AE816002A1913 /* FansViewController.h */,
+				98EFD3521D4AE816002A1913 /* FansViewController.m */,
+			);
+			name = "我的关注";
 			sourceTree = "<group>";
 		};
 		2B2B56C41D473CC70048AA20 /* 充值 */ = {
