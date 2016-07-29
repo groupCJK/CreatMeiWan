@@ -19,7 +19,6 @@
     CGRect frame = self.frame;
     self.frame = CGRectMake(frame.origin.x, frame.origin.y, [[UIScreen mainScreen] applicationFrame].size.width, frame.size.height);
 
-    NSLog(@"******11111********");
     UIImageView *icon = [[UIImageView alloc]init];
     icon.layer.cornerRadius = 25;
     icon.clipsToBounds = YES;

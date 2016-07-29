@@ -469,8 +469,6 @@
 		27587CBE1CF5AE3400B78F92 /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27587CBC1CF5AE3400B78F92 /* libopencore-amrnb.a */; };
 		27587CC01CF5AF8D00B78F92 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 27587CBF1CF5AF8D00B78F92 /* libstdc++.tbd */; };
 		27587CC21CF5B06A00B78F92 /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 27587CC11CF5B06A00B78F92 /* libstdc++.6.tbd */; };
-		2786039E1D0AC99900F27C4D /* information@2xreadMessage.png in Resources */ = {isa = PBXBuildFile; fileRef = 2786039C1D0AC99900F27C4D /* information@2xreadMessage.png */; };
-		2786039F1D0AC99A00F27C4D /* information2ReadMessage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2786039D1D0AC99900F27C4D /* information2ReadMessage@2x.png */; };
 		2794E51A1D07D87700CD50FE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2794E51C1D07D87700CD50FE /* Localizable.strings */; };
 		2794E5201D08094C00CD50FE /* NSMutableArray_Shuffling.m in Sources */ = {isa = PBXBuildFile; fileRef = 2794E51F1D08094C00CD50FE /* NSMutableArray_Shuffling.m */; };
 		279B86ED1CED93DF00EA2737 /* MYIntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 279B86EA1CED93DF00EA2737 /* MYIntroductionView.m */; };
@@ -1524,8 +1522,6 @@
 		27587CBC1CF5AE3400B78F92 /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libopencore-amrnb.a"; path = "../libopencore-amrnb.a"; sourceTree = "<group>"; };
 		27587CBF1CF5AF8D00B78F92 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		27587CC11CF5B06A00B78F92 /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
-		2786039C1D0AC99900F27C4D /* information@2xreadMessage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "information@2xreadMessage.png"; sourceTree = "<group>"; };
-		2786039D1D0AC99900F27C4D /* information2ReadMessage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "information2ReadMessage@2x.png"; sourceTree = "<group>"; };
 		2794E51B1D07D87700CD50FE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2794E51D1D07D91800CD50FE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		2794E51E1D08094C00CD50FE /* NSMutableArray_Shuffling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMutableArray_Shuffling.h; sourceTree = "<group>"; };
@@ -2422,8 +2418,6 @@
 				279B86EA1CED93DF00EA2737 /* MYIntroductionView.m */,
 				279B86EB1CED93DF00EA2737 /* MYIntroductionPanel.h */,
 				279B86EC1CED93DF00EA2737 /* MYIntroductionPanel.m */,
-				2786039C1D0AC99900F27C4D /* information@2xreadMessage.png */,
-				2786039D1D0AC99900F27C4D /* information2ReadMessage@2x.png */,
 				18D1ADCF1B774ED400532BB5 /* Model */,
 				182DB6B81B7460F400C73C54 /* View */,
 				18EF7A461B74B6A6005A4F64 /* Control */,
@@ -4180,7 +4174,6 @@
 				27CA5A591CEEACCB00CC6956 /* peiwan_find@3x.png in Resources */,
 				27587AD21CF5824F00B78F92 /* chatBar_more_locationSelected@2x.png in Resources */,
 				27587A941CF5824F00B78F92 /* chat_video_play.png in Resources */,
-				2786039F1D0AC99A00F27C4D /* information2ReadMessage@2x.png in Resources */,
 				27587A5C1CF5824F00B78F92 /* 120.png in Resources */,
 				273971C51D0045F300A3367C /* rankingView.xib in Resources */,
 				27587A711CF5824F00B78F92 /* VoiceSearchFeedback008.png in Resources */,
@@ -4301,7 +4294,6 @@
 				27587A961CF5824F00B78F92 /* chatBar_more_card@2x.png in Resources */,
 				27CA5A701CEEACCB00CC6956 /* personWhite@2x.png in Resources */,
 				27C83B351CFFE60800918A9D /* pai-hang-bang2.png in Resources */,
-				2786039E1D0AC99900F27C4D /* information@2xreadMessage.png in Resources */,
 				27CA5A391CEEACCB00CC6956 /* coin.png in Resources */,
 				27CA5A581CEEACCB00CC6956 /* peiwan_female@2x.png in Resources */,
 				27587A751CF5824F00B78F92 /* VoiceSearchFeedback010.png in Resources */,

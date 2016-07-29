@@ -48,7 +48,7 @@
     HUD.labelText = @"加载中";
     HUD.delegate = self;
     [HUD showAnimated:YES whileExecutingBlock:^{
-        NSLog(@"什么时候调用");
+        //NSLog(@"什么时候调用");
     }];
     [self.navigationController.navigationBar setBarTintColor:[CorlorTransform colorWithHexString:@"#3f90a4"]];
     self.navigationController.navigationBar.titleTextAttributes=[NSDictionary dictionaryWithObject:[UIColor whiteColor]           forKey:NSForegroundColorAttributeName];
