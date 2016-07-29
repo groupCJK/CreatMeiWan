@@ -115,20 +115,29 @@
         model.title=[userCache objectForKey:@"nickname"];
         model.avatarURLPath=[userCache objectForKey:@"headUrl"];
     }else{
-        NSString *session= [PersistenceManager getLoginSession];
-        NSData *data =  [UserConnector findPeiwanById:session userId:userId];
-        SBJsonParser*parser=[[SBJsonParser alloc]init];
-        NSMutableDictionary *json=[parser objectWithData:data];
-        int status = [[json objectForKey:@"status"]intValue];
-        if (status == 0) {
-            NSMutableDictionary* user  = [json objectForKey:@"entity"];
-            [user removeObjectForKey:@"userStates"];
-            [user removeObjectForKey:@"userTags"];
-            [userDefaults setObject:user forKey:userIdStr];
-            model.title=[user objectForKey:@"nickname"];
-            model.avatarURLPath=[user objectForKey:@"headUrl"];
         
-        }
+        NSString *session= [PersistenceManager getLoginSession];
+        [UserConnector findPeiwanById:session userId:userId receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+            if (!error) {
+                SBJsonParser*parser=[[SBJsonParser alloc]init];
+                NSMutableDictionary *json=[parser objectWithData:data];
+                int status = [[json objectForKey:@"status"]intValue];
+                if (status == 0) {
+                    NSMutableDictionary* user  = [json objectForKey:@"entity"];
+                    [user removeObjectForKey:@"userStates"];
+                    [user removeObjectForKey:@"userTags"];
+                    [userDefaults setObject:user forKey:userIdStr];
+                    model.title=[user objectForKey:@"nickname"];
+                    model.avatarURLPath=[user objectForKey:@"headUrl"];
+                    
+                }
+                
+            }else{
+                
+            }
+            
+        }];
+
     }
     
     cell.model = model;
@@ -183,18 +192,27 @@
     if (userCache) {
         messageCtr.title=[userCache objectForKey:@"nickname"];
     }else{
+        
         NSString *session= [PersistenceManager getLoginSession];
-        NSData *data =  [UserConnector findPeiwanById:session userId:userId];
-        SBJsonParser*parser=[[SBJsonParser alloc]init];
-        NSMutableDictionary *json=[parser objectWithData:data];
-        int status = [[json objectForKey:@"status"]intValue];
-        if (status == 0) {
-            NSMutableDictionary* user  = [json objectForKey:@"entity"];
-            [user removeObjectForKey:@"userStates"];
-            [user removeObjectForKey:@"userTags"];
-            [userDefaults setObject:user forKey:userIdStr];
-            messageCtr.title=[user objectForKey:@"nickname"];
-        }
+        [UserConnector findPeiwanById:session userId:userId receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+            if (!error) {
+                SBJsonParser*parser=[[SBJsonParser alloc]init];
+                NSMutableDictionary *json=[parser objectWithData:data];
+                int status = [[json objectForKey:@"status"]intValue];
+                if (status == 0) {
+                    NSMutableDictionary* user  = [json objectForKey:@"entity"];
+                    [user removeObjectForKey:@"userStates"];
+                    [user removeObjectForKey:@"userTags"];
+                    [userDefaults setObject:user forKey:userIdStr];
+                    messageCtr.title=[user objectForKey:@"nickname"];
+                }
+                
+            }else{
+                
+            }
+            
+        }];
+
     }
     self.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:messageCtr animated:YES];

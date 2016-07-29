@@ -189,18 +189,28 @@
             model.avatarURLPath=[userCache objectForKey:@"headUrl"];
         }else{
             NSString *session= [PersistenceManager getLoginSession];
-            NSData *data =  [UserConnector findPeiwanById:session userId:userId];
-            SBJsonParser*parser=[[SBJsonParser alloc]init];
-            NSMutableDictionary *json=[parser objectWithData:data];
-            int status = [[json objectForKey:@"status"]intValue];
-            if (status == 0) {
-                NSMutableDictionary* user  = [json objectForKey:@"entity"];
-                [user removeObjectForKey:@"userStates"];
-                [user removeObjectForKey:@"userTags"];
-                [userDefaults setObject:user forKey:userIdStr];
-                model.nickname=[user objectForKey:@"nickname"];
-                model.avatarURLPath=[user objectForKey:@"headUrl"];
-            }
+            [UserConnector findPeiwanById:session userId:userId receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+                if (!error) {
+                   
+                    SBJsonParser*parser=[[SBJsonParser alloc]init];
+                    NSMutableDictionary *json=[parser objectWithData:data];
+                    int status = [[json objectForKey:@"status"]intValue];
+                    if (status == 0) {
+                        NSMutableDictionary* user  = [json objectForKey:@"entity"];
+                        [user removeObjectForKey:@"userStates"];
+                        [user removeObjectForKey:@"userTags"];
+                        [userDefaults setObject:user forKey:userIdStr];
+                        model.nickname=[user objectForKey:@"nickname"];
+                        model.avatarURLPath=[user objectForKey:@"headUrl"];
+                    }
+
+                    
+                }else{
+                    
+                }
+                
+            }];
+                    
         }
     }
     {
@@ -212,16 +222,23 @@
             model.avatarURLPath=[userCache objectForKey:@"headUrl"];
         }else{
             NSString *session= [PersistenceManager getLoginSession];
-            NSData *data =  [UserConnector findPeiwanById:session userId:userId];
-            SBJsonParser*parser=[[SBJsonParser alloc]init];
-            NSMutableDictionary *json=[parser objectWithData:data];
-            int status = [[json objectForKey:@"status"]intValue];
-            if (status == 0) {
-                NSDictionary* user  = [json objectForKey:@"entity"];
-                
-                model.nickname=[user objectForKey:@"nickname"];
-                model.avatarURLPath=[user objectForKey:@"headUrl"];
-            }
+            [UserConnector findPeiwanById:session userId:userId receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+                if (!error) {
+                    SBJsonParser*parser=[[SBJsonParser alloc]init];
+                    NSMutableDictionary *json=[parser objectWithData:data];
+                    int status = [[json objectForKey:@"status"]intValue];
+                    if (status == 0) {
+                        NSDictionary* user  = [json objectForKey:@"entity"];
+                        
+                        model.nickname=[user objectForKey:@"nickname"];
+                        model.avatarURLPath=[user objectForKey:@"headUrl"];
+                    }
+
+                }else{
+                    
+                }
+
+            }];
         }
     }
     if ([EaseMessageHelper isRemoveAfterReadMessage:model.message])
@@ -312,17 +329,8 @@
     NSDictionary* loginUser = [PersistenceManager getLoginUser];
     NSNumber* uid = [loginUser objectForKey:@"id"];
     NSString* chatId = [NSString stringWithFormat:@"%@",uid];
-    //NSLog(@"%@fffffffffffffff",from);
-    //NSLog(@"%@ttttttttttt",to);
+
     if ([chatId isEqualToString:from]) {
-        //TODO:跳当前登录用户的详情页面
-//        PlagerinfoViewController *playerInfo = [[PlagerinfoViewController alloc] init];
-//        playerInfo.playerInfo=loginUser;
-//        [self.navigationController pushViewController:playerInfo animated:YES];
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//        PlagerinfoViewController *playerInfoCtr = [storyboard instantiateViewControllerWithIdentifier:@"playerinfo"];
-//        playerInfoCtr.playerInfo = loginUser;
-//        [self presentViewController:playerInfoCtr animated:NO completion:nil];
         
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         PlagerinfoViewController *playerInfoCtr = [mainStoryboard instantiateViewControllerWithIdentifier:@"secondStory"];
@@ -333,15 +341,13 @@
         //TODO:跳当前私聊用户的详情页面
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         PlagerinfoViewController *playerInfoCtr = [mainStoryboard instantiateViewControllerWithIdentifier:@"secondStory"];
-//        PlagerinfoViewController *playerInfo = [[PlagerinfoViewController alloc] init];
+
         NSUserDefaults* userDefault = [NSUserDefaults standardUserDefaults];
         NSString* fromUserId = [from stringByReplacingOccurrencesOfString:@"product_" withString:@""];
         playerInfoCtr.playerInfo=[userDefault objectForKey:fromUserId];
         [self.navigationController pushViewController:playerInfoCtr animated:YES];
     }
     
-//    UserProfileViewController *userprofile = [[UserProfileViewController alloc] initWithUsername:messageModel.nickname];
-//    [self.navigationController pushViewController:userprofile animated:YES];
 }
 
 
@@ -414,10 +420,7 @@
     id<IMessageModel> model = nil;
     model = [[EaseMessageModel alloc] initWithMessage:message];
     model.avatarImage = [UIImage imageNamed:@"EaseUIResource.bundle/user"];
-    //    UserProfileEntity *profileEntity = [[UserProfileManager sharedInstance] getUserProfileByUsername:model.nickname];
-//    if (profileEntity) {
-//        model.avatarURLPath = profileEntity.imageUrl;
-//    }
+
     model.failImageName = @"imageDownloadFail";
     return model;
 }
