@@ -39,8 +39,6 @@
 		182DB6F31B74A85E00C73C54 /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182DB6F21B74A85E00C73C54 /* RegistViewController.m */; };
 		183D533C1B86D66D00500663 /* MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 183D533B1B86D66D00500663 /* MD5.m */; };
 		183D53421B871C6900500663 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183D53411B871C6900500663 /* UserInfoViewController.m */; };
-		185274DE1B7EDA8400C5AC7C /* Myorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 185274DD1B7EDA8400C5AC7C /* Myorder.m */; };
-		185274E01B7EDABA00C5AC7C /* Myorder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 185274DF1B7EDABA00C5AC7C /* Myorder.xib */; };
 		185274E61B7F3C9300C5AC7C /* MyBurseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185274E51B7F3C9300C5AC7C /* MyBurseViewController.m */; };
 		1852CC4E1BAA9E5A00393FC4 /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1852CC4D1BAA9E5A00393FC4 /* MAMapKit.framework */; };
 		1872A6F41BF418A6007EC158 /* ButtonLable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1872A6F31BF418A6007EC158 /* ButtonLable.m */; };
@@ -617,6 +615,8 @@
 		98EFD35F1D4AE82C002A1913 /* FansTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD35B1D4AE82C002A1913 /* FansTableViewCell.m */; };
 		98EFD3611D4AEB39002A1913 /* userInfoBlack.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 98EFD3601D4AEB39002A1913 /* userInfoBlack.jpg */; };
 		98EFD3621D4AEB39002A1913 /* userInfoBlack.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 98EFD3601D4AEB39002A1913 /* userInfoBlack.jpg */; };
+		98EFD3661D4AF19A002A1913 /* Myorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD3641D4AF19A002A1913 /* Myorder.m */; };
+		98EFD3671D4AF19A002A1913 /* Myorder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98EFD3651D4AF19A002A1913 /* Myorder.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -756,9 +756,6 @@
 		183D533B1B86D66D00500663 /* MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MD5.m; sourceTree = "<group>"; };
 		183D53401B871C6900500663 /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
 		183D53411B871C6900500663 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
-		185274DC1B7EDA8400C5AC7C /* Myorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Myorder.h; sourceTree = "<group>"; };
-		185274DD1B7EDA8400C5AC7C /* Myorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Myorder.m; sourceTree = "<group>"; };
-		185274DF1B7EDABA00C5AC7C /* Myorder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Myorder.xib; sourceTree = "<group>"; };
 		185274E41B7F3C9300C5AC7C /* MyBurseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBurseViewController.h; sourceTree = "<group>"; };
 		185274E51B7F3C9300C5AC7C /* MyBurseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBurseViewController.m; sourceTree = "<group>"; };
 		1852CC4D1BAA9E5A00393FC4 /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = ../MAMapKit.framework; sourceTree = "<group>"; };
@@ -1691,6 +1688,9 @@
 		98EFD35A1D4AE82C002A1913 /* FansTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FansTableViewCell.h; sourceTree = "<group>"; };
 		98EFD35B1D4AE82C002A1913 /* FansTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FansTableViewCell.m; sourceTree = "<group>"; };
 		98EFD3601D4AEB39002A1913 /* userInfoBlack.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = userInfoBlack.jpg; sourceTree = "<group>"; };
+		98EFD3631D4AF19A002A1913 /* Myorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Myorder.h; sourceTree = "<group>"; };
+		98EFD3641D4AF19A002A1913 /* Myorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Myorder.m; sourceTree = "<group>"; };
+		98EFD3651D4AF19A002A1913 /* Myorder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Myorder.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1995,9 +1995,9 @@
 		1872A7041BF43506007EC158 /* OrderInfoView */ = {
 			isa = PBXGroup;
 			children = (
-				185274DC1B7EDA8400C5AC7C /* Myorder.h */,
-				185274DD1B7EDA8400C5AC7C /* Myorder.m */,
-				185274DF1B7EDABA00C5AC7C /* Myorder.xib */,
+				98EFD3631D4AF19A002A1913 /* Myorder.h */,
+				98EFD3641D4AF19A002A1913 /* Myorder.m */,
+				98EFD3651D4AF19A002A1913 /* Myorder.xib */,
 			);
 			name = OrderInfoView;
 			sourceTree = "<group>";
@@ -4173,7 +4173,6 @@
 				27587AB31CF5824F00B78F92 /* chatBar_more.png in Resources */,
 				27CA5A511CEEACCB00CC6956 /* peiwan_chat_dark@3x.png in Resources */,
 				27ADB8411CFEC50F00F11453 /* shouye@2x.png in Resources */,
-				185274E01B7EDABA00C5AC7C /* Myorder.xib in Resources */,
 				27587AC21CF5824F00B78F92 /* chatBar_colorMore_cameraSelected@2x.png in Resources */,
 				27E0A0C81CE1910A00D5FE31 /* Main.storyboard in Resources */,
 				27CA5A671CEEACCB00CC6956 /* peiwan_praise1.png in Resources */,
@@ -4318,6 +4317,7 @@
 				27587A5B1CF5824F00B78F92 /* 114.png in Resources */,
 				27CA5A421CEEACCB00CC6956 /* huangjin.png in Resources */,
 				27587AF61CF5824F00B78F92 /* groupPrivateHeader@2x.png in Resources */,
+				98EFD3671D4AF19A002A1913 /* Myorder.xib in Resources */,
 				27CA5A781CEEACCB00CC6956 /* zuanshi.png in Resources */,
 				27587A8A1CF5824F00B78F92 /* VoiceSearchFeedback020@2x.png in Resources */,
 				27587ACD1CF5824F00B78F92 /* chatBar_more_cameraSelected.png in Resources */,
@@ -4372,6 +4372,7 @@
 				18E57A131B7DE22700771063 /* AFURLResponseSerialization.m in Sources */,
 				27587C551CF5861900B78F92 /* PSTCollectionViewCell.m in Sources */,
 				27587C5C1CF5861900B78F92 /* PSTGridLayoutInfo.m in Sources */,
+				98EFD3661D4AF19A002A1913 /* Myorder.m in Sources */,
 				18E57A111B7DE22700771063 /* AFURLConnectionOperation.m in Sources */,
 				1883DA6F1B9A8ECC009F45A0 /* SettingPlayWithUIViewController.m in Sources */,
 				27587C341CF5861900B78F92 /* MJRefreshHeader.m in Sources */,
@@ -4549,7 +4550,6 @@
 				27587C641CF5861900B78F92 /* EaseSDKHelper.m in Sources */,
 				18CC8EE91BC39CE1000281CE /* Upload.swift in Sources */,
 				18824A491B85D5920063EC03 /* NSObject+SBJson.m in Sources */,
-				185274DE1B7EDA8400C5AC7C /* Myorder.m in Sources */,
 				27587C7F1CF5861A00B78F92 /* EaseMessageTimeCell.m in Sources */,
 				185274E61B7F3C9300C5AC7C /* MyBurseViewController.m in Sources */,
 				27587C651CF5861A00B78F92 /* EaseConversationModel.m in Sources */,

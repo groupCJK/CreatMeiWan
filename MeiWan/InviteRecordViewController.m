@@ -341,7 +341,7 @@
         self.myorder.mytag = 888;
         self.myorder.delegate = self;
         self.myorder.orderDic = self.myOrders[i];
-        self.myorder.frame = CGRectMake(0, 160*i, self.reSv.bounds.size.width, 150);
+        self.myorder.frame = CGRectMake(0, 190*i, self.reSv.bounds.size.width, 190);
         //sum += self.myorder.frame.size.height+10;
         [self.reSv addSubview:self.myorder];
         [self.reSvSubViews addObject:self.myorder];
@@ -357,7 +357,7 @@
         self.inviteMeorder = [[[NSBundle mainBundle]loadNibNamed:@"Myorder" owner:self options:nil]firstObject];
         self.inviteMeorder.mytag = 666;
         self.inviteMeorder.orderDic = self.inviteMeOrder[i];
-        self.inviteMeorder.frame = CGRectMake(0, 160*i, self.inSv.bounds.size.width, 150);
+        self.inviteMeorder.frame = CGRectMake(0, 190*i, self.inSv.bounds.size.width, 190);
         self.inviteMeorder.delegate = self;
         [self.inSv addSubview:self.inviteMeorder];
         [self.inSvSubViews addObject:self.inviteMeorder];

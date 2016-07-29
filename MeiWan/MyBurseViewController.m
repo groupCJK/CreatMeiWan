@@ -32,8 +32,6 @@
     
     [super viewDidLoad];
 
-//    self.balance.text = [NSString stringWithFormat:@"%.1f",[self.userDic[@"money"] doubleValue]];
-//    self.TopUp.text = [NSString stringWithFormat:@"%.1f",[self.userDic[@"money2"] doubleValue]];
     self.tabBarController.tabBar.hidden = YES;
 
     // Do any additional setup after loading the view.
