@@ -73,7 +73,7 @@
     [sexAge addSubview:age];
     self.ageLabel = age;
     
-    UIButton *focusButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width-70, (70-30)/2, 60, 20)];
+    UIButton *focusButton = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width -70, (70-30)/2, 60, 20)];
     [focusButton setTitle:@"关注" forState:UIControlStateNormal];
     focusButton.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     focusButton.layer.masksToBounds = YES;
@@ -87,9 +87,11 @@
 - (void)chlikFocusButton:(UIButton *)sender{
     
     NSString * userID =[self.focusDic objectForKey:@"id"];
-    if ([self.delegate respondsToSelector:@selector(focusTableViewCell:userID:)]) {
-        [self.delegate focusTableViewCell:self userID:userID];
-    }
+//    if ([self.delegate respondsToSelector:@selector(focusTableViewCell:userID:)]) {
+//        
+//    }
+    [self.delegate focusTableViewCell:self userID:userID];
+
     
 }
 

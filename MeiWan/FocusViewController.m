@@ -20,26 +20,30 @@
 @interface FocusViewController ()<UITableViewDelegate,UITableViewDataSource,FocusTableViewCellDelegate>
 
 @property (nonatomic, strong) UITableView *focusTableView;
-@property (nonatomic, strong) NSMutableArray *focusArray;
+@property (nonatomic, strong) NSMutableArray * focusArray;
 @property (nonatomic, strong) NSNumber *peiwanId;
+@property (nonatomic, strong) NSMutableArray * MyfriendArray;
 
 @end
 
 @implementation FocusViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    self.title = @"我的粉丝";
-    
-    [self focusTableView];
-    
-    // Do any additional setup after loading the view.
+-(void)viewWillAppear:(BOOL)animated{
+
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:YES];
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    self.title = @"我的粉丝";
+
     [self focusFollowersBy];
+    [self findMyFriendList];
+    [self CreatTableView];
+
+    
+    
+    // Do any additional setup after loading the view.
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -71,9 +75,16 @@
         cell = [[FocusTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"infoCell"];
     }
     cell.focusDic = self.focusArray[indexPath.row];
+    
     cell.delegate =self;
-//    self.peiwanId = [cell.focusDic objectForKey:@"id"];
-//    [cell.focusButton addTarget:self action:@selector(chlikFocusButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self.MyfriendArray enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        if ([obj isEqualToDictionary:self.focusArray[indexPath.row]]) {
+            NSLog(@"xiangdeng------%@",self.focusArray[indexPath.row]);
+            [cell.focusButton setTitle:@"互相关注" forState:UIControlStateNormal];
+        }
+    }];
+    
     return cell;
 }
 
@@ -81,7 +92,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
         
     self.hidesBottomBarWhenPushed = YES;
-        [self performSegueWithIdentifier:@"focusDetail" sender:self.focusArray[indexPath.row]];
+    
+    [self performSegueWithIdentifier:@"focusDetail" sender:self.focusArray[indexPath.row]];
 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -102,17 +114,19 @@
             }else{
                 SBJsonParser*parser=[[SBJsonParser alloc]init];
                 NSMutableDictionary *json=[parser objectWithData:data];
-                //NSLog(@"%@",json);
                 int status = [[json objectForKey:@"status"]intValue];
-                //NSLog(@"%d",status);
                 if (status == 0) {
-                    [self focusFollowersBy];
-                    [ShowMessage showMessage:@"关注成功"];
+
+                    [cell.focusButton setTitle:@"互相关注" forState:UIControlStateNormal];
+
+                    
                 }else if (status == 1){
+                    
                     [PersistenceManager setLoginSession:@""];
                     LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
                     lv.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:lv animated:YES];
+                    
                 }else{
                     
                 }
@@ -126,7 +140,7 @@
         pv.playerInfo = sender;
     }
 }
-
+/**获取粉丝列表*/
 - (void)focusFollowersBy{
     NSString *sesstion = [PersistenceManager getLoginSession];
     [UserConnector findMyFocus:sesstion receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
@@ -143,10 +157,7 @@
                         [self.focusArray removeObjectAtIndex:i];
                     }
                 }
-                //NSLog(@"%@++++++",self.myfriendsArray);
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.focusTableView reloadData];
-                });
+                [_focusTableView reloadData];
             }else if (status == 1){
                 [PersistenceManager setLoginSession:@""];
                 
@@ -161,15 +172,41 @@
         }
     }];
 }
+/**获取好友*/
+- (void)findMyFriendList
+{
+    NSString * session = [PersistenceManager getLoginSession];
+    [UserConnector findMyFriends:session receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (error) {
+            [self showMessageAlert:@"服务器未响应"];
+        }else{
+            SBJsonParser*parser=[[SBJsonParser alloc]init];
+            NSMutableDictionary *json=[parser objectWithData:data];
+            self.MyfriendArray = json[@"entity"];
+            [_focusTableView reloadData];
+        }
+    }];
+}
+/**提示框*/
+- (void)showMessageAlert:(NSString *)message
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action){
+        
+    }];
+    UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:nil];
+    [alertController addAction:cancelAction];
+    [alertController addAction:sureAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
 
-- (UITableView *)focusTableView{
-    if (!_focusTableView) {
-        _focusTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, dtScreenWidth, dtScreenHeight) style:UITableViewStylePlain];
-        _focusTableView.delegate = self;
-        _focusTableView.dataSource = self;
-        [self.view addSubview:_focusTableView];
-    }
-    return _focusTableView;
+/**创建tableView*/
+- (void)CreatTableView
+{
+    _focusTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, dtScreenWidth, dtScreenHeight) style:UITableViewStylePlain];
+    _focusTableView.delegate = self;
+    _focusTableView.dataSource = self;
+    [self.view addSubview:_focusTableView];
 }
 
 - (void)didReceiveMemoryWarning {

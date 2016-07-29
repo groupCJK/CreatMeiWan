@@ -72,7 +72,7 @@
     [sexAge addSubview:age];
     self.ageLabel = age;
     
-    UIButton *fansButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width-70, (70-30)/2, 60, 20)];
+    UIButton *fansButton = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-70, (70-30)/2, 60, 20)];
     [fansButton setTitle:@"取消关注" forState:UIControlStateNormal];
     fansButton.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     fansButton.layer.masksToBounds = YES;

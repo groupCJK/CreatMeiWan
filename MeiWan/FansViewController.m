@@ -140,7 +140,7 @@
                         [self.fansArray removeObjectAtIndex:i];
                     }
                 }
-                //NSLog(@"%@++++++",self.myfriendsArray);
+
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.fansTableView reloadData];
                 });

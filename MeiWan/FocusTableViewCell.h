@@ -30,6 +30,7 @@
 @property (nonatomic, strong)UIButton *focusButton;
 
 @property (strong, nonatomic)NSDictionary *focusDic;
+@property (strong,nonatomic)NSDictionary * friendDic;
 
 @property (strong, nonatomic)id<FocusTableViewCellDelegate>delegate;
 
