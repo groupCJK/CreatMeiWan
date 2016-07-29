@@ -40,13 +40,13 @@
     [self addSubview:sexAge];
     self.sexAgeView = sexAge;
     
-    UIImageView *sexImage = [[UIImageView alloc] initWithFrame:CGRectMake(2, 2, 10, 12)];
+    UIImageView *sexImage = [[UIImageView alloc] initWithFrame:CGRectMake(2, 2, 10, 10)];
     
     if ([[focusDic objectForKey:@"gender"]intValue] == 0) {
-        sexImage.image = [UIImage imageNamed:@"nansheng_logo"];
+        sexImage.image = [UIImage imageNamed:@"peiwan_male"];
         sexAge.backgroundColor = [CorlorTransform colorWithHexString:@"#007aff" andAlpha:88/255.0];
     }else{
-        sexImage.image = [UIImage imageNamed:@"nvsheng_logo"];
+        sexImage.image = [UIImage imageNamed:@"peiwan_female"];
         sexAge.backgroundColor = [CorlorTransform colorWithHexString:@"#ffc0cb"];
     }
     [sexAge addSubview:sexImage];
@@ -73,7 +73,7 @@
     [sexAge addSubview:age];
     self.ageLabel = age;
     
-    UIButton *focusButton = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width -70, (70-30)/2, 60, 20)];
+    UIButton *focusButton = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width -70, (70-20)/2, 60, 20)];
     [focusButton setTitle:@"关注" forState:UIControlStateNormal];
     focusButton.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     focusButton.layer.masksToBounds = YES;

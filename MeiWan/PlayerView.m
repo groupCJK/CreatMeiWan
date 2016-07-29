@@ -18,7 +18,7 @@
 - (void)setPlayerInfo:(NSDictionary *)playerInfo{
     NSArray * titlelabel = @[@"线上点歌",@"视屏聊天",@"聚餐",@"线下K歌",@"夜店达人",@"叫醒服务",@"影伴",@"运动健身",@"LOL"];
     _playerInfo = playerInfo;
-    NSLog(@"%@",playerInfo);
+    //NSLog(@"%@",playerInfo);
     self.hot.text = [NSString stringWithFormat:@"%d",[[playerInfo objectForKey:@"hot"]intValue]];
     NSURL *headUrl = [NSURL URLWithString:[playerInfo objectForKey:@"headUrl"]];
     //NSLog(@"%@",headUrl);
@@ -104,7 +104,7 @@
     self.biaoqianImage3 = [[UIImageView alloc]init];
     
     NSArray * usertimeTags = [playerInfo objectForKey:@"userTimeTags"];
-    NSLog(@"%@",usertimeTags);
+   // NSLog(@"%@",usertimeTags);
     if (usertimeTags.count==1) {
         NSDictionary * dic1 = usertimeTags[0];
         

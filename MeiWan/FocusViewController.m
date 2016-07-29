@@ -40,8 +40,6 @@
     [self focusFollowersBy];
     [self findMyFriendList];
     [self CreatTableView];
-
-    
     
     // Do any additional setup after loading the view.
 }
@@ -80,7 +78,7 @@
     [self.MyfriendArray enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         if ([obj isEqualToDictionary:self.focusArray[indexPath.row]]) {
-            NSLog(@"xiangdeng------%@",self.focusArray[indexPath.row]);
+           // NSLog(@"xiangdeng------%@",self.focusArray[indexPath.row]);
             [cell.focusButton setTitle:@"互相关注" forState:UIControlStateNormal];
         }
     }];
@@ -140,6 +138,7 @@
         pv.playerInfo = sender;
     }
 }
+
 /**获取粉丝列表*/
 - (void)focusFollowersBy{
     NSString *sesstion = [PersistenceManager getLoginSession];
@@ -172,6 +171,7 @@
         }
     }];
 }
+
 /**获取好友*/
 - (void)findMyFriendList
 {
@@ -187,6 +187,7 @@
         }
     }];
 }
+
 /**提示框*/
 - (void)showMessageAlert:(NSString *)message
 {

@@ -39,13 +39,13 @@
     [self addSubview:sexAge];
     self.sexAgeView = sexAge;
     
-    UIImageView *sexImage = [[UIImageView alloc] initWithFrame:CGRectMake(2, 2, 10, 12)];
+    UIImageView *sexImage = [[UIImageView alloc] initWithFrame:CGRectMake(2, 2, 10, 10)];
     
     if ([[fansDic objectForKey:@"gender"]intValue] == 0) {
-        sexImage.image = [UIImage imageNamed:@"nansheng_logo"];
+        sexImage.image = [UIImage imageNamed:@"peiwan_male"];
         sexAge.backgroundColor = [CorlorTransform colorWithHexString:@"#007aff" andAlpha:88/255.0];
     }else{
-        sexImage.image = [UIImage imageNamed:@"nvsheng_logo"];
+        sexImage.image = [UIImage imageNamed:@"peiwan_female"];
         sexAge.backgroundColor = [CorlorTransform colorWithHexString:@"#ffc0cb"];
     }
     [sexAge addSubview:sexImage];
@@ -72,7 +72,7 @@
     [sexAge addSubview:age];
     self.ageLabel = age;
     
-    UIButton *fansButton = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-70, (70-30)/2, 60, 20)];
+    UIButton *fansButton = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-70, (70-20)/2, 60, 20)];
     [fansButton setTitle:@"取消关注" forState:UIControlStateNormal];
     fansButton.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     fansButton.layer.masksToBounds = YES;
