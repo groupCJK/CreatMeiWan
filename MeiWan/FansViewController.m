@@ -7,7 +7,7 @@
 //
 
 #import "FansViewController.h"
-#import "FansTableViewCell.h"
+#import "fansCell.h"
 #import "LoginViewController.h"
 #import "PlagerinfoViewController.h"
 
@@ -18,11 +18,13 @@
 #import "ShowMessage.h"
 
 @interface FansViewController ()<UITableViewDelegate,UITableViewDataSource>
-
+{
+    NSDictionary * fansDic;
+}
 @property (nonatomic, strong) UITableView *fansTableView;
 @property (nonatomic, strong) NSMutableArray *fansArray;
 @property (nonatomic ,strong) NSNumber *peiwanId;
-@property (nonatomic, strong) FansTableViewCell *fansCell;
+@property (nonatomic, strong) fansCell *fansCell;
 
 @end
 
@@ -32,7 +34,7 @@
     [super viewDidLoad];
     
     self.title = @"我的关注";
-    
+    fansDic = [[NSDictionary alloc]init];
     _fansTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, dtScreenWidth, dtScreenHeight) style:UITableViewStylePlain];
     _fansTableView.delegate = self;
     _fansTableView.dataSource = self;
@@ -49,46 +51,61 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    FansTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"infoCell"];
+    fansCell * cell = [tableView dequeueReusableCellWithIdentifier:@"infoCell"];
     if (!cell) {
-        cell = [[FansTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"infoCell"];
-
-    }
-
-    for (UIView *subView in cell.contentView.subviews)
-    {
-        [subView removeFromSuperview];
+        cell = [[fansCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"infoCell"];
     }
     
-    cell.fansDic = self.fansArray[indexPath.row];
-    self.peiwanId = [cell.fansDic objectForKey:@"id"];
-    self.fansCell = cell;
-    cell.indexPath =indexPath;
-    cell.tappedBlock =^(NSDictionary * fansDic,NSIndexPath * path){
+    fansDic = self.fansArray[indexPath.row];
+    [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:[fansDic objectForKey:@"headUrl"]]];
+    cell.nickname .text = fansDic[@"nickname"];
+    cell.nickname.font = [UIFont systemFontOfSize:15.0];
+    CGSize size = [cell.nickname.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:cell.nickname.font,NSFontAttributeName, nil]];
+    cell.nickname.frame = CGRectMake(70, 35-size.height/2, size.width, size.height);
+    cell.sexImage.frame = CGRectMake(cell.nickname.frame.origin.x+cell.nickname.frame.size.width+10, cell.nickname.center.y-8, 15, 15);
+    if ([[fansDic objectForKey:@"gender"]intValue] == 0){
+        cell.sexImage.image = [UIImage imageNamed:@"nansheng_logo"];
+    }else{
+        cell.sexImage.image = [UIImage imageNamed:@"nvsheng_logo"];
+    }
+    cell.ageLabel.frame = CGRectMake(cell.sexImage.frame.origin.x+cell.sexImage.frame.size.width+5, cell.sexImage.frame.origin.y, 30, 15);
+    NSDate *today = [NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    formatter.dateFormat = @"yyyy";
+    NSString *year = [formatter stringFromDate:today];
+    int yearnow = year.intValue;
+    int birthyear = [[fansDic objectForKey:@"year"]intValue];
+    int agenumber = yearnow - birthyear;
+    NSString *userAge = [NSString stringWithFormat:@"%d",agenumber];
+    cell.ageLabel.text = userAge;
     
-        NSString * userID =[fansDic objectForKey:@"id"];
-        NSLog(@"%@",userID);
-        NSInteger userNumber =[userID integerValue];
-        NSNumber * number =[NSNumber numberWithUnsignedInteger:userNumber];
-        NSString *session = [PersistenceManager getLoginSession];
-        [UserConnector deleteFriend:session friendId:number receiver:^(NSData *data,NSError *error){
-            if (error!=nil) {
-                
-                [ShowMessage showMessage:@"删除失败"];
-
-            }else{
-                [self.fansArray removeObject:fansDic];
-                NSIndexPath * index =[NSIndexPath indexPathForRow:path.row inSection:0];
-                [self.fansTableView deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationFade];
-                [ShowMessage showMessage:@"取消关注"];
-                [self.fansTableView reloadData];
-
-            }}];
-        
-    };
+    cell.fansButton.tag = indexPath.row;
+    [cell.fansButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
+- (void)buttonClick:(UIButton *)sender
+{
+    NSDictionary * userMessage = self.fansArray[sender.tag];
+    NSString * userID =[userMessage objectForKey:@"id"];
+    NSLog(@"%@",userID);
+    NSInteger userNumber =[userID integerValue];
+    NSNumber * number =[NSNumber numberWithUnsignedInteger:userNumber];
+    NSString *session = [PersistenceManager getLoginSession];
+    [UserConnector deleteFriend:session friendId:number receiver:^(NSData *data,NSError *error){
+        if (error!=nil) {
+            
+            [ShowMessage showMessage:@"删除失败"];
+            
+        }else{
+            [self.fansArray removeObject:userMessage];
+            NSIndexPath * index =[NSIndexPath indexPathForRow:sender.tag inSection:0];
+            [self.fansTableView deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationFade];
+            [ShowMessage showMessage:@"取消关注"];
+            [self.fansTableView reloadData];
+            
+        }}];
 
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
         
     self.hidesBottomBarWhenPushed = YES;

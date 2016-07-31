@@ -67,7 +67,7 @@
     } ];
         //NSLog(@"%@",usertimeTags);
     colorArray = @[@"#ff5d90",@"eb4f38",@"#ff6f36",@"#fdd32d",@"#36cdff",@"#ff3674",@"#7667e5",@"#f55d52",@"#ff5d90"];
-    priceArray = @[@39,@69,@99,@129,@169];
+    priceArray = @[@29,@59,@99,@129,@199];
     titleArray = @[@"线上点歌",@"视屏聊天",@"聚餐",@"线下K歌",@"夜店达人",@"叫醒服务",@"影伴",@"运动健身",@"LOL"];
     changePriceArray = @[@5,@10,@15,@20,@25];
     numberArray = [[NSMutableArray alloc]initWithCapacity:0];
