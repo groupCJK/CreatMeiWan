@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Uaj-XS-CqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Uaj-XS-CqX">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -2723,8 +2723,8 @@
                                     <constraint firstAttribute="height" id="be7-MV-9Yn"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ess-qh-QUB">
-                                <rect key="frame" x="0.0" y="64" width="320" height="457"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ess-qh-QUB">
+                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="b56-qT-L4i">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="274"/>
@@ -2996,7 +2996,11 @@
                         </subviews>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="Ess-qh-QUB" firstAttribute="top" secondItem="8NC-vb-edU" secondAttribute="bottom" id="00x-h7-e7M"/>
                             <constraint firstAttribute="trailingMargin" secondItem="OGo-8e-KTN" secondAttribute="trailing" id="3Ff-F0-4YN"/>
+                            <constraint firstItem="Ess-qh-QUB" firstAttribute="leading" secondItem="c8g-Am-jt3" secondAttribute="leading" id="aie-Tq-Dzl"/>
+                            <constraint firstAttribute="trailing" secondItem="Ess-qh-QUB" secondAttribute="trailing" id="dQC-Tj-Tpo"/>
+                            <constraint firstAttribute="bottom" secondItem="Ess-qh-QUB" secondAttribute="bottom" id="i16-D3-rFb"/>
                             <constraint firstItem="OGo-8e-KTN" firstAttribute="leading" secondItem="c8g-Am-jt3" secondAttribute="leadingMargin" id="n3S-IQ-dXg"/>
                             <constraint firstItem="OGo-8e-KTN" firstAttribute="top" secondItem="8NC-vb-edU" secondAttribute="bottom" id="tRc-nj-XhQ"/>
                         </constraints>
@@ -4582,13 +4586,13 @@
         <segue reference="a2L-pk-feb"/>
         <segue reference="ecr-8a-lYy"/>
         <segue reference="G1e-fu-sL2"/>
-        <segue reference="CsZ-Ni-kPZ"/>
         <segue reference="TE0-cN-cJS"/>
+        <segue reference="S0y-tW-KPA"/>
+        <segue reference="eH8-oc-G9W"/>
+        <segue reference="voh-uX-1iD"/>
         <segue reference="T0n-fg-bJC"/>
         <segue reference="Cbe-BK-afe"/>
         <segue reference="paO-aE-i4M"/>
         <segue reference="765-rk-Vfn"/>
-        <segue reference="S0y-tW-KPA"/>
-        <segue reference="eH8-oc-G9W"/>
     </inferredMetricsTieBreakers>
 </document>
