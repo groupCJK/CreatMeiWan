@@ -272,6 +272,7 @@
                             <outlet property="delegate" destination="GZB-Pf-48W" id="myS-Ba-P54"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="Xnh-0n-WGQ"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <segue destination="OVO-8k-NGG" kind="show" identifier="personInfo" id="KR5-l0-YjU"/>
@@ -2311,7 +2312,7 @@
                     <navigationItem key="navigationItem" title="最新动态" id="eTm-wq-dE9">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="0nE-YY-NZW">
                             <connections>
-                                <segue destination="As3-G6-YDV" kind="show" id="ecr-8a-lYy"/>
+                                <action selector="addNewStatus:" destination="sMr-zm-Veh" id="DGi-gN-nCd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -2319,6 +2320,7 @@
                     <connections>
                         <segue destination="GZB-Pf-48W" kind="show" identifier="discuss" id="GI5-Ug-Nan"/>
                         <segue destination="OVO-8k-NGG" kind="show" identifier="personInfo" id="5GD-ss-Z4a"/>
+                        <segue destination="As3-G6-YDV" kind="push" identifier="newStatus" id="lkr-Fs-pVo"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gXW-J4-4G4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4584,15 +4586,15 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="a2L-pk-feb"/>
-        <segue reference="ecr-8a-lYy"/>
-        <segue reference="G1e-fu-sL2"/>
-        <segue reference="TE0-cN-cJS"/>
-        <segue reference="S0y-tW-KPA"/>
-        <segue reference="eH8-oc-G9W"/>
-        <segue reference="voh-uX-1iD"/>
+        <segue reference="GI5-Ug-Nan"/>
+        <segue reference="5GD-ss-Z4a"/>
+        <segue reference="lkr-Fs-pVo"/>
         <segue reference="T0n-fg-bJC"/>
         <segue reference="Cbe-BK-afe"/>
         <segue reference="paO-aE-i4M"/>
         <segue reference="765-rk-Vfn"/>
+        <segue reference="G1e-fu-sL2"/>
+        <segue reference="TE0-cN-cJS"/>
+        <segue reference="S0y-tW-KPA"/>
     </inferredMetricsTieBreakers>
 </document>

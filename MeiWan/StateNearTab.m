@@ -21,8 +21,9 @@
 #import "PlagerinfoViewController.h"
 #import "ButtonLable.h"
 #import "MBProgressHUD.h"
+#import "MoveActionViewController.h"
 
-@interface StateNearTab ()<MoveActionCellDelegate,DiscussTabViewDelegate,MBProgressHUDDelegate>
+@interface StateNearTab ()<MoveActionCellDelegate,DiscussTabViewDelegate,MBProgressHUDDelegate,moveAction>
 {
     MBProgressHUD * HUD;
 }
@@ -37,10 +38,14 @@
 
 @implementation StateNearTab
 
--(void)viewWillAppear:(BOOL)animated
+- (IBAction)addNewStatus:(id)sender {
+    [self performSegueWithIdentifier:@"newStatus" sender:nil];
+}
+-(void)back
 {
     [self.tableView.header beginRefreshing];
 }
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -56,7 +61,6 @@
     //self.moveActionFrames = [NSMutableArray array];
     [self setupRefresh];
     [self getDataWithNumber:self.stateCount];
-    
 }
 #pragma mark - getData
 -(void)getDataWithNumber:(int)limit{
@@ -252,6 +256,10 @@
     if ([segue.identifier isEqualToString:@"personInfo"]) {
         PlagerinfoViewController *pv = segue.destinationViewController;
         pv.playerInfo = sender;
+    }
+    if ([segue.identifier isEqualToString:@"newStatus"]) {
+        MoveActionViewController * mv = segue.destinationViewController;
+        mv.delegate = self;
     }
 
 }
