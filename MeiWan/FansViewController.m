@@ -33,14 +33,14 @@
     
     self.title = @"我的关注";
     
-    [self fansTableView];
-    
-    // Do any additional setup after loading the view.
-}
-
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:YES];
+    _fansTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, dtScreenWidth, dtScreenHeight) style:UITableViewStylePlain];
+    _fansTableView.delegate = self;
+    _fansTableView.dataSource = self;
+    _fansTableView.tableFooterView = [[UIView alloc] init];
+    [self.view addSubview:_fansTableView];
     [self fansFollowersBy];
+
+    // Do any additional setup after loading the view.
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -48,29 +48,18 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (self.fansArray.count == 0) {
-        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        static NSString *noMessageCellid = @"sessionnomessageCellidentifier";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:noMessageCellid];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:noMessageCellid];
-            CGRect frame = cell.frame;
-            cell.frame = CGRectMake(frame.origin.x, frame.origin.y, [[UIScreen mainScreen] applicationFrame].size.width, frame.size.height);
-            [[UIScreen mainScreen] applicationFrame];
-            UILabel *noMsgLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 100.0f, cell.frame.size.width, 50.0f)];
-            noMsgLabel.text = @"您尚未关注用户";
-            noMsgLabel.textColor = [UIColor darkGrayColor];
-            noMsgLabel.textAlignment = NSTextAlignmentCenter;
-            [cell.contentView addSubview:noMsgLabel];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-        return cell;
-        
-    }
+    
     FansTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"infoCell"];
     if (!cell) {
         cell = [[FansTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"infoCell"];
+
     }
+
+    for (UIView *subView in cell.contentView.subviews)
+    {
+        [subView removeFromSuperview];
+    }
+    
     cell.fansDic = self.fansArray[indexPath.row];
     self.peiwanId = [cell.fansDic objectForKey:@"id"];
     self.fansCell = cell;
@@ -81,25 +70,20 @@
         NSLog(@"%@",userID);
         NSInteger userNumber =[userID integerValue];
         NSNumber * number =[NSNumber numberWithUnsignedInteger:userNumber];
-
-        [self.fansArray removeObject:fansDic];
-        NSIndexPath * index =[NSIndexPath indexPathForRow:path.row inSection:0];
-//        [self.fansTableView beginUpdates];
-        [self.fansTableView deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationFade];
-//        [self.fansTableView endUpdates];
-        [self.fansTableView reloadData];
-        
         NSString *session = [PersistenceManager getLoginSession];
         [UserConnector deleteFriend:session friendId:number receiver:^(NSData *data,NSError *error){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.fansCell = nil;
-                if (self.fansArray.count == 0) {
-                    [self.fansTableView reloadData];
-                }else{
-                    [ShowMessage showMessage:@"取消关注成功"];
-                }
-            });
-        }];
+            if (error!=nil) {
+                
+                [ShowMessage showMessage:@"删除失败"];
+
+            }else{
+                [self.fansArray removeObject:fansDic];
+                NSIndexPath * index =[NSIndexPath indexPathForRow:path.row inSection:0];
+                [self.fansTableView deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationFade];
+                [ShowMessage showMessage:@"取消关注"];
+                [self.fansTableView reloadData];
+
+            }}];
         
     };
     return cell;
@@ -159,16 +143,6 @@
     }];
 }
 
-- (UITableView *)fansTableView{
-    if (!_fansTableView) {
-        _fansTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, dtScreenWidth, dtScreenHeight) style:UITableViewStylePlain];
-        _fansTableView.delegate = self;
-        _fansTableView.dataSource = self;
-        _fansTableView.tableFooterView = [[UIView alloc] init];
-        [self.view addSubview:_fansTableView];
-    }
-    return _fansTableView;
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
