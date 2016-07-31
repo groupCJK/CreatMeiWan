@@ -34,10 +34,6 @@
 
 @implementation HotCountController
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [self.tableView.header beginRefreshing];
-}
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -65,6 +61,8 @@
             self.navigationItem.rightBarButtonItem = nil;
         }
     }
+    //第一次进入刷新
+    [self.tableView.header beginRefreshing];
 
 }
 - (IBAction)hotRole:(UIBarButtonItem *)sender {
