@@ -605,6 +605,8 @@
 		2BE25BF81D2B53A400D2AEAF /* animationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE25BF71D2B53A400D2AEAF /* animationCell.m */; };
 		2BE5E2661D1A40790031361C /* HotCountCellChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5E2651D1A40790031361C /* HotCountCellChange.m */; };
 		9866077B1D4B3CB2007AF7C2 /* userInfoBlack.png in Resources */ = {isa = PBXBuildFile; fileRef = 9866077A1D4B3CB2007AF7C2 /* userInfoBlack.png */; };
+		987E7F811D4EE79C00613C6F /* UserInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 987E7F801D4EE79C00613C6F /* UserInfoTableViewCell.m */; };
+		987E7F831D4EE7B900613C6F /* black.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 987E7F821D4EE7B900613C6F /* black.jpg */; };
 		98EFD3531D4AE816002A1913 /* FocusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD3501D4AE816002A1913 /* FocusViewController.m */; };
 		98EFD3541D4AE816002A1913 /* FocusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD3501D4AE816002A1913 /* FocusViewController.m */; };
 		98EFD3551D4AE816002A1913 /* FansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD3521D4AE816002A1913 /* FansViewController.m */; };
@@ -1678,6 +1680,9 @@
 		2BE5E2641D1A40790031361C /* HotCountCellChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotCountCellChange.h; sourceTree = "<group>"; };
 		2BE5E2651D1A40790031361C /* HotCountCellChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotCountCellChange.m; sourceTree = "<group>"; };
 		9866077A1D4B3CB2007AF7C2 /* userInfoBlack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userInfoBlack.png; sourceTree = "<group>"; };
+		987E7F7F1D4EE79C00613C6F /* UserInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoTableViewCell.h; sourceTree = "<group>"; };
+		987E7F801D4EE79C00613C6F /* UserInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoTableViewCell.m; sourceTree = "<group>"; };
+		987E7F821D4EE7B900613C6F /* black.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = black.jpg; sourceTree = "<group>"; };
 		98EFD34F1D4AE816002A1913 /* FocusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FocusViewController.h; sourceTree = "<group>"; };
 		98EFD3501D4AE816002A1913 /* FocusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusViewController.m; sourceTree = "<group>"; };
 		98EFD3511D4AE816002A1913 /* FansViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FansViewController.h; sourceTree = "<group>"; };
@@ -3811,6 +3816,7 @@
 		27E0A0C51CE1759F00D5FE31 /* Control */ = {
 			isa = PBXGroup;
 			children = (
+				987E7F821D4EE7B900613C6F /* black.jpg */,
 				9866077A1D4B3CB2007AF7C2 /* userInfoBlack.png */,
 				27587CB71CF5A7A500B78F92 /* PersonTableViewController.h */,
 				27587CB61CF5A7A500B78F92 /* PersonTableViewController.m */,
@@ -3927,6 +3933,8 @@
 		98EFD3571D4AE81A002A1913 /* cell */ = {
 			isa = PBXGroup;
 			children = (
+				987E7F7F1D4EE79C00613C6F /* UserInfoTableViewCell.h */,
+				987E7F801D4EE79C00613C6F /* UserInfoTableViewCell.m */,
 				98EFD3581D4AE82C002A1913 /* FocusTableViewCell.h */,
 				98EFD3591D4AE82C002A1913 /* FocusTableViewCell.m */,
 				98EFD35A1D4AE82C002A1913 /* FansTableViewCell.h */,
@@ -4256,6 +4264,7 @@
 				27587A821CF5824F00B78F92 /* VoiceSearchFeedback016@2x.png in Resources */,
 				27587A781CF5824F00B78F92 /* VoiceSearchFeedback011@2x.png in Resources */,
 				27587AA41CF5824F00B78F92 /* chat_location_detail_disclosureHL@2x.png in Resources */,
+				987E7F831D4EE7B900613C6F /* black.jpg in Resources */,
 				27587AF01CF5824F00B78F92 /* group_creategroup@2x.png in Resources */,
 				27587A601CF5824F00B78F92 /* 80.png in Resources */,
 				27ADB8481CFEE53C00F11453 /* tabarBac.png in Resources */,
@@ -4445,6 +4454,7 @@
 				27587C5D1CF5861900B78F92 /* PSTGridLayoutItem.m in Sources */,
 				18CC8EE61BC39CE1000281CE /* Result.swift in Sources */,
 				18841F2F1B8C390700E2728B /* UMUUploaderManager.m in Sources */,
+				987E7F811D4EE79C00613C6F /* UserInfoTableViewCell.m in Sources */,
 				27587C8C1CF5861A00B78F92 /* EaseFacialView.m in Sources */,
 				18F6D2C51B8FF42A00B1F0C3 /* MoveActionViewCell.m in Sources */,
 				1883F92B1B9E89F5004A19BA /* LOLHelper.swift in Sources */,
@@ -4703,7 +4713,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE = "96076237-aea0-4610-88b4-394f86d2cf32";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s x86_64";
@@ -4748,7 +4757,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE = "96076237-aea0-4610-88b4-394f86d2cf32";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -4798,7 +4806,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.chuangjike.MeiWan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE = "96076237-aea0-4610-88b4-394f86d2cf32";
 				SDKROOT = iphoneos;
 				SWIFT_INSTALL_OBJC_HEADER = YES;
@@ -4854,7 +4861,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.chuangjike.MeiWan;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE = "96076237-aea0-4610-88b4-394f86d2cf32";
 				SDKROOT = iphoneos;
 				SWIFT_INSTALL_OBJC_HEADER = YES;
