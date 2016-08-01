@@ -50,9 +50,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self loadTimeData];
-    
     self.userInfoDic = [PersistenceManager getLoginUser];
+    
+    [self loadDatasource];
+    
+    [self userInfoTableView];
+    
+    [self loadTimeData];
     
 }
 
@@ -365,11 +369,12 @@
             NSMutableDictionary *json=[parser objectWithData:data];
             int status = [[json objectForKey:@"status"]intValue];
             if (status == 0) {
-                self.playerInfo = [json objectForKey:@"entity"];
                 
                 self.userInfoTableView.tableHeaderView = self.userInfoHeadView;
+
+                self.playerInfo = [json objectForKey:@"entity"];
                 
-                [self loadDatasource];
+                [self.userInfoTableView reloadData];
                 
             }else if (status == 1){
                 
@@ -377,7 +382,6 @@
                 
             }
         }
-        //NSLog(@"%@",self.playerInfo);
     }];
 }
 

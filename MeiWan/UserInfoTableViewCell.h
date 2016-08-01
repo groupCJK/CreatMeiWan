@@ -17,6 +17,7 @@
 @property (nonatomic, strong)UITextField *userInfoEdit;
 @property (nonatomic, strong)UITextField *userInfoEditSign;
 @property (nonatomic, strong)UILabel *line;
+
 @property (nonatomic, strong)UIImageView *timeImage1;
 @property (nonatomic, strong)UILabel *timeTitle1;
 
@@ -27,5 +28,7 @@
 @property (nonatomic, strong)UILabel *timeTitle3;
 
 @property (strong, nonatomic)NSDictionary *timeDic;
+
+@property (strong, nonatomic)UILabel *timeerrer;
 
 @end

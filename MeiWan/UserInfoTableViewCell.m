@@ -61,17 +61,17 @@
         line.backgroundColor = [CorlorTransform colorWithHexString:@"#d0d0d0"];
         [self addSubview:line];
         self.line = line;
-        
-        UIImage *image = [UIImage imageNamed:@"biaoqian.png"];
-        NSInteger leftCapWidth = image.size.width * 0.9;
-        NSInteger topCapHeight = image.size.height * 0.9;
-        UIImage *newImage = [image stretchableImageWithLeftCapWidth:leftCapWidth topCapHeight:topCapHeight];
-        
-        UIImageView *oneimage = [[UIImageView alloc]initWithFrame:CGRectMake(title.frame.origin.x+title.frame.size.width+5, (self.frame.size.height/2+title.frame.size.height/2)/2, 44, 20)];
-        oneimage.image = newImage;
-        [self addSubview:oneimage];
-        self.timeImage1 = oneimage;
-        self.timeImage1.hidden = YES;
+//        
+//        UIImage *image = [UIImage imageNamed:@"biaoqian.png"];
+//        NSInteger leftCapWidth = image.size.width * 0.9;
+//        NSInteger topCapHeight = image.size.height * 0.9;
+//        UIImage *newImage = [image stretchableImageWithLeftCapWidth:leftCapWidth topCapHeight:topCapHeight];
+//        
+//        UIImageView *oneimage = [[UIImageView alloc]initWithFrame:CGRectMake(title.frame.origin.x+title.frame.size.width+5, (self.frame.size.height/2+title.frame.size.height/2)/2, 44, 20)];
+//        oneimage.image = newImage;
+//        [self addSubview:oneimage];
+//        self.timeImage1 = oneimage;
+//        self.timeImage1.hidden = YES;
     }
     return self;
 }
@@ -87,16 +87,7 @@
     
     NSArray *labelTitle = [_timeDic objectForKey:@"userTimeTags"];
     
-    if (labelTitle.count == 0) {
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.userInfoTitle.frame.origin.x+self.userInfoTitle.frame.size.width+5, (50-40)/2, 90, 40)];
-        label.text = @"用户暂无标签";
-        label.font = [UIFont systemFontOfSize:13.0f];
-        [self addSubview:label];
-        self.timeImage1.hidden = YES;
-        self.timeImage2.hidden = YES;
-        self.timeImage3.hidden = YES;
-        label.textColor = [CorlorTransform colorWithHexString:@"#B0B0B0"];
-    }else if (labelTitle.count == 1){
+    if (labelTitle.count == 1) {
         NSDictionary *label1Dic = labelTitle[0];
         //三个标签label
         UILabel * oneLabel = [[UILabel alloc]init];
@@ -108,7 +99,7 @@
         }else if([indexstr isEqualToString: @"3"]){
             oneLabel.text = @"聚餐";
         }else if([indexstr isEqualToString:@"4"]){
-            oneLabel.text = @"线下k歌";
+            oneLabel.text = @"线下K歌";
         }else if([indexstr isEqualToString:@"5"]){
             oneLabel.text = @"夜店达人";
         }else if([indexstr isEqualToString:@"6"]){
@@ -129,12 +120,13 @@
         oneLabel.frame = CGRectMake(5, 8, name2W,name2H);
         self.timeTitle1 = oneLabel;
         
-        UIImageView * oneImage = [[UIImageView alloc]initWithFrame:CGRectMake(self.userInfoTitle.frame.origin.x+self.userInfoTitle.frame.size.width+5, (self.frame.size.height/2+self.userInfoTitle.frame.size.height/2)/2, name2W+4, name2H+4)];
+        UIImageView * oneImage = [[UIImageView alloc]initWithFrame:CGRectMake(self.userInfoTitle.frame.origin.x+self.userInfoTitle.frame.size.width+5, (self.frame.size.height/2+self.userInfoTitle.frame.size.height/2)/2, oneLabel.frame.size.width+10, oneLabel.frame.size.height+10)];
         oneImage.image = newImage;
-        [oneImage addSubview:oneLabel];
         [self addSubview:oneImage];
+        [oneImage addSubview:oneLabel];
         self.timeImage1 = oneImage;
-        
+        self.timeerrer.hidden = YES;
+
     }else if (labelTitle.count == 2){
         NSDictionary *label1Dic = labelTitle[0];
         //三个标签label
@@ -147,7 +139,7 @@
         }else if([indexstr isEqualToString: @"3"]){
             oneLabel.text = @"聚餐";
         }else if([indexstr isEqualToString:@"4"]){
-            oneLabel.text = @"线下k歌";
+            oneLabel.text = @"线下K歌";
         }else if([indexstr isEqualToString:@"5"]){
             oneLabel.text = @"夜店达人";
         }else if([indexstr isEqualToString:@"6"]){
@@ -166,12 +158,13 @@
         CGFloat name2H = nick2Size.height;
         CGFloat name2W = nick2Size.width;
         oneLabel.frame = CGRectMake(5, 8, name2W,name2H);
+        //        [self addSubview:oneLabel];
         self.timeTitle1 = oneLabel;
         
-        UIImageView * oneImage = [[UIImageView alloc]initWithFrame:CGRectMake(self.userInfoTitle.frame.origin.x+self.userInfoTitle.frame.size.width+5, (self.frame.size.height/2+self.userInfoTitle.frame.size.height/2)/2, name2W+4, name2H+4)];
+        UIImageView * oneImage = [[UIImageView alloc]initWithFrame:CGRectMake(self.userInfoTitle.frame.origin.x+self.userInfoTitle.frame.size.width+5, (self.frame.size.height/2+self.userInfoTitle.frame.size.height/2)/2, oneLabel.frame.size.width+10, oneLabel.frame.size.height+10)];
         oneImage.image = newImage;
-        [oneImage addSubview:oneLabel];
         [self addSubview:oneImage];
+        [oneImage addSubview:oneLabel];
         self.timeImage1 = oneImage;
         
         NSDictionary *label2Dic = labelTitle[1];
@@ -184,7 +177,7 @@
         }else if([indexstr2 isEqualToString:@"3"]){
             twoLabel.text = @"聚餐";
         }else if([indexstr2 isEqualToString:@"4"]){
-            twoLabel.text = @"线下k歌";
+            twoLabel.text = @"线下K歌";
         }else if([indexstr2 isEqualToString:@"5"]){
             twoLabel.text = @"夜店达人";
         }else if([indexstr2 isEqualToString:@"6"]){
@@ -203,15 +196,18 @@
         CGFloat twoSizeH = twoSize.height;
         CGFloat twoSizeW = twoSize.width;
         twoLabel.frame = CGRectMake(5, 8, twoSizeW,twoSizeH);
-        //        [self addSubview:twoLabel];
+        [self addSubview:twoLabel];
         self.timeTitle2 = twoLabel;
         
-        UIImageView * twoImage = [[UIImageView alloc] initWithFrame:CGRectMake(oneImage.frame.origin.x+oneImage.frame.size.width+4,(self.frame.size.height/2+self.userInfoTitle.frame.size.height/2)/2,twoSizeW+4,twoSizeW+4)];
+        UIImageView * twoImage = [[UIImageView alloc] initWithFrame:CGRectMake(oneImage.frame.origin.x+oneImage.frame.size.width+10,oneImage.frame.origin.y, twoSizeW+10 ,twoSizeH+10)];
         twoImage.image = newImage;
-        [self addSubview:twoImage];
         [twoImage addSubview:twoLabel];
+        [self addSubview:twoImage];
         self.timeImage2 = twoImage;
-    }else if (labelTitle.count >= 3){
+        self.timeerrer.hidden = YES;
+
+    }else if (labelTitle.count>=3){
+        
         NSDictionary *label1Dic = labelTitle[0];
         //三个标签label
         UILabel * oneLabel = [[UILabel alloc]init];
@@ -223,7 +219,7 @@
         }else if([indexstr isEqualToString: @"3"]){
             oneLabel.text = @"聚餐";
         }else if([indexstr isEqualToString:@"4"]){
-            oneLabel.text = @"线下k歌";
+            oneLabel.text = @"线下K歌";
         }else if([indexstr isEqualToString:@"5"]){
             oneLabel.text = @"夜店达人";
         }else if([indexstr isEqualToString:@"6"]){
@@ -242,12 +238,13 @@
         CGFloat name2H = nick2Size.height;
         CGFloat name2W = nick2Size.width;
         oneLabel.frame = CGRectMake(5, 8, name2W,name2H);
+        //        [self addSubview:oneLabel];
         self.timeTitle1 = oneLabel;
         
-        UIImageView * oneImage = [[UIImageView alloc]initWithFrame:CGRectMake(self.userInfoTitle.frame.origin.x+self.userInfoTitle.frame.size.width+5, (self.frame.size.height/2+self.userInfoTitle.frame.size.height/2)/2, name2W+4, 20)];
+        UIImageView * oneImage = [[UIImageView alloc]initWithFrame:CGRectMake(self.userInfoTitle.frame.origin.x+self.userInfoTitle.frame.size.width+5, (self.frame.size.height/2+self.userInfoTitle.frame.size.height/2)/2, oneLabel.frame.size.width+10, oneLabel.frame.size.height+10)];
         oneImage.image = newImage;
-        [oneImage addSubview:oneLabel];
         [self addSubview:oneImage];
+        [oneImage addSubview:oneLabel];
         self.timeImage1 = oneImage;
         
         NSDictionary *label2Dic = labelTitle[1];
@@ -260,7 +257,7 @@
         }else if([indexstr2 isEqualToString:@"3"]){
             twoLabel.text = @"聚餐";
         }else if([indexstr2 isEqualToString:@"4"]){
-            twoLabel.text = @"线下k歌";
+            twoLabel.text = @"线下K歌";
         }else if([indexstr2 isEqualToString:@"5"]){
             twoLabel.text = @"夜店达人";
         }else if([indexstr2 isEqualToString:@"6"]){
@@ -279,15 +276,15 @@
         CGFloat twoSizeH = twoSize.height;
         CGFloat twoSizeW = twoSize.width;
         twoLabel.frame = CGRectMake(5, 8, twoSizeW,twoSizeH);
-//        [self addSubview:twoLabel];
+        [self addSubview:twoLabel];
         self.timeTitle2 = twoLabel;
         
-        UIImageView * twoImage = [[UIImageView alloc] initWithFrame:CGRectMake(oneImage.frame.origin.x+oneImage.frame.size.width+20,(self.frame.size.height/2+self.userInfoTitle.frame.size.height/2)/2,twoSizeW+6,20)];
+        UIImageView * twoImage = [[UIImageView alloc] initWithFrame:CGRectMake(oneImage.frame.origin.x+oneImage.frame.size.width+10,oneImage.frame.origin.y, twoSizeW+10 ,twoSizeH+10)];
         twoImage.image = newImage;
-        [self addSubview:twoImage];
         [twoImage addSubview:twoLabel];
+        [self addSubview:twoImage];
         self.timeImage2 = twoImage;
-
+        
         NSDictionary *label3Dic = labelTitle[2];
         NSString *indexstr3 = [NSString stringWithFormat:@"%@",[label3Dic objectForKey:@"index"]];
         UILabel * threeLabel = [[UILabel alloc]init];
@@ -298,7 +295,7 @@
         }else if([indexstr3 isEqualToString:@"3"]){
             threeLabel.text = @"聚餐";
         }else if([indexstr3 isEqualToString:@"4"]){
-            threeLabel.text = @"线下k歌";
+            threeLabel.text = @"线下K歌";
         }else if([indexstr3 isEqualToString:@"5"]){
             threeLabel.text = @"夜店达人";
         }else if([indexstr3 isEqualToString:@"6"]){
@@ -318,11 +315,23 @@
         CGFloat threeSizeW = threeSize.width;
         threeLabel.frame = CGRectMake(5, threeSizeH-2, threeSizeW,threeSizeH);
         
-        UIImageView * threeImage = [[UIImageView alloc]initWithFrame:CGRectMake(twoImage.frame.origin.x+twoImage.frame.size.width+18,oneImage.frame.origin.y, threeSizeW+6,20)];
+        UIImageView * threeImage = [[UIImageView alloc]initWithFrame:CGRectMake(twoImage.frame.origin.x+twoImage.frame.size.width+10,twoImage.frame.origin.y, threeSizeW+10, threeSizeH+10)];
         threeImage.image = newImage;
         [threeImage addSubview:threeLabel];
         [self addSubview:threeImage];
         self.timeImage3 = threeImage;
+        self.timeerrer.hidden = YES;
+    }else{
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.userInfoTitle.frame.origin.x+self.userInfoTitle.frame.size.width+5, (50-40)/2, 90, 40)];
+        label.textColor = [CorlorTransform colorWithHexString:@"#B0B0B0"];
+        label.text = @"用户暂无标签";
+        label.font = [UIFont systemFontOfSize:13.0f];
+        [self addSubview:label];
+        self.timeerrer = label;
+        self.timeerrer.hidden = NO;
+        self.timeImage1.hidden = YES;
+        self.timeImage2.hidden = YES;
+        self.timeImage3.hidden = YES;
     }
     
     
