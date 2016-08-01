@@ -114,7 +114,7 @@
         notification.alertBody = @"您有一条新消息";
     }
     
-#warning 去掉注释会显示[本地]开头, 方便在开发中区分是否为本地推送
+#pragma mark 去掉注释会显示[本地]开头, 方便在开发中区分是否为本地推送
     
     notification.alertAction = @"打开";
     notification.timeZone = [NSTimeZone defaultTimeZone];

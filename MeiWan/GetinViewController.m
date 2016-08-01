@@ -95,9 +95,22 @@
                     [PersistenceManager setLoginSession:session];
                     [[NSUserDefaults standardUserDefaults]setObject:self.phone.text forKey:@"username"];
                     [[NSUserDefaults standardUserDefaults]synchronize];
-                    [self loginEsay];
-                    [self performSegueWithIdentifier:@"players" sender:nil];
-                     [HUD hide:YES afterDelay:0];
+
+                    NSString * product = [NSString stringWithFormat:@"product_%@",userDict[@"id"]];
+                    NSString * passMD5 = [NSString stringWithString:[MD5 md5:product]];
+                    
+                    //环信用户组
+                    [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:product password:passMD5 completion:^(NSDictionary *loginInfo, EMError *error) {
+                        NSLog(@"***登录成功");
+                        NSLog(@"***登录成功");
+                        [self performSegueWithIdentifier:@"players" sender:nil];
+                        [HUD hide:YES afterDelay:0];
+
+                        //获取数据库中的数据
+                        [[EaseMob sharedInstance].chatManager loadDataFromDatabase];
+                        
+                    } onQueue:nil];
+
                 }
             }
         }];
@@ -120,38 +133,7 @@
 }
 - (void)loginEsay
 {
-    //异步登陆账号
-    [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:self.phone.text
-                                                        password:self.password.text
-                                                      completion:
-     ^(NSDictionary *loginInfo, EMError *error) {
-         
-         if (loginInfo && !error) {
-             //设置是否自动登录
-             [[EaseMob sharedInstance].chatManager setIsAutoLoginEnabled:YES];
-             
-             // 旧数据转换 (如果您的sdk是由2.1.2版本升级过来的，需要家这句话)
-             [[EaseMob sharedInstance].chatManager importDataToNewDatabase];
-             //获取数据库中数据
-             [[EaseMob sharedInstance].chatManager loadDataFromDatabase];
-             
-             //获取群组列表
-             [[EaseMob sharedInstance].chatManager asyncFetchMyGroupsList];
-             
-#warning 开始跳转,然后开始聊天
-             NSLog(@"登录成功");
-             
-             //             [self thisToChatViewController];
-             //发送自动登陆状态通知
-             //             [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOGINCHANGE object:@YES];
-             
-         }
-         else
-         {
-             NSLog(@"%@",error);
-         }
-     } onQueue:nil];
-
+    
 }
 
 
