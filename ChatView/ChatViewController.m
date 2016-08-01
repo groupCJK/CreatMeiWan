@@ -52,6 +52,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UIApplication * app = [UIApplication sharedApplication];
+    
+    NSInteger badgeNumber = [[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase];
+    app.applicationIconBadgeNumber = badgeNumber;
+    
     self.tabBarController.tabBar.hidden = YES;
 
     // Do any additional setup after loading the view.

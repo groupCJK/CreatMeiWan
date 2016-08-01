@@ -48,7 +48,6 @@
         [application registerUserNotificationSettings:settings];
     }
 #endif
-    
     //角标清0
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     
@@ -56,7 +55,6 @@
     UINavigationBar *navigationBar = [UINavigationBar appearance];
     [navigationBar setTintColor:[UIColor whiteColor]];
     
-    //    return YES;
     [self setUpLoaduserInfo];
     
     //测试推送
