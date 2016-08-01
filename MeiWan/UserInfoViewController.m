@@ -194,6 +194,11 @@
         headImageSingleRecognizer.numberOfTapsRequired = 1; // 单击
         [_userInfoHead addGestureRecognizer:headImageSingleRecognizer];
         
+        UILabel *prompt = [[UILabel alloc] initWithFrame:CGRectMake(5,160, 100, 10)];
+        prompt.text = @"返回自动保存资料";
+        prompt.font = [UIFont systemFontOfSize:12.0f];
+        prompt.textColor = [UIColor whiteColor];
+        [image addSubview:prompt];
     }
     return _userInfoHeadView;
 }
