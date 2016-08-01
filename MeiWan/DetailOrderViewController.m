@@ -48,12 +48,33 @@
         self.peiwanNickname.text = [peiwan objectForKey:@"nickname"];
     }
     
-    NSDictionary *netBar = [self.detailOrderDic objectForKey:@"netbar"];
-    NSString *netbar = [netBar objectForKey:@"name"];
-    if (netbar.length == 0) {
-        self.choiceBar.text = @"未指定";
-    }else{
-        self.choiceBar.text = netbar;
+//    NSDictionary *netBar = [self.detailOrderDic objectForKey:@"netbar"];
+//    NSString *netbar = [netBar objectForKey:@"name"];
+//    if (netbar.length == 0) {
+//        self.choiceBar.text = @"未指定";
+//    }else{
+//        self.choiceBar.text = netbar;
+//    }
+    
+    double typedouble = [[self.detailOrderDic objectForKey:@"tagIndex"]doubleValue];
+    if (typedouble == 1) {
+        self.choiceBar.text = @"线上点歌";
+    }else if(typedouble == 2){
+        self.choiceBar.text = @"视频聊天";
+    }else if(typedouble == 3){
+        self.choiceBar.text = @"聚餐";
+    }else if(typedouble == 4){
+        self.choiceBar.text = @"线下K歌";
+    }else if(typedouble == 5){
+        self.choiceBar.text = @"夜店达人";
+    }else if(typedouble == 6){
+        self.choiceBar.text= @"叫醒服务";
+    }else if(typedouble == 7){
+        self.choiceBar.text = @"影伴";
+    }else if(typedouble == 8){
+        self.choiceBar.text = @"运动健身";
+    }else if(typedouble == 9){
+        self.choiceBar.text = @"LOL";
     }
     
     self.hours.text = [NSString stringWithFormat:@"%d小时",[[self.detailOrderDic objectForKey:@"hours"]intValue]];

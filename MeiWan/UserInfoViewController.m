@@ -46,9 +46,6 @@
 
 @implementation UserInfoViewController
 
-- (void)viewWillAppear:(BOOL)animated{
-    [self loadTimeData];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -182,7 +179,7 @@
         image.image = [UIImage imageNamed:@"black.jpg"];
         [_userInfoHeadView addSubview:image];
         
-        _userInfoHead = [[UIImageView alloc]initWithFrame:CGRectMake((dtScreenWidth-50)/2, (180-80)/2, 80, 80)];
+        _userInfoHead = [[UIImageView alloc]initWithFrame:CGRectMake((dtScreenWidth-80)/2, (180-80)/2, 80, 80)];
         NSURL *url = [NSURL URLWithString:self.myuserInfo.headUrl];
         [_userInfoHead setImageWithURL:url];
         _userInfoHead.userInteractionEnabled = YES;

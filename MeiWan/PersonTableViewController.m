@@ -321,10 +321,6 @@
 {
     NSLog(@"用户资料");
     
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
-    backItem.title = @"自动保存资料";
-    self.navigationItem.backBarButtonItem = backItem;
-    
     [self performSegueWithIdentifier:@"userInfo" sender:self.userInfoDic];
 }
 
@@ -347,7 +343,6 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     UIImagePickerController *ipc = [[UIImagePickerController alloc]init];
     ipc.delegate = self;
-    //    ipc.navigationBar.backgroundColor = [CorlorTransform colorWithHexString:@"#3f90a4"];//系统导航栏透明未解决
     [[ipc navigationBar] setTintColor:[CorlorTransform colorWithHexString:@"#3f90a4"]];
     if (buttonIndex == 1) {
         //NSLog(@"1");
