@@ -391,8 +391,6 @@
     }];
 }
 
-
-
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
     NSMutableDictionary *userInfoDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.name,@"nickname",self.sigen,@"description",nil];
