@@ -180,7 +180,7 @@
     if (!_userInfoHeadView) {
         _userInfoHeadView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, dtScreenWidth, 180)];
         UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, dtScreenWidth, 180)];
-        image.image = [UIImage imageNamed:@"black.jpg"];
+        image.image = [UIImage imageNamed:@"black2"];
         [_userInfoHeadView addSubview:image];
         
         _userInfoHead = [[UIImageView alloc]initWithFrame:CGRectMake((dtScreenWidth-80)/2, (180-80)/2, 80, 80)];
@@ -197,7 +197,8 @@
         UILabel *prompt = [[UILabel alloc] initWithFrame:CGRectMake(5,160, 100, 10)];
         prompt.text = @"返回自动保存资料";
         prompt.font = [UIFont systemFontOfSize:12.0f];
-        prompt.textColor = [UIColor whiteColor];
+        prompt.textColor = [UIColor blackColor];
+        prompt.textColor = [CorlorTransform colorWithHexString:@"#7B7B7B"];
         [image addSubview:prompt];
     }
     return _userInfoHeadView;

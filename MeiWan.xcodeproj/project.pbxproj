@@ -604,7 +604,6 @@
 		2BDFA9581D33485F00E33681 /* PlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDFA9571D33485F00E33681 /* PlayerView.xib */; };
 		2BE25BF81D2B53A400D2AEAF /* animationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE25BF71D2B53A400D2AEAF /* animationCell.m */; };
 		2BE5E2661D1A40790031361C /* HotCountCellChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5E2651D1A40790031361C /* HotCountCellChange.m */; };
-		9866077B1D4B3CB2007AF7C2 /* userInfoBlack.png in Resources */ = {isa = PBXBuildFile; fileRef = 9866077A1D4B3CB2007AF7C2 /* userInfoBlack.png */; };
 		987E7F811D4EE79C00613C6F /* UserInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 987E7F801D4EE79C00613C6F /* UserInfoTableViewCell.m */; };
 		987E7F831D4EE7B900613C6F /* black.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 987E7F821D4EE7B900613C6F /* black.jpg */; };
 		98EFD3531D4AE816002A1913 /* FocusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD3501D4AE816002A1913 /* FocusViewController.m */; };
@@ -617,6 +616,7 @@
 		98EFD35F1D4AE82C002A1913 /* FansTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD35B1D4AE82C002A1913 /* FansTableViewCell.m */; };
 		98EFD3661D4AF19A002A1913 /* Myorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD3641D4AF19A002A1913 /* Myorder.m */; };
 		98EFD3671D4AF19A002A1913 /* Myorder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98EFD3651D4AF19A002A1913 /* Myorder.xib */; };
+		98F57EF01D4F409F001D3703 /* black2.png in Resources */ = {isa = PBXBuildFile; fileRef = 98F57EEF1D4F409F001D3703 /* black2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1679,7 +1679,6 @@
 		2BE25BF71D2B53A400D2AEAF /* animationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = animationCell.m; path = ../animationCell.m; sourceTree = "<group>"; };
 		2BE5E2641D1A40790031361C /* HotCountCellChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotCountCellChange.h; sourceTree = "<group>"; };
 		2BE5E2651D1A40790031361C /* HotCountCellChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotCountCellChange.m; sourceTree = "<group>"; };
-		9866077A1D4B3CB2007AF7C2 /* userInfoBlack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userInfoBlack.png; sourceTree = "<group>"; };
 		987E7F7F1D4EE79C00613C6F /* UserInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoTableViewCell.h; sourceTree = "<group>"; };
 		987E7F801D4EE79C00613C6F /* UserInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoTableViewCell.m; sourceTree = "<group>"; };
 		987E7F821D4EE7B900613C6F /* black.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = black.jpg; sourceTree = "<group>"; };
@@ -1694,6 +1693,7 @@
 		98EFD3631D4AF19A002A1913 /* Myorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Myorder.h; sourceTree = "<group>"; };
 		98EFD3641D4AF19A002A1913 /* Myorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Myorder.m; sourceTree = "<group>"; };
 		98EFD3651D4AF19A002A1913 /* Myorder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Myorder.xib; sourceTree = "<group>"; };
+		98F57EEF1D4F409F001D3703 /* black2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3816,8 +3816,8 @@
 		27E0A0C51CE1759F00D5FE31 /* Control */ = {
 			isa = PBXGroup;
 			children = (
+				98F57EEF1D4F409F001D3703 /* black2.png */,
 				987E7F821D4EE7B900613C6F /* black.jpg */,
-				9866077A1D4B3CB2007AF7C2 /* userInfoBlack.png */,
 				27587CB71CF5A7A500B78F92 /* PersonTableViewController.h */,
 				27587CB61CF5A7A500B78F92 /* PersonTableViewController.m */,
 				183D53401B871C6900500663 /* UserInfoViewController.h */,
@@ -4107,7 +4107,6 @@
 				27587AC01CF5824F00B78F92 /* chatBar_colorMore_audioCallSelected@2x.png in Resources */,
 				27CA5A311CEEACCB00CC6956 /* 2_loadingҳ.png in Resources */,
 				27587A831CF5824F00B78F92 /* VoiceSearchFeedback017.png in Resources */,
-				9866077B1D4B3CB2007AF7C2 /* userInfoBlack.png in Resources */,
 				27587AFF1CF5824F00B78F92 /* tabbar_contacts@2x.png in Resources */,
 				27CA5A631CEEACCB00CC6956 /* peiwan_me_dark@3x.png in Resources */,
 				27587A721CF5824F00B78F92 /* VoiceSearchFeedback008@2x.png in Resources */,
@@ -4124,6 +4123,7 @@
 				2B5805B31D2A386800721653 /* label2.png in Resources */,
 				27ADB83C1CFEC50F00F11453 /* information@2x.png in Resources */,
 				27587AE11CF5824F00B78F92 /* chat_sender_audio_playing_002@2x.png in Resources */,
+				98F57EF01D4F409F001D3703 /* black2.png in Resources */,
 				27CA5A5F1CEEACCB00CC6956 /* peiwan_location2.png in Resources */,
 				27CA5A491CEEACCB00CC6956 /* infoWhite@2x.png in Resources */,
 				27ADB8441CFED6E300F11453 /* register_bg2.png in Resources */,

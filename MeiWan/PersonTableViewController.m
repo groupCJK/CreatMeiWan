@@ -110,7 +110,7 @@
     
     self.userInfoHeaderView.frame = CGRectMake(0, 0, dtScreenWidth, 200);
     UIImageView *blackImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, dtScreenWidth, self.userInfoHeaderView.frame.size.height)];
-    blackImageView.image = [UIImage imageNamed:@"userInfoBlack"];
+    blackImageView.image = [UIImage imageNamed:@"black.jpg"];
     [self.userInfoHeaderView addSubview:blackImageView];
     
     self.headimage = [[UIImageView alloc] initWithFrame:CGRectMake((dtScreenWidth-90)/2, 10, 90, 90)];
@@ -122,6 +122,7 @@
     
     UIButton *eaditButton = [[UIButton alloc] initWithFrame:CGRectMake(dtScreenWidth-98, 200-70, 96, 20)];
     [eaditButton setTitle:@"点击背景编辑资料" forState:UIControlStateNormal];
+    [eaditButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     eaditButton.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     [blackImageView addSubview:eaditButton];
     
@@ -184,8 +185,8 @@
     [self.userInfoHeaderView addSubview:signLabel];
     
     UIView *blackView = [[UIView alloc] initWithFrame:CGRectMake(0, self.userInfoHeaderView.frame.size.height-50, dtScreenWidth, 50)];
-    blackView.backgroundColor = [UIColor blackColor];
-    blackView.alpha = 0.4f;
+    blackView.backgroundColor = [CorlorTransform colorWithHexString:@"#ADADAD"];
+    blackView.alpha = 0.5f;
     [self.userInfoHeaderView addSubview:blackView];
     
     //动态
@@ -576,16 +577,17 @@
     }
 }
 - (IBAction)delogin:(UIBarButtonItem *)sender {
-    self.reloginView = [[UIView alloc]initWithFrame:CGRectMake(self.view.bounds.size.width-200, 55, 190, 40)];
+    self.reloginView = [[UIView alloc]initWithFrame:CGRectMake(self.view.bounds.size.width-145, 55, 130, 40)];
     self.reloginView.backgroundColor = [UIColor grayColor];
     self.reloginView.layer.cornerRadius = 5;
     self.reloginView.layer.masksToBounds = YES;
-    UIButton *opinitonBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 190, 40)];
-    opinitonBtn.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    UIButton *opinitonBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 130, 40)];
+    opinitonBtn.backgroundColor = [UIColor whiteColor];
+    opinitonBtn.titleLabel.font = [UIFont systemFontOfSize:14.0f];
     [opinitonBtn addTarget:self action:@selector(touchOpinitonBtn) forControlEvents:UIControlEventTouchUpInside];
-    UIImageView *opinitonIg = [[UIImageView alloc]initWithFrame:CGRectMake(20, 10, 20, 20)];
+    UIImageView *opinitonIg = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 20, 20)];
     opinitonIg.image = [UIImage imageNamed:@"peiwan_close"];
-    UILabel *opinitonLab = [[UILabel alloc]initWithFrame:CGRectMake(60, 10, 140, 20)];
+    UILabel *opinitonLab = [[UILabel alloc]initWithFrame:CGRectMake(40, 10, 130, 20)];
     opinitonLab.text = @"退出登录";
     [opinitonBtn addSubview:opinitonIg];
     [opinitonBtn addSubview:opinitonLab];
