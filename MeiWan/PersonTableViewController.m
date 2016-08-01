@@ -321,6 +321,10 @@
 {
     NSLog(@"用户资料");
     
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
+    backItem.title = @"自动保存资料";
+    self.navigationItem.backBarButtonItem = backItem;
+    
     [self performSegueWithIdentifier:@"userInfo" sender:self.userInfoDic];
 }
 
