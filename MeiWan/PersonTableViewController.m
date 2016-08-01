@@ -337,11 +337,13 @@
 - (IBAction)jumptoUserInfo:(UITapGestureRecognizer *)sender {
     [self performSegueWithIdentifier:@"userInfo" sender:nil];
 }
+
 //点击设置头像
 - (IBAction)getHeadImage:(id)sender {
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"选择图片" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从相册选取", nil];
     [alert show];
 }
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     UIImagePickerController *ipc = [[UIImagePickerController alloc]init];
     ipc.delegate = self;
