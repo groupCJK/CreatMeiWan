@@ -43,38 +43,6 @@
             endingLineNumber = "304"
             landmarkName = "-alertView:clickedButtonAtIndex:"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__60-[DetailOrderViewController alertView:clickedButtonAtIndex:]_block_invoke"
-                  moduleName = "MeiWan"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/user_kevin/GitHub/CreatMEIWAN/MeiWan/DetailOrderViewController.m"
-                  timestampString = "491726514.878901"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "304"
-                  endingLineNumber = "304"
-                  offsetFromSymbolStart = "900">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__copy_helper_block_.249"
-                  moduleName = "MeiWan"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/user_kevin/GitHub/CreatMEIWAN/MeiWan/DetailOrderViewController.m"
-                  timestampString = "491726514.879418"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "304"
-                  endingLineNumber = "304"
-                  offsetFromSymbolStart = "51">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -107,6 +75,38 @@
             endingLineNumber = "285"
             landmarkName = "-alertView:clickedButtonAtIndex:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[DetailOrderViewController btnAction:]"
+                  moduleName = "MeiWan"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/user_kevin/GitHub/CreatMEIWAN/MeiWan/DetailOrderViewController.m"
+                  timestampString = "491739321.228582"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "285"
+                  endingLineNumber = "285"
+                  offsetFromSymbolStart = "1293">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[DetailOrderViewController btnAction:]"
+                  moduleName = "MeiWan"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/user_kevin/GitHub/CreatMEIWAN/MeiWan/DetailOrderViewController.m"
+                  timestampString = "491739321.228776"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "285"
+                  endingLineNumber = "285"
+                  offsetFromSymbolStart = "1348">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

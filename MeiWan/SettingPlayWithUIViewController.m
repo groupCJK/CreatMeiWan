@@ -22,7 +22,13 @@
 @interface SettingPlayWithUIViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     NSArray * priceArray;
+    /**线上点歌-叫醒服务*/
     NSArray * changePriceArray;
+    /**视频聊天*/
+    NSArray * VideoChatArray;
+    /**线下点歌*/
+    NSArray * downLineVoiceArray;
+    
     NSArray * colorArray;
     NSArray * titleArray;
     UITableView * tableview;
@@ -69,7 +75,13 @@
     colorArray = @[@"#ff5d90",@"eb4f38",@"#ff6f36",@"#fdd32d",@"#36cdff",@"#ff3674",@"#7667e5",@"#f55d52",@"#ff5d90"];
     priceArray = @[@29,@59,@99,@129,@199];
     titleArray = @[@"线上点歌",@"视屏聊天",@"聚餐",@"线下K歌",@"夜店达人",@"叫醒服务",@"影伴",@"运动健身",@"LOL"];
-    changePriceArray = @[@5,@10,@15,@20,@25];
+    /**线上点歌-叫醒服务*/
+    changePriceArray = @[@5,@10,@15,@20,@30];
+    /**视频聊天*/
+    VideoChatArray = @[@19,@29,@39,@59,@79];
+    /**线下点歌*/
+    downLineVoiceArray = @[@39,@69,@99,@129,@159,@199];
+    
     numberArray = [[NSMutableArray alloc]initWithCapacity:0];
     getArray  = [[NSMutableArray alloc]initWithCapacity:0];
     userdefaults  = [NSUserDefaults standardUserDefaults];
@@ -209,7 +221,7 @@
             cell = [tableview cellForRowAtIndexPath:indexPath];
             indexpath = indexPath;
             
-            if (indexPath.row==5||indexPath.row==0) {
+            if (indexPath.row==5||indexPath.row==0||indexPath.row==1||indexPath.row==3) {
                 
                 if (cell.shanchu.hidden==NO) {
                     [self animationView:cell index:indexPath];
@@ -223,14 +235,77 @@
                         Jiaoview = [[UIView alloc]initWithFrame:self.priceView.frame];
                         Jiaoview.backgroundColor = [UIColor blackColor];
                         [self.view addSubview:Jiaoview];
-                        for (int i = 0; i<5; i++) {
-                            UIButton * jiaoButton = [UIButton buttonWithType:UIButtonTypeCustom];
-                            jiaoButton.frame = CGRectMake(0, i*(Jiaoview.frame.size.height/5), Jiaoview.frame.size.width, Jiaoview.frame.size.height/5);
-                            [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／次",changePriceArray[i]] forState:UIControlStateNormal];
-                            jiaoButton.backgroundColor = [UIColor colorWithRed:arc4random()%256/255.0 green:arc4random()%256/255.0 blue:arc4random()%256/255.0 alpha:1];
-                            jiaoButton.tag = i;
-                            [jiaoButton addTarget:self action:@selector(jiaoChuangButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-                            [Jiaoview addSubview:jiaoButton];
+                       
+                        switch (indexPath.row) {
+                            case 0:
+                            {
+                                /**线上点歌*/
+                                priceArray = changePriceArray;
+                                for (int i = 0; i<priceArray.count; i++) {
+                                    UIButton * jiaoButton = [UIButton buttonWithType:UIButtonTypeCustom];
+                                    jiaoButton.frame = CGRectMake(0, i*(Jiaoview.frame.size.height/priceArray.count), Jiaoview.frame.size.width, Jiaoview.frame.size.height/priceArray.count);
+                                    [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／次",priceArray[i]] forState:UIControlStateNormal];
+                                    jiaoButton.backgroundColor = [UIColor colorWithRed:arc4random()%256/255.0 green:arc4random()%256/255.0 blue:arc4random()%256/255.0 alpha:1];
+                                    jiaoButton.tag = i;
+                                    [jiaoButton addTarget:self action:@selector(jiaoChuangButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+                                    [Jiaoview addSubview:jiaoButton];
+                                }
+
+                            }
+                                break;
+                              
+                            case 1:
+                            {
+                                /**视频聊天*/
+                                priceArray = VideoChatArray;
+                                for (int i = 0; i<VideoChatArray.count; i++) {
+                                    UIButton * jiaoButton = [UIButton buttonWithType:UIButtonTypeCustom];
+                                    jiaoButton.frame = CGRectMake(0, i*(Jiaoview.frame.size.height/priceArray.count), Jiaoview.frame.size.width, Jiaoview.frame.size.height/priceArray.count);
+                                    [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／次",priceArray[i]] forState:UIControlStateNormal];
+                                    jiaoButton.backgroundColor = [UIColor colorWithRed:arc4random()%256/255.0 green:arc4random()%256/255.0 blue:arc4random()%256/255.0 alpha:1];
+                                    jiaoButton.tag = i;
+                                    [jiaoButton addTarget:self action:@selector(jiaoChuangButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+                                    [Jiaoview addSubview:jiaoButton];
+                                }
+
+                            }
+                                break;
+                               
+                            case 5:
+                            {
+                                /**叫醒服务*/
+                                priceArray = changePriceArray;
+                                for (int i = 0; i<4; i++) {
+                                    UIButton * jiaoButton = [UIButton buttonWithType:UIButtonTypeCustom];
+                                    jiaoButton.frame = CGRectMake(0, i*(Jiaoview.frame.size.height/4), Jiaoview.frame.size.width, Jiaoview.frame.size.height/4);
+                                    [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／次",priceArray[i]] forState:UIControlStateNormal];
+                                    jiaoButton.backgroundColor = [UIColor colorWithRed:arc4random()%256/255.0 green:arc4random()%256/255.0 blue:arc4random()%256/255.0 alpha:1];
+                                    jiaoButton.tag = i;
+                                    [jiaoButton addTarget:self action:@selector(jiaoChuangButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+                                    [Jiaoview addSubview:jiaoButton];
+                                }
+
+                            }
+                                break;
+                                
+                            case 3:
+                            {
+                                /**线下K歌*/
+                                priceArray = downLineVoiceArray;
+                                for (int i = 0; i<downLineVoiceArray.count; i++) {
+                                    UIButton * jiaoButton = [UIButton buttonWithType:UIButtonTypeCustom];
+                                    jiaoButton.frame = CGRectMake(0, i*(Jiaoview.frame.size.height/priceArray.count), Jiaoview.frame.size.width, Jiaoview.frame.size.height/priceArray.count);
+                                    [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／时",priceArray[i]] forState:UIControlStateNormal];
+                                    jiaoButton.backgroundColor = [UIColor colorWithRed:arc4random()%256/255.0 green:arc4random()%256/255.0 blue:arc4random()%256/255.0 alpha:1];
+                                    jiaoButton.tag = i;
+                                    [jiaoButton addTarget:self action:@selector(jiaoChuangButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+                                    [Jiaoview addSubview:jiaoButton];
+                                }
+
+                            }
+                                break;
+                            default:
+                                break;
                         }
                     }
                 }
@@ -249,7 +324,7 @@
             }
         
         }else{
-            
+
             self.priceView.hidden = YES;
             indexpathother = indexPath.row;
             [self animationView:cell index:indexpath];
@@ -260,19 +335,99 @@
 }
 - (void)jiaoChuangButtonClick:(UIButton *)sender
 {
-    Jiaoview.hidden = YES;
-    NSUserDefaults * jiaoPrice = [NSUserDefaults standardUserDefaults];
-    [jiaoPrice setObject:[NSNumber numberWithInteger:sender.tag] forKey:@"senderID"];
-    [jiaoPrice synchronize];
-    
-    CGContextRef context=UIGraphicsGetCurrentContext();
-    [UIView beginAnimations:nil context:context];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationDuration:0.3];
-    [UIView setAnimationRepeatCount:1];
-    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:cell cache:YES];
-    [UIView commitAnimations];
-    [self animationStop1:sender.tag];
+    switch (indexpath.row) {
+        case 0:
+        {
+            if (sender.tag>1) {
+                [self showMessageAlert:@"级别不够"];
+            }else{
+                Jiaoview.hidden = YES;
+                NSUserDefaults * jiaoPrice = [NSUserDefaults standardUserDefaults];
+                [jiaoPrice setObject:[NSNumber numberWithInteger:sender.tag] forKey:@"senderID"];
+                [jiaoPrice synchronize];
+                
+                CGContextRef context=UIGraphicsGetCurrentContext();
+                [UIView beginAnimations:nil context:context];
+                [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                [UIView setAnimationDuration:0.3];
+                [UIView setAnimationRepeatCount:1];
+                [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:cell cache:YES];
+                [UIView commitAnimations];
+                [self animationStop1:sender.tag];
+            }
+        }
+            break;
+        case 1:
+        {
+            if (sender.tag>0) {
+                [self showMessageAlert:@"级别不够"];
+            }else{
+                Jiaoview.hidden = YES;
+                NSUserDefaults * jiaoPrice = [NSUserDefaults standardUserDefaults];
+                [jiaoPrice setObject:[NSNumber numberWithInteger:sender.tag] forKey:@"senderID"];
+                [jiaoPrice synchronize];
+                
+                CGContextRef context=UIGraphicsGetCurrentContext();
+                [UIView beginAnimations:nil context:context];
+                [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                [UIView setAnimationDuration:0.3];
+                [UIView setAnimationRepeatCount:1];
+                [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:cell cache:YES];
+                [UIView commitAnimations];
+                [self animationStop1:sender.tag];
+            }
+
+        }
+            break;
+        case 3:
+        {
+            if (sender.tag>0) {
+                [self showMessageAlert:@"级别不够"];
+            }else{
+                Jiaoview.hidden = YES;
+                NSUserDefaults * jiaoPrice = [NSUserDefaults standardUserDefaults];
+                [jiaoPrice setObject:[NSNumber numberWithInteger:sender.tag] forKey:@"senderID"];
+                [jiaoPrice synchronize];
+                
+                CGContextRef context=UIGraphicsGetCurrentContext();
+                [UIView beginAnimations:nil context:context];
+                [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                [UIView setAnimationDuration:0.3];
+                [UIView setAnimationRepeatCount:1];
+                [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:cell cache:YES];
+                [UIView commitAnimations];
+                [self animationStop1:sender.tag];
+            }
+
+        }
+            break;
+        case 5:
+        {
+            if (sender.tag>1) {
+                [self showMessageAlert:@"级别不够"];
+            }else{
+                Jiaoview.hidden = YES;
+                NSUserDefaults * jiaoPrice = [NSUserDefaults standardUserDefaults];
+                [jiaoPrice setObject:[NSNumber numberWithInteger:sender.tag] forKey:@"senderID"];
+                [jiaoPrice synchronize];
+                
+                CGContextRef context=UIGraphicsGetCurrentContext();
+                [UIView beginAnimations:nil context:context];
+                [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                [UIView setAnimationDuration:0.3];
+                [UIView setAnimationRepeatCount:1];
+                [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:cell cache:YES];
+                [UIView commitAnimations];
+                [self animationStop1:sender.tag];
+            }
+
+        }
+            break;
+            
+        default:
+            break;
+    }
+   
 }
 
 - (void)animationView:(UIView *)animationview index:(NSIndexPath *)indexpaths
@@ -334,8 +489,7 @@
         cell.tianjia.hidden = YES;
         cell.showImage.hidden = NO;
         cell.priceLabel.hidden = YES;
-        [self registerNetWorking:indexpath.row+1 price:changePriceArray[senderID]];
-
+        [self registerNetWorking:indexpath.row+1 price:priceArray[senderID]];
     }
 }
 
@@ -409,4 +563,17 @@
         }
     }];
 }
+
+- (void)showMessageAlert:(NSString *)message
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action){
+        
+    }];
+    UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:nil];
+    [alertController addAction:cancelAction];
+    [alertController addAction:sureAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
 @end
