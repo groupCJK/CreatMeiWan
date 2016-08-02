@@ -110,7 +110,7 @@
             if ([index integerValue]==6||[index integerValue]==1) {
                 firstLabel.text = [NSString stringWithFormat:@"%@-%@元/次",titlelabel[[index intValue]-1],price];
             }else{
-               firstLabel.text = [NSString stringWithFormat:@"%@-%@元/hour",titlelabel[[index intValue]-1],price];
+               firstLabel.text = [NSString stringWithFormat:@"%@-%@元/时",titlelabel[[index intValue]-1],price];
             }
             
             firstLabel.textAlignment = NSTextAlignmentCenter;
@@ -132,7 +132,7 @@
             if ([index integerValue]==6 || [index integerValue]==1) {
                 firstLabel.text = [NSString stringWithFormat:@"%@-%@元/次",titlelabel[[index intValue]-1],price];
             }else{
-                firstLabel.text = [NSString stringWithFormat:@"%@-%@元/hour",titlelabel[[index intValue]-1],price];
+                firstLabel.text = [NSString stringWithFormat:@"%@-%@元/时",titlelabel[[index intValue]-1],price];
             }
 
             firstLabel.tag = [index integerValue];
@@ -146,7 +146,7 @@
             if ([index2 integerValue]==6 || [index2 integerValue]==1) {
                 secondLabel.text = [NSString stringWithFormat:@"%@-%@元/次",titlelabel[[index2 intValue]-1],price2];
             }else{
-                secondLabel.text = [NSString stringWithFormat:@"%@-%@元/hour",titlelabel[[index2 intValue]-1],price2];
+                secondLabel.text = [NSString stringWithFormat:@"%@-%@元/时",titlelabel[[index2 intValue]-1],price2];
             }
 
             secondLabel.textAlignment = NSTextAlignmentCenter;
@@ -172,7 +172,7 @@
             if ([index integerValue]==6 ||[index integerValue]==1) {
                 firstLabel.text = [NSString stringWithFormat:@"%@-%@元/次",titlelabel[[index intValue]-1],price];
             }else{
-                firstLabel.text = [NSString stringWithFormat:@"%@-%@元/hour",titlelabel[[index intValue]-1],price];
+                firstLabel.text = [NSString stringWithFormat:@"%@-%@元/时",titlelabel[[index intValue]-1],price];
             }
             firstLabel.textAlignment = NSTextAlignmentCenter;
             firstLabel.textColor =  [CorlorTransform colorWithHexString:@"#3f90a4"];
@@ -186,21 +186,21 @@
             if ([index2 integerValue]==6 || [index2 integerValue]==1) {
                 secondLabel.text = [NSString stringWithFormat:@"%@-%@元/次",titlelabel[[index2 intValue]-1],price2];
             }else{
-                secondLabel.text = [NSString stringWithFormat:@"%@-%@元/hour",titlelabel[[index2 intValue]-1],price2];
+                secondLabel.text = [NSString stringWithFormat:@"%@-%@元/时",titlelabel[[index2 intValue]-1],price2];
             }
             secondLabel.textAlignment = NSTextAlignmentCenter;
             secondLabel.tag = [index2 integerValue];
             [view addSubview:secondLabel];
             UITapGestureRecognizer * tapGesture2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(secondlabelTap:)];
             secondLabel.userInteractionEnabled = YES;
-            secondLabel.textColor =  [CorlorTransform colorWithHexString:@"#3f90a4"];
+            secondLabel.textColor = [CorlorTransform colorWithHexString:@"#3f90a4"];
             [secondLabel addGestureRecognizer:tapGesture2];
             
             UILabel * thirdLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, view.frame.size.height/3*2, view.frame.size.width, view.frame.size.height/3)];
             if ([index3 integerValue]==6 || [index3 integerValue]==1) {
                 thirdLabel.text = [NSString stringWithFormat:@"%@-%@元/次",titlelabel[[index3 intValue]-1],price3];
             }else{
-                thirdLabel.text = [NSString stringWithFormat:@"%@-%@元/hour",titlelabel[[index3 intValue]-1],price3];
+                thirdLabel.text = [NSString stringWithFormat:@"%@-%@元/时",titlelabel[[index3 intValue]-1],price3];
             }
             thirdLabel.textAlignment = NSTextAlignmentCenter;
             thirdLabel.tag = [index3 integerValue];

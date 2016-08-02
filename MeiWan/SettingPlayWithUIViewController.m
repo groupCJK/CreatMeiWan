@@ -44,6 +44,7 @@
     NSMutableArray * numberArray;
     NSMutableArray * getArray;
     NSMutableArray * usertimeTags;
+    int level;
     UIView * Jiaoview;
 }
 
@@ -62,6 +63,7 @@
             SBJsonParser*parser=[[SBJsonParser alloc]init];
             NSMutableDictionary *json=[parser objectWithData:data];
             NSDictionary * entity  =[json objectForKey:@"entity"];
+            level = [[entity objectForKey:@"level"] intValue];
             usertimeTags = [entity objectForKey:@"userTimeTags"];
             [self creatTableView];
         }else{
@@ -108,7 +110,7 @@
     priceTableview.delegate = self;
     priceTableview.dataSource = self;
     priceTableview.scrollEnabled = NO;
-    
+    priceTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     [showView addSubview:priceTableview];
     self.priceView = showView;
     
@@ -169,9 +171,10 @@
         if (!cell1) {
             cell1 = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         }
-        cell1.textLabel.text = [NSString stringWithFormat:@"%@ 元／hour",priceArray[indexPath.row]];
+        cell1.textLabel.text = [NSString stringWithFormat:@"%@ 元／时",priceArray[indexPath.row]];
         cell1.textLabel.textAlignment = NSTextAlignmentCenter;
-        cell1.textLabel.font = [UIFont systemFontOfSize:12.0];
+
+        cell1.backgroundColor = [UIColor colorWithRed:arc4random()%256/255.0 green:arc4random()%256/255.0 blue:arc4random()%256/255.0 alpha:1];
         return cell1;
     }
 }
@@ -231,7 +234,7 @@
                     if (usertimeTags.count>=3) {
                     
                     }else{
-                        [usertimeTags addObject:[NSString stringWithFormat:@"%d",indexPath.row+1]];
+                        [usertimeTags addObject:[NSString stringWithFormat:@"%ld",indexPath.row+1]];
                         Jiaoview = [[UIView alloc]initWithFrame:self.priceView.frame];
                         Jiaoview.backgroundColor = [UIColor blackColor];
                         [self.view addSubview:Jiaoview];
@@ -244,7 +247,14 @@
                                 for (int i = 0; i<priceArray.count; i++) {
                                     UIButton * jiaoButton = [UIButton buttonWithType:UIButtonTypeCustom];
                                     jiaoButton.frame = CGRectMake(0, i*(Jiaoview.frame.size.height/priceArray.count), Jiaoview.frame.size.width, Jiaoview.frame.size.height/priceArray.count);
-                                    [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／次",priceArray[i]] forState:UIControlStateNormal];
+                                    if (i>level+1) {
+                                        [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／次 等级不足",priceArray[i]] forState:UIControlStateNormal];
+
+                                    }else{
+                                        [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／次",priceArray[i]] forState:UIControlStateNormal];
+    
+                                    }
+                                    
                                     jiaoButton.backgroundColor = [UIColor colorWithRed:arc4random()%256/255.0 green:arc4random()%256/255.0 blue:arc4random()%256/255.0 alpha:1];
                                     jiaoButton.tag = i;
                                     [jiaoButton addTarget:self action:@selector(jiaoChuangButtonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -261,7 +271,13 @@
                                 for (int i = 0; i<VideoChatArray.count; i++) {
                                     UIButton * jiaoButton = [UIButton buttonWithType:UIButtonTypeCustom];
                                     jiaoButton.frame = CGRectMake(0, i*(Jiaoview.frame.size.height/priceArray.count), Jiaoview.frame.size.width, Jiaoview.frame.size.height/priceArray.count);
-                                    [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／小时",priceArray[i]] forState:UIControlStateNormal];
+                                    if (i>level) {
+                                        [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／次 等级不足",priceArray[i]] forState:UIControlStateNormal];
+                                        
+                                    }else{
+                                        [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／次",priceArray[i]] forState:UIControlStateNormal];
+                                        
+                                    }
                                     jiaoButton.backgroundColor = [UIColor colorWithRed:arc4random()%256/255.0 green:arc4random()%256/255.0 blue:arc4random()%256/255.0 alpha:1];
                                     jiaoButton.tag = i;
                                     [jiaoButton addTarget:self action:@selector(jiaoChuangButtonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -278,7 +294,13 @@
                                 for (int i = 0; i<4; i++) {
                                     UIButton * jiaoButton = [UIButton buttonWithType:UIButtonTypeCustom];
                                     jiaoButton.frame = CGRectMake(0, i*(Jiaoview.frame.size.height/4), Jiaoview.frame.size.width, Jiaoview.frame.size.height/4);
-                                    [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／次",priceArray[i]] forState:UIControlStateNormal];
+                                    if (i>level+1) {
+                                        [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／次 等级不足",priceArray[i]] forState:UIControlStateNormal];
+                                        
+                                    }else{
+                                        [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／次",priceArray[i]] forState:UIControlStateNormal];
+                                        
+                                    }
                                     jiaoButton.backgroundColor = [UIColor colorWithRed:arc4random()%256/255.0 green:arc4random()%256/255.0 blue:arc4random()%256/255.0 alpha:1];
                                     jiaoButton.tag = i;
                                     [jiaoButton addTarget:self action:@selector(jiaoChuangButtonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -295,7 +317,13 @@
                                 for (int i = 0; i<downLineVoiceArray.count; i++) {
                                     UIButton * jiaoButton = [UIButton buttonWithType:UIButtonTypeCustom];
                                     jiaoButton.frame = CGRectMake(0, i*(Jiaoview.frame.size.height/priceArray.count), Jiaoview.frame.size.width, Jiaoview.frame.size.height/priceArray.count);
-                                    [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／时",priceArray[i]] forState:UIControlStateNormal];
+                                    if (i>level) {
+                                        [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／次 等级不足",priceArray[i]] forState:UIControlStateNormal];
+                                        
+                                    }else{
+                                        [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／次",priceArray[i]] forState:UIControlStateNormal];
+                                        
+                                    }
                                     jiaoButton.backgroundColor = [UIColor colorWithRed:arc4random()%256/255.0 green:arc4random()%256/255.0 blue:arc4random()%256/255.0 alpha:1];
                                     jiaoButton.tag = i;
                                     [jiaoButton addTarget:self action:@selector(jiaoChuangButtonClick:) forControlEvents:UIControlEventTouchUpInside];
