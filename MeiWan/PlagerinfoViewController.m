@@ -266,7 +266,7 @@
         [invitButton addTarget:self action:@selector(didTapInivtButton:) forControlEvents:UIControlEventTouchUpInside];
         [_buttonView addSubview:invitButton];
         
-        UIButton *focusButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/3+10, 20, 90, 30)];
+        UIButton *focusButton = [[UIButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width-90)/2, 20, 90, 30)];
         [focusButton setTitle:@"关注" forState:UIControlStateNormal];
         [focusButton setTintColor:[UIColor whiteColor]];
         focusButton.backgroundColor = [CorlorTransform colorWithHexString:@"#FF69B4"];

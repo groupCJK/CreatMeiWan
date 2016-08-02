@@ -316,11 +316,9 @@
                 }
             }];
             
-            //NSLog(@"%@",result);
         }else {
             [HUD hide:YES afterDelay:0];
             [ShowMessage showMessage:@"头像上传失败"];
-            //NSLog(@"%@",error);
         }
         
     }];
