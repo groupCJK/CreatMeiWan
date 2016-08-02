@@ -29,7 +29,7 @@
 #import "CompressImage.h"
 #import "CorlorTransform.h"
 
-@interface UserInfoViewController ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate,MBProgressHUDDelegate>
+@interface UserInfoViewController ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate,MBProgressHUDDelegate,UITextFieldDelegate>
 
 @property (nonatomic, strong)UITableView *userInfoTableView;
 @property (nonatomic, strong)NSArray *dataSource;
@@ -113,6 +113,7 @@
         cell.userInfoEdit.hidden = YES;
         cell.userInfoEditSign.hidden = NO;
         cell.userInfoEditSign.text = self.myuserInfo.mydescription;
+        cell.userInfoEditSign.delegate = self;
         [cell.userInfoEditSign addTarget:self action:@selector(userInfoEditSign:) forControlEvents:UIControlEventEditingChanged];
     }else if (indexPath.row == 5){
         cell.timeImage1.hidden = NO;
@@ -141,6 +142,7 @@
 
 - (void)userInfoEditSign:(UITextField *)textField
 {
+    
     if (textField.text.length > 30) {
         textField.text = [textField.text substringToIndex:30];
         UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"提示" message:@"签名不能多于30个字符串" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
@@ -149,6 +151,7 @@
     self.sigen = textField.text;
     NSLog(@"%@",textField.text);
     NSLog(@"%lu",textField.text.length);
+    
 }
 
 
@@ -163,7 +166,6 @@
     NSLog(@"%@",textField.text);
     NSLog(@"%lu",textField.text.length);
 }
-
 
 - (UITableView *)userInfoTableView{
     if (!_userInfoTableView) {
@@ -427,6 +429,24 @@
 
 - (void)didTipPromptButton:(UIButton *)sender{
     NSLog(@"点击更换头像");
+}
+//签名开始编辑
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.5];
+    _userInfoTableView.frame = CGRectMake(0, -214, dtScreenWidth, dtScreenHeight);
+    [UIView commitAnimations];
+}
+//return键
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.5];
+    _userInfoTableView.frame = CGRectMake(0, 0, dtScreenWidth, dtScreenHeight);
+    [UIView commitAnimations];
+    [textField resignFirstResponder];
+    return YES;
 }
 
 #pragma mark - Navigation

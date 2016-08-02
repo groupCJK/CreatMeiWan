@@ -22,6 +22,7 @@
 #import "ConnectTableViewController.h"
 #import "MD5.h"
 #import "MBProgressHUD.h"
+#import "WGS84TOGCJ02.h"
 
 #define width_screen [UIScreen mainScreen].bounds.size.width
 
@@ -60,6 +61,7 @@
 #pragma mark - mapView Delegate
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    
     switch (status)
     {        case kCLAuthorizationStatusNotDetermined:
         if ([manager respondsToSelector:@selector(requestAlwaysAuthorization)])
@@ -75,6 +77,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
+
     NSMutableDictionary *userInfoDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:newLocation.coordinate.latitude],@"latitude",[NSNumber numberWithDouble:newLocation.coordinate.longitude],@"longitude",nil];
 
     NSString *session = [PersistenceManager getLoginSession];
@@ -136,9 +139,8 @@
     // 设置代理
     _locationManager.delegate = self;
     // 设置定位精确度到米
-    _locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     // 设置过滤器为无
-    _locationManager.distanceFilter = kCLLocationAccuracyNearestTenMeters;
     // 开始定位
     [_locationManager requestAlwaysAuthorization];//这句话ios8以上版本使用。
     [_locationManager startUpdatingLocation];

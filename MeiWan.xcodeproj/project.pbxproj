@@ -602,6 +602,7 @@
 		2BDFA9551D32416900E33681 /* CJKCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDFA9521D32416900E33681 /* CJKCollectionViewCell.m */; };
 		2BDFA9561D32416900E33681 /* firstPage_scrollViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDFA9541D32416900E33681 /* firstPage_scrollViewCell.m */; };
 		2BDFA9581D33485F00E33681 /* PlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDFA9571D33485F00E33681 /* PlayerView.xib */; };
+		2BE236BB1D508F6600D7A859 /* WGS84TOGCJ02.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE236BA1D508F6600D7A859 /* WGS84TOGCJ02.m */; };
 		2BE25BF81D2B53A400D2AEAF /* animationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE25BF71D2B53A400D2AEAF /* animationCell.m */; };
 		2BE5E2661D1A40790031361C /* HotCountCellChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5E2651D1A40790031361C /* HotCountCellChange.m */; };
 		987E7F811D4EE79C00613C6F /* UserInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 987E7F801D4EE79C00613C6F /* UserInfoTableViewCell.m */; };
@@ -1675,6 +1676,8 @@
 		2BDFA9531D32416900E33681 /* firstPage_scrollViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = firstPage_scrollViewCell.h; sourceTree = "<group>"; };
 		2BDFA9541D32416900E33681 /* firstPage_scrollViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = firstPage_scrollViewCell.m; sourceTree = "<group>"; };
 		2BDFA9571D33485F00E33681 /* PlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerView.xib; sourceTree = "<group>"; };
+		2BE236B91D508F6600D7A859 /* WGS84TOGCJ02.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WGS84TOGCJ02.h; sourceTree = "<group>"; };
+		2BE236BA1D508F6600D7A859 /* WGS84TOGCJ02.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WGS84TOGCJ02.m; sourceTree = "<group>"; };
 		2BE25BF61D2B53A400D2AEAF /* animationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = animationCell.h; path = ../animationCell.h; sourceTree = "<group>"; };
 		2BE25BF71D2B53A400D2AEAF /* animationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = animationCell.m; path = ../animationCell.m; sourceTree = "<group>"; };
 		2BE5E2641D1A40790031361C /* HotCountCellChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotCountCellChange.h; sourceTree = "<group>"; };
@@ -2193,6 +2196,7 @@
 		18ABFEDA1BF9879F000F96FF /* 附近 */ = {
 			isa = PBXGroup;
 			children = (
+				2BE236B81D508F2900D7A859 /* 火星坐标转化 */,
 				18EF7A471B74B6A6005A4F64 /* PalyListViewController.h */,
 				27587CA51CF59CFF00B78F92 /* PalyListViewController.m */,
 				182B2B7E1B78A4DB00A41F2C /* subviews */,
@@ -3930,6 +3934,15 @@
 			name = view;
 			sourceTree = "<group>";
 		};
+		2BE236B81D508F2900D7A859 /* 火星坐标转化 */ = {
+			isa = PBXGroup;
+			children = (
+				2BE236B91D508F6600D7A859 /* WGS84TOGCJ02.h */,
+				2BE236BA1D508F6600D7A859 /* WGS84TOGCJ02.m */,
+			);
+			name = "火星坐标转化";
+			sourceTree = "<group>";
+		};
 		98EFD3571D4AE81A002A1913 /* cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -4500,6 +4513,7 @@
 				18C8C7B51B76240100BC8EEA /* CorlorTransform.m in Sources */,
 				27587C391CF5861900B78F92 /* UIView+MJExtension.m in Sources */,
 				27587C811CF5861A00B78F92 /* EaseBubbleView+Image.m in Sources */,
+				2BE236BB1D508F6600D7A859 /* WGS84TOGCJ02.m in Sources */,
 				27587C3D1CF5861900B78F92 /* MWPhoto.m in Sources */,
 				18C05CD11BC89A8C0028A220 /* BanlanceViewController.m in Sources */,
 				18CC8EEA1BC39CE1000281CE /* Validation.swift in Sources */,
@@ -4689,8 +4703,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Wei Liu (8RJ67A2F8R)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Wei Liu (8RJ67A2F8R)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Liu (A998BHQHS8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Wei Liu (A998BHQHS8)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -4713,7 +4727,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "02a7690d-0f84-4294-a34d-fc0ccfd6adc3";
+				PROVISIONING_PROFILE = "04b477cc-e2f4-4979-a96d-45f9f0c8030a";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s x86_64";
 			};
@@ -4740,8 +4754,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Wei Liu (8RJ67A2F8R)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Wei Liu (8RJ67A2F8R)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Liu (A998BHQHS8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Wei Liu (A998BHQHS8)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -4757,7 +4771,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "02a7690d-0f84-4294-a34d-fc0ccfd6adc3";
+				PROVISIONING_PROFILE = "04b477cc-e2f4-4979-a96d-45f9f0c8030a";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s x86_64";
@@ -4771,8 +4785,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Wei Liu (8RJ67A2F8R)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Wei Liu (8RJ67A2F8R)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4806,7 +4820,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.chuangjike.MeiWan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "02a7690d-0f84-4294-a34d-fc0ccfd6adc3";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "MeiWan/MeiWan-Bridging-Header.h";
@@ -4825,8 +4839,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Wei Liu (8RJ67A2F8R)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Wei Liu (8RJ67A2F8R)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4861,7 +4875,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.chuangjike.MeiWan;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "02a7690d-0f84-4294-a34d-fc0ccfd6adc3";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "MeiWan/MeiWan-Bridging-Header.h";
