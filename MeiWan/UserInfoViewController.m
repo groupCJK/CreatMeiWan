@@ -446,6 +446,7 @@
     _userInfoTableView.frame = CGRectMake(0, 0, dtScreenWidth, dtScreenHeight);
     [UIView commitAnimations];
     [textField resignFirstResponder];
+    textField.returnKeyType = UIReturnKeyDone;
     return YES;
 }
 
