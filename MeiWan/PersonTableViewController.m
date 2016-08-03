@@ -42,8 +42,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *askfor;
 @property (strong, nonatomic) IBOutlet UILabel *mywallet;
 @property (weak, nonatomic) IBOutlet UILabel *balanceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *todayProfit;
 @property (strong, nonatomic) IBOutlet UIImageView *imgwallet;
 @property (strong, nonatomic) IBOutlet UITableViewCell *recordCenter;
+@property (weak, nonatomic) IBOutlet UITableViewCell *guildCenter;
 @property (strong, nonatomic) UIImageView *headimage;
 
 @property (nonatomic, strong) NSDictionary *userInfoDic;
@@ -261,7 +263,10 @@
     [fansView addGestureRecognizer:fansSingleRecognizer];
     
     [[EaseMob sharedInstance].chatManager setApnsNickname:self.userinfo.nickname];
-    self.balanceLabel.text = [NSString stringWithFormat:@"余额%@元",self.userInfoData[@"money2"]];
+    self.balanceLabel.text = [NSString stringWithFormat:@"余额:%.2f",[self.userInfoData[@"money2"]doubleValue]];
+    self.balanceLabel.textColor = [UIColor grayColor];
+    //公会管理今日收益
+    self.todayProfit.textColor = [UIColor grayColor];
 
     NSString *thesame = [NSString stringWithFormat:@"%ld",self.userinfo.userId];
     if ([thesame isEqualToString:@"100000"] || [thesame isEqualToString:@"100001"]) {
@@ -269,12 +274,14 @@
         self.balanceLabel.text = nil;
         self.imgwallet.image = [UIImage imageNamed:@"shezhi"];
         self.recordCenter.hidden = YES;
+        self.guildCenter.hidden = YES;
     }else{
         if (![setting canOpen]) {
             self.mywallet.text = @"安全设置";
             self.balanceLabel.text = nil;
             self.imgwallet.image = [UIImage imageNamed:@"shezhi"];
             self.recordCenter.hidden = YES;
+            self.guildCenter.hidden = YES;
         }
         [setting getOpen];
     }

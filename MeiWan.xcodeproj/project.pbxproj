@@ -576,6 +576,8 @@
 		27F4F7911CF5F09F00A376E0 /* AskForPlayWithViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E911BB1B7D92C5002BB75F /* AskForPlayWithViewController.m */; };
 		27F4F7921CF5F09F00A376E0 /* AccusationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188225271BA004CA004EBEEB /* AccusationViewController.m */; };
 		2B2B56C71D473D170048AA20 /* PrepaidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B56C61D473D170048AA20 /* PrepaidViewController.m */; };
+		2B2D08491D5193C100139467 /* gonghui.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B2D08481D5193C100139467 /* gonghui.jpg */; };
+		2B2D084F1D519E4D00139467 /* guildCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D084E1D519E4D00139467 /* guildCenterViewController.m */; };
 		2B5805B21D2A386800721653 /* label1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805A91D2A386800721653 /* label1.png */; };
 		2B5805B31D2A386800721653 /* label2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805AA1D2A386800721653 /* label2.png */; };
 		2B5805B41D2A386800721653 /* label3.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805AB1D2A386800721653 /* label3.png */; };
@@ -1635,6 +1637,9 @@
 		27E0A0C71CE1910A00D5FE31 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2B2B56C51D473D170048AA20 /* PrepaidViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrepaidViewController.h; sourceTree = "<group>"; };
 		2B2B56C61D473D170048AA20 /* PrepaidViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrepaidViewController.m; sourceTree = "<group>"; };
+		2B2D08481D5193C100139467 /* gonghui.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = gonghui.jpg; sourceTree = "<group>"; };
+		2B2D084D1D519E4D00139467 /* guildCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = guildCenterViewController.h; sourceTree = "<group>"; };
+		2B2D084E1D519E4D00139467 /* guildCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = guildCenterViewController.m; sourceTree = "<group>"; };
 		2B5805A91D2A386800721653 /* label1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label1.png; sourceTree = "<group>"; };
 		2B5805AA1D2A386800721653 /* label2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label2.png; sourceTree = "<group>"; };
 		2B5805AB1D2A386800721653 /* label3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label3.png; sourceTree = "<group>"; };
@@ -3824,8 +3829,11 @@
 				987E7F821D4EE7B900613C6F /* black.jpg */,
 				27587CB71CF5A7A500B78F92 /* PersonTableViewController.h */,
 				27587CB61CF5A7A500B78F92 /* PersonTableViewController.m */,
+				2B2D08481D5193C100139467 /* gonghui.jpg */,
 				183D53401B871C6900500663 /* UserInfoViewController.h */,
 				183D53411B871C6900500663 /* UserInfoViewController.m */,
+				2B2D084D1D519E4D00139467 /* guildCenterViewController.h */,
+				2B2D084E1D519E4D00139467 /* guildCenterViewController.m */,
 				2B1B0AD11D4AF14B00F193A4 /* 粉丝 */,
 				2B1B0AD21D4AF15900F193A4 /* 我的关注 */,
 				98EFD3571D4AE81A002A1913 /* cell */,
@@ -4301,6 +4309,7 @@
 				27CA5A3A1CEEACCB00CC6956 /* default-568@2x.png in Resources */,
 				27ADB8501CFEF67F00F11453 /* pai-hang-bang2@2x.png in Resources */,
 				27ADB8301CFEBD5F00F11453 /* Profile.png in Resources */,
+				2B2D08491D5193C100139467 /* gonghui.jpg in Resources */,
 				27587AC91CF5824F00B78F92 /* chatBar_colorMore_videoCallSelected@2x.png in Resources */,
 				2B5805B71D2A386800721653 /* label6.png in Resources */,
 				18A3196F1C030747005E9010 /* userInfo.xib in Resources */,
@@ -4617,6 +4626,7 @@
 				27587C741CF5861A00B78F92 /* EaseEmotionEscape.m in Sources */,
 				18824A4B1B85D5920063EC03 /* SBJsonStreamParser.m in Sources */,
 				18ABFEE01BF988B5000F96FF /* StateNearTab.m in Sources */,
+				2B2D084F1D519E4D00139467 /* guildCenterViewController.m in Sources */,
 				27587C371CF5861900B78F92 /* UIScrollView+MJExtension.m in Sources */,
 				27587C211CF5861900B78F92 /* EMAudioPlayerUtil.m in Sources */,
 				18CC8EE71BC39CE1000281CE /* ServerTrustPolicy.swift in Sources */,
