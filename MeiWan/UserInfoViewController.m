@@ -40,7 +40,7 @@
 @property (nonatomic, strong) NSDictionary *userInfoDic;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *sigen;
-@property(nonatomic,strong)NSDictionary *playerInfo;
+@property (nonatomic,strong)NSDictionary *playerInfo;
 
 @end
 

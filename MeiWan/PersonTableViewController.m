@@ -19,6 +19,7 @@
 #import "MyBurseViewController.h"
 #import "FocusViewController.h"
 #import "FansViewController.h"
+#import "guildCenterViewController.h"
 
 #import "UserInfo.h"
 #import "CWStarRateView.h"
@@ -552,6 +553,10 @@
     if ([segue.identifier isEqualToString:@"focusList"]) {
         FocusViewController *fov = segue.destinationViewController;
         fov.hidesBottomBarWhenPushed = YES;
+    }
+    if ([segue.identifier isEqualToString:@"gonghui"]) {
+        guildCenterViewController *gcV = segue.destinationViewController;
+        gcV.hidesBottomBarWhenPushed = YES;
     }
 }
 

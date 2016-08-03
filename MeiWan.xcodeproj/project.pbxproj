@@ -3826,10 +3826,10 @@
 			isa = PBXGroup;
 			children = (
 				98F57EEF1D4F409F001D3703 /* black2.png */,
+				2B2D08481D5193C100139467 /* gonghui.jpg */,
 				987E7F821D4EE7B900613C6F /* black.jpg */,
 				27587CB71CF5A7A500B78F92 /* PersonTableViewController.h */,
 				27587CB61CF5A7A500B78F92 /* PersonTableViewController.m */,
-				2B2D08481D5193C100139467 /* gonghui.jpg */,
 				183D53401B871C6900500663 /* UserInfoViewController.h */,
 				183D53411B871C6900500663 /* UserInfoViewController.m */,
 				2B2D084D1D519E4D00139467 /* guildCenterViewController.h */,
