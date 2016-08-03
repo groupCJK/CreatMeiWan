@@ -2537,10 +2537,19 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="余额 0 元" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Te9-uD-iIT">
+                                                    <rect key="frame" x="253" y="11" width="59" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="Te9-uD-iIT" firstAttribute="top" secondItem="vDu-h6-8ny" secondAttribute="topMargin" constant="3" id="3tp-dt-iMn"/>
+                                                <constraint firstItem="Te9-uD-iIT" firstAttribute="trailing" secondItem="vDu-h6-8ny" secondAttribute="trailingMargin" id="BTL-Rg-BJT"/>
                                                 <constraint firstAttribute="bottom" secondItem="RNQ-9v-8D1" secondAttribute="bottom" constant="12" id="LzB-U4-8oY"/>
                                                 <constraint firstItem="RNQ-9v-8D1" firstAttribute="leading" secondItem="vDu-h6-8ny" secondAttribute="leading" constant="12" id="Nki-ok-2cT"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Te9-uD-iIT" secondAttribute="bottom" constant="3" id="f0Y-7z-WLK"/>
                                                 <constraint firstItem="RNQ-9v-8D1" firstAttribute="top" secondItem="vDu-h6-8ny" secondAttribute="top" constant="12" id="rFV-p2-90K"/>
                                                 <constraint firstItem="9NV-zh-o4K" firstAttribute="centerY" secondItem="RNQ-9v-8D1" secondAttribute="centerY" id="usC-de-qcc"/>
                                                 <constraint firstItem="9NV-zh-o4K" firstAttribute="leading" secondItem="RNQ-9v-8D1" secondAttribute="trailing" constant="15" id="wK0-33-85g"/>
@@ -2632,6 +2641,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="askfor" destination="aCg-ac-Wd0" id="F7P-Pd-kGa"/>
+                        <outlet property="balanceLabel" destination="Te9-uD-iIT" id="sok-s7-1nb"/>
                         <outlet property="imgwallet" destination="RNQ-9v-8D1" id="mlM-PW-U4w"/>
                         <outlet property="mywallet" destination="9NV-zh-o4K" id="EI8-ap-dzc"/>
                         <outlet property="recordCenter" destination="15D-oc-hCa" id="d7N-0P-PEz"/>

@@ -191,31 +191,13 @@
             cell = [tableview cellForRowAtIndexPath:indexPath];
             static int i = 0 ;i++;
             if (i%2==1) {
-                if (usertimeTags.count>=3) {
-                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"最多设置三个标签，请谅解" preferredStyle:UIAlertControllerStyleAlert];
-                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"移除" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                        [self animationView:cell index:indexPath];
-                    }];
-                    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
-                    [alertController addAction:cancelAction];
-                    [alertController addAction:okAction];
-                    [self presentViewController:alertController animated:YES completion:nil];
-                }else{
-                    
-                    [self animationView:cell index:indexPath];
-                }
+                
+                [self animationView:cell index:indexPath];
+               
             }else{
-                if (usertimeTags.count>=3) {
-                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"最多设置三个标签，请谅解" preferredStyle:UIAlertControllerStyleAlert];
-                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-                    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
-                    [alertController addAction:cancelAction];
-                    [alertController addAction:okAction];
-                    [self presentViewController:alertController animated:YES completion:nil];
-                }else{
-                    
-                    [self animationView:cell index:indexPath];
-                }
+            
+                [self animationView:cell index:indexPath];
+                
             }
         }
         
@@ -345,7 +327,7 @@
                 }else{
                     if (usertimeTags.count>=3) {
                     }else{
-                        [usertimeTags addObject:[NSString stringWithFormat:@"%d",indexPath.row+1]];
+                        [usertimeTags addObject:[NSString stringWithFormat:@"%ld",indexPath.row+1]];
                         self.priceView.hidden = NO;
                     }
                 }

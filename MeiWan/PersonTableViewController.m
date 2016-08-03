@@ -41,6 +41,7 @@
 @property (weak, nonatomic) IBOutlet UIView *userInfoHeaderView;
 @property (strong, nonatomic) IBOutlet UILabel *askfor;
 @property (strong, nonatomic) IBOutlet UILabel *mywallet;
+@property (weak, nonatomic) IBOutlet UILabel *balanceLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *imgwallet;
 @property (strong, nonatomic) IBOutlet UITableViewCell *recordCenter;
 @property (strong, nonatomic) UIImageView *headimage;
@@ -260,15 +261,18 @@
     [fansView addGestureRecognizer:fansSingleRecognizer];
     
     [[EaseMob sharedInstance].chatManager setApnsNickname:self.userinfo.nickname];
-    
+    self.balanceLabel.text = [NSString stringWithFormat:@"余额%@元",self.userInfoData[@"money2"]];
+
     NSString *thesame = [NSString stringWithFormat:@"%ld",self.userinfo.userId];
     if ([thesame isEqualToString:@"100000"] || [thesame isEqualToString:@"100001"]) {
         self.mywallet.text = @"安全设置";
+        self.balanceLabel.text = nil;
         self.imgwallet.image = [UIImage imageNamed:@"shezhi"];
         self.recordCenter.hidden = YES;
     }else{
         if (![setting canOpen]) {
             self.mywallet.text = @"安全设置";
+            self.balanceLabel.text = nil;
             self.imgwallet.image = [UIImage imageNamed:@"shezhi"];
             self.recordCenter.hidden = YES;
         }
@@ -292,6 +296,7 @@
             int status = [[json objectForKey:@"status"]intValue];
             if (status == 0) {
                 self.userInfoData = [json objectForKey:@"entity"];
+                
                 [self updateUI];
             }
         }

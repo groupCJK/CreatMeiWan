@@ -49,12 +49,14 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *CellIdentifier = [NSString stringWithFormat:@"Cell%ld%ld", (long)[indexPath section], (long)[indexPath row]];//以indexPath来唯一确定cell
+
     if (self.focusArray.count == 0) {
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        static NSString *noMessageCellid = @"sessionnomessageCellidentifier";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:noMessageCellid];
+
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:noMessageCellid];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             CGRect frame = cell.frame;
             cell.frame = CGRectMake(frame.origin.x, frame.origin.y, [[UIScreen mainScreen] applicationFrame].size.width, frame.size.height);
             [[UIScreen mainScreen] applicationFrame];
@@ -68,9 +70,9 @@
         return cell;
         
     }
-    FocusTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"infoCell"];
+    FocusTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
-        cell = [[FocusTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"infoCell"];
+        cell = [[FocusTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.focusDic = self.focusArray[indexPath.row];
     
@@ -78,7 +80,6 @@
     [self.MyfriendArray enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         if ([obj isEqualToDictionary:self.focusArray[indexPath.row]]) {
-           // NSLog(@"xiangdeng------%@",self.focusArray[indexPath.row]);
             [cell.focusButton setTitle:@"互相关注" forState:UIControlStateNormal];
         }
     }];
