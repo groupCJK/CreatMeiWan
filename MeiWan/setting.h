@@ -8,9 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "NSMutableArray_Shuffling.h"
-
+#import <UIKit/UIKit.h>
 static const BOOL isTest = NO;
 @interface setting : NSObject
+{
+    NSMutableArray * changeArray;
+}
 
 +(NSMutableArray*) ips;
 +(void) adjustIps;

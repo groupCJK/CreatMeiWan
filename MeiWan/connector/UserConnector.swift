@@ -5,20 +5,47 @@
 //  Created by mac on 15/8/27.
 //  Copyright (c) 2015年 mac. All rights reserved.
 //
+//
+//  UserConnector.swift
+//  Liuwei
+//
+//  Created by mac on 15/8/27.
+//  Copyright (c) 2015年 mac. All rights reserved.
+//
 
 import UIKit
 
 
 @objc public class UserConnector: NSObject {
     
-//    private static let userUrl=setting.getIp()+"peiwan-server/rest/users/";
-//    private static let orderUrl=setting.getIp()+"peiwan-server/rest/orders/";
-
+    private static var userUrl=NSUserDefaults .standardUserDefaults().valueForKey("1") as! String
+    private static var anOtherUrl = NSUserDefaults.standardUserDefaults().valueForKey("0") as! String
+    
     private static func UserURL()->String?{
-        return setting.getIp()+"peiwan-server/rest/users/";
+        
+        struct Static {
+            static var onceToken : dispatch_once_t = 0
+        }
+        dispatch_once(&Static.onceToken) {
+            
+            var i = arc4random()%50
+            i = i+1
+            print(i)
+            if (i%2==0){
+                userUrl = NSUserDefaults .standardUserDefaults().valueForKey("0") as! String
+                anOtherUrl = NSUserDefaults.standardUserDefaults().valueForKey("1") as! String
+            }else{
+                userUrl = NSUserDefaults .standardUserDefaults().valueForKey("1") as! String
+                anOtherUrl = NSUserDefaults.standardUserDefaults().valueForKey("0") as! String
+            }
+            
+        }
+
+        return userUrl+"peiwan-server/rest/users/"
     }
     private static func OrderURL()->String?{
-        return setting.getIp()+"peiwan-server/rest/orders/";
+        
+        return userUrl+"peiwan-server/rest/orders/";
     }
     public static func acceptInvalidSSLCerts() {
         let manager = Manager.sharedInstance
@@ -45,17 +72,17 @@ import UIKit
     
     //登陆
     public static func login(username:String,password:String,receiver:(data:NSData?,error:NSError?)->()){
-
+        
         
         request(.GET, UserURL()!+"login", parameters:["username":username,"password":password])
             .response { request, response, data, error in
-                if ((error) != nil){
-                    setting .adjustIps()
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
-                //            var s = NSString(data: data!, encoding: NSUTF8StringEncoding)as String!
-                //这里解析你收到的数据
                 receiver(data:data!, error:error)
         }
     }
@@ -67,12 +94,13 @@ import UIKit
         }
         request(.GET, UserURL()!+"update", parameters:parameters as? [String : AnyObject])
             .response { request, r, data, error in
-                if ((error) != nil){
-                    setting .adjustIps()
-                }else{
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
-
                 
                 receiver(data:data!, error:error)
         }
@@ -109,11 +137,17 @@ import UIKit
         }
         request(.GET, UserURL()!+"aroundPeiwan", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if ((error) != nil){
+                
+                if (error==nil){
+                    
                 }else{
-                    setting .adjustIps()
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
+                
                 receiver(data:data!.gunzippedData(), error:error)
+                
+                
         }
     }
     
@@ -133,10 +167,13 @@ import UIKit
         parameters["district"]=district
         request(.GET, UserURL()!+"register", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    if ((error) != nil){
-                    }else{
-                    }                }
+                
+                if (error==nil){
+                    
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
+                }
                 
                 receiver(data:data, error:error)
         }
@@ -151,25 +188,31 @@ import UIKit
         parameters["userId"]=userId
         request(.GET, UserURL()!+"findPeiwanById", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
+                    
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
         }
     }
     
-  
+    
     //寻找游戏角色
     public static func findRoles(userId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
         parameters["userId"]=userId
         request(.GET, UserURL()!+"findRoles", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
+                    
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -184,9 +227,12 @@ import UIKit
         parameters["limit"]=limit
         request(.GET, UserURL()!+"findOrderEvaluationByUserId", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
+                    
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -197,11 +243,14 @@ import UIKit
     public static func peiwanNetbars(peiwanId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
         parameters["peiwanId"]=peiwanId
-        request(.GET, UserURL()!+"peiwanNetbars", parameters:parameters as? [String : NSObject])
+        request(.GET,UserURL()!+"peiwanNetbars", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
+                    
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -215,10 +264,12 @@ import UIKit
         parameters["sign"]=sign;
         request(.GET, UserURL()!+"sendCode", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
                 
+                if (error==nil){
+                    
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -232,10 +283,12 @@ import UIKit
         parameters["sign"]=sign;
         request(.GET, UserURL()!+"sendCode2", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -248,10 +301,12 @@ import UIKit
         parameters["session"]=session
         request(.GET, UserURL()!+"findMyFriends", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -263,12 +318,14 @@ import UIKit
         var parameters:Dictionary<String,AnyObject> = [:]
         parameters["session"]=session
         parameters["friendId"]=friendId
-        request(.GET, UserURL()!+"addFriend", parameters:parameters as? [String : NSObject])
+        request(.GET,UserURL()!+"addFriend", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -282,10 +339,12 @@ import UIKit
         parameters["friendId"]=friendId
         request(.GET, UserURL()!+"deleteFriend", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -300,10 +359,12 @@ import UIKit
         parameters["contentIndex"]=contentIndex
         request(.GET, UserURL()!+"accusation", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -316,10 +377,12 @@ import UIKit
         parameters["netbarId"]=netbarId
         request(.GET, UserURL()!+"findNetbarPhoto", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -334,10 +397,12 @@ import UIKit
         parameters["name"]=name
         request(.GET, UserURL()!+"addRole", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -349,12 +414,14 @@ import UIKit
         var parameters:Dictionary<String,AnyObject> = [:]
         parameters["session"]=session
         parameters["lolRoleId"]=lolRoleId
-        request(.GET, UserURL()!+"deleteRole", parameters:parameters as? [String : NSObject])
+        request(.GET,UserURL()!+"deleteRole", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -378,10 +445,12 @@ import UIKit
         parameters["isWin"]=isWin
         request(.GET, OrderURL()!+"createOrder", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -408,10 +477,12 @@ import UIKit
         }
         request(.GET, OrderURL()!+"createOrder2", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -427,10 +498,12 @@ import UIKit
         parameters["limit"]=limit
         request(.GET, UserURL()!+"findStates2", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -445,10 +518,12 @@ import UIKit
         parameters["limit"]=limit
         request(.GET, UserURL()!+"findAroundStates", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -464,10 +539,12 @@ import UIKit
         parameters["stateId"]=stateId
         request(.GET, UserURL()!+"insertStateComment", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -483,10 +560,12 @@ import UIKit
         parameters["stateCommentId"]=stateCommentId
         request(.GET, UserURL()!+"insertStateReplay", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -498,12 +577,14 @@ import UIKit
         var parameters:Dictionary<String,AnyObject> = [:]
         parameters["session"]=session
         parameters["stateId"]=stateId
-        request(.GET, UserURL()!+"findStateComment", parameters:parameters as? [String : NSObject])
+        request(.GET,UserURL()!+"findStateComment", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -518,10 +599,12 @@ import UIKit
         parameters["statePhotos"]=statePhotos
         request(.GET, UserURL()!+"insertState", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -533,12 +616,14 @@ import UIKit
         var parameters:Dictionary<String,AnyObject> = [:]
         parameters["session"]=session
         parameters["stateId"]=stateId
-        request(.GET, UserURL()!+"deleteState", parameters:parameters as? [String : NSObject])
+        request(.GET,UserURL()!+"deleteState", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -553,10 +638,12 @@ import UIKit
         parameters["stateId"] = stateId
         request(.GET, UserURL()!+"likeUserState",parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -571,10 +658,12 @@ import UIKit
         parameters["stateId"] = stateId
         request(.GET, UserURL()!+"unlikeUserState",parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -587,10 +676,12 @@ import UIKit
         parameters["userId"] = userId
         request(.GET, UserURL()!+"findUserTags", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -605,10 +696,12 @@ import UIKit
         parameters["limit"] = limit
         request(.GET, UserURL()!+"rankUsers", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -627,10 +720,12 @@ import UIKit
         parameters["address"]=address
         request(.GET, UserURL()!+"createPeiwanForm", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -645,10 +740,12 @@ import UIKit
         parameters["limit"]=limit
         request(.GET, UserURL()!+"findNetbarLikeName", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -663,10 +760,12 @@ import UIKit
         parameters["limit"]=limit
         request(.GET, OrderURL()!+"myOrders", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -680,10 +779,12 @@ import UIKit
         parameters["orderId"]=orderId
         request(.GET, OrderURL()!+"acceptOrder", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -698,10 +799,12 @@ import UIKit
         parameters["limit"]=limit
         request(.GET, OrderURL()!+"inviteMeOrders", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -715,10 +818,12 @@ import UIKit
         parameters["orderId"]=orderId
         request(.GET, OrderURL()!+"orderOk", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -732,10 +837,12 @@ import UIKit
         parameters["orderId"]=orderId
         request(.GET, OrderURL()!+"payWithAccountMoney", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -752,10 +859,12 @@ import UIKit
         parameters["photos"]=photos
         request(.GET, OrderURL()!+"sendComplain", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -773,10 +882,12 @@ import UIKit
         parameters["content"]=content
         request(.GET, OrderURL()!+"evaluationOrder", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -790,10 +901,12 @@ import UIKit
         parameters["money"]=money
         request(.GET, UserURL()!+"createCashRequest", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -808,10 +921,12 @@ import UIKit
         parameters["limit"]=limit
         request(.GET, UserURL()!+"myCashRequests", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -826,10 +941,12 @@ import UIKit
         parameters["verifyCode"]=verifyCode
         request(.GET, UserURL()!+"resetPassword", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data, error:error)
@@ -844,10 +961,12 @@ import UIKit
         parameters["price"]=price
         request(.GET, UserURL()!+"addUserTimeTag", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -862,10 +981,12 @@ import UIKit
         parameters["price"]=price
         request(.GET, UserURL()!+"deleteUserTimeTag", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -884,6 +1005,13 @@ import UIKit
         request(.GET, OrderURL()!+"createRecharge", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
+                if (error==nil){
+                    
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
+                }
+                
                 receiver(data:data!.gunzippedData(), error:error)
         }
     }
@@ -894,10 +1022,12 @@ import UIKit
         request(.GET, UserURL()!+"getLoginedUser", parameters:parameters as? [String : NSObject])
             
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -905,7 +1035,7 @@ import UIKit
     }
     /**直接充值*/
     public static func aliRechargeSigh(session:String!,price:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
-       
+        
         var parameters:Dictionary<String,AnyObject> = [:]
         
         if(session != nil){
@@ -918,14 +1048,21 @@ import UIKit
         request(.GET, OrderURL()!+"aliRechargeSigh", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
+                if (error==nil){
+                    
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
+                }
+                
                 receiver(data:data!.gunzippedData(), error:error)
         }
-
-    
+        
+        
     }
     
     public static func payWithAccountMoney(session:String!,peiwanId:NSNumber!,price:NSNumber!,hours:NSNumber!,tagIndex:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
-    
+        
         var parameters:Dictionary<String,AnyObject> = [:]
         
         if(session != nil){
@@ -947,10 +1084,17 @@ import UIKit
         request(.GET, OrderURL()!+"payWithAccountMoney", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
+                if (error==nil){
+                    
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
+                }
+                
                 receiver(data:data!.gunzippedData(), error:error)
         }
-
-
+        
+        
     }
     
     public static func aliOrderSign(session:String!,peiwanId:NSNumber!,price:NSNumber!,hours:NSNumber!,tagIndex:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
@@ -976,6 +1120,13 @@ import UIKit
         request(.GET, OrderURL()!+"aliOrderSign", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
+                if (error==nil){
+                    
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
+                }
+                
                 receiver(data:data!.gunzippedData(), error:error)
         }
         
@@ -988,18 +1139,23 @@ import UIKit
         parameters["session"]=session
         request(.GET, UserURL()!+"findFollowersByUserId", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
-                if (error != nil){
-                    setting .adjustIps()
-
+                if (error==nil){
                     
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
         }
     }
-
+    
     
 }
+
+
+
+
 
 
 

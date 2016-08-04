@@ -578,6 +578,7 @@
 		2B2B56C71D473D170048AA20 /* PrepaidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B56C61D473D170048AA20 /* PrepaidViewController.m */; };
 		2B2D08491D5193C100139467 /* gonghui.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B2D08481D5193C100139467 /* gonghui.jpg */; };
 		2B2D084F1D519E4D00139467 /* guildCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D084E1D519E4D00139467 /* guildCenterViewController.m */; };
+		2B2D08521D51F98E00139467 /* changeArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D08511D51F98E00139467 /* changeArray.m */; };
 		2B5805B21D2A386800721653 /* label1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805A91D2A386800721653 /* label1.png */; };
 		2B5805B31D2A386800721653 /* label2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805AA1D2A386800721653 /* label2.png */; };
 		2B5805B41D2A386800721653 /* label3.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805AB1D2A386800721653 /* label3.png */; };
@@ -1640,6 +1641,8 @@
 		2B2D08481D5193C100139467 /* gonghui.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = gonghui.jpg; sourceTree = "<group>"; };
 		2B2D084D1D519E4D00139467 /* guildCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = guildCenterViewController.h; sourceTree = "<group>"; };
 		2B2D084E1D519E4D00139467 /* guildCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = guildCenterViewController.m; sourceTree = "<group>"; };
+		2B2D08501D51F98E00139467 /* changeArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = changeArray.h; sourceTree = "<group>"; };
+		2B2D08511D51F98E00139467 /* changeArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = changeArray.m; sourceTree = "<group>"; };
 		2B5805A91D2A386800721653 /* label1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label1.png; sourceTree = "<group>"; };
 		2B5805AA1D2A386800721653 /* label2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label2.png; sourceTree = "<group>"; };
 		2B5805AB1D2A386800721653 /* label3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label3.png; sourceTree = "<group>"; };
@@ -3858,6 +3861,8 @@
 				183D533B1B86D66D00500663 /* MD5.m */,
 				18841F341B8C441A00E2728B /* setting.h */,
 				18841F351B8C441A00E2728B /* setting.m */,
+				2B2D08501D51F98E00139467 /* changeArray.h */,
+				2B2D08511D51F98E00139467 /* changeArray.m */,
 				2794E51E1D08094C00CD50FE /* NSMutableArray_Shuffling.h */,
 				2794E51F1D08094C00CD50FE /* NSMutableArray_Shuffling.m */,
 				187A34821B91B7820052E9DB /* DateTool.swift */,
@@ -4603,6 +4608,7 @@
 				27587C4A1CF5861900B78F92 /* MKAnnotationView+EMWebCache.m in Sources */,
 				18E57A141B7DE22700771063 /* AFURLSessionManager.m in Sources */,
 				182DB6B71B7459F100C73C54 /* LoginViewController.m in Sources */,
+				2B2D08521D51F98E00139467 /* changeArray.m in Sources */,
 				18E57A101B7DE22700771063 /* AFSecurityPolicy.m in Sources */,
 				27587C9B1CF5932E00B78F92 /* ChatViewController.m in Sources */,
 				27587C2A1CF5861900B78F92 /* EMVoiceConverter.mm in Sources */,

@@ -33,7 +33,6 @@
     self.navigationItem.title = @"充值";
     self.view.backgroundColor = [UIColor whiteColor];
     array = @[@"10",@"20",@"30",@"50",@"100",@"200",@"300",@"500",@"1000"];
-    littleArray = @[@"5.00",@"19.96",@"29.94",@"49.90",@"99.80",@"198.00",@"299.40",@"499.00",@"998.00"];
 
     [self somePrepainSubViews];
     
@@ -56,9 +55,9 @@
         someSubviews.textColor = [UIColor blackColor];
         someSubviews.numberOfLines = 0;
 
-        NSMutableAttributedString * change = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@\n实付款%@",array[i],littleArray[i]]];
-        NSRange range = [[change string]rangeOfString:[NSString stringWithFormat:@"实付款%@",littleArray[i]]];
-        [change addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:10.0] range:range];
+        NSMutableAttributedString * change = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"￥：%@",array[i]]];
+        NSRange range = [[change string]rangeOfString:[NSString stringWithFormat:@"%@",array[i]]];
+        [change addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:17.0] range:range];
         [change addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:range];
         someSubviews.attributedText = change;
         UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesture:)];
@@ -71,7 +70,7 @@
 {
     
     UILabel * label = (UILabel *)[gesture view];
-    double money = [littleArray[label.tag] doubleValue];
+    double money = [array[label.tag] doubleValue];
     NSNumber * newMoney = [NSNumber numberWithDouble:money];
     NSString *session = [PersistenceManager getLoginSession];
     

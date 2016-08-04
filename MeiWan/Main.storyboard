@@ -949,7 +949,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="sT0-Ph-tcY">
-                            <rect key="frame" x="0.0" y="64" width="320" height="247"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="247"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YmF-CB-5Tm">
@@ -1126,13 +1126,13 @@
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="JAE-Ry-iNg">
-                            <rect key="frame" x="0.0" y="377" width="320" height="0.0"/>
+                            <rect key="frame" x="0.0" y="313" width="320" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="News Cell" rowHeight="44" id="P9p-1b-kR4" customClass="ExploitsTableViewCell">
-                                <rect key="frame" x="0.0" y="333" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="269" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="P9p-1b-kR4" id="til-An-Bth">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -2439,10 +2439,10 @@
         <scene sceneID="vgH-pU-mE9">
             <objects>
                 <tableViewController id="asM-Wc-l0p" customClass="PersonTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="BS1-ae-zhf">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="BS1-ae-zhf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="6in-GM-Ao3">
                             <rect key="frame" x="0.0" y="64" width="320" height="200"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2450,47 +2450,15 @@
                             <gestureRecognizers/>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="VJY-4k-TkF">
-                            <rect key="frame" x="0.0" y="528" width="320" height="18"/>
+                            <rect key="frame" x="0.0" y="458" width="320" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <sections>
                             <tableViewSection id="vjt-Vh-lCf">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="hfp-oe-dbk">
-                                        <rect key="frame" x="0.0" y="264" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hfp-oe-dbk" id="KJp-n8-NHR">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="peiwan_dongtai.png" translatesAutoresizingMaskIntoConstraints="NO" id="eCh-ce-UCq">
-                                                    <rect key="frame" x="12" y="12" width="20" height="19"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="20" id="C8Z-te-R20"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的动态" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGA-Cy-mxZ">
-                                                    <rect key="frame" x="47" y="13" width="60" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="eCh-ce-UCq" secondAttribute="bottom" constant="12" id="37c-bj-4o9"/>
-                                                <constraint firstItem="pGA-Cy-mxZ" firstAttribute="leading" secondItem="eCh-ce-UCq" secondAttribute="trailing" constant="15" id="CU7-p6-qEX"/>
-                                                <constraint firstItem="eCh-ce-UCq" firstAttribute="leading" secondItem="KJp-n8-NHR" secondAttribute="leading" constant="12" id="X9b-Uq-LbC"/>
-                                                <constraint firstItem="pGA-Cy-mxZ" firstAttribute="centerY" secondItem="eCh-ce-UCq" secondAttribute="centerY" id="rNv-Bt-L2R"/>
-                                                <constraint firstItem="eCh-ce-UCq" firstAttribute="top" secondItem="KJp-n8-NHR" secondAttribute="top" constant="12" id="rtu-aj-YDx"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="G3c-ye-bFr" kind="show" identifier="mymove" id="546-yb-QaP"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="bmM-Uh-1oe">
-                                        <rect key="frame" x="0.0" y="308" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="264" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bmM-Uh-1oe" id="bfm-d3-DMQ">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -2519,7 +2487,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="c5Q-M9-llT">
-                                        <rect key="frame" x="0.0" y="352" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="308" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c5Q-M9-llT" id="vDu-h6-8ny">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -2556,40 +2524,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="4gL-hZ-fBr">
-                                        <rect key="frame" x="0.0" y="396" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4gL-hZ-fBr" id="Flr-Dl-zq2">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="peiwan_jian.png" translatesAutoresizingMaskIntoConstraints="NO" id="a6W-fN-MNN">
-                                                    <rect key="frame" x="12" y="12" width="20" height="19"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="20" id="jDN-Ec-Q5K"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="战绩查询" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ilr-Yz-xa2">
-                                                    <rect key="frame" x="47" y="13" width="60" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="a6W-fN-MNN" firstAttribute="leading" secondItem="Flr-Dl-zq2" secondAttribute="leading" constant="12" id="7IJ-jb-yTO"/>
-                                                <constraint firstAttribute="bottom" secondItem="a6W-fN-MNN" secondAttribute="bottom" constant="12" id="V37-In-okX"/>
-                                                <constraint firstItem="ilr-Yz-xa2" firstAttribute="centerY" secondItem="a6W-fN-MNN" secondAttribute="centerY" id="gOk-5v-Pcr"/>
-                                                <constraint firstItem="ilr-Yz-xa2" firstAttribute="leading" secondItem="a6W-fN-MNN" secondAttribute="trailing" constant="15" id="rax-ai-gFc"/>
-                                                <constraint firstItem="a6W-fN-MNN" firstAttribute="top" secondItem="Flr-Dl-zq2" secondAttribute="top" constant="12" id="yMb-Za-BSq"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="7Dp-vM-gQa" kind="show" identifier="playerbeing" id="t8N-Ad-iU4"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="15D-oc-hCa">
-                                        <rect key="frame" x="0.0" y="440" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="352" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="15D-oc-hCa" id="fwt-P3-irz">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -2624,7 +2560,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="dl4-Mo-XJh">
-                                        <rect key="frame" x="0.0" y="484" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="396" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dl4-Mo-XJh" id="610-jz-EeD">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -2675,13 +2611,7 @@
                             <outlet property="delegate" destination="asM-Wc-l0p" id="f9Q-aV-FbE"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="WL8-eH-0oH">
-                        <barButtonItem key="rightBarButtonItem" title="更多" id="c7A-VR-7fz">
-                            <connections>
-                                <action selector="delogin:" destination="asM-Wc-l0p" id="Qmc-i6-ZFQ"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="WL8-eH-0oH"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="askfor" destination="aCg-ac-Wd0" id="F7P-Pd-kGa"/>
@@ -2839,13 +2769,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="cee-vh-lSn">
-                            <rect key="frame" x="0.0" y="130" width="320" height="0.0"/>
+                            <rect key="frame" x="0.0" y="66" width="320" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="mycell" rowHeight="44" id="7uh-e6-Hxl" customClass="MoveActionViewCell">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7uh-e6-Hxl" id="65x-6f-vCf">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -4345,10 +4275,8 @@
         <image name="peiwan_add2.png" width="1024" height="1024"/>
         <image name="peiwan_ask.png" width="16" height="16"/>
         <image name="peiwan_default_head.png" width="128" height="128"/>
-        <image name="peiwan_dongtai.png" width="64" height="64"/>
         <image name="peiwan_hot.png" width="64" height="64"/>
         <image name="peiwan_invite.png" width="64" height="64"/>
-        <image name="peiwan_jian.png" width="64" height="64"/>
         <image name="peiwan_location2.png" width="128" height="128"/>
         <image name="peiwan_message.png" width="32" height="32"/>
         <image name="peiwan_phone.png" width="128" height="128"/>

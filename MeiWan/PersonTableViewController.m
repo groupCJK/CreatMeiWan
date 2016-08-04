@@ -310,6 +310,46 @@
         }
     }];
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 64;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, dtScreenWidth, 64)];
+    view.backgroundColor = [UIColor whiteColor];
+    
+    UIButton * exit = [UIButton buttonWithType:UIButtonTypeCustom];
+    exit.frame = CGRectMake(20, 20, dtScreenWidth-40, 44);
+    exit.layer.cornerRadius = 5;
+    exit.backgroundColor = [CorlorTransform colorWithHexString:@"#3f90a4"];
+    [exit setTitle:@"退出登录" forState:UIControlStateNormal];
+    [exit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [exit addTarget:self action:@selector(exitClick) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:exit];
+    return view;
+}
+//退出登录
+- (void)exitClick
+{
+    
+    [self showMessageAlert:@"是否退出登录"];
+}
+/**提示框*/
+- (void)showMessageAlert:(NSString *)message
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action){
+        
+    }];
+    UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [self touchOpinitonBtn];
+        [self removeView];
+    }];
+    [alertController addAction:cancelAction];
+    [alertController addAction:sureAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
 
 -(void)SingleDynamicTap:(UITapGestureRecognizer*)recognizer
 {
@@ -593,31 +633,31 @@
         }
     }
 }
-- (IBAction)delogin:(UIBarButtonItem *)sender {
-    self.reloginView = [[UIView alloc]initWithFrame:CGRectMake(self.view.bounds.size.width-145, 55, 130, 40)];
-    self.reloginView.backgroundColor = [UIColor grayColor];
-    self.reloginView.layer.cornerRadius = 5;
-    self.reloginView.layer.masksToBounds = YES;
-    UIButton *opinitonBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 130, 40)];
-    opinitonBtn.backgroundColor = [UIColor whiteColor];
-    opinitonBtn.titleLabel.font = [UIFont systemFontOfSize:14.0f];
-    [opinitonBtn addTarget:self action:@selector(touchOpinitonBtn) forControlEvents:UIControlEventTouchUpInside];
-    UIImageView *opinitonIg = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 20, 20)];
-    opinitonIg.image = [UIImage imageNamed:@"peiwan_close"];
-    UILabel *opinitonLab = [[UILabel alloc]initWithFrame:CGRectMake(40, 10, 130, 20)];
-    opinitonLab.text = @"退出登录";
-    [opinitonBtn addSubview:opinitonIg];
-    [opinitonBtn addSubview:opinitonLab];
-    [self.reloginView addSubview:opinitonBtn];
-    
-    self.clearView = [[UIView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(removeView)];
-    [self.clearView addGestureRecognizer:tap];
-    
-    [[ShowMessage mainWindow]addSubview:self.clearView];
-    [[ShowMessage mainWindow]addSubview:self.reloginView];
-    
-}
+//- (IBAction)delogin:(UIBarButtonItem *)sender {
+//    self.reloginView = [[UIView alloc]initWithFrame:CGRectMake(self.view.bounds.size.width-145, 55, 130, 40)];
+//    self.reloginView.backgroundColor = [UIColor grayColor];
+//    self.reloginView.layer.cornerRadius = 5;
+//    self.reloginView.layer.masksToBounds = YES;
+//    UIButton *opinitonBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 130, 40)];
+//    opinitonBtn.backgroundColor = [UIColor whiteColor];
+//    opinitonBtn.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+//    [opinitonBtn addTarget:self action:@selector(touchOpinitonBtn) forControlEvents:UIControlEventTouchUpInside];
+//    UIImageView *opinitonIg = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 20, 20)];
+//    opinitonIg.image = [UIImage imageNamed:@"peiwan_close"];
+//    UILabel *opinitonLab = [[UILabel alloc]initWithFrame:CGRectMake(40, 10, 130, 20)];
+//    opinitonLab.text = @"退出登录";
+//    [opinitonBtn addSubview:opinitonIg];
+//    [opinitonBtn addSubview:opinitonLab];
+//    [self.reloginView addSubview:opinitonBtn];
+//    
+//    self.clearView = [[UIView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(removeView)];
+//    [self.clearView addGestureRecognizer:tap];
+//    
+//    [[ShowMessage mainWindow]addSubview:self.clearView];
+//    [[ShowMessage mainWindow]addSubview:self.reloginView];
+//    
+//}
 -(void)touchOpinitonBtn{
     //注销环信登录
     [[EaseMob sharedInstance].chatManager asyncLogoffWithUnbindDeviceToken:YES completion:^(NSDictionary *info, EMError *error) {
