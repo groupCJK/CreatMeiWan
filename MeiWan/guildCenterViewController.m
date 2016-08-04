@@ -7,6 +7,21 @@
 //
 
 #import "guildCenterViewController.h"
+#import "QRCodeViewController.h"
+#import "GuildMembersViewController.h"
+#import "OrderListViewController.h"
+#import "GuildRankListViewController.h"
+#import "CashManagementViewController.h"
+
+#import "UserInfo.h"
+#import "Meiwan-Swift.h"
+#import "ShowMessage.h"
+#import "CorlorTransform.h"
+#import "setting.h"
+#import "SBJson.h"
+#import "UIImageView+WebCache.h"
+#import "MBProgressHUD.h"
+#import "CorlorTransform.h"
 
 @interface guildCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -52,23 +67,41 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     switch (indexPath.row) {
         case 0:
         {
-            
+            QRCodeViewController *orCodeVC = [[QRCodeViewController alloc] init];
+            orCodeVC.title = @"工会二维码";
+            orCodeVC.view.backgroundColor = [UIColor whiteColor];
+            [self.navigationController pushViewController:orCodeVC animated:YES];
         }break;
         case 1:
         {
-            
+            GuildMembersViewController *guildMemberVC = [[GuildMembersViewController alloc] init];
+            guildMemberVC.title = @"工会成员";
+            guildMemberVC.view.backgroundColor = [UIColor whiteColor];
+            guildMemberVC.title = @"工会成员";
+            [self.navigationController pushViewController:guildMemberVC animated:YES];
         }break;
         case 2:{
-            
+            OrderListViewController *orderListVC = [[OrderListViewController alloc] init];
+            orderListVC.view.backgroundColor = [UIColor whiteColor];
+            orderListVC.title = @"工会订单";
+            [self.navigationController pushViewController:orderListVC animated:YES];
         }break;
         case 3:{
-            
+            GuildRankListViewController *guildBankListVC = [[GuildRankListViewController alloc] init];
+            guildBankListVC.view.backgroundColor = [UIColor whiteColor];
+            guildBankListVC.title = @"工会排行";
+            [self.navigationController pushViewController:guildBankListVC animated:YES];
         }break;
         case 4:{
-            
+            CashManagementViewController *cashManageMentVC = [[CashManagementViewController alloc] init];
+            cashManageMentVC.title = @"提现管理";
+            cashManageMentVC.view.backgroundColor = [UIColor whiteColor];
+            [self.navigationController pushViewController:cashManageMentVC animated:YES];
         }break;
         default:
             break;
