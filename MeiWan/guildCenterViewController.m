@@ -50,7 +50,30 @@
     
     return cell;
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.row) {
+        case 0:
+        {
+            
+        }break;
+        case 1:
+        {
+            
+        }break;
+        case 2:{
+            
+        }break;
+        case 3:{
+            
+        }break;
+        case 4:{
+            
+        }break;
+        default:
+            break;
+    }
+}
 #pragma mark Get Set
 
 - (UITableView *)guildCenterTableView{
@@ -168,8 +191,8 @@
 }
 
 - (void)loadDatasource{
-    NSArray *data = @[@{@"title":@"生成工会二维码"},
-                      @{@"title":@"工会会员列表"},
+    NSArray *data = @[@{@"title":@"工会二维码"},
+                      @{@"title":@"工会成员"},
                       @{@"title":@"订单一览"},
                       @{@"title":@"工会排行榜"},
                       @{@"title":@"提现管理"}];

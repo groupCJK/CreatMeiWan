@@ -579,6 +579,11 @@
 		2B2D08491D5193C100139467 /* gonghui.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B2D08481D5193C100139467 /* gonghui.jpg */; };
 		2B2D084F1D519E4D00139467 /* guildCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D084E1D519E4D00139467 /* guildCenterViewController.m */; };
 		2B2D08521D51F98E00139467 /* changeArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D08511D51F98E00139467 /* changeArray.m */; };
+		2B2D085C1D530C8F00139467 /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D085B1D530C8F00139467 /* QRCodeViewController.m */; };
+		2B2D085F1D530CBF00139467 /* GuildMembersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D085E1D530CBF00139467 /* GuildMembersViewController.m */; };
+		2B2D08621D530CDC00139467 /* OrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D08611D530CDC00139467 /* OrderListViewController.m */; };
+		2B2D08651D530CFC00139467 /* GuildRankListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D08641D530CFC00139467 /* GuildRankListViewController.m */; };
+		2B2D08681D530D3200139467 /* CashManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D08671D530D3200139467 /* CashManagementViewController.m */; };
 		2B5805B21D2A386800721653 /* label1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805A91D2A386800721653 /* label1.png */; };
 		2B5805B31D2A386800721653 /* label2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805AA1D2A386800721653 /* label2.png */; };
 		2B5805B41D2A386800721653 /* label3.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805AB1D2A386800721653 /* label3.png */; };
@@ -1643,6 +1648,16 @@
 		2B2D084E1D519E4D00139467 /* guildCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = guildCenterViewController.m; sourceTree = "<group>"; };
 		2B2D08501D51F98E00139467 /* changeArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = changeArray.h; sourceTree = "<group>"; };
 		2B2D08511D51F98E00139467 /* changeArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = changeArray.m; sourceTree = "<group>"; };
+		2B2D085A1D530C8F00139467 /* QRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeViewController.h; sourceTree = "<group>"; };
+		2B2D085B1D530C8F00139467 /* QRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeViewController.m; sourceTree = "<group>"; };
+		2B2D085D1D530CBF00139467 /* GuildMembersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuildMembersViewController.h; sourceTree = "<group>"; };
+		2B2D085E1D530CBF00139467 /* GuildMembersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuildMembersViewController.m; sourceTree = "<group>"; };
+		2B2D08601D530CDC00139467 /* OrderListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListViewController.h; sourceTree = "<group>"; };
+		2B2D08611D530CDC00139467 /* OrderListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListViewController.m; sourceTree = "<group>"; };
+		2B2D08631D530CFC00139467 /* GuildRankListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuildRankListViewController.h; sourceTree = "<group>"; };
+		2B2D08641D530CFC00139467 /* GuildRankListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuildRankListViewController.m; sourceTree = "<group>"; };
+		2B2D08661D530D3200139467 /* CashManagementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashManagementViewController.h; sourceTree = "<group>"; };
+		2B2D08671D530D3200139467 /* CashManagementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashManagementViewController.m; sourceTree = "<group>"; };
 		2B5805A91D2A386800721653 /* label1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label1.png; sourceTree = "<group>"; };
 		2B5805AA1D2A386800721653 /* label2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label2.png; sourceTree = "<group>"; };
 		2B5805AB1D2A386800721653 /* label3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label3.png; sourceTree = "<group>"; };
@@ -2377,9 +2392,9 @@
 				18897A8D1B7EC91F009EB646 /* InviteRecordViewController.h */,
 				18897A8E1B7EC91F009EB646 /* InviteRecordViewController.m */,
 				18C1FBC21B9ECACE00151BB2 /* DetailOrder */,
+				2B2B56C41D473CC70048AA20 /* 充值 */,
 				185274E41B7F3C9300C5AC7C /* MyBurseViewController.h */,
 				185274E51B7F3C9300C5AC7C /* MyBurseViewController.m */,
-				2B2B56C41D473CC70048AA20 /* 充值 */,
 				185274E71B7F41FE00C5AC7C /* MyBurse */,
 				18EB4E471B802C72000AE087 /* PlayerBeingTableViewController.h */,
 				18EB4E481B802C72000AE087 /* PlayerBeingTableViewController.m */,
@@ -3837,6 +3852,7 @@
 				183D53411B871C6900500663 /* UserInfoViewController.m */,
 				2B2D084D1D519E4D00139467 /* guildCenterViewController.h */,
 				2B2D084E1D519E4D00139467 /* guildCenterViewController.m */,
+				2B2D08531D530C0E00139467 /* 公会中心 */,
 				2B1B0AD11D4AF14B00F193A4 /* 粉丝 */,
 				2B1B0AD21D4AF15900F193A4 /* 我的关注 */,
 				98EFD3571D4AE81A002A1913 /* cell */,
@@ -3901,6 +3917,63 @@
 				2B2B56C61D473D170048AA20 /* PrepaidViewController.m */,
 			);
 			name = "充值";
+			sourceTree = "<group>";
+		};
+		2B2D08531D530C0E00139467 /* 公会中心 */ = {
+			isa = PBXGroup;
+			children = (
+				2B2D08541D530C2400139467 /* 二维码 */,
+				2B2D08591D530C6D00139467 /* 公会成员 */,
+				2B2D08581D530C5D00139467 /* 订单一览 */,
+				2B2D08571D530C4D00139467 /* 公会排行榜 */,
+				2B2D08551D530C2E00139467 /* 提现管理 */,
+			);
+			name = "公会中心";
+			sourceTree = "<group>";
+		};
+		2B2D08541D530C2400139467 /* 二维码 */ = {
+			isa = PBXGroup;
+			children = (
+				2B2D085A1D530C8F00139467 /* QRCodeViewController.h */,
+				2B2D085B1D530C8F00139467 /* QRCodeViewController.m */,
+			);
+			name = "二维码";
+			sourceTree = "<group>";
+		};
+		2B2D08551D530C2E00139467 /* 提现管理 */ = {
+			isa = PBXGroup;
+			children = (
+				2B2D08661D530D3200139467 /* CashManagementViewController.h */,
+				2B2D08671D530D3200139467 /* CashManagementViewController.m */,
+			);
+			name = "提现管理";
+			sourceTree = "<group>";
+		};
+		2B2D08571D530C4D00139467 /* 公会排行榜 */ = {
+			isa = PBXGroup;
+			children = (
+				2B2D08631D530CFC00139467 /* GuildRankListViewController.h */,
+				2B2D08641D530CFC00139467 /* GuildRankListViewController.m */,
+			);
+			name = "公会排行榜";
+			sourceTree = "<group>";
+		};
+		2B2D08581D530C5D00139467 /* 订单一览 */ = {
+			isa = PBXGroup;
+			children = (
+				2B2D08601D530CDC00139467 /* OrderListViewController.h */,
+				2B2D08611D530CDC00139467 /* OrderListViewController.m */,
+			);
+			name = "订单一览";
+			sourceTree = "<group>";
+		};
+		2B2D08591D530C6D00139467 /* 公会成员 */ = {
+			isa = PBXGroup;
+			children = (
+				2B2D085D1D530CBF00139467 /* GuildMembersViewController.h */,
+				2B2D085E1D530CBF00139467 /* GuildMembersViewController.m */,
+			);
+			name = "公会成员";
 			sourceTree = "<group>";
 		};
 		2B5805BB1D2A508100721653 /* animationVIew */ = {
@@ -4416,6 +4489,7 @@
 				27587C511CF5861900B78F92 /* UIImageView+EMWebCache.m in Sources */,
 				27587C8A1CF5861A00B78F92 /* EaseTextView.m in Sources */,
 				18EB4E501B8081C5000AE087 /* AssesserInfoViewController.m in Sources */,
+				2B2D085F1D530CBF00139467 /* GuildMembersViewController.m in Sources */,
 				98EFD3551D4AE816002A1913 /* FansViewController.m in Sources */,
 				27587C3A1CF5861900B78F92 /* MWCaptionView.m in Sources */,
 				27587C561CF5861900B78F92 /* PSTCollectionViewController.m in Sources */,
@@ -4484,6 +4558,7 @@
 				987E7F811D4EE79C00613C6F /* UserInfoTableViewCell.m in Sources */,
 				27587C8C1CF5861A00B78F92 /* EaseFacialView.m in Sources */,
 				18F6D2C51B8FF42A00B1F0C3 /* MoveActionViewCell.m in Sources */,
+				2B2D08681D530D3200139467 /* CashManagementViewController.m in Sources */,
 				1883F92B1B9E89F5004A19BA /* LOLHelper.swift in Sources */,
 				98EFD35C1D4AE82C002A1913 /* FocusTableViewCell.m in Sources */,
 				98EFD35E1D4AE82C002A1913 /* FansTableViewCell.m in Sources */,
@@ -4495,6 +4570,7 @@
 				18824A531B85D5920063EC03 /* SBJsonUTF8Stream.m in Sources */,
 				18F1CC161B952BD4003EF78A /* registInfo.m in Sources */,
 				27587C291CF5861900B78F92 /* wav.mm in Sources */,
+				2B2D085C1D530C8F00139467 /* QRCodeViewController.m in Sources */,
 				27587C501CF5861900B78F92 /* UIImageView+EMHighlightedWebCache.m in Sources */,
 				27587C251CF5861900B78F92 /* EMCDDeviceManager+ProximitySensor.m in Sources */,
 				27CA60DC1CEEBAF300CC6956 /* CWStarRateView.m in Sources */,
@@ -4538,6 +4614,7 @@
 				27587C441CF5861900B78F92 /* EMSDWebImageCompat.m in Sources */,
 				27587C221CF5861900B78F92 /* EMAudioRecorderUtil.m in Sources */,
 				27587C6E1CF5861A00B78F92 /* EaseChineseToPinyin.m in Sources */,
+				2B2D08651D530CFC00139467 /* GuildRankListViewController.m in Sources */,
 				188677191BA2AE8100B2202B /* RecordTableViewCell.m in Sources */,
 				18E57A0D1B7DE22700771063 /* AFHTTPRequestOperationManager.m in Sources */,
 				18E579F01B7DDDB000771063 /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -4560,6 +4637,7 @@
 				2B2B56C71D473D170048AA20 /* PrepaidViewController.m in Sources */,
 				27587C271CF5861900B78F92 /* EMCDDeviceManagerBase.m in Sources */,
 				18EB4E4D1B803471000AE087 /* AddPlayerBeingViewController.m in Sources */,
+				2B2D08621D530CDC00139467 /* OrderListViewController.m in Sources */,
 				18E579F51B7DDDB000771063 /* UIProgressView+AFNetworking.m in Sources */,
 				18C1FBC51B9ECB3700151BB2 /* DetailOrderViewController.m in Sources */,
 				27587C311CF5861900B78F92 /* MJRefreshFooter.m in Sources */,
