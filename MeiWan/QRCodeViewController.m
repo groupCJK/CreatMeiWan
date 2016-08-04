@@ -7,6 +7,7 @@
 //
 
 #import "QRCodeViewController.h"
+#import "ZBarSDK.h"
 
 @interface QRCodeViewController ()
 

@@ -576,7 +576,6 @@
 		27F4F7911CF5F09F00A376E0 /* AskForPlayWithViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E911BB1B7D92C5002BB75F /* AskForPlayWithViewController.m */; };
 		27F4F7921CF5F09F00A376E0 /* AccusationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188225271BA004CA004EBEEB /* AccusationViewController.m */; };
 		2B2B56C71D473D170048AA20 /* PrepaidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B56C61D473D170048AA20 /* PrepaidViewController.m */; };
-		2B2D08491D5193C100139467 /* gonghui.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B2D08481D5193C100139467 /* gonghui.jpg */; };
 		2B2D084F1D519E4D00139467 /* guildCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D084E1D519E4D00139467 /* guildCenterViewController.m */; };
 		2B2D08521D51F98E00139467 /* changeArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D08511D51F98E00139467 /* changeArray.m */; };
 		2B2D085C1D530C8F00139467 /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D085B1D530C8F00139467 /* QRCodeViewController.m */; };
@@ -584,6 +583,7 @@
 		2B2D08621D530CDC00139467 /* OrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D08611D530CDC00139467 /* OrderListViewController.m */; };
 		2B2D08651D530CFC00139467 /* GuildRankListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D08641D530CFC00139467 /* GuildRankListViewController.m */; };
 		2B2D08681D530D3200139467 /* CashManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D08671D530D3200139467 /* CashManagementViewController.m */; };
+		2B2D09471D5321B100139467 /* gonghui.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2D09461D5321B100139467 /* gonghui.png */; };
 		2B5805B21D2A386800721653 /* label1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805A91D2A386800721653 /* label1.png */; };
 		2B5805B31D2A386800721653 /* label2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805AA1D2A386800721653 /* label2.png */; };
 		2B5805B41D2A386800721653 /* label3.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805AB1D2A386800721653 /* label3.png */; };
@@ -1645,7 +1645,6 @@
 		27E0A0C71CE1910A00D5FE31 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2B2B56C51D473D170048AA20 /* PrepaidViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrepaidViewController.h; sourceTree = "<group>"; };
 		2B2B56C61D473D170048AA20 /* PrepaidViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrepaidViewController.m; sourceTree = "<group>"; };
-		2B2D08481D5193C100139467 /* gonghui.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = gonghui.jpg; sourceTree = "<group>"; };
 		2B2D084D1D519E4D00139467 /* guildCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = guildCenterViewController.h; sourceTree = "<group>"; };
 		2B2D084E1D519E4D00139467 /* guildCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = guildCenterViewController.m; sourceTree = "<group>"; };
 		2B2D08501D51F98E00139467 /* changeArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = changeArray.h; sourceTree = "<group>"; };
@@ -1660,6 +1659,7 @@
 		2B2D08641D530CFC00139467 /* GuildRankListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuildRankListViewController.m; sourceTree = "<group>"; };
 		2B2D08661D530D3200139467 /* CashManagementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashManagementViewController.h; sourceTree = "<group>"; };
 		2B2D08671D530D3200139467 /* CashManagementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashManagementViewController.m; sourceTree = "<group>"; };
+		2B2D09461D5321B100139467 /* gonghui.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gonghui.png; sourceTree = "<group>"; };
 		2B5805A91D2A386800721653 /* label1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label1.png; sourceTree = "<group>"; };
 		2B5805AA1D2A386800721653 /* label2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label2.png; sourceTree = "<group>"; };
 		2B5805AB1D2A386800721653 /* label3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label3.png; sourceTree = "<group>"; };
@@ -3851,7 +3851,6 @@
 			isa = PBXGroup;
 			children = (
 				98F57EEF1D4F409F001D3703 /* black2.png */,
-				2B2D08481D5193C100139467 /* gonghui.jpg */,
 				987E7F821D4EE7B900613C6F /* black.jpg */,
 				27587CB71CF5A7A500B78F92 /* PersonTableViewController.h */,
 				27587CB61CF5A7A500B78F92 /* PersonTableViewController.m */,
@@ -3859,6 +3858,7 @@
 				183D53411B871C6900500663 /* UserInfoViewController.m */,
 				2B2D084D1D519E4D00139467 /* guildCenterViewController.h */,
 				2B2D084E1D519E4D00139467 /* guildCenterViewController.m */,
+				2B2D09461D5321B100139467 /* gonghui.png */,
 				2B2D08531D530C0E00139467 /* 公会中心 */,
 				2B1B0AD11D4AF14B00F193A4 /* 粉丝 */,
 				2B1B0AD21D4AF15900F193A4 /* 我的关注 */,
@@ -4213,6 +4213,7 @@
 				27587ACB1CF5824F00B78F92 /* chatBar_more_camera.png in Resources */,
 				273971C71D00461500A3367C /* rankingView.xib in Resources */,
 				273139891D1286B200712E1F /* near2@2x.png in Resources */,
+				2B2D09471D5321B100139467 /* gonghui.png in Resources */,
 				27587A6C1CF5824F00B78F92 /* VoiceSearchFeedback005@2x.png in Resources */,
 				27587ABE1CF5824F00B78F92 /* chatBar_recordSelectedBg@2x.png in Resources */,
 				27587A681CF5824F00B78F92 /* VoiceSearchFeedback003@2x.png in Resources */,
@@ -4414,7 +4415,6 @@
 				27CA5A3A1CEEACCB00CC6956 /* default-568@2x.png in Resources */,
 				27ADB8501CFEF67F00F11453 /* pai-hang-bang2@2x.png in Resources */,
 				27ADB8301CFEBD5F00F11453 /* Profile.png in Resources */,
-				2B2D08491D5193C100139467 /* gonghui.jpg in Resources */,
 				27587AC91CF5824F00B78F92 /* chatBar_colorMore_videoCallSelected@2x.png in Resources */,
 				2B5805B71D2A386800721653 /* label6.png in Resources */,
 				18A3196F1C030747005E9010 /* userInfo.xib in Resources */,
