@@ -1019,7 +1019,7 @@ import UIKit
     public static func getLoginedUser(session:String!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
         parameters["session"]=session
-        request(.GET, UserURL()!+"getLoginedUser", parameters:parameters as? [String : NSObject])
+        request(.GET, UserURL()!+"findMyInfo", parameters:parameters as? [String : NSObject])
             
             .response { request, r, data, error in
                 
