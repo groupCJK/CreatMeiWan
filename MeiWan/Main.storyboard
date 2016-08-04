@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Uaj-XS-CqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Uaj-XS-CqX">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -2457,20 +2457,20 @@
                         <sections>
                             <tableViewSection id="vjt-Vh-lCf">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="bmM-Uh-1oe">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="pzk-4m-XJK">
                                         <rect key="frame" x="0.0" y="264" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bmM-Uh-1oe" id="bfm-d3-DMQ">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pzk-4m-XJK" id="6t8-c6-nvV">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="peiwan_smile.png" translatesAutoresizingMaskIntoConstraints="NO" id="Bdg-Zx-msf">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="peiwan_smile.png" translatesAutoresizingMaskIntoConstraints="NO" id="szA-XS-HwH">
                                                     <rect key="frame" x="12" y="12" width="20" height="19"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="20" id="FZ4-Fj-o1M"/>
+                                                        <constraint firstAttribute="width" constant="20" id="u4I-GQ-HF7"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="达人申请" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCg-ac-Wd0">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="达人申请" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASV-AC-CRF">
                                                     <rect key="frame" x="47" y="13" width="60" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2478,11 +2478,11 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="aCg-ac-Wd0" firstAttribute="centerY" secondItem="Bdg-Zx-msf" secondAttribute="centerY" id="4Bg-4h-5QI"/>
-                                                <constraint firstItem="Bdg-Zx-msf" firstAttribute="leading" secondItem="bfm-d3-DMQ" secondAttribute="leading" constant="12" id="G3b-9C-zGE"/>
-                                                <constraint firstItem="Bdg-Zx-msf" firstAttribute="top" secondItem="bfm-d3-DMQ" secondAttribute="top" constant="12" id="THr-Jc-eX7"/>
-                                                <constraint firstItem="aCg-ac-Wd0" firstAttribute="leading" secondItem="Bdg-Zx-msf" secondAttribute="trailing" constant="15" id="glh-mU-nB7"/>
-                                                <constraint firstAttribute="bottom" secondItem="Bdg-Zx-msf" secondAttribute="bottom" constant="12" id="lGb-8b-th4"/>
+                                                <constraint firstItem="szA-XS-HwH" firstAttribute="top" secondItem="6t8-c6-nvV" secondAttribute="top" constant="12" id="IAg-jI-9ye"/>
+                                                <constraint firstItem="ASV-AC-CRF" firstAttribute="leading" secondItem="szA-XS-HwH" secondAttribute="trailing" constant="15" id="T4l-ns-cpY"/>
+                                                <constraint firstItem="ASV-AC-CRF" firstAttribute="centerY" secondItem="szA-XS-HwH" secondAttribute="centerY" id="XHA-FP-w5M"/>
+                                                <constraint firstAttribute="bottom" secondItem="szA-XS-HwH" secondAttribute="bottom" constant="12" id="htH-pM-p5M"/>
+                                                <constraint firstItem="szA-XS-HwH" firstAttribute="leading" secondItem="6t8-c6-nvV" secondAttribute="leading" constant="12" id="o1z-NC-mnT"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -2614,7 +2614,6 @@
                     <navigationItem key="navigationItem" id="WL8-eH-0oH"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
-                        <outlet property="askfor" destination="aCg-ac-Wd0" id="F7P-Pd-kGa"/>
                         <outlet property="balanceLabel" destination="Te9-uD-iIT" id="sok-s7-1nb"/>
                         <outlet property="guildCenter" destination="dl4-Mo-XJh" id="djT-Nk-eds"/>
                         <outlet property="imgwallet" destination="RNQ-9v-8D1" id="mlM-PW-U4w"/>
@@ -2629,6 +2628,7 @@
                         <segue destination="ZF1-M0-wP6" kind="show" identifier="mysetting" id="S0y-tW-KPA"/>
                         <segue destination="uEh-I1-g35" kind="push" identifier="focusList" id="du9-X3-qgL"/>
                         <segue destination="6e8-S1-ELO" kind="push" identifier="fansList" id="qAh-40-brm"/>
+                        <segue destination="G3c-ye-bFr" kind="push" identifier="mymove" id="Mia-IN-qeo"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Inp-bm-Mc4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2769,13 +2769,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="cee-vh-lSn">
-                            <rect key="frame" x="0.0" y="66" width="320" height="0.0"/>
+                            <rect key="frame" x="0.0" y="130" width="320" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="mycell" rowHeight="44" id="7uh-e6-Hxl" customClass="MoveActionViewCell">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7uh-e6-Hxl" id="65x-6f-vCf">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -4294,15 +4294,15 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="a2L-pk-feb"/>
-        <segue reference="lkr-Fs-pVo"/>
-        <segue reference="GI5-Ug-Nan"/>
-        <segue reference="G1e-fu-sL2"/>
         <segue reference="S0y-tW-KPA"/>
-        <segue reference="pDl-IO-OYw"/>
-        <segue reference="2kF-w6-CmH"/>
         <segue reference="TgU-ON-UTc"/>
+        <segue reference="g80-2p-wku"/>
+        <segue reference="eH8-oc-G9W"/>
+        <segue reference="OgS-eC-l9o"/>
         <segue reference="T0n-fg-bJC"/>
-        <segue reference="Cbe-BK-afe"/>
         <segue reference="765-rk-Vfn"/>
+        <segue reference="Cbe-BK-afe"/>
+        <segue reference="G1e-fu-sL2"/>
+        <segue reference="pDl-IO-OYw"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -601,7 +601,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 1) {
+    if (indexPath.row == 0) {
         
         if(self.userinfo.isAudit == 0){
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"如果亲通过了美玩达人申请，亲就可以选择自己的专属标签，出售自己的闲暇时间" preferredStyle:UIAlertControllerStyleAlert];
@@ -619,7 +619,7 @@
             [self performSegueWithIdentifier:@"setting" sender:self.userinfo];
         }
     }
-    if (indexPath.row == 2) {
+    if (indexPath.row == 1) {
         NSString *thesame = [NSString stringWithFormat:@"%ld",self.userinfo.userId];
         if ([thesame isEqualToString:@"100000"] || [thesame isEqualToString:@"100001"]) {
             [self performSegueWithIdentifier:@"mysetting" sender:nil];
@@ -633,31 +633,7 @@
         }
     }
 }
-//- (IBAction)delogin:(UIBarButtonItem *)sender {
-//    self.reloginView = [[UIView alloc]initWithFrame:CGRectMake(self.view.bounds.size.width-145, 55, 130, 40)];
-//    self.reloginView.backgroundColor = [UIColor grayColor];
-//    self.reloginView.layer.cornerRadius = 5;
-//    self.reloginView.layer.masksToBounds = YES;
-//    UIButton *opinitonBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 130, 40)];
-//    opinitonBtn.backgroundColor = [UIColor whiteColor];
-//    opinitonBtn.titleLabel.font = [UIFont systemFontOfSize:14.0f];
-//    [opinitonBtn addTarget:self action:@selector(touchOpinitonBtn) forControlEvents:UIControlEventTouchUpInside];
-//    UIImageView *opinitonIg = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 20, 20)];
-//    opinitonIg.image = [UIImage imageNamed:@"peiwan_close"];
-//    UILabel *opinitonLab = [[UILabel alloc]initWithFrame:CGRectMake(40, 10, 130, 20)];
-//    opinitonLab.text = @"退出登录";
-//    [opinitonBtn addSubview:opinitonIg];
-//    [opinitonBtn addSubview:opinitonLab];
-//    [self.reloginView addSubview:opinitonBtn];
-//    
-//    self.clearView = [[UIView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(removeView)];
-//    [self.clearView addGestureRecognizer:tap];
-//    
-//    [[ShowMessage mainWindow]addSubview:self.clearView];
-//    [[ShowMessage mainWindow]addSubview:self.reloginView];
-//    
-//}
+
 -(void)touchOpinitonBtn{
     //注销环信登录
     [[EaseMob sharedInstance].chatManager asyncLogoffWithUnbindDeviceToken:YES completion:^(NSDictionary *info, EMError *error) {
