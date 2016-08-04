@@ -626,6 +626,7 @@
 		98EFD3661D4AF19A002A1913 /* Myorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD3641D4AF19A002A1913 /* Myorder.m */; };
 		98EFD3671D4AF19A002A1913 /* Myorder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98EFD3651D4AF19A002A1913 /* Myorder.xib */; };
 		98F57EF01D4F409F001D3703 /* black2.png in Resources */ = {isa = PBXBuildFile; fileRef = 98F57EEF1D4F409F001D3703 /* black2.png */; };
+		C12454D4E5FAE708A007C06C /* libPods-MeiWan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E78385184BB25331F6F840D7 /* libPods-MeiWan.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -984,6 +985,7 @@
 		18F6D2C41B8FF42A00B1F0C3 /* MoveActionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoveActionViewCell.m; sourceTree = "<group>"; };
 		18F6D2C61B8FF46900B1F0C3 /* MyMoveActionTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyMoveActionTableViewController.h; sourceTree = "<group>"; };
 		18F6D2C71B8FF47300B1F0C3 /* MyMoveActionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMoveActionTableViewController.m; sourceTree = "<group>"; };
+		25FF59D3B455D924F82FC2BA /* Pods-MeiWan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeiWan.release.xcconfig"; path = "Pods/Target Support Files/Pods-MeiWan/Pods-MeiWan.release.xcconfig"; sourceTree = "<group>"; };
 		273139861D1286B200712E1F /* near2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "near2@2x.png"; sourceTree = "<group>"; };
 		273971C41D0045F300A3367C /* rankingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = rankingView.xib; sourceTree = "<group>"; };
 		273971C61D00461500A3367C /* rankingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = rankingView.xib; sourceTree = "<group>"; };
@@ -1720,6 +1722,8 @@
 		98EFD3641D4AF19A002A1913 /* Myorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Myorder.m; sourceTree = "<group>"; };
 		98EFD3651D4AF19A002A1913 /* Myorder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Myorder.xib; sourceTree = "<group>"; };
 		98F57EEF1D4F409F001D3703 /* black2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black2.png; sourceTree = "<group>"; };
+		D94EE7AF621BFE9480E8818D /* Pods-MeiWan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeiWan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MeiWan/Pods-MeiWan.debug.xcconfig"; sourceTree = "<group>"; };
+		E78385184BB25331F6F840D7 /* libPods-MeiWan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MeiWan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1756,6 +1760,7 @@
 				18CC8EC11BC3985B000281CE /* libstdc++.6.0.9.dylib in Frameworks */,
 				1852CC4E1BAA9E5A00393FC4 /* MAMapKit.framework in Frameworks */,
 				275874441CF53EF200B78F92 /* AMap.bundle in Frameworks */,
+				C12454D4E5FAE708A007C06C /* libPods-MeiWan.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2427,6 +2432,8 @@
 				18EF7A1F1B74B67F005A4F64 /* MeiWan */,
 				18EF7A391B74B67F005A4F64 /* MeiWanTests */,
 				18EF7A1E1B74B67F005A4F64 /* Products */,
+				45BCC003E365D0C4121A79F9 /* Pods */,
+				C633A52044CC997BE5466BFE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -4029,6 +4036,15 @@
 			name = "火星坐标转化";
 			sourceTree = "<group>";
 		};
+		45BCC003E365D0C4121A79F9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D94EE7AF621BFE9480E8818D /* Pods-MeiWan.debug.xcconfig */,
+				25FF59D3B455D924F82FC2BA /* Pods-MeiWan.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		98EFD3571D4AE81A002A1913 /* cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -4044,6 +4060,14 @@
 			name = cell;
 			sourceTree = "<group>";
 		};
+		C633A52044CC997BE5466BFE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E78385184BB25331F6F840D7 /* libPods-MeiWan.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -4051,9 +4075,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 18EF7A401B74B67F005A4F64 /* Build configuration list for PBXNativeTarget "MeiWan" */;
 			buildPhases = (
+				0D0E5B25C6714F006518B921 /* [CP] Check Pods Manifest.lock */,
 				18EF7A191B74B67F005A4F64 /* Sources */,
 				18EF7A1A1B74B67F005A4F64 /* Frameworks */,
 				18EF7A1B1B74B67F005A4F64 /* Resources */,
+				4511F21102CD28E470ECF08F /* [CP] Embed Pods Frameworks */,
+				E213090A7E4449CB1FB7156A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -4452,6 +4479,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0D0E5B25C6714F006518B921 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4511F21102CD28E470ECF08F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MeiWan/Pods-MeiWan-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E213090A7E4449CB1FB7156A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MeiWan/Pods-MeiWan-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		18EF7A191B74B67F005A4F64 /* Sources */ = {
@@ -4874,6 +4949,7 @@
 		};
 		18EF7A411B74B67F005A4F64 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D94EE7AF621BFE9480E8818D /* Pods-MeiWan.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -4928,6 +5004,7 @@
 		};
 		18EF7A421B74B67F005A4F64 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 25FF59D3B455D924F82FC2BA /* Pods-MeiWan.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
