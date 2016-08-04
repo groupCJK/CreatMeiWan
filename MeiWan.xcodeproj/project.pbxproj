@@ -634,6 +634,7 @@
 		98EFD3661D4AF19A002A1913 /* Myorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD3641D4AF19A002A1913 /* Myorder.m */; };
 		98EFD3671D4AF19A002A1913 /* Myorder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98EFD3651D4AF19A002A1913 /* Myorder.xib */; };
 		98F57EF01D4F409F001D3703 /* black2.png in Resources */ = {isa = PBXBuildFile; fileRef = 98F57EEF1D4F409F001D3703 /* black2.png */; };
+		98FCFC1B1D532DFA003939B7 /* LastGuildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98FCFC1A1D532DFA003939B7 /* LastGuildViewController.m */; };
 		C12454D4E5FAE708A007C06C /* libPods-MeiWan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E78385184BB25331F6F840D7 /* libPods-MeiWan.a */; };
 /* End PBXBuildFile section */
 
@@ -1746,6 +1747,8 @@
 		98EFD3641D4AF19A002A1913 /* Myorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Myorder.m; sourceTree = "<group>"; };
 		98EFD3651D4AF19A002A1913 /* Myorder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Myorder.xib; sourceTree = "<group>"; };
 		98F57EEF1D4F409F001D3703 /* black2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black2.png; sourceTree = "<group>"; };
+		98FCFC191D532DFA003939B7 /* LastGuildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LastGuildViewController.h; sourceTree = "<group>"; };
+		98FCFC1A1D532DFA003939B7 /* LastGuildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LastGuildViewController.m; sourceTree = "<group>"; };
 		D94EE7AF621BFE9480E8818D /* Pods-MeiWan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeiWan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MeiWan/Pods-MeiWan.debug.xcconfig"; sourceTree = "<group>"; };
 		E78385184BB25331F6F840D7 /* libPods-MeiWan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MeiWan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -4004,6 +4007,8 @@
 			children = (
 				2B2D085D1D530CBF00139467 /* GuildMembersViewController.h */,
 				2B2D085E1D530CBF00139467 /* GuildMembersViewController.m */,
+				98FCFC191D532DFA003939B7 /* LastGuildViewController.h */,
+				98FCFC1A1D532DFA003939B7 /* LastGuildViewController.m */,
 			);
 			name = "公会成员";
 			sourceTree = "<group>";
@@ -4868,6 +4873,7 @@
 				18824A4A1B85D5920063EC03 /* SBJsonParser.m in Sources */,
 				18824A501B85D5920063EC03 /* SBJsonStreamWriterAccumulator.m in Sources */,
 				18F1CC0A1B948C51003EF78A /* JiNode.swift in Sources */,
+				98FCFC1B1D532DFA003939B7 /* LastGuildViewController.m in Sources */,
 				18C8C7AF1B760C2A00BC8EEA /* GetinViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
