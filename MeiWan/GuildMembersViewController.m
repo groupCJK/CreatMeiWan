@@ -7,6 +7,7 @@
 //
 
 #import "GuildMembersViewController.h"
+#import "LastGuildViewController.h"
 
 @interface GuildMembersViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -90,6 +91,10 @@
         NSLog(@"列表二");
         NSLog(@"%ld",(long)indexPath.row);
     }else{
+        LastGuildViewController *lastGuildVC = [[LastGuildViewController alloc] init];
+        lastGuildVC.view.backgroundColor = [UIColor whiteColor];
+        lastGuildVC.title = @"子工会";
+        [self.navigationController pushViewController:lastGuildVC animated:YES];
         NSLog(@"列表二");
         NSLog(@"%ld",(long)indexPath.row);
     }

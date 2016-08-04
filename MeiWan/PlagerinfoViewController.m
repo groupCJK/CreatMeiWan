@@ -43,7 +43,6 @@
 @property (strong, nonatomic) UIView *btn;
 @property (strong, nonatomic) UIView *tip;
 @property (strong, nonatomic) UIView *tipclear;
-//@property (nonatomic, strong) NSString* isFriend;
 @property (nonatomic, strong) NSDictionary *stateDatas;
 @property (nonatomic, strong) UserDynamicTableViewCell *dynamicCell;
 @property (nonatomic, strong) NSArray *arr1;
@@ -69,16 +68,6 @@
     }else{
         [self buttonView];
     }
-    
-//    if (self.friendList == 1) {
-//        NSUserDefaults *defaultslist = [NSUserDefaults standardUserDefaults];
-//        self.playerInfo = [defaultslist objectForKey:@"playerinfofrist"];
-//        [defaultslist synchronize];
-//    }else{
-//        NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
-//        NSDictionary *playerinfo = self.playerInfo;
-//        [defaults setObject:playerinfo forKey:@"playerinfo"];
-//    }
 
     NSString *session= [PersistenceManager getLoginSession];
     [UserConnector findPeiwanById:session userId:[self.playerInfo objectForKey:@"id"] receiver:^(NSData *data,NSError *error){
@@ -97,13 +86,7 @@
                 
             }
         }
-        
-        //NSLog(@"%@",self.playerInfo);
     }];
-    
-//    NSUserDefaults *defaults2 =[NSUserDefaults standardUserDefaults];
-//    NSArray *states = self.arr1;
-//    [defaults2 setObject:states forKey:@"states"];
     
     [UserConnector findStates:[PersistenceManager getLoginSession]userId:[self.playerInfo objectForKey:@"id"] offset:[NSNumber numberWithInt:0] limit:[NSNumber numberWithInt:1] receiver:^(NSData *data,NSError *error){
         if (error) {
@@ -224,17 +207,6 @@
     }
 }
 
--(void)showInvite{
-    [self performSegueWithIdentifier:@"invite" sender:self.playerInfo];
-}
--(void)showState{
-    [self performSegueWithIdentifier:@"peiwanstate" sender:self.playerInfo];
-}
-- (void)showpicture{
-    [self performSegueWithIdentifier:@"picture" sender:self.playerInfo];
-}
-
-
 - (UITableView *)playerTableView{
     if (!_playerTableView) {
         _playerTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height-120) style:UITableViewStylePlain];
@@ -320,6 +292,17 @@
     return _orderButtonView;
 }
 
+#pragma did Tip segu传参跳转判断
+-(void)showInvite{
+    [self performSegueWithIdentifier:@"invite" sender:self.playerInfo];
+}
+-(void)showState{
+    [self performSegueWithIdentifier:@"peiwanstate" sender:self.playerInfo];
+}
+- (void)showpicture{
+    [self performSegueWithIdentifier:@"picture" sender:self.playerInfo];
+}
+
 - (void)didTapInivtButton:(UIButton *)sender{
     [ self performSegueWithIdentifier:@"invite" sender:self.playerInfo];
 }
@@ -329,9 +312,8 @@
 
     NSString *product = [NSString stringWithFormat:@"%@%ld",
                          [setting getRongLianYun],[[self.playerInfo objectForKey:@"id"]longValue]];
-    //
+    
     ChatViewController *messageCtr = [[ChatViewController alloc] initWithConversationChatter:product conversationType:eConversationTypeChat];
-    //    messageCtr.title = userid;
     messageCtr.title = [NSString stringWithFormat:@"%@",
                         [self.playerInfo objectForKey:@"nickname"]];
     [self.navigationController pushViewController:messageCtr animated:YES];
@@ -423,54 +405,6 @@
     tap.numberOfTapsRequired = 1;
     [lab1 addGestureRecognizer:tap];
     [self.moreVi addSubview:lab1];
-    
-//    UILabel *lab2 = [[UILabel alloc]initWithFrame:CGRectMake(0, 31, 60, 30)];
-//    lab2.textColor = [UIColor whiteColor];
-//    lab2.backgroundColor = [CorlorTransform colorWithHexString:@"#3f90a4"];
-//
-//    lab2.font = [UIFont systemFontOfSize:12.0f];
-//    if (self.isFriend) {
-//        if ([self.isFriend isEqualToString:@"no"]) {
-//            lab2.text = @"添加好友";
-//        }else{
-//            lab2.text = @"删除好友";
-//        }
-//    }else{
-//        NSString *sesstion = [PersistenceManager getLoginSession];
-//        [UserConnector findMyFriends:sesstion receiver:^(NSData *data,NSError *error){
-//            if (error) {
-//                [ShowMessage showMessage:@"服务器未响应"];
-//            }else{
-//                SBJsonParser*parser=[[SBJsonParser alloc]init];
-//                NSMutableDictionary *json=[parser objectWithData:data];
-//                int status = [[json objectForKey:@"status"]intValue];
-//                if (status == 0) {
-//                    NSMutableArray *myFriendsArray = [json objectForKey:@"entity"];
-//                    lab2.text = @"添加好友";
-//                    self.isFriend = @"no";
-//                    for (int i = 0; i < myFriendsArray.count; i++) {
-//                        long friendId = [[myFriendsArray[i] objectForKey:@"id"]longValue];
-//                        long playerId = [[self.playerInfo objectForKey:@"id"]longValue];
-//                        if (friendId == playerId) {
-//                            lab2.text = @"删除好友";
-//                            self.isFriend = @"yes";
-//                        }
-//                    }
-//                }else if(status == 1){
-//                    [self jumpout];
-//                }else{
-//                    
-//                }
-//            }
-//            // NSLog(@"%@",myFriendsArray);
-//        }];
-//    }
-//    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(taplab2)];
-//    tap.numberOfTapsRequired = 1;
-//    lab2.userInteractionEnabled = YES;
-//    lab2.textAlignment = NSTextAlignmentCenter;
-//    [lab2 addGestureRecognizer:tap1];
-//    [self.moreVi addSubview:lab2];
 
     UILabel * label2 = [[UILabel alloc]initWithFrame:CGRectMake(0, 31, 60, 30)];
     label2.text = @"拉黑";
@@ -653,71 +587,13 @@
         }
     }];
 }
-//加为好友
--(void)taplab2{
-//    [self.btn removeFromSuperview];
-//    [self.moreVi removeFromSuperview];
-//    NSString *title;
-//    NSString *nickname = [self.playerInfo objectForKey:@"nickname"];
-//    if ([self.isFriend isEqualToString:@"yes"]) {
-//        title = [NSString stringWithFormat:@"您将删除好友%@",nickname];
-//    } else {
-//        title = [NSString stringWithFormat:@"您将添加%@为好友",nickname];
-//    }
-//    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:title message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
-//    [alert show];
-}
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-//    if (buttonIndex == 1) {
-//        if ([self.isFriend isEqualToString:@"yes"]) {
-//            NSString *sesstion = [PersistenceManager getLoginSession];
-//            [UserConnector deleteFriend:sesstion friendId:[self.playerInfo objectForKey:@"id"] receiver:^(NSData *data,NSError *error){
-//                if (error) {
-//                    [ShowMessage showMessage:@"服务器未响应"];
-//                }else{
-//                    SBJsonParser*parser=[[SBJsonParser alloc]init];
-//                    NSMutableDictionary *json=[parser objectWithData:data];
-//                    //NSLog(@"%@",json);
-//                    int status = [[json objectForKey:@"status"]intValue];
-//                    if (status == 0) {
-//                        self.isFriend = @"no";
-//                    }else if (status == 1){
-//                        [self jumpout];
-//                    }else{
-//                        
-//                    }
-//                }
-//            }];
-//        }else{
-//            NSString *sesstion = [PersistenceManager getLoginSession];
-//            [UserConnector addFriend:sesstion friendId:[self.playerInfo objectForKey:@"id"] receiver:^(NSData *data,NSError *error){
-//                if (error) {
-//                    [ShowMessage showMessage:@"服务器未响应"];
-//                }else{
-//                    SBJsonParser*parser=[[SBJsonParser alloc]init];
-//                    NSMutableDictionary *json=[parser objectWithData:data];
-//                    //NSLog(@"%@",json);
-//                    int status = [[json objectForKey:@"status"]intValue];
-//                    if (status == 0) {
-//                        self.isFriend = @"yes";
-//                    }else if (status == 1){
-//                        [self jumpout];
-//                    }else{
-//                        
-//                    }
-//                }
-//            }];
-//            
-//        }
-//        
-//    }
-}
 
 //取消举报和加为好友；
 -(void)remove{
     [self.btn removeFromSuperview];
     [self.moreVi removeFromSuperview];
 }
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
     [self remove];
