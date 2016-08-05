@@ -8,9 +8,11 @@
 
 #import "PeiwanHeadViewController.h"
 #import "UIImageView+WebCache.h"
+#import "creatAlbum.h"
 @interface PeiwanHeadViewController ()<UIScrollViewDelegate>
 @property (strong, nonatomic) UIImageView *imageView;
 @property (strong, nonatomic) UIScrollView *scrollerview;
+
 @end
 
 @implementation PeiwanHeadViewController
@@ -26,7 +28,7 @@
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     NSURL *headUrl = [NSURL URLWithString:[self.peiwanInfoDic objectForKey:@"headUrl"]];
     [self.imageView setImageWithURL:headUrl placeholderImage:nil];
-
+    self.imageView.userInteractionEnabled = YES;
     //放大倍数
     self.scrollerview.maximumZoomScale=3.0;
     self.scrollerview.minimumZoomScale=1.0;
@@ -66,6 +68,7 @@
 {
     [[self navigationController] setNavigationBarHidden:![[self navigationController] isNavigationBarHidden] animated:YES];
 }
+
 #pragma mark -UIScrollViewDelegate
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {

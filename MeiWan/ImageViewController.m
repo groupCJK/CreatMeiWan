@@ -9,6 +9,7 @@
 #import "ImageViewController.h"
 #import "UIImageView+WebCache.h"
 #import "ShowMessage.h"
+#import "creatAlbum.h"
 @interface ImageViewController ()<UIScrollViewDelegate>
 @property (nonatomic,strong) UIScrollView *sv;
 @property (nonatomic,strong) UILabel *countLable;
@@ -52,6 +53,10 @@
         im.tag = i+10;
         NSURL *url = [NSURL URLWithString:self.moveActionframe.moveActionModel.images[i]];
         [im setImageWithURL:url];
+        UILongPressGestureRecognizer * longpress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPressGerture:)];
+        im.userInteractionEnabled = YES;
+        longpress.minimumPressDuration = 0.8;
+        [im addGestureRecognizer:longpress];
         [scv addSubview:im];
         [self.sv addSubview:scv];
     }
@@ -86,4 +91,35 @@
     [super viewWillDisappear:YES];
     [self.countLable removeFromSuperview];
 }
+
+//长按
+- (void)longPressGerture:(UILongPressGestureRecognizer *)gesture
+{
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+
+        UIImageView * imageview = (UIImageView *)[gesture view];
+
+        [self showMessageAlert:@"保存图片" image:imageview.image];
+
+    }else {
+
+    }
+}
+/**提示框*/
+- (void)showMessageAlert:(NSString *)message image:(UIImage *)image
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action){
+
+    }];
+    UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"保存到相册" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+
+        [creatAlbum createAlbumSaveImage:image];
+    }];
+
+    [alertController addAction:cancelAction];
+    [alertController addAction:sureAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
 @end
