@@ -576,6 +576,7 @@
 		27F4F7911CF5F09F00A376E0 /* AskForPlayWithViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E911BB1B7D92C5002BB75F /* AskForPlayWithViewController.m */; };
 		27F4F7921CF5F09F00A376E0 /* AccusationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188225271BA004CA004EBEEB /* AccusationViewController.m */; };
 		2B0C707D1D546F84001AB100 /* OrderLiseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B0C707C1D546F84001AB100 /* OrderLiseCell.m */; };
+		2B0C70821D547394001AB100 /* creatAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B0C70811D547394001AB100 /* creatAlbum.m */; };
 		2B2B56C71D473D170048AA20 /* PrepaidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B56C61D473D170048AA20 /* PrepaidViewController.m */; };
 		2B2D084F1D519E4D00139467 /* guildCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D084E1D519E4D00139467 /* guildCenterViewController.m */; };
 		2B2D08521D51F98E00139467 /* changeArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D08511D51F98E00139467 /* changeArray.m */; };
@@ -1656,6 +1657,8 @@
 		27E0A0C71CE1910A00D5FE31 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2B0C707B1D546F84001AB100 /* OrderLiseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderLiseCell.h; sourceTree = "<group>"; };
 		2B0C707C1D546F84001AB100 /* OrderLiseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderLiseCell.m; sourceTree = "<group>"; };
+		2B0C70801D547394001AB100 /* creatAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = creatAlbum.h; sourceTree = "<group>"; };
+		2B0C70811D547394001AB100 /* creatAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = creatAlbum.m; sourceTree = "<group>"; };
 		2B2B56C51D473D170048AA20 /* PrepaidViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrepaidViewController.h; sourceTree = "<group>"; };
 		2B2B56C61D473D170048AA20 /* PrepaidViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrepaidViewController.m; sourceTree = "<group>"; };
 		2B2D084D1D519E4D00139467 /* guildCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = guildCenterViewController.h; sourceTree = "<group>"; };
@@ -3942,6 +3945,15 @@
 			name = cell;
 			sourceTree = "<group>";
 		};
+		2B0C707F1D547374001AB100 /* 创建相册-保存图片至本地 */ = {
+			isa = PBXGroup;
+			children = (
+				2B0C70801D547394001AB100 /* creatAlbum.h */,
+				2B0C70811D547394001AB100 /* creatAlbum.m */,
+			);
+			name = "创建相册-保存图片至本地";
+			sourceTree = "<group>";
+		};
 		2B1B0AD11D4AF14B00F193A4 /* 粉丝 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3986,6 +3998,7 @@
 			children = (
 				2B2D085A1D530C8F00139467 /* QRCodeViewController.h */,
 				2B2D085B1D530C8F00139467 /* QRCodeViewController.m */,
+				2B0C707F1D547374001AB100 /* 创建相册-保存图片至本地 */,
 				2B2D09641D533CE600139467 /* 扫码 */,
 			);
 			name = "二维码";
@@ -4843,6 +4856,7 @@
 				18824A4D1B85D5920063EC03 /* SBJsonStreamParserAdapter.m in Sources */,
 				27587C2D1CF5861900B78F92 /* MBProgressHUD+Add.m in Sources */,
 				2B2D09631D532BC300139467 /* split.c in Sources */,
+				2B0C70821D547394001AB100 /* creatAlbum.m in Sources */,
 				279B86EE1CED93DF00EA2737 /* MYIntroductionPanel.m in Sources */,
 				18824A151B85CD980063EC03 /* FriendListTableViewCell.m in Sources */,
 				27587C4A1CF5861900B78F92 /* MKAnnotationView+EMWebCache.m in Sources */,
