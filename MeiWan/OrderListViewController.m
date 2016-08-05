@@ -7,8 +7,9 @@
 //
 
 #import "OrderListViewController.h"
+#import "OrderLiseCell.h"
 
-@interface OrderListViewController ()
+@interface OrderListViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
 
@@ -16,26 +17,32 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    UIImageView * imagevie = [[UIImageView alloc]initWithFrame:CGRectMake((124)/dtScreenHeight,((dtScreenWidth-220)/2)/dtScreenWidth,220/dtScreenHeight,220/dtScreenWidth)];
-    imagevie.backgroundColor = [UIColor redColor];
-    [self.view addSubview:imagevie];
+
+    [self init_UI];
+  
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)init_UI
+{
+    UITableView * tableview = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStylePlain];
+    tableview.dataSource = self;
+    tableview.delegate = self;
+    tableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    [self.view addSubview:tableview];
 }
+#pragma marl----
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    OrderLiseCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if (!cell) {
+        cell = [[OrderLiseCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    }
+    return cell;
 }
-*/
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 10;
+}
 
 @end

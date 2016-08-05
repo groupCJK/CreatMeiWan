@@ -575,6 +575,7 @@
 		27F4F7901CF5F09F00A376E0 /* MoveActionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1892E2731B82CAAD00DE39EC /* MoveActionViewController.m */; };
 		27F4F7911CF5F09F00A376E0 /* AskForPlayWithViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E911BB1B7D92C5002BB75F /* AskForPlayWithViewController.m */; };
 		27F4F7921CF5F09F00A376E0 /* AccusationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188225271BA004CA004EBEEB /* AccusationViewController.m */; };
+		2B0C707D1D546F84001AB100 /* OrderLiseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B0C707C1D546F84001AB100 /* OrderLiseCell.m */; };
 		2B2B56C71D473D170048AA20 /* PrepaidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B56C61D473D170048AA20 /* PrepaidViewController.m */; };
 		2B2D084F1D519E4D00139467 /* guildCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D084E1D519E4D00139467 /* guildCenterViewController.m */; };
 		2B2D08521D51F98E00139467 /* changeArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D08511D51F98E00139467 /* changeArray.m */; };
@@ -1653,6 +1654,8 @@
 		27D416031CFD8ADB00F4C7BA /* searchIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchIcon@2x.png"; sourceTree = "<group>"; };
 		27D416041CFD8ADB00F4C7BA /* searchIcon2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchIcon2@2x.png"; sourceTree = "<group>"; };
 		27E0A0C71CE1910A00D5FE31 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		2B0C707B1D546F84001AB100 /* OrderLiseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderLiseCell.h; sourceTree = "<group>"; };
+		2B0C707C1D546F84001AB100 /* OrderLiseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderLiseCell.m; sourceTree = "<group>"; };
 		2B2B56C51D473D170048AA20 /* PrepaidViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrepaidViewController.h; sourceTree = "<group>"; };
 		2B2B56C61D473D170048AA20 /* PrepaidViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrepaidViewController.m; sourceTree = "<group>"; };
 		2B2D084D1D519E4D00139467 /* guildCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = guildCenterViewController.h; sourceTree = "<group>"; };
@@ -3930,6 +3933,15 @@
 			name = Helper;
 			sourceTree = "<group>";
 		};
+		2B0C707E1D546F89001AB100 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				2B0C707B1D546F84001AB100 /* OrderLiseCell.h */,
+				2B0C707C1D546F84001AB100 /* OrderLiseCell.m */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
 		2B1B0AD11D4AF14B00F193A4 /* 粉丝 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4002,6 +4014,7 @@
 			children = (
 				2B2D08601D530CDC00139467 /* OrderListViewController.h */,
 				2B2D08611D530CDC00139467 /* OrderListViewController.m */,
+				2B0C707E1D546F89001AB100 /* cell */,
 			);
 			name = "订单一览";
 			sourceTree = "<group>";
@@ -4768,6 +4781,7 @@
 				18CC8EE41BC39CE1000281CE /* Response.swift in Sources */,
 				18824A4E1B85D5920063EC03 /* SBJsonStreamParserState.m in Sources */,
 				18CC8EE81BC39CE1000281CE /* Stream.swift in Sources */,
+				2B0C707D1D546F84001AB100 /* OrderLiseCell.m in Sources */,
 				18824A121B85CBC80063EC03 /* FriendListTableViewController.m in Sources */,
 				27587C451CF5861900B78F92 /* EMSDWebImageDecoder.m in Sources */,
 				27587C3C1CF5861900B78F92 /* MWGridViewController.m in Sources */,

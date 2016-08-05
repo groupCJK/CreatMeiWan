@@ -76,39 +76,13 @@
     }
 
 }
-//- (void)saveImageToPhotos:(UIImage*)savedImage
-//{
-//    
-//    UIImageWriteToSavedPhotosAlbum(savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
-//    
-//}
-//- (void)image: (UIImage *) image didFinishSavingWithError: (NSError *) error contextInfo: (void *) contextInfo
-//{
-//    if(error != NULL){
-//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"存储失败"
-//                                                       message:@"请打开 设置-隐私-照片 来进行设置"
-//                                                      delegate:nil
-//                                             cancelButtonTitle:@"确定"
-//                                             otherButtonTitles:nil, nil];
-//        [alert show];
-//    }else{
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"图片保存成功"
-//                                                        message:nil
-//                                                       delegate:self
-//                                              cancelButtonTitle:@"确定"
-//                                              otherButtonTitles:nil];
-//        [alert show];
-//    }
-//
-//}
+
 /**跳转扫码页面*/
 - (void)saoScanClick
 {
     scanViewController * san = [[scanViewController alloc]init];
     san.navigationItem.title = @"扫码";
     [self.navigationController pushViewController:san animated:YES];
-    
-//    // Do any additional setup after loading the view, typically from a nib.
 }
 /**提示框*/
 - (void)showMessageAlert:(NSString *)message image:(UIImage *)image
@@ -171,8 +145,10 @@
     [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAlbum usingBlock:listGroupBlock failureBlock:nil];
     
     [self saveToAlbumWithMetadata:nil imageData:UIImagePNGRepresentation(self.image) customAlbumName:@"美玩" completionBlock:^ {
-         [ShowMessage showMessage:@"保存成功"];
-         
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [ShowMessage showMessage:@"保存成功"];
+        });
+        
      }failureBlock:^(NSError *error){
          //处理添加失败的方法显示alert让它回到主线程执行，不然那个框框死活不肯弹出来
          dispatch_async(dispatch_get_main_queue(), ^{
