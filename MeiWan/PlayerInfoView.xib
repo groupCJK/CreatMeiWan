@@ -181,7 +181,7 @@
                                 </mask>
                             </variation>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="peiwan_location" translatesAutoresizingMaskIntoConstraints="NO" id="9AD-6J-FIL">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="juli" translatesAutoresizingMaskIntoConstraints="NO" id="9AD-6J-FIL">
                             <rect key="frame" x="288" y="27" width="12" height="12"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="12" id="7Zj-31-fBw"/>
@@ -437,7 +437,7 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
+        <image name="juli" width="20" height="20"/>
         <image name="peiwan_default_head.png" width="128" height="128"/>
-        <image name="peiwan_location" width="32" height="32"/>
     </resources>
 </document>

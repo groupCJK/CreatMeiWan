@@ -330,7 +330,7 @@
    didSelectAvatarMessageModel:(id<IMessageModel>)messageModel
 {
     NSString* from = messageModel.message.from;
-    NSString* to = messageModel.message.to;
+//    NSString* to = messageModel.message.to;
     NSDictionary* loginUser = [PersistenceManager getLoginUser];
     NSNumber* uid = [loginUser objectForKey:@"id"];
     NSString* chatId = [NSString stringWithFormat:@"%@",uid];
@@ -443,7 +443,6 @@
     else {
         [self resetEaseMessageHelpType];
         if ([self.navigationController.navigationBar respondsToSelector:@selector(setBarTintColor:)]) {
-//            [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(30, 167, 252, 1)];
         }
     }
     

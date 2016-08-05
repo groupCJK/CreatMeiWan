@@ -22,7 +22,7 @@
 #import "UIImageView+WebCache.h"
 #import "MBProgressHUD.h"
 #import "CorlorTransform.h"
-
+#import "RecordTableViewController.h"
 @interface guildCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong)UIView *createGuild;
@@ -98,7 +98,7 @@
             [self.navigationController pushViewController:guildBankListVC animated:YES];
         }break;
         case 4:{
-            CashManagementViewController *cashManageMentVC = [[CashManagementViewController alloc] init];
+            RecordTableViewController *cashManageMentVC = [[RecordTableViewController alloc] init];
             cashManageMentVC.title = @"提现管理";
             cashManageMentVC.view.backgroundColor = [UIColor whiteColor];
             [self.navigationController pushViewController:cashManageMentVC animated:YES];

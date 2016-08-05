@@ -122,7 +122,7 @@
     self.locationLabel = location;
     
     UIImageView *locationImage = [[UIImageView alloc] initWithFrame:CGRectMake(location.frame.origin.x-18, 7, 15, 15)];
-    locationImage.image = [UIImage imageNamed:@"peiwan_location"];
+    locationImage.image = [UIImage imageNamed:@"juli"];
     [self addSubview:locationImage];
     self.locationImage = locationImage;
 }

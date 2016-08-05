@@ -92,8 +92,12 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dRu-m2-ZvG">
                     <rect key="frame" x="0.0" y="547" width="320" height="20"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="peiwan_location.png" translatesAutoresizingMaskIntoConstraints="NO" id="My3-ui-5ii">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="juli" translatesAutoresizingMaskIntoConstraints="NO" id="My3-ui-5ii">
                             <rect key="frame" x="8" y="5" width="15" height="15"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="15" id="012-Iy-VYF"/>
+                                <constraint firstAttribute="width" constant="15" id="FBa-qj-xnx"/>
+                            </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oqg-wQ-FPt">
                             <rect key="frame" x="26" y="2" width="200" height="21"/>
@@ -155,7 +159,9 @@
                 <constraint firstItem="dvw-gl-uxK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="3" id="E6g-CT-5bY"/>
                 <constraint firstAttribute="trailing" secondItem="dRu-m2-ZvG" secondAttribute="trailing" id="Ho1-sr-weD"/>
                 <constraint firstItem="dvw-gl-uxK" firstAttribute="centerY" secondItem="Jwb-tO-5i8" secondAttribute="centerY" id="I1q-Oe-1V2"/>
+                <constraint firstItem="My3-ui-5ii" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="KkD-fN-jPT"/>
                 <constraint firstItem="Ujl-Kk-4zK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Mxp-2L-xM3"/>
+                <constraint firstAttribute="bottom" secondItem="My3-ui-5ii" secondAttribute="bottom" constant="1" id="NAy-uJ-x1Y"/>
                 <constraint firstItem="s6J-4a-DXu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="NNK-En-RcB"/>
                 <constraint firstItem="Ujl-Kk-4zK" firstAttribute="top" secondItem="s6J-4a-DXu" secondAttribute="bottom" id="Srh-A7-xXk"/>
                 <constraint firstItem="dvw-gl-uxK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="cNG-SS-on4"/>
@@ -202,7 +208,7 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
+        <image name="juli" width="20" height="20"/>
         <image name="peiwan_hot.png" width="64" height="64"/>
-        <image name="peiwan_location.png" width="32" height="32"/>
     </resources>
 </document>
