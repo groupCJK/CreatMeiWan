@@ -638,6 +638,10 @@
 		98EFD3661D4AF19A002A1913 /* Myorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD3641D4AF19A002A1913 /* Myorder.m */; };
 		98EFD3671D4AF19A002A1913 /* Myorder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98EFD3651D4AF19A002A1913 /* Myorder.xib */; };
 		98F57EF01D4F409F001D3703 /* black2.png in Resources */ = {isa = PBXBuildFile; fileRef = 98F57EEF1D4F409F001D3703 /* black2.png */; };
+		98F90AAD1D5436020098DE1B /* CAPSPageMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F90AAC1D5436020098DE1B /* CAPSPageMenu.m */; };
+		98F90AB01D5437360098DE1B /* MembersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F90AAF1D5437360098DE1B /* MembersViewController.m */; };
+		98F90AB31D54374E0098DE1B /* TalentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F90AB21D54374E0098DE1B /* TalentViewController.m */; };
+		98F90B0A1D5481140098DE1B /* LowerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F90B091D5481140098DE1B /* LowerViewController.m */; };
 		98FCFC1B1D532DFA003939B7 /* LastGuildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98FCFC1A1D532DFA003939B7 /* LastGuildViewController.m */; };
 		C12454D4E5FAE708A007C06C /* libPods-MeiWan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E78385184BB25331F6F840D7 /* libPods-MeiWan.a */; };
 /* End PBXBuildFile section */
@@ -1759,6 +1763,14 @@
 		98EFD3641D4AF19A002A1913 /* Myorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Myorder.m; sourceTree = "<group>"; };
 		98EFD3651D4AF19A002A1913 /* Myorder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Myorder.xib; sourceTree = "<group>"; };
 		98F57EEF1D4F409F001D3703 /* black2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black2.png; sourceTree = "<group>"; };
+		98F90AAB1D5436020098DE1B /* CAPSPageMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAPSPageMenu.h; sourceTree = "<group>"; };
+		98F90AAC1D5436020098DE1B /* CAPSPageMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAPSPageMenu.m; sourceTree = "<group>"; };
+		98F90AAE1D5437360098DE1B /* MembersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MembersViewController.h; sourceTree = "<group>"; };
+		98F90AAF1D5437360098DE1B /* MembersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MembersViewController.m; sourceTree = "<group>"; };
+		98F90AB11D54374E0098DE1B /* TalentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalentViewController.h; sourceTree = "<group>"; };
+		98F90AB21D54374E0098DE1B /* TalentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalentViewController.m; sourceTree = "<group>"; };
+		98F90B081D5481140098DE1B /* LowerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LowerViewController.h; sourceTree = "<group>"; };
+		98F90B091D5481140098DE1B /* LowerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LowerViewController.m; sourceTree = "<group>"; };
 		98FCFC191D532DFA003939B7 /* LastGuildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LastGuildViewController.h; sourceTree = "<group>"; };
 		98FCFC1A1D532DFA003939B7 /* LastGuildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LastGuildViewController.m; sourceTree = "<group>"; };
 		D94EE7AF621BFE9480E8818D /* Pods-MeiWan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeiWan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MeiWan/Pods-MeiWan.debug.xcconfig"; sourceTree = "<group>"; };
@@ -3910,6 +3922,8 @@
 		27E0A0C61CE1805100D5FE31 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				98F90AAB1D5436020098DE1B /* CAPSPageMenu.h */,
+				98F90AAC1D5436020098DE1B /* CAPSPageMenu.m */,
 				2BDAF79B1D2271FE008B05EA /* list_icon.png */,
 				27D415FC1CFD845200F4C7BA /* DTDefine.h */,
 				18C8C7B31B76240100BC8EEA /* CorlorTransform.h */,
@@ -4050,6 +4064,12 @@
 			children = (
 				2B2D085D1D530CBF00139467 /* GuildMembersViewController.h */,
 				2B2D085E1D530CBF00139467 /* GuildMembersViewController.m */,
+				98F90AAE1D5437360098DE1B /* MembersViewController.h */,
+				98F90AAF1D5437360098DE1B /* MembersViewController.m */,
+				98F90AB11D54374E0098DE1B /* TalentViewController.h */,
+				98F90AB21D54374E0098DE1B /* TalentViewController.m */,
+				98F90B081D5481140098DE1B /* LowerViewController.h */,
+				98F90B091D5481140098DE1B /* LowerViewController.m */,
 				98FCFC191D532DFA003939B7 /* LastGuildViewController.h */,
 				98FCFC1A1D532DFA003939B7 /* LastGuildViewController.m */,
 			);
@@ -4656,11 +4676,13 @@
 				18E57A131B7DE22700771063 /* AFURLResponseSerialization.m in Sources */,
 				27587C551CF5861900B78F92 /* PSTCollectionViewCell.m in Sources */,
 				27587C5C1CF5861900B78F92 /* PSTGridLayoutInfo.m in Sources */,
+				98F90AAD1D5436020098DE1B /* CAPSPageMenu.m in Sources */,
 				98EFD3661D4AF19A002A1913 /* Myorder.m in Sources */,
 				18E57A111B7DE22700771063 /* AFURLConnectionOperation.m in Sources */,
 				1883DA6F1B9A8ECC009F45A0 /* SettingPlayWithUIViewController.m in Sources */,
 				27587C341CF5861900B78F92 /* MJRefreshHeader.m in Sources */,
 				27587C331CF5861900B78F92 /* MJRefreshGifHeader.m in Sources */,
+				98F90AB31D54374E0098DE1B /* TalentViewController.m in Sources */,
 				27587C761CF5861A00B78F92 /* EaseConversationListViewController.m in Sources */,
 				27587C631CF5861900B78F92 /* EaseMessageHelper.m in Sources */,
 				27587C301CF5861900B78F92 /* MJRefreshConst.m in Sources */,
@@ -4779,6 +4801,7 @@
 				27587C2E1CF5861900B78F92 /* MBProgressHUD.m in Sources */,
 				18C3E26F1B783FED004B02BB /* RandNumber.m in Sources */,
 				27587C9C1CF5932E00B78F92 /* CustomMessageCell.m in Sources */,
+				98F90B0A1D5481140098DE1B /* LowerViewController.m in Sources */,
 				27587C461CF5861900B78F92 /* EMSDWebImageDownloader.m in Sources */,
 				27587C2F1CF5861900B78F92 /* MJRefreshComponent.m in Sources */,
 				27587C751CF5861A00B78F92 /* EaseEmotionManager.m in Sources */,
@@ -4850,6 +4873,7 @@
 				27587C641CF5861900B78F92 /* EaseSDKHelper.m in Sources */,
 				18CC8EE91BC39CE1000281CE /* Upload.swift in Sources */,
 				18824A491B85D5920063EC03 /* NSObject+SBJson.m in Sources */,
+				98F90AB01D5437360098DE1B /* MembersViewController.m in Sources */,
 				27587C7F1CF5861A00B78F92 /* EaseMessageTimeCell.m in Sources */,
 				185274E61B7F3C9300C5AC7C /* MyBurseViewController.m in Sources */,
 				27587C651CF5861A00B78F92 /* EaseConversationModel.m in Sources */,
