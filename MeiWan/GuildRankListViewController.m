@@ -7,8 +7,8 @@
 //
 
 #import "GuildRankListViewController.h"
-
-@interface GuildRankListViewController ()
+#import "GuildRankCell.h"
+@interface GuildRankListViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
 
@@ -16,22 +16,36 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     // Do any additional setup after loading the view.
+    [self init_UI];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)init_UI
+{
+    UITableView * tableview = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStylePlain];
+    tableview.dataSource = self;
+    tableview.delegate = self;
+    tableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    [self.view addSubview:tableview];
 }
+#pragma marl----
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    GuildRankCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if (!cell) {
+        cell = [[GuildRankCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    }
+    return cell;
 }
-*/
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 10;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
+}
 
 @end

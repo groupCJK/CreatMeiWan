@@ -577,6 +577,7 @@
 		27F4F7921CF5F09F00A376E0 /* AccusationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188225271BA004CA004EBEEB /* AccusationViewController.m */; };
 		2B0C707D1D546F84001AB100 /* OrderLiseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B0C707C1D546F84001AB100 /* OrderLiseCell.m */; };
 		2B0C70821D547394001AB100 /* creatAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B0C70811D547394001AB100 /* creatAlbum.m */; };
+		2B0C70861D5481D1001AB100 /* GuildRankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B0C70851D5481D1001AB100 /* GuildRankCell.m */; };
 		2B2B56C71D473D170048AA20 /* PrepaidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B56C61D473D170048AA20 /* PrepaidViewController.m */; };
 		2B2D084F1D519E4D00139467 /* guildCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D084E1D519E4D00139467 /* guildCenterViewController.m */; };
 		2B2D08521D51F98E00139467 /* changeArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D08511D51F98E00139467 /* changeArray.m */; };
@@ -1659,6 +1660,8 @@
 		2B0C707C1D546F84001AB100 /* OrderLiseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderLiseCell.m; sourceTree = "<group>"; };
 		2B0C70801D547394001AB100 /* creatAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = creatAlbum.h; sourceTree = "<group>"; };
 		2B0C70811D547394001AB100 /* creatAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = creatAlbum.m; sourceTree = "<group>"; };
+		2B0C70841D5481D1001AB100 /* GuildRankCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuildRankCell.h; sourceTree = "<group>"; };
+		2B0C70851D5481D1001AB100 /* GuildRankCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuildRankCell.m; sourceTree = "<group>"; };
 		2B2B56C51D473D170048AA20 /* PrepaidViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrepaidViewController.h; sourceTree = "<group>"; };
 		2B2B56C61D473D170048AA20 /* PrepaidViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrepaidViewController.m; sourceTree = "<group>"; };
 		2B2D084D1D519E4D00139467 /* guildCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = guildCenterViewController.h; sourceTree = "<group>"; };
@@ -3954,6 +3957,15 @@
 			name = "创建相册-保存图片至本地";
 			sourceTree = "<group>";
 		};
+		2B0C70831D5481B5001AB100 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				2B0C70841D5481D1001AB100 /* GuildRankCell.h */,
+				2B0C70851D5481D1001AB100 /* GuildRankCell.m */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
 		2B1B0AD11D4AF14B00F193A4 /* 粉丝 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4018,6 +4030,7 @@
 			children = (
 				2B2D08631D530CFC00139467 /* GuildRankListViewController.h */,
 				2B2D08641D530CFC00139467 /* GuildRankListViewController.m */,
+				2B0C70831D5481B5001AB100 /* cell */,
 			);
 			name = "公会排行榜";
 			sourceTree = "<group>";
@@ -4760,6 +4773,7 @@
 				2B5B7D2A1D3893C700CF5354 /* CommentTableViewCell.m in Sources */,
 				18F14BD11B8DE20000C74E37 /* PayInfo.m in Sources */,
 				18CC8EE51BC39CE1000281CE /* ResponseSerialization.swift in Sources */,
+				2B0C70861D5481D1001AB100 /* GuildRankCell.m in Sources */,
 				2BDFA9561D32416900E33681 /* firstPage_scrollViewCell.m in Sources */,
 				18841F2E1B8C390700E2728B /* NSString+NSHash.m in Sources */,
 				27587C2E1CF5861900B78F92 /* MBProgressHUD.m in Sources */,
