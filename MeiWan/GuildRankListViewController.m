@@ -23,19 +23,27 @@
 
 -(void)init_UI
 {
-    UITableView * tableview = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStylePlain];
+    UITableView * tableview = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStyleGrouped];
     tableview.dataSource = self;
     tableview.delegate = self;
-    tableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     [self.view addSubview:tableview];
 }
 #pragma marl----
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0.1;
+}
 
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.1;
+}
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GuildRankCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (!cell) {
         cell = [[GuildRankCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+         cell.selectionStyle=UITableViewCellSelectionStyleNone;
     }
     return cell;
 }
@@ -47,5 +55,8 @@
 {
     return 60;
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
 @end

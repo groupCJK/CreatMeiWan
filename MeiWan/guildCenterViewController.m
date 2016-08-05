@@ -149,9 +149,23 @@
         guildNick.frame = CGRectMake(guildHeadImage.frame.origin.y+guildHeadImage.frame.size.width+10,(100-nickSizeH)/3, nickSizeW, nickSizeH);
         [guildInfo addSubview:guildNick];
         
-        UILabel *experienceLabel = [[UILabel alloc] initWithFrame:CGRectMake(guildHeadImage.frame.origin.y+guildHeadImage.frame.size.width+10, guildNick.frame.origin.y+guildNick.frame.size.height+5, 60, 10)];
-        experienceLabel.backgroundColor = [UIColor blackColor];
+        
+        /**经验条*/
+        UILabel *experienceLabel = [[UILabel alloc] initWithFrame:CGRectMake(guildHeadImage.frame.origin.y+guildHeadImage.frame.size.width+10, guildNick.frame.origin.y+guildNick.frame.size.height+5, 60, 5)];
+        experienceLabel.backgroundColor = [CorlorTransform colorWithHexString:@"#708090"];
+        experienceLabel.layer.cornerRadius = 2;
+        experienceLabel.clipsToBounds = YES;
         [guildInfo addSubview:experienceLabel];
+        
+        CGFloat needExperence = 100;
+        CGFloat haveexperence = 50;
+        CGFloat baifenbi = haveexperence/needExperence;
+        
+        UILabel * colorLabel = [[UILabel alloc]initWithFrame:CGRectMake(experienceLabel.frame.origin.x, experienceLabel.frame.origin.y, experienceLabel.frame.size.width*baifenbi, experienceLabel.frame.size.height)];
+        colorLabel.backgroundColor = [CorlorTransform colorWithHexString:@"#76EE00"];
+        colorLabel.layer.cornerRadius = 2;
+        colorLabel.clipsToBounds = YES;
+        [guildInfo addSubview:colorLabel];
         
         UILabel *levelLabel = [[UILabel alloc] initWithFrame:CGRectMake(guildHeadImage.frame.origin.y+guildHeadImage.frame.size.width+10, experienceLabel.frame.origin.y+experienceLabel.frame.size.height+5, 80, 10)];
         levelLabel.text = @"(一级工会)";
