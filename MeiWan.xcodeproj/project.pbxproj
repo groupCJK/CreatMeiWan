@@ -592,6 +592,7 @@
 		2B2D09611D532BC300139467 /* qrspec.c in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D09561D532BC300139467 /* qrspec.c */; };
 		2B2D09621D532BC300139467 /* rscode.c in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D09581D532BC300139467 /* rscode.c */; };
 		2B2D09631D532BC300139467 /* split.c in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D095A1D532BC300139467 /* split.c */; };
+		2B2D09671D533CFB00139467 /* scanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D09661D533CFB00139467 /* scanViewController.m */; };
 		2B5805B21D2A386800721653 /* label1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805A91D2A386800721653 /* label1.png */; };
 		2B5805B31D2A386800721653 /* label2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805AA1D2A386800721653 /* label2.png */; };
 		2B5805B41D2A386800721653 /* label3.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805AB1D2A386800721653 /* label3.png */; };
@@ -1685,6 +1686,8 @@
 		2B2D09591D532BC300139467 /* rscode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rscode.h; sourceTree = "<group>"; };
 		2B2D095A1D532BC300139467 /* split.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = split.c; sourceTree = "<group>"; };
 		2B2D095B1D532BC300139467 /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
+		2B2D09651D533CFB00139467 /* scanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scanViewController.h; sourceTree = "<group>"; };
+		2B2D09661D533CFB00139467 /* scanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = scanViewController.m; sourceTree = "<group>"; };
 		2B5805A91D2A386800721653 /* label1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label1.png; sourceTree = "<group>"; };
 		2B5805AA1D2A386800721653 /* label2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label2.png; sourceTree = "<group>"; };
 		2B5805AB1D2A386800721653 /* label3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label3.png; sourceTree = "<group>"; };
@@ -3971,6 +3974,7 @@
 			children = (
 				2B2D085A1D530C8F00139467 /* QRCodeViewController.h */,
 				2B2D085B1D530C8F00139467 /* QRCodeViewController.m */,
+				2B2D09641D533CE600139467 /* 扫码 */,
 			);
 			name = "二维码";
 			sourceTree = "<group>";
@@ -4034,6 +4038,15 @@
 				2B2D095B1D532BC300139467 /* split.h */,
 			);
 			path = libqrencode;
+			sourceTree = "<group>";
+		};
+		2B2D09641D533CE600139467 /* 扫码 */ = {
+			isa = PBXGroup;
+			children = (
+				2B2D09651D533CFB00139467 /* scanViewController.h */,
+				2B2D09661D533CFB00139467 /* scanViewController.m */,
+			);
+			name = "扫码";
 			sourceTree = "<group>";
 		};
 		2B5805BB1D2A508100721653 /* animationVIew */ = {
@@ -4677,6 +4690,7 @@
 				2BDFA94D1D32404400E33681 /* UICollectionViewWaterfallLayout.m in Sources */,
 				04B138A61BA07EAF00AAD93F /* AliOrder.m in Sources */,
 				18F1CC081B948C51003EF78A /* Ji.swift in Sources */,
+				2B2D09671D533CFB00139467 /* scanViewController.m in Sources */,
 				27587C691CF5861A00B78F92 /* NSDateFormatter+Category.m in Sources */,
 				27587C5B1CF5861900B78F92 /* PSTCollectionViewUpdateItem.m in Sources */,
 				27587C521CF5861900B78F92 /* UIView+EMWebCacheOperation.m in Sources */,

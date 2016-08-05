@@ -17,6 +17,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    UIImageView * imagevie = [[UIImageView alloc]initWithFrame:CGRectMake((124)/dtScreenHeight,((dtScreenWidth-220)/2)/dtScreenWidth,220/dtScreenHeight,220/dtScreenWidth)];
+    imagevie.backgroundColor = [UIColor redColor];
+    [self.view addSubview:imagevie];
 }
 
 - (void)didReceiveMemoryWarning {
