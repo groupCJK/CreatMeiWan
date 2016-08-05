@@ -320,7 +320,7 @@
     view.backgroundColor = [UIColor whiteColor];
     
     UIButton * exit = [UIButton buttonWithType:UIButtonTypeCustom];
-    exit.frame = CGRectMake(20, 20, dtScreenWidth-40, 30);
+    exit.frame = CGRectMake(20, 20, dtScreenWidth-40, 44);
     exit.layer.cornerRadius = 5;
     exit.titleLabel.font = [UIFont systemFontOfSize:15.0f];
     exit.backgroundColor = [CorlorTransform colorWithHexString:@"#3f90a4"];
