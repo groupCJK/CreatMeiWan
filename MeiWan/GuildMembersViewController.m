@@ -13,7 +13,7 @@
 #import "LowerViewController.h"
 #import "CAPSPageMenu.h"
 
-@interface GuildMembersViewController ()
+@interface GuildMembersViewController ()<CAPSPageMenuDelegate>
 
 @property (nonatomic, strong)CAPSPageMenu *pageMenu;
 
@@ -51,10 +51,10 @@
                                  };
     
     _pageMenu = [[CAPSPageMenu alloc] initWithViewControllers:controllerArray frame:CGRectMake(0.0, dtNavBarDefaultHeight, self.view.frame.size.width, self.view.frame.size.height) options:parameters];
-//    _pageMenu.delegate = self;
+    _pageMenu.delegate = self;
     
     [self.view addSubview:_pageMenu.view];
-//    [self addChildViewController:_pageMenu];
+    [self addChildViewController:_pageMenu];
 
     // Do any additional setup after loading the view.
 }

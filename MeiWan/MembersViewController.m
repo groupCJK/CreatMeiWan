@@ -7,8 +7,11 @@
 //
 
 #import "MembersViewController.h"
+#import "LastGuildViewController.h"
 
-@interface MembersViewController ()
+@interface MembersViewController ()<UITableViewDataSource,UITableViewDelegate>
+
+@property (nonatomic, strong)UITableView *membersTableView;
 
 @end
 
@@ -16,8 +19,39 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor redColor];
+    [self membersTableView];
     // Do any additional setup after loading the view.
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 10;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    }
+    cell.textLabel.text = @"111";
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    LastGuildViewController * lastGuildVC = [[LastGuildViewController alloc] init];
+    lastGuildVC.title = @"子工会";
+    [self.navigationController pushViewController:lastGuildVC animated:YES];
+}
+
+- (UITableView *)membersTableView{
+    if (!_membersTableView) {
+        _membersTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -50, dtScreenWidth, dtScreenHeight) style:UITableViewStylePlain];
+        _membersTableView.dataSource = self;
+        _membersTableView.delegate = self;
+        [self.view addSubview:_membersTableView];
+    }
+    return _membersTableView;
 }
 
 - (void)didReceiveMemoryWarning {

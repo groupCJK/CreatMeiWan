@@ -38,14 +38,18 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
     LastGuildViewController * lastGuildVC = [[LastGuildViewController alloc] init];
     lastGuildVC.title = @"子工会";
     [self.navigationController pushViewController:lastGuildVC animated:YES];
+    
 }
 
 - (UITableView *)lowerTableView{
     if (!_lowerTableView) {
-        _lowerTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, dtScreenWidth, dtScreenHeight) style:UITableViewStylePlain];
+        _lowerTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -50, dtScreenWidth, dtScreenHeight) style:UITableViewStylePlain];
         _lowerTableView.dataSource = self;
         _lowerTableView.delegate = self;
         [self.view addSubview:_lowerTableView];

@@ -102,7 +102,7 @@
 //工会
 - (UIView *)lastGuildCenter{
     if (!_lastGuildCenter) {
-        _lastGuildCenter = [[UIView alloc] initWithFrame:CGRectMake(0, 0, dtScreenWidth, 207)];
+        _lastGuildCenter = [[UIView alloc] initWithFrame:CGRectMake(0, dtNavBarDefaultHeight, dtScreenWidth, 207)];
         _lastGuildCenter.backgroundColor = [UIColor grayColor];
         [self.view addSubview:_lastGuildCenter];
         
