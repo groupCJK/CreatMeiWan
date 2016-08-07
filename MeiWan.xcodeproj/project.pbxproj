@@ -630,6 +630,7 @@
 		2BF43CEA1D56D93E00C5B6C6 /* subGuildCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF43CE91D56D93E00C5B6C6 /* subGuildCell.m */; };
 		987E7F811D4EE79C00613C6F /* UserInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 987E7F801D4EE79C00613C6F /* UserInfoTableViewCell.m */; };
 		987E7F831D4EE7B900613C6F /* black.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 987E7F821D4EE7B900613C6F /* black.jpg */; };
+		98BB8B811D570FCB001C79A4 /* GreatGuildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98BB8B801D570FCB001C79A4 /* GreatGuildViewController.m */; };
 		98EFD3531D4AE816002A1913 /* FocusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD3501D4AE816002A1913 /* FocusViewController.m */; };
 		98EFD3541D4AE816002A1913 /* FocusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD3501D4AE816002A1913 /* FocusViewController.m */; };
 		98EFD3551D4AE816002A1913 /* FansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD3521D4AE816002A1913 /* FansViewController.m */; };
@@ -1755,6 +1756,8 @@
 		987E7F7F1D4EE79C00613C6F /* UserInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoTableViewCell.h; sourceTree = "<group>"; };
 		987E7F801D4EE79C00613C6F /* UserInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoTableViewCell.m; sourceTree = "<group>"; };
 		987E7F821D4EE7B900613C6F /* black.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = black.jpg; sourceTree = "<group>"; };
+		98BB8B7F1D570FCB001C79A4 /* GreatGuildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GreatGuildViewController.h; sourceTree = "<group>"; };
+		98BB8B801D570FCB001C79A4 /* GreatGuildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GreatGuildViewController.m; sourceTree = "<group>"; };
 		98EFD34F1D4AE816002A1913 /* FocusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FocusViewController.h; sourceTree = "<group>"; };
 		98EFD3501D4AE816002A1913 /* FocusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusViewController.m; sourceTree = "<group>"; };
 		98EFD3511D4AE816002A1913 /* FansViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FansViewController.h; sourceTree = "<group>"; };
@@ -3904,6 +3907,8 @@
 				183D53411B871C6900500663 /* UserInfoViewController.m */,
 				2B2D084D1D519E4D00139467 /* guildCenterViewController.h */,
 				2B2D084E1D519E4D00139467 /* guildCenterViewController.m */,
+				98BB8B7F1D570FCB001C79A4 /* GreatGuildViewController.h */,
+				98BB8B801D570FCB001C79A4 /* GreatGuildViewController.m */,
 				2B2D09461D5321B100139467 /* gonghui.png */,
 				2B2D08531D530C0E00139467 /* 公会中心 */,
 				2B1B0AD11D4AF14B00F193A4 /* 粉丝 */,
@@ -4780,6 +4785,7 @@
 				27587C411CF5861900B78F92 /* MWZoomingScrollView.m in Sources */,
 				182B2B841B78CC1800A41F2C /* PlayerInfoView.m in Sources */,
 				2BF43CEA1D56D93E00C5B6C6 /* subGuildCell.m in Sources */,
+				98BB8B811D570FCB001C79A4 /* GreatGuildViewController.m in Sources */,
 				27587C3B1CF5861900B78F92 /* MWGridCell.m in Sources */,
 				27587C5E1CF5861900B78F92 /* PSTGridLayoutRow.m in Sources */,
 				04B138AA1BA07EAF00AAD93F /* MD5DataSigner.m in Sources */,

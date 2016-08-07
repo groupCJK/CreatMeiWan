@@ -46,6 +46,8 @@
         self.userStates = [userInfo objectForKey:@"userStates"];
         self.userTags = [userInfo objectForKey:@"userTags"];
         self.userTimeTags = [userInfo objectForKey:@"userTimeTags"];
+        self.hasUnion = [[userInfo objectForKey:@"hasUnion"] doubleValue];
+        self.canCreateUnion = [[userInfo objectForKey:@"canCreateUnion"] doubleValue];
 }
     
     return self;

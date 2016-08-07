@@ -12,6 +12,7 @@
 #import "OrderListViewController.h"
 #import "GuildRankListViewController.h"
 #import "CashManagementViewController.h"
+#import "GreatGuildViewController.h"
 
 #import "UserInfo.h"
 #import "Meiwan-Swift.h"
@@ -33,6 +34,8 @@
 
 @property (nonatomic, strong)NSArray *dataSource;
 
+@property (nonatomic, strong)NSDictionary *userInfoDic;
+
 @property (nonatomic, strong)UserInfo *userInfo;
 
 @end
@@ -41,13 +44,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self createGuild];
     
 //    [self guildCenter];
+    self.userInfoDic = [PersistenceManager getLoginUser];
     
-    [self loadDatasource];
+    self.userInfo = [[UserInfo alloc]initWithDictionary: [PersistenceManager getLoginUser]];
     
-    self.guildCenterTableView.tableHeaderView = self.guildCenter;
+    if (self.userInfo.hasUnion == 1) {
+        [self loadDatasource];
+        self.guildCenterTableView.tableHeaderView = self.guildCenter;
+    }else{
+        [self createGuild];
+    }
+    
     // Do any additional setup after loading the view.
 }
 
@@ -224,7 +233,9 @@
         createGuildButton.layer.borderColor = [[UIColor redColor] CGColor];;
         createGuildButton.layer.borderWidth = 2.0f;
         [createGuildButton.layer setMasksToBounds:YES];
+
         [createGuildButton addTarget:self action:@selector(didTipcreateGuild:) forControlEvents:UIControlEventTouchUpInside];
+
         [_createGuild addSubview:createGuildButton];
         
         UITextView *textview = [[UITextView alloc] initWithFrame:CGRectMake(0, createGuildButton.frame.origin.y+createGuildButton.frame.size.height+20, dtScreenWidth, 200)];
@@ -252,6 +263,14 @@
 
 - (void)didTipcreateGuild:(UIButton *)sender{
     NSLog(@"创建工会");
+    if (self.userInfo.canCreateUnion == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你没有创建工会的资格，充值两百元获得创建工会的资格" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+    }else{
+        GreatGuildViewController *greatGuild = [[GreatGuildViewController alloc] init];
+        greatGuild.title = @"创建工会";
+        [self.navigationController pushViewController:greatGuild animated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
