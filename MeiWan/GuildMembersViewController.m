@@ -11,11 +11,8 @@
 #import "TalentViewController.h"
 #import "LastGuildViewController.h"
 #import "LowerViewController.h"
-#import "CAPSPageMenu.h"
 
-@interface GuildMembersViewController ()<CAPSPageMenuDelegate>
-
-@property (nonatomic, strong)CAPSPageMenu *pageMenu;
+@interface GuildMembersViewController ()
 
 @end
 
@@ -23,56 +20,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSMutableArray *controllerArray = [NSMutableArray array];
-
-    MembersViewController *membersPayViewController=[MembersViewController new];
-    membersPayViewController.title=@"成员";
-    
-    TalentViewController *talentViewController = [[TalentViewController alloc] init];
-    talentViewController.title = @"达人";
-    
-    LowerViewController *lastGuildViewController = [[LowerViewController alloc] init];
-    lastGuildViewController.title = @"子工会";
-    
-    [controllerArray addObject:membersPayViewController];
-    [controllerArray addObject:talentViewController];
-    [controllerArray addObject:lastGuildViewController];
-    
-    NSDictionary *parameters = @{CAPSPageMenuOptionMenuItemWidth:@(dtScreenWidth/3),
-                                 CAPSPageMenuOptionMenuMargin:@(0),
-                                 CAPSPageMenuOptionUseMenuLikeSegmentedControl: @(NO),
-                                 
-                                 CAPSPageMenuOptionSelectionIndicatorColor:[UIColor blackColor],
-                                 CAPSPageMenuOptionScrollMenuBackgroundColor:[UIColor whiteColor],
-                                 CAPSPageMenuOptionMenuItemSeparatorRoundEdges:@(YES),
-                                 CAPSPageMenuOptionSelectedMenuItemLabelColor:[UIColor blackColor],
-                                 CAPSPageMenuOptionSelectionIndicatorColor: [UIColor whiteColor],
-                                 CAPSPageMenuOptionBottomMenuHairlineColor: [UIColor grayColor],
-                                 };
-    
-    _pageMenu = [[CAPSPageMenu alloc] initWithViewControllers:controllerArray frame:CGRectMake(0.0, dtNavBarDefaultHeight, self.view.frame.size.width, self.view.frame.size.height) options:parameters];
-    _pageMenu.delegate = self;
-    
-    [self.view addSubview:_pageMenu.view];
-    [self addChildViewController:_pageMenu];
-
-    // Do any additional setup after loading the view.
-}
-
-- (void)didTapGoToLeft {
-    NSInteger currentIndex = self.pageMenu.currentPageIndex;
-    
-    if (currentIndex > 0) {
-        [_pageMenu moveToPage:currentIndex - 1];
-    }
-}
-
-- (void)didTapGoToRight {
-    NSInteger currentIndex = self.pageMenu.currentPageIndex;
-    
-    if (currentIndex < self.pageMenu.controllerArray.count) {
-        [self.pageMenu moveToPage:currentIndex + 1];
-    }
 }
 
 - (void)didReceiveMemoryWarning {

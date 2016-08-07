@@ -8,6 +8,7 @@
 
 #import "MembersViewController.h"
 #import "LastGuildViewController.h"
+#import "MembersTableViewCell.h"
 
 @interface MembersViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -28,13 +29,17 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    MembersTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        cell = [[MembersTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
     cell.textLabel.text = @"111";
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 60;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -46,7 +51,7 @@
 
 - (UITableView *)membersTableView{
     if (!_membersTableView) {
-        _membersTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -50, dtScreenWidth, dtScreenHeight) style:UITableViewStylePlain];
+        _membersTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, dtScreenWidth, dtScreenHeight) style:UITableViewStylePlain];
         _membersTableView.dataSource = self;
         _membersTableView.delegate = self;
         [self.view addSubview:_membersTableView];
