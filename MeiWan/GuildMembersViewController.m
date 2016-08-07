@@ -49,6 +49,7 @@
     scrollview.contentSize = CGSizeMake(dtScreenWidth*3, dtScreenHeight-108);
     scrollview.pagingEnabled = YES;
     scrollview.delegate = self;
+    
     [self.view addSubview:scrollview];
     
     guildMemberTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, dtScreenWidth, dtScreenHeight-108) style:UITableViewStylePlain];
@@ -79,9 +80,13 @@
     lineView.frame = CGRectMake(dtScreenWidth/3*integer, 107, dtScreenWidth/3, 1);
     [UIView commitAnimations];
 }
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    [self viewAnimation:scrollView.contentOffset.x/dtScreenWidth];
+    if ([scrollView isKindOfClass:[UITableView class]]) {
+        
+    } else {
+        [self viewAnimation:scrollView.contentOffset.x/dtScreenWidth];
+    }
 }
 
 #pragma mark === tableview delegate datasource
