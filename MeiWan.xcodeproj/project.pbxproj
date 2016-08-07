@@ -625,6 +625,9 @@
 		2BE236BB1D508F6600D7A859 /* WGS84TOGCJ02.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE236BA1D508F6600D7A859 /* WGS84TOGCJ02.m */; };
 		2BE25BF81D2B53A400D2AEAF /* animationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE25BF71D2B53A400D2AEAF /* animationCell.m */; };
 		2BE5E2661D1A40790031361C /* HotCountCellChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5E2651D1A40790031361C /* HotCountCellChange.m */; };
+		2BF43CE41D56D8F800C5B6C6 /* guildMementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF43CE31D56D8F800C5B6C6 /* guildMementCell.m */; };
+		2BF43CE71D56D92C00C5B6C6 /* daRenCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF43CE61D56D92C00C5B6C6 /* daRenCell.m */; };
+		2BF43CEA1D56D93E00C5B6C6 /* subGuildCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF43CE91D56D93E00C5B6C6 /* subGuildCell.m */; };
 		987E7F811D4EE79C00613C6F /* UserInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 987E7F801D4EE79C00613C6F /* UserInfoTableViewCell.m */; };
 		987E7F831D4EE7B900613C6F /* black.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 987E7F821D4EE7B900613C6F /* black.jpg */; };
 		98EFD3531D4AE816002A1913 /* FocusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD3501D4AE816002A1913 /* FocusViewController.m */; };
@@ -638,11 +641,6 @@
 		98EFD3661D4AF19A002A1913 /* Myorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 98EFD3641D4AF19A002A1913 /* Myorder.m */; };
 		98EFD3671D4AF19A002A1913 /* Myorder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98EFD3651D4AF19A002A1913 /* Myorder.xib */; };
 		98F57EF01D4F409F001D3703 /* black2.png in Resources */ = {isa = PBXBuildFile; fileRef = 98F57EEF1D4F409F001D3703 /* black2.png */; };
-		98F90AB01D5437360098DE1B /* MembersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F90AAF1D5437360098DE1B /* MembersViewController.m */; };
-		98F90AB31D54374E0098DE1B /* TalentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F90AB21D54374E0098DE1B /* TalentViewController.m */; };
-		98F90B0A1D5481140098DE1B /* LowerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F90B091D5481140098DE1B /* LowerViewController.m */; };
-		98F90B0E1D548FC10098DE1B /* MembersTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F90B0D1D548FC10098DE1B /* MembersTableViewCell.m */; };
-		98FCFC1B1D532DFA003939B7 /* LastGuildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98FCFC1A1D532DFA003939B7 /* LastGuildViewController.m */; };
 		C12454D4E5FAE708A007C06C /* libPods-MeiWan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E78385184BB25331F6F840D7 /* libPods-MeiWan.a */; };
 /* End PBXBuildFile section */
 
@@ -1748,6 +1746,12 @@
 		2BE25BF71D2B53A400D2AEAF /* animationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = animationCell.m; path = ../animationCell.m; sourceTree = "<group>"; };
 		2BE5E2641D1A40790031361C /* HotCountCellChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotCountCellChange.h; sourceTree = "<group>"; };
 		2BE5E2651D1A40790031361C /* HotCountCellChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotCountCellChange.m; sourceTree = "<group>"; };
+		2BF43CE21D56D8F800C5B6C6 /* guildMementCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = guildMementCell.h; sourceTree = "<group>"; };
+		2BF43CE31D56D8F800C5B6C6 /* guildMementCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = guildMementCell.m; sourceTree = "<group>"; };
+		2BF43CE51D56D92C00C5B6C6 /* daRenCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = daRenCell.h; sourceTree = "<group>"; };
+		2BF43CE61D56D92C00C5B6C6 /* daRenCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = daRenCell.m; sourceTree = "<group>"; };
+		2BF43CE81D56D93E00C5B6C6 /* subGuildCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = subGuildCell.h; sourceTree = "<group>"; };
+		2BF43CE91D56D93E00C5B6C6 /* subGuildCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = subGuildCell.m; sourceTree = "<group>"; };
 		987E7F7F1D4EE79C00613C6F /* UserInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoTableViewCell.h; sourceTree = "<group>"; };
 		987E7F801D4EE79C00613C6F /* UserInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoTableViewCell.m; sourceTree = "<group>"; };
 		987E7F821D4EE7B900613C6F /* black.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = black.jpg; sourceTree = "<group>"; };
@@ -1763,16 +1767,6 @@
 		98EFD3641D4AF19A002A1913 /* Myorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Myorder.m; sourceTree = "<group>"; };
 		98EFD3651D4AF19A002A1913 /* Myorder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Myorder.xib; sourceTree = "<group>"; };
 		98F57EEF1D4F409F001D3703 /* black2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black2.png; sourceTree = "<group>"; };
-		98F90AAE1D5437360098DE1B /* MembersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MembersViewController.h; sourceTree = "<group>"; };
-		98F90AAF1D5437360098DE1B /* MembersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MembersViewController.m; sourceTree = "<group>"; };
-		98F90AB11D54374E0098DE1B /* TalentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalentViewController.h; sourceTree = "<group>"; };
-		98F90AB21D54374E0098DE1B /* TalentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalentViewController.m; sourceTree = "<group>"; };
-		98F90B081D5481140098DE1B /* LowerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LowerViewController.h; sourceTree = "<group>"; };
-		98F90B091D5481140098DE1B /* LowerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LowerViewController.m; sourceTree = "<group>"; };
-		98F90B0C1D548FC10098DE1B /* MembersTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MembersTableViewCell.h; sourceTree = "<group>"; };
-		98F90B0D1D548FC10098DE1B /* MembersTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MembersTableViewCell.m; sourceTree = "<group>"; };
-		98FCFC191D532DFA003939B7 /* LastGuildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LastGuildViewController.h; sourceTree = "<group>"; };
-		98FCFC1A1D532DFA003939B7 /* LastGuildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LastGuildViewController.m; sourceTree = "<group>"; };
 		D94EE7AF621BFE9480E8818D /* Pods-MeiWan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeiWan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MeiWan/Pods-MeiWan.debug.xcconfig"; sourceTree = "<group>"; };
 		E78385184BB25331F6F840D7 /* libPods-MeiWan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MeiWan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -4062,14 +4056,6 @@
 			children = (
 				2B2D085D1D530CBF00139467 /* GuildMembersViewController.h */,
 				2B2D085E1D530CBF00139467 /* GuildMembersViewController.m */,
-				98F90AAE1D5437360098DE1B /* MembersViewController.h */,
-				98F90AAF1D5437360098DE1B /* MembersViewController.m */,
-				98F90AB11D54374E0098DE1B /* TalentViewController.h */,
-				98F90AB21D54374E0098DE1B /* TalentViewController.m */,
-				98F90B081D5481140098DE1B /* LowerViewController.h */,
-				98F90B091D5481140098DE1B /* LowerViewController.m */,
-				98FCFC191D532DFA003939B7 /* LastGuildViewController.h */,
-				98FCFC1A1D532DFA003939B7 /* LastGuildViewController.m */,
 				98F90B0B1D548FA30098DE1B /* cell */,
 			);
 			name = "公会成员";
@@ -4187,8 +4173,12 @@
 		98F90B0B1D548FA30098DE1B /* cell */ = {
 			isa = PBXGroup;
 			children = (
-				98F90B0C1D548FC10098DE1B /* MembersTableViewCell.h */,
-				98F90B0D1D548FC10098DE1B /* MembersTableViewCell.m */,
+				2BF43CE21D56D8F800C5B6C6 /* guildMementCell.h */,
+				2BF43CE31D56D8F800C5B6C6 /* guildMementCell.m */,
+				2BF43CE51D56D92C00C5B6C6 /* daRenCell.h */,
+				2BF43CE61D56D92C00C5B6C6 /* daRenCell.m */,
+				2BF43CE81D56D93E00C5B6C6 /* subGuildCell.h */,
+				2BF43CE91D56D93E00C5B6C6 /* subGuildCell.m */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -4689,7 +4679,6 @@
 				1883DA6F1B9A8ECC009F45A0 /* SettingPlayWithUIViewController.m in Sources */,
 				27587C341CF5861900B78F92 /* MJRefreshHeader.m in Sources */,
 				27587C331CF5861900B78F92 /* MJRefreshGifHeader.m in Sources */,
-				98F90AB31D54374E0098DE1B /* TalentViewController.m in Sources */,
 				27587C761CF5861A00B78F92 /* EaseConversationListViewController.m in Sources */,
 				27587C631CF5861900B78F92 /* EaseMessageHelper.m in Sources */,
 				27587C301CF5861900B78F92 /* MJRefreshConst.m in Sources */,
@@ -4742,6 +4731,7 @@
 				18F1CC091B948C51003EF78A /* JiHelper.swift in Sources */,
 				27587C4E1CF5861900B78F92 /* UIImage+EMMultiFormat.m in Sources */,
 				27587C8D1CF5861A00B78F92 /* EaseChatBarMoreView.m in Sources */,
+				2BF43CE41D56D8F800C5B6C6 /* guildMementCell.m in Sources */,
 				27587C781CF5861A00B78F92 /* EaseMessageViewController.m in Sources */,
 				27587C831CF5861A00B78F92 /* EaseBubbleView+Text.m in Sources */,
 				18F359CF1B7ACC92005E3838 /* UserAssessTableViewCell.m in Sources */,
@@ -4789,6 +4779,7 @@
 				27CA60DC1CEEBAF300CC6956 /* CWStarRateView.m in Sources */,
 				27587C411CF5861900B78F92 /* MWZoomingScrollView.m in Sources */,
 				182B2B841B78CC1800A41F2C /* PlayerInfoView.m in Sources */,
+				2BF43CEA1D56D93E00C5B6C6 /* subGuildCell.m in Sources */,
 				27587C3B1CF5861900B78F92 /* MWGridCell.m in Sources */,
 				27587C5E1CF5861900B78F92 /* PSTGridLayoutRow.m in Sources */,
 				04B138AA1BA07EAF00AAD93F /* MD5DataSigner.m in Sources */,
@@ -4808,7 +4799,6 @@
 				27587C2E1CF5861900B78F92 /* MBProgressHUD.m in Sources */,
 				18C3E26F1B783FED004B02BB /* RandNumber.m in Sources */,
 				27587C9C1CF5932E00B78F92 /* CustomMessageCell.m in Sources */,
-				98F90B0A1D5481140098DE1B /* LowerViewController.m in Sources */,
 				27587C461CF5861900B78F92 /* EMSDWebImageDownloader.m in Sources */,
 				27587C2F1CF5861900B78F92 /* MJRefreshComponent.m in Sources */,
 				27587C751CF5861A00B78F92 /* EaseEmotionManager.m in Sources */,
@@ -4877,12 +4867,11 @@
 				18888E831BA3F11800F7FEEE /* StateTableViewController.m in Sources */,
 				04B138A91BA07EAF00AAD93F /* DataVerifier.m in Sources */,
 				18CC8EE11BC39CE1000281CE /* MultipartFormData.swift in Sources */,
+				2BF43CE71D56D92C00C5B6C6 /* daRenCell.m in Sources */,
 				27587C641CF5861900B78F92 /* EaseSDKHelper.m in Sources */,
 				18CC8EE91BC39CE1000281CE /* Upload.swift in Sources */,
 				18824A491B85D5920063EC03 /* NSObject+SBJson.m in Sources */,
-				98F90AB01D5437360098DE1B /* MembersViewController.m in Sources */,
 				27587C7F1CF5861A00B78F92 /* EaseMessageTimeCell.m in Sources */,
-				98F90B0E1D548FC10098DE1B /* MembersTableViewCell.m in Sources */,
 				185274E61B7F3C9300C5AC7C /* MyBurseViewController.m in Sources */,
 				27587C651CF5861A00B78F92 /* EaseConversationModel.m in Sources */,
 				27587C7C1CF5861A00B78F92 /* EaseUserCell.m in Sources */,
@@ -4961,7 +4950,6 @@
 				18824A4A1B85D5920063EC03 /* SBJsonParser.m in Sources */,
 				18824A501B85D5920063EC03 /* SBJsonStreamWriterAccumulator.m in Sources */,
 				18F1CC0A1B948C51003EF78A /* JiNode.swift in Sources */,
-				98FCFC1B1D532DFA003939B7 /* LastGuildViewController.m in Sources */,
 				18C8C7AF1B760C2A00BC8EEA /* GetinViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

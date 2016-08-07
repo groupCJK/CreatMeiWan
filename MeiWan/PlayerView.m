@@ -56,7 +56,6 @@
     self.age.textColor = RGB(174, 174, 174);
     self.age.text = userAge;
     self.age.font = [UIFont systemFontOfSize:12.0];
-    self.age.textColor = RGB(174, 174, 174);
     CGSize ageSize = [self.age.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:self.age.font,NSFontAttributeName, nil]];
     self.age.frame = CGRectMake(self.nicename.frame.size.width+self.nicename.frame.origin.x+5, self.nicename.frame.origin.y, ageSize.width+2, ageSize.height);
     [self addSubview:self.age];
