@@ -42,6 +42,8 @@
 @property(nonatomic,strong) NSMutableArray *userStates;
 @property(nonatomic,strong) NSMutableArray *userTags;
 @property(nonatomic,strong) NSMutableArray *userTimeTags;
+@property(nonatomic,assign) int hasUnion;//是否拥有工会
+@property(nonatomic,assign) int canCreateUnion;//是否可以创建工会
 
 -(id)initWithDictionary:(NSDictionary*)dictionary;
 @end

@@ -33,6 +33,8 @@
 
 @property (nonatomic, strong)NSArray *dataSource;
 
+@property (nonatomic, strong)UserInfo *userInfo;
+
 @end
 
 @implementation guildCenterViewController
