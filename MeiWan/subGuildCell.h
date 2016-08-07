@@ -10,6 +10,9 @@
 
 @interface subGuildCell : UITableViewCell
 
+@property(nonatomic,strong)UIImageView * guildImage;
+@property(nonatomic,strong)UILabel * guildName;
+
 @property(nonatomic,strong)NSDictionary * dictionary;
 
 @end

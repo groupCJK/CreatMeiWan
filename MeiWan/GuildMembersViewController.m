@@ -114,7 +114,7 @@
         if (!cell) {
             cell = [[subGuildCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         }
-        cell.dictionary = [[NSDictionary alloc]initWithObjectsAndKeys:@"王二",@"nickname",@"22",@"age",@"男",@"sex", nil];
+        cell.dictionary = [[NSDictionary alloc]initWithObjectsAndKeys:@"黑暗圣光",@"name",@"gonghui",@"guildImage", nil];
         return cell;
     }
 }
