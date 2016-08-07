@@ -2614,6 +2614,7 @@
                     <navigationItem key="navigationItem" id="WL8-eH-0oH"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="askfor" destination="ASV-AC-CRF" id="NyK-iL-LL1"/>
                         <outlet property="balanceLabel" destination="Te9-uD-iIT" id="sok-s7-1nb"/>
                         <outlet property="guildCenter" destination="dl4-Mo-XJh" id="djT-Nk-eds"/>
                         <outlet property="imgwallet" destination="RNQ-9v-8D1" id="mlM-PW-U4w"/>
