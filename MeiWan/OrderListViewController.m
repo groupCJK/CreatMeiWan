@@ -38,11 +38,12 @@
     if (!cell) {
         cell = [[OrderLiseCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
+    cell.dictionary = @{@"dingdan":@"订单:1029634058373",@"ticheng":@"提成:5￥"};
     return cell;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return 100;
 }
 
 @end

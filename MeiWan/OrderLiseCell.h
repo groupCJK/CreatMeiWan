@@ -10,4 +10,9 @@
 
 @interface OrderLiseCell : UITableViewCell
 
+@property(nonatomic,strong)NSDictionary * dictionary;
+
+@property(nonatomic,strong)UILabel * orderNumber;
+@property(nonatomic,strong)UILabel * moneyLabel;
+
 @end

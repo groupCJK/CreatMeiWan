@@ -155,7 +155,7 @@
     imageArray =  @[@"sing",@"video-chat",@"dining",@"sing-expert",@"go-nightclubbing",@"clock",@"shadow-with",@"sports",@"lol",@"all"];
     [self loginHuanxin];
 
-    self.infoCount = 6;
+    self.infoCount = 20;
     self.playerviews = [NSMutableArray array];
     self.myRandNumber = [[RandNumber alloc]init];
     self.searchDic = [NSMutableDictionary dictionary];

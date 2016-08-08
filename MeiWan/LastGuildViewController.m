@@ -93,7 +93,7 @@
 
 - (UITableView *)guildCenterTableView{
     if (!_guildCenterTableView) {
-        _guildCenterTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, dtScreenWidth, dtScreenHeight) style:UITableViewStylePlain];
+        _guildCenterTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, dtScreenWidth, dtScreenHeight) style:UITableViewStylePlain];
         _guildCenterTableView.dataSource = self;
         _guildCenterTableView.delegate = self;
         _guildCenterTableView.tableFooterView = [[UIView alloc] init];

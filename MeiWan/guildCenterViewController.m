@@ -198,8 +198,8 @@
         experienceLabel.layer.borderWidth = 1;
         experienceLabel.clipsToBounds = YES;
         [guildInfo addSubview:experienceLabel];
-        NSInteger allNeedPeople;
-        NSInteger people = [self.guildArray[@"people"] integerValue];
+        CGFloat allNeedPeople;
+        CGFloat people = [self.guildArray[@"people"] integerValue];
         if ([self.guildArray[@"level"] integerValue]==1){
             allNeedPeople = 20;
         }else if ([self.guildArray[@"level"] integerValue]==2){
@@ -216,7 +216,7 @@
         CGFloat baifenbi = people/allNeedPeople;
         /**公会人数比例*/
         UILabel * people_allNeedPeople = [[UILabel alloc]init];
-        people_allNeedPeople.text = [NSString stringWithFormat:@"%ld/%ld",people,allNeedPeople];
+        people_allNeedPeople.text = [NSString stringWithFormat:@"%ld/%ld",(long)people,(long)allNeedPeople];
         people_allNeedPeople.textColor = [UIColor grayColor];
         people_allNeedPeople.font = [UIFont systemFontOfSize:14.0];
         CGSize size_people = [people_allNeedPeople.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:people_allNeedPeople.font,NSFontAttributeName, nil]];
@@ -224,7 +224,7 @@
         [guildInfo addSubview:people_allNeedPeople];
         
         UILabel * colorLabel = [[UILabel alloc]initWithFrame:CGRectMake(experienceLabel.frame.origin.x+1, experienceLabel.frame.origin.y+1, (experienceLabel.frame.size.width-2)*baifenbi, experienceLabel.frame.size.height-2)];
-        colorLabel.backgroundColor = [CorlorTransform colorWithHexString:@"3399cc"];
+        colorLabel.backgroundColor = [CorlorTransform colorWithHexString:@"#3399cc"];
         colorLabel.layer.cornerRadius = 4;
         colorLabel.clipsToBounds = YES;
         [guildInfo addSubview:colorLabel];

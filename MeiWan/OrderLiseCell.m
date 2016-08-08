@@ -16,20 +16,29 @@
         /**
          
          */
-        UILabel * orderNumber = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, dtScreenWidth/3, self.frame.size.height)];
-        orderNumber.text = @"123456679534";
-        orderNumber.textColor = [UIColor grayColor];
-        orderNumber.font = [UIFont systemFontOfSize:15.0];
+        UILabel * orderNumber = [[UILabel alloc]init];
         [self addSubview:orderNumber];
+        self.orderNumber = orderNumber;
         
-        UILabel * moneyNumber = [[UILabel alloc]initWithFrame:CGRectMake(dtScreenWidth-100, 0, 90, self.frame.size.height)];
-        moneyNumber.text = @"123";
-        moneyNumber.textColor = [UIColor grayColor];
-        moneyNumber.textAlignment = NSTextAlignmentRight;
-        moneyNumber.font = [UIFont systemFontOfSize:15.0];
+        UILabel * moneyNumber = [[UILabel alloc]init];
         [self addSubview:moneyNumber];
+        self.moneyLabel = moneyNumber;
         
     }
     return self;
+}
+-(void)setDictionary:(NSDictionary *)dictionary
+{
+    _orderNumber.text = dictionary[@"dingdan"];
+    _orderNumber.font = [UIFont systemFontOfSize:16.0];
+    CGSize size_order = [_orderNumber.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_orderNumber.font,NSFontAttributeName, nil]];
+    _orderNumber.frame = CGRectMake(10, 0, size_order.width, self.frame.size.height);
+    
+    _moneyLabel.text = dictionary[@"ticheng"];
+    _moneyLabel.font = [UIFont systemFontOfSize:15.0];
+    CGSize size_money = [_moneyLabel.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_moneyLabel.font,NSFontAttributeName, nil]];
+    _moneyLabel.frame = CGRectMake(dtScreenWidth-10-size_money.width, 0, size_money.width, self.frame.size.height);
+    
+    
 }
 @end

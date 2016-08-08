@@ -10,4 +10,10 @@
 
 @interface GuildRankCell : UITableViewCell
 
+@property(nonatomic,strong)NSDictionary * dictionary;
+
+@property(nonatomic,strong)UIImageView * guildLogo;
+@property(nonatomic,strong)UILabel * guidName;
+@property(nonatomic,strong)UILabel * personNumber;
+
 @end

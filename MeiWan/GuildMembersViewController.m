@@ -10,6 +10,12 @@
 #import "guildMementCell.h"
 #import "daRenCell.h"
 #import "subGuildCell.h"
+#import "LastGuildViewController.h"
+#import "Meiwan-Swift.h"
+#import "ShowMessage.h"
+#import "SBJsonParser.h"
+#import "LoginViewController.h"
+#import "PlagerinfoViewController.h"
 @interface GuildMembersViewController ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 {
     UIView * lineView;
@@ -17,7 +23,16 @@
     UITableView * guildMemberTableView;
     UITableView * DaRenTableView;
     UITableView * subGuildTableView;
+    /**子公会组*/
+    
 }
+/**公会成员组*/
+@property(nonatomic,strong)NSMutableArray * memberArray;
+/**达人组*/
+@property(nonatomic,strong)NSMutableArray * darenArray;
+/**子公会组*/
+@property(nonatomic,strong)NSMutableArray * subGuildArray;
+
 @end
 
 @implementation GuildMembersViewController
@@ -25,7 +40,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self init_UI];
-    
+    [self beginNetWorking];
 }
 
 - (void)init_UI
@@ -51,11 +66,11 @@
     scrollview.delegate = self;
     
     [self.view addSubview:scrollview];
-    
     guildMemberTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, dtScreenWidth, dtScreenHeight-108) style:UITableViewStylePlain];
     guildMemberTableView.delegate = self;
     guildMemberTableView.dataSource = self;
     [scrollview addSubview:guildMemberTableView];
+  
     
     DaRenTableView = [[UITableView alloc]initWithFrame:CGRectMake(dtScreenWidth, 0, dtScreenWidth, dtScreenHeight-108) style:UITableViewStylePlain];
     DaRenTableView.delegate = self;
@@ -96,7 +111,13 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 100;
+    if (tableView==guildMemberTableView) {
+        return self.memberArray.count;
+    }else if (tableView == DaRenTableView){
+        return self.darenArray.count;
+    }else{
+        return self.subGuildArray.count;
+    }
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -105,22 +126,132 @@
         if (!cell) {
             cell = [[guildMementCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         }
-        cell.dictionary = [[NSDictionary alloc]initWithObjectsAndKeys:@"王二",@"nickname",@"22",@"age",@"男",@"sex", nil];
+        if (self.memberArray.count>0) {
+            cell.dictionary = self.memberArray[indexPath.row];
+        }
         return cell;
     }else if (tableView == DaRenTableView){
         daRenCell * cell = [tableView dequeueReusableCellWithIdentifier:@"daren"];
         if (!cell) {
             cell = [[daRenCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"daren"];
         }
-        cell.dictionary = [[NSDictionary alloc]initWithObjectsAndKeys:@"翠花",@"nickname",@"22",@"age",@"女",@"sex", nil];
+        if (self.darenArray.count>0) {
+            cell.dictionary = self.darenArray[indexPath.row];
+        }
         return cell;
     }else{
         subGuildCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
         if (!cell) {
             cell = [[subGuildCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         }
-        cell.dictionary = [[NSDictionary alloc]initWithObjectsAndKeys:@"黑暗圣光",@"name",@"gonghui",@"guildImage", nil];
+        if (self.subGuildArray.count>0) {
+            cell.dictionary = self.subGuildArray[indexPath.row];
+        }
         return cell;
     }
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView == guildMemberTableView) {
+
+    }else if (tableView == DaRenTableView){
+        
+    }else{
+        LastGuildViewController *lastVC = [[LastGuildViewController alloc]init];
+        [self.navigationController pushViewController:lastVC animated:YES];
+    }
+}
+
+#pragma mark----netWorking
+
+-(void)beginNetWorking
+{
+    NSString *session= [PersistenceManager getLoginSession];
+    [UserConnector findMyUnionMembers:session offset:0 limit:20 receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (error) {
+            [ShowMessage showMessage:@"服务器未响应"];
+        }else{
+            SBJsonParser*parser=[[SBJsonParser alloc]init];
+            NSMutableDictionary *json=[parser objectWithData:data];
+            NSLog(@"%@",json);
+            int status = [[json objectForKey:@"status"]intValue];
+            if (status == 0) {
+                self.memberArray = [json objectForKey:@"entity"];
+                [guildMemberTableView reloadData];
+                [self performSelector:@selector(darenNetWorking) withObject:nil afterDelay:0.5];
+            }else if(status == 1){
+                
+                [PersistenceManager setLoginSession:@""];
+                LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
+                lv.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:lv animated:YES];
+                
+            }else{
+               
+            }
+
+        }
+    }];
+}
+- (void)darenNetWorking
+{
+    NSString *session= [PersistenceManager getLoginSession];
+    [UserConnector findMyUnionDarens:session offset:0 limit:20 receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (error) {
+            [ShowMessage showMessage:@"服务器未响应"];
+        }else{
+            SBJsonParser*parser=[[SBJsonParser alloc]init];
+            NSMutableDictionary *json=[parser objectWithData:data];
+            NSLog(@"%@",json);
+            int status = [[json objectForKey:@"status"]intValue];
+            if (status == 0) {
+                self.darenArray = [json objectForKey:@"entity"];
+                [DaRenTableView reloadData];
+                [self performSelector:@selector(guildNetWorking) withObject:nil afterDelay:0.5];
+            }else if(status == 1){
+                
+                [PersistenceManager setLoginSession:@""];
+                LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
+                lv.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:lv animated:YES];
+                
+            }else{
+                
+            }
+        }
+    }];
+}
+- (void)guildNetWorking
+{
+    NSString *session= [PersistenceManager getLoginSession];
+    [UserConnector findMySubUnions:session offset:0 limit:20 receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (error) {
+            [ShowMessage showMessage:@"服务器未响应"];
+        }else{
+            SBJsonParser*parser=[[SBJsonParser alloc]init];
+            NSMutableDictionary *json=[parser objectWithData:data];
+            NSLog(@"%@",json);
+            int status = [[json objectForKey:@"status"]intValue];
+            if (status == 0) {
+                self.subGuildArray = [json objectForKey:@"entity"];
+                [subGuildTableView reloadData];
+            }else if(status == 1){
+                
+                [PersistenceManager setLoginSession:@""];
+                LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
+                lv.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:lv animated:YES];
+                
+            }else{
+                
+            }
+            
+        }
+    }];
+
+}
+- (void)init_guildTableview
+{
+    
 }
 @end

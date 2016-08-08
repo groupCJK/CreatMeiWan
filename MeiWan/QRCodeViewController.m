@@ -35,12 +35,30 @@
     [super viewDidLoad];
     UIImageView * imageView = [[UIImageView alloc]init];
     imageView.center = self.view.center;
-    imageView.bounds = CGRectMake(0, 0, 300, 300);
     imageView.userInteractionEnabled = YES;
     //公会会长名称
     NSString * string = [NSString stringWithFormat:@"http://web.chuangjk.com/wx/peiwan-server/static/promoter/index.html?unionId=%@",self.guildID];
     
-    UIImage*tempImage=[QRCodeGenerator qrImageForString:string imageSize:300 Topimg:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.headerURL]]]];
+    CGFloat ImageSize;
+    if (IS_IPHONE_4_OR_LESS) {
+        imageView.bounds = CGRectMake(0, 0, 250, 250);
+
+        ImageSize = 250;
+    }else if (IS_IPHONE_5){
+        imageView.bounds = CGRectMake(0, 0, 250, 250);
+
+        ImageSize = 250;
+    }else if (IS_IPHONE_6){
+        imageView.bounds = CGRectMake(0, 0, 300, 300);
+
+         ImageSize = 300;
+    }else{
+        imageView.bounds = CGRectMake(0, 0, 300, 300);
+
+        ImageSize = 300;
+    }
+    
+    UIImage*tempImage=[QRCodeGenerator qrImageForString:string imageSize:ImageSize Topimg:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.headerURL]]]];
     imageView.image=tempImage;
     [self.view addSubview:imageView];
     //长按手势

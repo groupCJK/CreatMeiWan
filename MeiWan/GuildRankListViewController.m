@@ -45,11 +45,12 @@
         cell = [[GuildRankCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
          cell.selectionStyle=UITableViewCellSelectionStyleNone;
     }
+    cell.dictionary = @{@"guildname":@"郎刑天下",@"people":@"100人"};
     return cell;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return 100;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -18,7 +18,7 @@ import UIKit
 
 @objc public class UserConnector: NSObject {
     
-    private static var userUrl=NSUserDefaults .standardUserDefaults().valueForKey("1") as! String
+    private static var userUrl=NSUserDefaults .standardUserDefaults().valueForKey("0") as! String
     private static var anOtherUrl = NSUserDefaults.standardUserDefaults().valueForKey("0") as! String
     
     private static func UserURL()->String?{
@@ -1188,6 +1188,84 @@ import UIKit
                 receiver(data:data!.gunzippedData(), error:error)
         }
     }
+    
+    /**公会成员*/
+    public static func findMyUnionMembers(session:String?,offset:Int,limit:Int,receiver:(data:NSData?,error:NSError?)->()){
+        var parameters:Dictionary<String,AnyObject> = [:]
+        if(session != nil){
+            parameters["session"]=session
+        }
+        parameters["offset"]=offset
+        parameters["limit"]=limit
+       
+        request(.GET, UserURL()!+"findMyUnionMembers", parameters:parameters as? [String : NSObject])
+            .response { request, r, data, error in
+                
+                if (error==nil){
+                    
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
+                }
+                
+                receiver(data:data!.gunzippedData(), error:error)
+                
+                
+        }
+    }
+    /**达人*/
+    public static func findMyUnionDarens(session:String?,offset:Int,limit:Int,receiver:(data:NSData?,error:NSError?)->()){
+        var parameters:Dictionary<String,AnyObject> = [:]
+        if(session != nil){
+            parameters["session"]=session
+        }
+        parameters["offset"]=offset
+        parameters["limit"]=limit
+        
+        request(.GET, UserURL()!+"findMyUnionDarens", parameters:parameters as? [String : NSObject])
+            .response { request, r, data, error in
+                
+                if (error==nil){
+                    
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
+                }
+                
+                receiver(data:data!.gunzippedData(), error:error)
+                
+                
+        }
+    }
+    /**子公会*/
+    public static func findMySubUnions(session:String?,offset:Int,limit:Int,receiver:(data:NSData?,error:NSError?)->()){
+        var parameters:Dictionary<String,AnyObject> = [:]
+        if(session != nil){
+            parameters["session"]=session
+        }
+        parameters["offset"]=offset
+        parameters["limit"]=limit
+        
+        request(.GET, UserURL()!+"findMySubUnions", parameters:parameters as? [String : NSObject])
+            .response { request, r, data, error in
+                
+                if (error==nil){
+                    
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
+                }
+                
+                receiver(data:data!.gunzippedData(), error:error)
+                
+                
+        }
+    }
+
+//    findMyUnionMembers
+//    @QueryParam("session") String session,
+//    @QueryParam("offset") Integer offset,
+//    @QueryParam("limit") Integer limit
     
 }
 
