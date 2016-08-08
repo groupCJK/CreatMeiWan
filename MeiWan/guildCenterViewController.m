@@ -82,7 +82,7 @@
     NSArray *sectionArray = self.dataSource[indexPath.section];
     NSDictionary *dic = sectionArray[indexPath.row];
     cell.textLabel.text = dic[@"title"];
-    cell.textLabel.font = [UIFont systemFontOfSize:14.0f];
+    cell.textLabel.font = [UIFont systemFontOfSize:16.0];
     
     return cell;
 }
@@ -95,6 +95,8 @@
         {
             QRCodeViewController *orCodeVC = [[QRCodeViewController alloc] init];
             orCodeVC.title = @"工会二维码";
+            orCodeVC.guildID = self.guildArray[@"id"];
+            orCodeVC.headerURL = self.guildArray[@"headUrl"];
             orCodeVC.view.backgroundColor = [UIColor whiteColor];
             [self.navigationController pushViewController:orCodeVC animated:YES];
         }break;
@@ -179,7 +181,8 @@
 
         UILabel *guildNick = [[UILabel alloc] init];
         guildNick.text = [self.guildArray objectForKey:@"name"];
-        guildNick.font = [UIFont systemFontOfSize:13.0f];
+        guildNick.textColor = [CorlorTransform colorWithHexString:@"ff6600"];
+        guildNick.font = [UIFont systemFontOfSize:14.0];
         CGSize NickSize = [guildNick.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:guildNick.font,NSFontAttributeName, nil]];
         CGFloat nickSizeH = NickSize.height;
         CGFloat nickSizeW = NickSize.width;
@@ -188,27 +191,49 @@
         
         
         /**经验条*/
-        UILabel *experienceLabel = [[UILabel alloc] initWithFrame:CGRectMake(guildHeadImage.frame.origin.y+guildHeadImage.frame.size.width+10, guildNick.frame.origin.y+guildNick.frame.size.height+5, 60, 5)];
-        experienceLabel.backgroundColor = [CorlorTransform colorWithHexString:@"#708090"];
-        experienceLabel.layer.cornerRadius = 2;
+        UILabel *experienceLabel = [[UILabel alloc] initWithFrame:CGRectMake(guildHeadImage.frame.origin.y+guildHeadImage.frame.size.width+10, guildNick.frame.origin.y+guildNick.frame.size.height+5, 100, 10)];
+//        experienceLabel.backgroundColor = [CorlorTransform colorWithHexString:@"#708090"];
+        experienceLabel.layer.cornerRadius = 5;
+        experienceLabel.layer.borderColor = [UIColor blackColor].CGColor;
+        experienceLabel.layer.borderWidth = 1;
         experienceLabel.clipsToBounds = YES;
         [guildInfo addSubview:experienceLabel];
+        NSInteger allNeedPeople;
+        NSInteger people = [self.guildArray[@"people"] integerValue];
+        if ([self.guildArray[@"level"] integerValue]==1){
+            allNeedPeople = 20;
+        }else if ([self.guildArray[@"level"] integerValue]==2){
+            allNeedPeople = 100;
+        }else if ([self.guildArray[@"level"] integerValue]==3){
+            allNeedPeople = 500;
+        }else if ([self.guildArray[@"level"] integerValue]==4){
+            allNeedPeople = 2000;
+        }else if ([self.guildArray[@"level"] integerValue]==5){
+            allNeedPeople = 5000;
+        }else{
+            allNeedPeople = 10000;
+        }
+        CGFloat baifenbi = people/allNeedPeople;
+        /**公会人数比例*/
+        UILabel * people_allNeedPeople = [[UILabel alloc]init];
+        people_allNeedPeople.text = [NSString stringWithFormat:@"%ld/%ld",people,allNeedPeople];
+        people_allNeedPeople.textColor = [UIColor grayColor];
+        people_allNeedPeople.font = [UIFont systemFontOfSize:14.0];
+        CGSize size_people = [people_allNeedPeople.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:people_allNeedPeople.font,NSFontAttributeName, nil]];
+        people_allNeedPeople.frame = CGRectMake(experienceLabel.frame.origin.x+experienceLabel.frame.size.width+10, experienceLabel.frame.origin.y-2, size_people.width, size_people.height);
+        [guildInfo addSubview:people_allNeedPeople];
         
-        CGFloat needExperence = 100;
-        CGFloat haveexperence = 50;
-        CGFloat baifenbi = haveexperence/needExperence;
-        
-        UILabel * colorLabel = [[UILabel alloc]initWithFrame:CGRectMake(experienceLabel.frame.origin.x, experienceLabel.frame.origin.y, experienceLabel.frame.size.width*baifenbi, experienceLabel.frame.size.height)];
-        colorLabel.backgroundColor = [CorlorTransform colorWithHexString:@"#76EE00"];
-        colorLabel.layer.cornerRadius = 2;
+        UILabel * colorLabel = [[UILabel alloc]initWithFrame:CGRectMake(experienceLabel.frame.origin.x+1, experienceLabel.frame.origin.y+1, (experienceLabel.frame.size.width-2)*baifenbi, experienceLabel.frame.size.height-2)];
+        colorLabel.backgroundColor = [CorlorTransform colorWithHexString:@"3399cc"];
+        colorLabel.layer.cornerRadius = 4;
         colorLabel.clipsToBounds = YES;
         [guildInfo addSubview:colorLabel];
         
         UILabel *levelLabel = [[UILabel alloc] initWithFrame:CGRectMake(guildHeadImage.frame.origin.y+guildHeadImage.frame.size.width+10, experienceLabel.frame.origin.y+experienceLabel.frame.size.height+5, 80, 10)];
         NSString *level = [self.guildArray objectForKey:@"level"];
         levelLabel.text = [NSString stringWithFormat:@"%@ 级工会",level];
-        levelLabel.font = [UIFont systemFontOfSize:13.0f];
-        levelLabel.textColor = [UIColor redColor];
+        levelLabel.font = [UIFont systemFontOfSize:14.0];
+        levelLabel.textColor = [CorlorTransform colorWithHexString:@"#ffd700"];
         UILabel *line2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 150, dtScreenWidth, 1)];
         line2.backgroundColor = [UIColor grayColor];
         [guildInfo addSubview:line2];
@@ -216,10 +241,13 @@
         
         UIView *todayEarnings = [[UIView alloc] initWithFrame:CGRectMake(0, 101, dtScreenWidth/2-1, 49)];
         [_guildCenter addSubview:todayEarnings];
-        UILabel *today = [[UILabel alloc] initWithFrame:CGRectMake((todayEarnings.frame.size.width-80)/2,(todayEarnings.frame.size.height-10)/2, 80, 10)];
+        UILabel *today = [[UILabel alloc] init];
         today.textColor = [UIColor blackColor];
-        NSString *earningsText = [self.guildArray objectForKey:@"totalMoney"];
+        NSString *earningsText = [self.guildArray objectForKey:@"todayMoney"];
         today.text = [NSString stringWithFormat:@"今日收益:%@",earningsText];
+        today.font = [UIFont systemFontOfSize:16.0];
+        CGSize size_today = [today.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:today.font,NSFontAttributeName, nil]];
+        today.frame = CGRectMake(todayEarnings.frame.size.width/2-size_today.width/2,todayEarnings.frame.size.height/2-size_today.height/2, size_today.width, size_today.height);
         [todayEarnings addSubview:today];
         
         UILabel *line3 = [[UILabel alloc] initWithFrame:CGRectMake(todayEarnings.frame.origin.x+todayEarnings.frame.size.width, 110, 2, 30)];
@@ -228,10 +256,13 @@
         
         UIView *sumEarnings = [[UIView alloc] initWithFrame:CGRectMake(dtScreenWidth/2+2, 101, dtScreenWidth/2-1, 49)];
         [_guildCenter addSubview:sumEarnings];
-        UILabel *sum = [[UILabel alloc] initWithFrame:CGRectMake((sumEarnings.frame.size.width-80)/2+2,(sumEarnings.frame.size.height-10)/2, 80, 10)];
+        UILabel *sum = [[UILabel alloc] init];
         sum.textColor = [UIColor blackColor];
         NSString *sumText = [self.guildArray objectForKey:@"totalMoney"];
+        sum.font = [UIFont systemFontOfSize:16.0];
         sum.text = [NSString stringWithFormat:@"累计收益:%@",sumText];
+        CGSize size_sum = [sum.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:sum.font,NSFontAttributeName, nil]];
+        sum.frame = CGRectMake(sumEarnings.frame.size.width/2-size_sum.width/2,sumEarnings.frame.size.height/2-size_sum.height/2, size_sum.width, size_sum.height);
         [sumEarnings addSubview:sum];
         
     }

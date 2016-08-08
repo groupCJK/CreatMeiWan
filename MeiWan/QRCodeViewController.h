@@ -10,4 +10,7 @@
 
 @interface QRCodeViewController : UIViewController
 
+@property(nonatomic,assign)NSString * guildID;
+@property(nonatomic,assign)NSString * headerURL;
+
 @end

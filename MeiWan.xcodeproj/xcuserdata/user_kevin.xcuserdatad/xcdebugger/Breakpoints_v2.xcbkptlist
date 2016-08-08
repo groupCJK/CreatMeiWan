@@ -84,12 +84,12 @@
                   moduleName = "MeiWan"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user_kevin/GitHub/CreatMeiWan/MeiWan/DetailOrderViewController.m"
-                  timestampString = "492319954.94412"
+                  timestampString = "492331479.907871"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "285"
                   endingLineNumber = "285"
-                  offsetFromSymbolStart = "1274">
+                  offsetFromSymbolStart = "1293">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -99,12 +99,12 @@
                   moduleName = "MeiWan"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user_kevin/GitHub/CreatMeiWan/MeiWan/DetailOrderViewController.m"
-                  timestampString = "492319954.944286"
+                  timestampString = "492331479.908068"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "285"
                   endingLineNumber = "285"
-                  offsetFromSymbolStart = "1307">
+                  offsetFromSymbolStart = "1348">
                </Location>
             </Locations>
          </BreakpointContent>
