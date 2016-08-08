@@ -125,6 +125,7 @@
                         NSMutableDictionary *json=[parser objectWithData:data];
                         self.userInfoDic = [json objectForKey:@"hasUnion"];
                         self.userInfo = [[UserInfo alloc]initWithDictionary:self.userInfoDic];
+                        self.userInfo.hasUnion = 1;
                         [PersistenceManager setLoginUser:json];
                         [ShowMessage showMessage:@"资料提交成功"];
                     }

@@ -1172,6 +1172,23 @@ import UIKit
         }
     }
     
+    //查找工会
+    public static func findMyUnion(session:String!,receiver:(data:NSData?,error:NSError?)->()){
+        var parameters:Dictionary<String,AnyObject> = [:]
+        parameters["session"]=session
+        request(.GET, UserURL()!+"findMyUnion", parameters:parameters as? [String : NSObject])
+            .response { request, r, data, error in
+                if (error==nil){
+                    
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
+                }
+                
+                receiver(data:data!.gunzippedData(), error:error)
+        }
+    }
+    
 }
 
 

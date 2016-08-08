@@ -24,6 +24,8 @@
 #import "MBProgressHUD.h"
 #import "CorlorTransform.h"
 #import "RecordTableViewController.h"
+#import "ShowMessage.h"
+
 @interface guildCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong)UIView *createGuild;
@@ -38,6 +40,8 @@
 
 @property (nonatomic, strong)UserInfo *userInfo;
 
+@property (nonatomic, strong) NSMutableDictionary * guildArray;
+
 @end
 
 @implementation guildCenterViewController
@@ -45,18 +49,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self loadFindGuildData];
+    
+    [self loadDatasource];
+
+    
 //    [self guildCenter];
     self.userInfoDic = [PersistenceManager getLoginUser];
     
     self.userInfo = [[UserInfo alloc]initWithDictionary: [PersistenceManager getLoginUser]];
     NSDictionary * dic = [PersistenceManager getLoginUser];
     
-    if (self.userInfo.hasUnion == 1) {
-        [self loadDatasource];
-        self.guildCenterTableView.tableHeaderView = self.guildCenter;
-    }else{
-        [self createGuild];
-    }
+//    if (self.userInfo.hasUnion == 1) {
+//    }else{
+//        [self createGuild];
+//    }
     
     // Do any additional setup after loading the view.
 }
@@ -119,6 +126,21 @@
             break;
     }
 }
+
+- (void)loadFindGuildData{
+    NSString *session = [PersistenceManager getLoginSession];
+    [UserConnector findMyUnion:session receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (error!=nil) {
+            [ShowMessage showMessage:@"服务器未连接"];
+        }else{
+            SBJsonParser*parser=[[SBJsonParser alloc]init];
+            NSMutableDictionary *json=[parser objectWithData:data];
+            self.guildArray = json[@"entity"];
+            self.guildCenterTableView.tableHeaderView = self.guildCenter;
+        }
+    }];
+}
+
 #pragma mark Get Set
 
 - (UITableView *)guildCenterTableView{
@@ -147,13 +169,14 @@
         [_guildCenter addSubview:guildInfo];
         
         UIImageView *guildHeadImage = [[UIImageView alloc]initWithFrame:CGRectMake((100-60)/2, 20, 60, 60)];
-        guildHeadImage.image = [UIImage imageNamed:@"black.jpg"];
+        NSURL *url = [NSURL URLWithString:[self.guildArray objectForKey:@"headUrl"]];
+        [guildHeadImage setImageWithURL:url];
         guildHeadImage.layer.masksToBounds = YES;
         guildHeadImage.layer.cornerRadius = 30.0f;
         [guildInfo addSubview:guildHeadImage];
 
         UILabel *guildNick = [[UILabel alloc] init];
-        guildNick.text = @"花木兰";
+        guildNick.text = [self.guildArray objectForKey:@"name"];
         guildNick.font = [UIFont systemFontOfSize:13.0f];
         CGSize NickSize = [guildNick.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:guildNick.font,NSFontAttributeName, nil]];
         CGFloat nickSizeH = NickSize.height;
@@ -180,7 +203,8 @@
         [guildInfo addSubview:colorLabel];
         
         UILabel *levelLabel = [[UILabel alloc] initWithFrame:CGRectMake(guildHeadImage.frame.origin.y+guildHeadImage.frame.size.width+10, experienceLabel.frame.origin.y+experienceLabel.frame.size.height+5, 80, 10)];
-        levelLabel.text = @"(一级工会)";
+        NSString *level = [self.guildArray objectForKey:@"level"];
+        levelLabel.text = [NSString stringWithFormat:@"%@ 级工会",level];
         levelLabel.font = [UIFont systemFontOfSize:13.0f];
         levelLabel.textColor = [UIColor redColor];
         UILabel *line2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 150, dtScreenWidth, 1)];
@@ -192,8 +216,8 @@
         [_guildCenter addSubview:todayEarnings];
         UILabel *today = [[UILabel alloc] initWithFrame:CGRectMake((todayEarnings.frame.size.width-80)/2,(todayEarnings.frame.size.height-10)/2, 80, 10)];
         today.textColor = [UIColor blackColor];
-        NSString *earningsText = @"今日收益";
-        today.text = earningsText;
+        NSString *earningsText = [self.guildArray objectForKey:@"totalMoney"];
+        today.text = [NSString stringWithFormat:@"今日收益:%@",earningsText];
         [todayEarnings addSubview:today];
         
         UILabel *line3 = [[UILabel alloc] initWithFrame:CGRectMake(todayEarnings.frame.origin.x+todayEarnings.frame.size.width, 110, 2, 30)];
@@ -204,8 +228,8 @@
         [_guildCenter addSubview:sumEarnings];
         UILabel *sum = [[UILabel alloc] initWithFrame:CGRectMake((sumEarnings.frame.size.width-80)/2+2,(sumEarnings.frame.size.height-10)/2, 80, 10)];
         sum.textColor = [UIColor blackColor];
-        NSString *sumText = @"累计收益";
-        sum.text = sumText;
+        NSString *sumText = [self.guildArray objectForKey:@"totalMoney"];
+        sum.text = [NSString stringWithFormat:@"累计收益:%@",sumText];
         [sumEarnings addSubview:sum];
         
     }
