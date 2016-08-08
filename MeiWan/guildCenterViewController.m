@@ -49,7 +49,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self loadFindGuildData];
     
     [self loadDatasource];
 
@@ -58,12 +57,15 @@
     self.userInfoDic = [PersistenceManager getLoginUser];
     
     self.userInfo = [[UserInfo alloc]initWithDictionary: [PersistenceManager getLoginUser]];
-    NSDictionary * dic = [PersistenceManager getLoginUser];
+//    NSDictionary * dic = [PersistenceManager getLoginUser];
     
-//    if (self.userInfo.hasUnion == 1) {
-//    }else{
-//        [self createGuild];
-//    }
+    if (self.userInfo.hasUnion == 1) {
+        
+        [self loadFindGuildData];
+    
+    }else{
+        [self createGuild];
+    }
     
     // Do any additional setup after loading the view.
 }

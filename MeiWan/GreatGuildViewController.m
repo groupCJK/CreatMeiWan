@@ -128,6 +128,9 @@
                         self.userInfo.hasUnion = 1;
                         [PersistenceManager setLoginUser:json];
                         [ShowMessage showMessage:@"资料提交成功"];
+                        
+                        [self performSelector:@selector(pushViewController) withObject:nil afterDelay:0.5];
+                        
                     }
                 }];
             }else{
@@ -238,11 +241,11 @@
     self.guildHeadImage.image = image;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)pushViewController
+{
+    guildCenterViewController * guildVC = [[guildCenterViewController alloc]init];
+    [self.navigationController pushViewController:guildVC animated:YES];
 }
-
 /*
 #pragma mark - Navigation
 
