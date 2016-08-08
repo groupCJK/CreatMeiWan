@@ -49,6 +49,7 @@
     self.userInfoDic = [PersistenceManager getLoginUser];
     
     self.userInfo = [[UserInfo alloc]initWithDictionary: [PersistenceManager getLoginUser]];
+    NSDictionary * dic = [PersistenceManager getLoginUser];
     
     if (self.userInfo.hasUnion == 1) {
         [self loadDatasource];

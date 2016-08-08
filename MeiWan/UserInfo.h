@@ -46,4 +46,5 @@
 @property(nonatomic,assign) int canCreateUnion;//是否可以创建工会
 
 -(id)initWithDictionary:(NSDictionary*)dictionary;
+
 @end

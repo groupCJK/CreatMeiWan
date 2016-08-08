@@ -1150,6 +1150,27 @@ import UIKit
         }
     }
     
+    //创建工会
+    public static func createUnion(session:String!,name:String!,headUrl:String!, receiver:(data:NSData?,error:NSError?)->()){
+        var parameters:Dictionary<String,AnyObject> = [:]
+        if(session != nil){
+            parameters["session"]=session
+            parameters["name"]=name
+            parameters["headUrl"]=headUrl
+        }
+        request(.GET, UserURL()!+"createUnion", parameters:parameters as? [String : NSObject])
+            .response { request, r, data, error in
+                
+                if (error==nil){
+                    
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
+                }
+                
+                receiver(data:data!, error:error)
+        }
+    }
     
 }
 
