@@ -393,9 +393,17 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
-    NSMutableDictionary *userInfoDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.name,@"nickname",self.sigen,@"description",nil];
+//    NSMutableDictionary *userInfoDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.name,@"nickname",self.sigen,@"description",nil];
+    NSMutableDictionary * userInfoDIC = [[NSMutableDictionary alloc]initWithCapacity:0];
+    if (self.name.length>0) {
+        [userInfoDIC setObject:self.name forKey:@"nickname"];
+    }
+    if (self.sigen.length>0) {
+        [userInfoDIC setObject:self.sigen forKey:@"description"];
+    }
+    
     NSString *session = [PersistenceManager getLoginSession];
-    [UserConnector update:session parameters:userInfoDic receiver:^(NSData *data, NSError *error){
+    [UserConnector update:session parameters:userInfoDIC receiver:^(NSData *data, NSError *error){
         if (error) {
             [ShowMessage showMessage:@"服务器未响应"];
         }else{

@@ -249,26 +249,23 @@
         guildHeadImage.layer.cornerRadius = 40.0F;
         [_createGuild addSubview:guildHeadImage];
         
-        UIButton *createGuildButton = [[UIButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width-80)/2, guildHeadImage.frame.origin.y+guildHeadImage.frame.size.height+30, 85, 30)];
+        UIButton *createGuildButton = [[UIButton alloc] initWithFrame:CGRectMake(20,guildHeadImage.frame.origin.y+guildHeadImage.frame.size.height+30, dtScreenWidth-40, 44)];
         [createGuildButton setTitle:@"创建工会" forState:UIControlStateNormal];
-        [createGuildButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [createGuildButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         createGuildButton.titleLabel.textAlignment = NSTextAlignmentCenter;
         createGuildButton.layer.masksToBounds = YES;
-        createGuildButton.layer.cornerRadius = 5.0f;
-        createGuildButton.layer.borderColor = [[UIColor redColor] CGColor];;
-        createGuildButton.layer.borderWidth = 2.0f;
-        [createGuildButton.layer setMasksToBounds:YES];
-
+        createGuildButton.layer.cornerRadius = 5.0;
+        createGuildButton.backgroundColor = [CorlorTransform colorWithHexString:@"#3f90a4"];
         [createGuildButton addTarget:self action:@selector(didTipcreateGuild:) forControlEvents:UIControlEventTouchUpInside];
 
         [_createGuild addSubview:createGuildButton];
         
-        UITextView *textview = [[UITextView alloc] initWithFrame:CGRectMake(0, createGuildButton.frame.origin.y+createGuildButton.frame.size.height+20, dtScreenWidth, 200)];
+        UITextView *textview = [[UITextView alloc] initWithFrame:CGRectMake(20, createGuildButton.frame.origin.y+createGuildButton.frame.size.height+20, dtScreenWidth-40, 200)];
         textview.backgroundColor=[UIColor whiteColor];
         textview.scrollEnabled = NO;
         textview.editable = NO;
         textview.font = [UIFont systemFontOfSize:15.0f];
-        textview.textColor = [UIColor blackColor];
+        textview.textColor = [UIColor grayColor];
         textview.text = @"1:工会会长拥有专属二维码\n\n2:工会会长永久享受旗下达人接单百分比分成\n\n3:更多特权";//设置显示的文本内容
         [_createGuild addSubview:textview];
     }

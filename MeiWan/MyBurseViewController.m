@@ -34,7 +34,6 @@
 
     self.tabBarController.tabBar.hidden = YES;
 
-    // Do any additional setup after loading the view.
 }
 - (void)refreshMoney{
     
@@ -46,7 +45,7 @@
         }else{
             SBJsonParser*parser=[[SBJsonParser alloc]init];
             NSMutableDictionary *json=[parser objectWithData:data];
-            //NSLog(@"%@",json);
+
             int status = [[json objectForKey:@"status"]intValue];
             if (status == 0) {
                 self.userDic = [json objectForKey:@"entity"];

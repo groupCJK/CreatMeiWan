@@ -49,11 +49,12 @@
     
 
     // Do any additional setup after loading the view.
-    UIButton * saoScan = [UIButton buttonWithType:UIButtonTypeCustom];
-    saoScan.frame = CGRectMake(0, 64, 40, 40);
-    saoScan.backgroundColor = [UIColor greenColor];
-    [saoScan addTarget:self action:@selector(saoScanClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:saoScan];
+    //扫码按钮
+    //UIButton * saoScan = [UIButton buttonWithType:UIButtonTypeCustom];
+    //saoScan.frame = CGRectMake(0, 64, 40, 40);
+    //saoScan.backgroundColor = [UIColor greenColor];
+    //[saoScan addTarget:self action:@selector(saoScanClick) forControlEvents:UIControlEventTouchUpInside];
+    //[self.view addSubview:saoScan];
     
 }
 - (void)longPressGesture:(UILongPressGestureRecognizer *)gesture
@@ -70,13 +71,6 @@
 
 }
 
-/**跳转扫码页面*/
-- (void)saoScanClick
-{
-    scanViewController * san = [[scanViewController alloc]init];
-    san.navigationItem.title = @"扫码";
-    [self.navigationController pushViewController:san animated:YES];
-}
 /**提示框*/
 - (void)showMessageAlert:(NSString *)message image:(UIImage *)image
 {
@@ -95,6 +89,13 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
+/**跳转扫码页面*/
+- (void)saoScanClick
+{
+    scanViewController * san = [[scanViewController alloc]init];
+    san.navigationItem.title = @"扫码";
+    [self.navigationController pushViewController:san animated:YES];
+}
 
 
 

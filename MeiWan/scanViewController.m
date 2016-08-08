@@ -102,6 +102,9 @@
     if (metadataObjects.count>0) {
         AVMetadataMachineReadableCodeObject * metadataObject = [metadataObjects objectAtIndex : 0 ];
         [session stopRunning];
+        
+        
+        
         [self showMessageAlert:metadataObject.stringValue];
     }
 }
