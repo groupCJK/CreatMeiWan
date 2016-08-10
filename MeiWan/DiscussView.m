@@ -194,13 +194,7 @@
     }
 }
 - (void)discussBtnClick:(UIButton*)btn{
-//    self.discuss.selected = !btn.selected;
-//    if (self.discuss.selected) {
-//        self.discuss.lyTitleLable.textColor = [CorlorTransform colorWithHexString:@"56abe4"];
-//    }else{
-//        self.discuss.lyTitleLable.textColor = [CorlorTransform colorWithHexString:@"a9b7b7"];
-//    
-//    }
+
     [self.delegate discuss:self.moveActionFrame];
 }
 

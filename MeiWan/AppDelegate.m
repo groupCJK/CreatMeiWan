@@ -17,7 +17,10 @@
 #import "UserInfo.h"
 #import "MD5.h"
 #import "CorlorTransform.h"
-
+//#import "UMSocial.h"
+//#import "UMSocialWechatHandler.h"
+//#import "UMSocialQQHandler.h"
+//#import "UMSocialSinaSSOHandler.h"
 @interface AppDelegate ()
 
 @property (nonatomic, strong)UserInfo *userinfo;
@@ -78,6 +81,18 @@
     [[EaseMob sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     [self _registerRemoteNotification];
     
+//    /**友盟分享*/
+//    [UMSocialData setAppKey:@"507fcab25270157b37000010"];
+//    
+//    [UMSocialWechatHandler setWXAppId:@"wxd930ea5d5a258f4f" appSecret:@"db426a9829e4b49a0dcac7b4162da6b6" url:@"http://www.umeng.com/social"];
+//
+//    [UMSocialQQHandler setQQWithAppId:@"100424468" appKey:@"c7394704798a158208a74ab60104f0ba" url:@"http://www.umeng.com/social"];
+//
+//    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:@"3921700954"
+//                                              secret:@"04b48b094faeb16683c32669824ebdad"
+//                                         RedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
+//    
+    
     
     return YES;
     
@@ -102,7 +117,14 @@
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:notificationTypes];
     }   
 }
-
+//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+//{
+//    BOOL result = [UMSocialSnsService handleOpenURL:url];
+//    if (result == FALSE) {
+//        //调用其他SDK，例如支付宝SDK等
+//    }
+//    return result;
+//}
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
     [application registerForRemoteNotifications];
 }

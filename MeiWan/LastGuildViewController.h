@@ -10,4 +10,6 @@
 
 @interface LastGuildViewController : UIViewController
 
+@property(nonatomic,strong)NSDictionary * dictionary;
+
 @end

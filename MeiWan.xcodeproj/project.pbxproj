@@ -613,10 +613,12 @@
 		2B5B7D2E1D3893C700CF5354 /* UserDynamicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5B7D291D3893C700CF5354 /* UserDynamicTableViewCell.m */; };
 		2BA4F75D1D4DCB6700A6F68C /* fansCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA4F75C1D4DCB6700A6F68C /* fansCell.m */; };
 		2BB4D54D1D235B4D0004BFA9 /* blackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BB4D54C1D235B4D0004BFA9 /* blackModel.m */; };
+		2BBB51BA1D596F5B007045EC /* newViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBB51B91D596F5B007045EC /* newViewController.m */; };
 		2BDAF7991D226A17008B05EA /* PlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDAF7971D226A17008B05EA /* PlayerView.m */; };
 		2BDAF79C1D2271FE008B05EA /* list_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDAF79B1D2271FE008B05EA /* list_icon.png */; };
 		2BDAF79F1D2272B8008B05EA /* BlacknameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDAF79E1D2272B8008B05EA /* BlacknameController.m */; };
 		2BDAF7A31D228762008B05EA /* blackNameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDAF7A21D228762008B05EA /* blackNameTableViewCell.m */; };
+		2BDEE3091D5ABCFB00767F8B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BDEE3081D5ABCFB00767F8B /* SystemConfiguration.framework */; };
 		2BDFA94D1D32404400E33681 /* UICollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDFA94C1D32404400E33681 /* UICollectionViewWaterfallLayout.m */; };
 		2BDFA9501D3240E200E33681 /* CJKNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDFA94F1D3240E200E33681 /* CJKNavigationView.m */; };
 		2BDFA9551D32416900E33681 /* CJKCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDFA9521D32416900E33681 /* CJKCollectionViewCell.m */; };
@@ -1726,6 +1728,8 @@
 		2BA4F75C1D4DCB6700A6F68C /* fansCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fansCell.m; sourceTree = "<group>"; };
 		2BB4D54B1D235B4D0004BFA9 /* blackModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blackModel.h; sourceTree = "<group>"; };
 		2BB4D54C1D235B4D0004BFA9 /* blackModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = blackModel.m; sourceTree = "<group>"; };
+		2BBB51B81D596F5B007045EC /* newViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = newViewController.h; sourceTree = "<group>"; };
+		2BBB51B91D596F5B007045EC /* newViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newViewController.m; sourceTree = "<group>"; };
 		2BDAF7961D226A17008B05EA /* PlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerView.h; sourceTree = "<group>"; };
 		2BDAF7971D226A17008B05EA /* PlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerView.m; sourceTree = "<group>"; };
 		2BDAF79B1D2271FE008B05EA /* list_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list_icon.png; sourceTree = "<group>"; };
@@ -1733,6 +1737,9 @@
 		2BDAF79E1D2272B8008B05EA /* BlacknameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlacknameController.m; sourceTree = "<group>"; };
 		2BDAF7A11D228762008B05EA /* blackNameTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blackNameTableViewCell.h; sourceTree = "<group>"; };
 		2BDAF7A21D228762008B05EA /* blackNameTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = blackNameTableViewCell.m; sourceTree = "<group>"; };
+		2BDEE3081D5ABCFB00767F8B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		2BDEE30A1D5ABF5500767F8B /* libUMSocial_Sdk_5.2.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libUMSocial_Sdk_5.2.1.a; path = Pods/UMengSocialCOM/Umeng_SDK_Social_iOS_ARM64_5.2.1/UMSocial_Sdk_5.2.1/libUMSocial_Sdk_5.2.1.a; sourceTree = "<group>"; };
+		2BDEE30C1D5ABFBD00767F8B /* libSocialWechat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSocialWechat.a; path = Pods/UMengSocialCOM/Umeng_SDK_Social_iOS_ARM64_5.2.1/UMSocial_Sdk_Extra_Frameworks/Wechat/libSocialWechat.a; sourceTree = "<group>"; };
 		2BDFA94B1D32404400E33681 /* UICollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
 		2BDFA94C1D32404400E33681 /* UICollectionViewWaterfallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewWaterfallLayout.m; sourceTree = "<group>"; };
 		2BDFA94E1D3240E200E33681 /* CJKNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJKNavigationView.h; sourceTree = "<group>"; };
@@ -1782,23 +1789,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				275874DC1CF5519200B78F92 /* libsqlite3.tbd in Frameworks */,
+				27587CB51CF5A1AB00B78F92 /* CoreGraphics.framework in Frameworks */,
+				2BDEE3091D5ABCFB00767F8B /* SystemConfiguration.framework in Frameworks */,
+				275874CE1CF54FF100B78F92 /* libiconv.tbd in Frameworks */,
+				04B138C61BA0814E00AAD93F /* Security.framework in Frameworks */,
 				27587CC21CF5B06A00B78F92 /* libstdc++.6.tbd in Frameworks */,
 				27587CC01CF5AF8D00B78F92 /* libstdc++.tbd in Frameworks */,
 				275874CB1CF54FA900B78F92 /* libEaseMobClientSDK.a in Frameworks */,
-				27587CB51CF5A1AB00B78F92 /* CoreGraphics.framework in Frameworks */,
-				275874DC1CF5519200B78F92 /* libsqlite3.tbd in Frameworks */,
 				182DB4C51BC50490008A3E81 /* MobileCoreServices.framework in Frameworks */,
 				275874DA1CF5511100B78F92 /* CFNetwork.framework in Frameworks */,
 				275874D41CF550C700B78F92 /* libz.tbd in Frameworks */,
 				275874D21CF5509F00B78F92 /* libresolv.tbd in Frameworks */,
 				275874D01CF5506900B78F92 /* libxml2.tbd in Frameworks */,
-				275874CE1CF54FF100B78F92 /* libiconv.tbd in Frameworks */,
 				18CC8EC91BC39937000281CE /* libresolv.9.dylib in Frameworks */,
 				182DB4C71BC504C5008A3E81 /* MessageUI.framework in Frameworks */,
 				18CC8EC71BC39905000281CE /* libxml2.2.dylib in Frameworks */,
 				182DB4C91BC504EF008A3E81 /* libicucore.A.dylib in Frameworks */,
 				27587CBE1CF5AE3400B78F92 /* libopencore-amrnb.a in Frameworks */,
-				04B138C61BA0814E00AAD93F /* Security.framework in Frameworks */,
 				04B138BF1BA07FC800AAD93F /* libcrypto.a in Frameworks */,
 				04B138C01BA07FC800AAD93F /* libssl.a in Frameworks */,
 				04B138BC1BA07F1200AAD93F /* Foundation.framework in Frameworks */,
@@ -4064,8 +4072,7 @@
 			children = (
 				2B2D085D1D530CBF00139467 /* GuildMembersViewController.h */,
 				2B2D085E1D530CBF00139467 /* GuildMembersViewController.m */,
-				98CCB91F1D58369000BC86AA /* LastGuildViewController.h */,
-				98CCB9201D58369000BC86AA /* LastGuildViewController.m */,
+				2BBB51B71D596F37007045EC /* subviews */,
 				98F90B0B1D548FA30098DE1B /* cell */,
 			);
 			name = "公会成员";
@@ -4138,6 +4145,17 @@
 			name = model;
 			sourceTree = "<group>";
 		};
+		2BBB51B71D596F37007045EC /* subviews */ = {
+			isa = PBXGroup;
+			children = (
+				2BBB51B81D596F5B007045EC /* newViewController.h */,
+				2BBB51B91D596F5B007045EC /* newViewController.m */,
+				98CCB91F1D58369000BC86AA /* LastGuildViewController.h */,
+				98CCB9201D58369000BC86AA /* LastGuildViewController.m */,
+			);
+			name = subviews;
+			sourceTree = "<group>";
+		};
 		2BDAF7A01D228746008B05EA /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -4196,6 +4214,9 @@
 		C633A52044CC997BE5466BFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2BDEE30C1D5ABFBD00767F8B /* libSocialWechat.a */,
+				2BDEE30A1D5ABF5500767F8B /* libUMSocial_Sdk_5.2.1.a */,
+				2BDEE3081D5ABCFB00767F8B /* SystemConfiguration.framework */,
 				E78385184BB25331F6F840D7 /* libPods-MeiWan.a */,
 			);
 			name = Frameworks;
@@ -4693,6 +4714,7 @@
 				27587C631CF5861900B78F92 /* EaseMessageHelper.m in Sources */,
 				27587C301CF5861900B78F92 /* MJRefreshConst.m in Sources */,
 				18EB4E431B8018B9000AE087 /* ShowMessage.m in Sources */,
+				2BBB51BA1D596F5B007045EC /* newViewController.m in Sources */,
 				27587C7D1CF5861A00B78F92 /* EaseBaseMessageCell.m in Sources */,
 				2B2D095F1D532BC300139467 /* qrencode.c in Sources */,
 				27587C511CF5861900B78F92 /* UIImageView+EMWebCache.m in Sources */,
@@ -5005,10 +5027,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					"$(ARCHS_STANDARD)armv7s",
-					armv7,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -5047,8 +5066,8 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
 				PROVISIONING_PROFILE = "04b477cc-e2f4-4979-a96d-45f9f0c8030a";
-				SDKROOT = iphoneos;
-				VALID_ARCHS = "armv7 armv7s x86_64";
+				SDKROOT = iphoneos9.3;
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -5056,10 +5075,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					"$(ARCHS_STANDARD)armv7s",
-					armv7,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -5091,9 +5107,9 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
 				PROVISIONING_PROFILE = "04b477cc-e2f4-4979-a96d-45f9f0c8030a";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos9.3;
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "armv7 armv7s x86_64";
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Release;
 		};
@@ -5132,6 +5148,8 @@
 					"$(PROJECT_DIR)/EaseMobSDK/lib",
 					"$(PROJECT_DIR)/EaseUI/EMUIKit/3rdparty/DeviceHelper/VoiceConvert/opencore-amrnb",
 					"$(PROJECT_DIR)/MeiWan",
+					"$(PROJECT_DIR)/Pods/UMengSocialCOM/Umeng_SDK_Social_iOS_ARM64_5.2.1/UMSocial_Sdk_5.2.1",
+					"$(PROJECT_DIR)/Pods/UMengSocialCOM/Umeng_SDK_Social_iOS_ARM64_5.2.1/UMSocial_Sdk_Extra_Frameworks/Wechat",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -5141,7 +5159,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.chuangjike.MeiWan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos9.3;
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "MeiWan/MeiWan-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
@@ -5187,6 +5205,8 @@
 					"$(PROJECT_DIR)/EaseMobSDK/lib",
 					"$(PROJECT_DIR)/EaseUI/EMUIKit/3rdparty/DeviceHelper/VoiceConvert/opencore-amrnb",
 					"$(PROJECT_DIR)/MeiWan",
+					"$(PROJECT_DIR)/Pods/UMengSocialCOM/Umeng_SDK_Social_iOS_ARM64_5.2.1/UMSocial_Sdk_5.2.1",
+					"$(PROJECT_DIR)/Pods/UMengSocialCOM/Umeng_SDK_Social_iOS_ARM64_5.2.1/UMSocial_Sdk_Extra_Frameworks/Wechat",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -5197,7 +5217,7 @@
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos9.3;
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "MeiWan/MeiWan-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";

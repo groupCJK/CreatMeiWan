@@ -16,6 +16,7 @@
 -(void)showInvite;
 -(void)showState;
 -(void)showpicture;
+-(void)showImageView:(UIImageView *)imageview;
 
 @end
 

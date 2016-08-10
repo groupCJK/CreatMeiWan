@@ -16,6 +16,7 @@
 #import "SBJsonParser.h"
 #import "LoginViewController.h"
 #import "PlagerinfoViewController.h"
+#import "newViewController.h"
 @interface GuildMembersViewController ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 {
     UIView * lineView;
@@ -32,7 +33,7 @@
 @property(nonatomic,strong)NSMutableArray * darenArray;
 /**子公会组*/
 @property(nonatomic,strong)NSMutableArray * subGuildArray;
-
+@property(nonatomic,assign)CGFloat lastScrollOffset;
 @end
 
 @implementation GuildMembersViewController
@@ -66,23 +67,27 @@
     scrollview.delegate = self;
     
     [self.view addSubview:scrollview];
-    guildMemberTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, dtScreenWidth, dtScreenHeight-108) style:UITableViewStylePlain];
+    guildMemberTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, dtScreenWidth, dtScreenHeight-108) style:UITableViewStyleGrouped];
     guildMemberTableView.delegate = self;
     guildMemberTableView.dataSource = self;
+    guildMemberTableView.backgroundColor = [UIColor whiteColor];
     [scrollview addSubview:guildMemberTableView];
   
     
-    DaRenTableView = [[UITableView alloc]initWithFrame:CGRectMake(dtScreenWidth, 0, dtScreenWidth, dtScreenHeight-108) style:UITableViewStylePlain];
+    DaRenTableView = [[UITableView alloc]initWithFrame:CGRectMake(dtScreenWidth, 0, dtScreenWidth, dtScreenHeight-108) style:UITableViewStyleGrouped];
     DaRenTableView.delegate = self;
     DaRenTableView.dataSource = self;
+    DaRenTableView.backgroundColor = [UIColor whiteColor];
     [scrollview addSubview:DaRenTableView];
     
-    subGuildTableView = [[UITableView alloc]initWithFrame:CGRectMake(dtScreenWidth*2, 0, dtScreenWidth, dtScreenHeight-108) style:UITableViewStylePlain];
+    subGuildTableView = [[UITableView alloc]initWithFrame:CGRectMake(dtScreenWidth*2, 0, dtScreenWidth, dtScreenHeight-108) style:UITableViewStyleGrouped];
     subGuildTableView.delegate = self;
     subGuildTableView.dataSource = self;
+    subGuildTableView.backgroundColor = [UIColor whiteColor];
     [scrollview addSubview:subGuildTableView];
     
 }
+
 - (void)lineViewMove:(UIButton *)sender
 {
     [self viewAnimation:sender.tag];
@@ -98,13 +103,28 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if ([scrollView isKindOfClass:[UITableView class]]) {
-        
+        CGFloat y = scrollView.contentOffset.y;
+        if (y > self.lastScrollOffset) {
+                //shang
+        } else {
+            
+                //xia
+        }
+        self.lastScrollOffset = y;
     } else {
         [self viewAnimation:scrollView.contentOffset.x/dtScreenWidth];
     }
 }
 
 #pragma mark === tableview delegate datasource
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0.01;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.01;
+}
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 60;
@@ -152,13 +172,19 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (tableView == guildMemberTableView) {
-
+        newViewController * newVC = [[newViewController alloc]init];
+        newVC.dictionary = _memberArray[indexPath.row];
+        [self.navigationController pushViewController:newVC animated:YES];
     }else if (tableView == DaRenTableView){
-        
+        newViewController * newVC2 = [[newViewController alloc]init];
+        newVC2.dictionary = _darenArray[indexPath.row];
+        [self.navigationController pushViewController:newVC2 animated:YES];
     }else{
-        LastGuildViewController *lastVC = [[LastGuildViewController alloc]init];
-        [self.navigationController pushViewController:lastVC animated:YES];
+//        LastGuildViewController *lastVC = [[LastGuildViewController alloc]init];
+//        lastVC.dictionary = _subGuildArray[indexPath.row];
+//        [self.navigationController pushViewController:lastVC animated:YES];
     }
 }
 

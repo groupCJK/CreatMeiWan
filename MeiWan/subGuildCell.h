@@ -12,6 +12,8 @@
 
 @property(nonatomic,strong)UIImageView * guildImage;
 @property(nonatomic,strong)UILabel * guildName;
+@property(nonatomic,strong)UILabel * huiZhang;
+@property(nonatomic,strong)UILabel * accumulate;
 
 @property(nonatomic,strong)NSDictionary * dictionary;
 

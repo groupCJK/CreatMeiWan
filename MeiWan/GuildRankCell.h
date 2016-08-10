@@ -14,6 +14,7 @@
 
 @property(nonatomic,strong)UIImageView * guildLogo;
 @property(nonatomic,strong)UILabel * guidName;
-@property(nonatomic,strong)UILabel * personNumber;
+@property(nonatomic,strong)UILabel * shouYi;
+@property(nonatomic,strong)UILabel * huiZhang;
 
 @end

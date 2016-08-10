@@ -268,7 +268,7 @@
     self.balanceLabel.textColor = [UIColor grayColor];
     //公会管理今日收益
     self.todayProfit.textColor = [UIColor grayColor];
-
+    self.todayProfit.text = [NSString stringWithFormat:@"今日收益:%.2f",[self.userInfoData[@""]doubleValue]];
     NSString *thesame = [NSString stringWithFormat:@"%ld",self.userinfo.userId];
     if ([thesame isEqualToString:@"100000"] || [thesame isEqualToString:@"100001"]) {
         self.mywallet.text = @"安全设置";

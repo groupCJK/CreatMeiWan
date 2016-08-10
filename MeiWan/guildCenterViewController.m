@@ -23,7 +23,7 @@
 #import "UIImageView+WebCache.h"
 #import "MBProgressHUD.h"
 #import "CorlorTransform.h"
-#import "RecordTableViewController.h"
+//#import "RecordTableViewController.h"
 #import "ShowMessage.h"
 
 @interface guildCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -121,8 +121,9 @@
             [self.navigationController pushViewController:guildBankListVC animated:YES];
         }break;
         case 4:{
-            RecordTableViewController *cashManageMentVC = [[RecordTableViewController alloc] init];
+            CashManagementViewController *cashManageMentVC = [[CashManagementViewController alloc] init];
             cashManageMentVC.title = @"提现管理";
+            cashManageMentVC.dictionary = self.guildArray;
             cashManageMentVC.view.backgroundColor = [UIColor whiteColor];
             [self.navigationController pushViewController:cashManageMentVC animated:YES];
         }break;
@@ -199,16 +200,30 @@
         experienceLabel.clipsToBounds = YES;
         [guildInfo addSubview:experienceLabel];
         CGFloat allNeedPeople;
-        CGFloat people = [self.guildArray[@"people"] integerValue];
-        if ([self.guildArray[@"level"] integerValue]==1){
+        CGFloat people = [self.guildArray[@"exp"] integerValue];
+        int level;
+        if (people<=20) {
+            level = 1;
+        }else if (20<people&&people<=100){
+            level = 2;
+        }else if (people>100&&people<=500){
+            level = 3;
+        }else if (people>500&&people<=2000){
+            level = 4;
+        }else if (people>2000&&people<=5000){
+            level = 5;
+        }else{
+            level = 6;
+        }
+        if (level==1){
             allNeedPeople = 20;
-        }else if ([self.guildArray[@"level"] integerValue]==2){
+        }else if (level==2){
             allNeedPeople = 100;
-        }else if ([self.guildArray[@"level"] integerValue]==3){
+        }else if (level==3){
             allNeedPeople = 500;
-        }else if ([self.guildArray[@"level"] integerValue]==4){
+        }else if (level==4){
             allNeedPeople = 2000;
-        }else if ([self.guildArray[@"level"] integerValue]==5){
+        }else if (level==5){
             allNeedPeople = 5000;
         }else{
             allNeedPeople = 10000;
@@ -230,8 +245,7 @@
         [guildInfo addSubview:colorLabel];
         
         UILabel *levelLabel = [[UILabel alloc] initWithFrame:CGRectMake(guildHeadImage.frame.origin.y+guildHeadImage.frame.size.width+10, experienceLabel.frame.origin.y+experienceLabel.frame.size.height+5, 80, 10)];
-        NSString *level = [self.guildArray objectForKey:@"level"];
-        levelLabel.text = [NSString stringWithFormat:@"%@ 级工会",level];
+        levelLabel.text = [NSString stringWithFormat:@"%d 级工会",level];
         levelLabel.font = [UIFont systemFontOfSize:14.0];
         levelLabel.textColor = [CorlorTransform colorWithHexString:@"#ffd700"];
         UILabel *line2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 150, dtScreenWidth, 1)];

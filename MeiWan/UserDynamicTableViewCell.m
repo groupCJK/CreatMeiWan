@@ -66,6 +66,9 @@
                 dynamicImage.clipsToBounds = YES;
                 [self addSubview:dynamicImage];
                 self.dynamicImage = dynamicImage;
+                self.dynamicImage.userInteractionEnabled = YES;
+                UITapGestureRecognizer * gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showPicture:)];
+                [self.dynamicImage addGestureRecognizer:gesture];
             }
         }
         
@@ -93,6 +96,12 @@
 
 - (void)showState:(id)sender {
     [self.delegate showState];
+}
+- (void)showPicture:(UITapGestureRecognizer*)gesture
+{
+    UIImageView * imageview = (UIImageView *)[gesture view];
+    [self.delegate showImageView:imageview];
+    [self.delegate showpicture];
 }
 
 - (void)awakeFromNib {

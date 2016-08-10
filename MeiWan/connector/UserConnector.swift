@@ -18,8 +18,8 @@ import UIKit
 
 @objc public class UserConnector: NSObject {
     
-    private static var userUrl=NSUserDefaults .standardUserDefaults().valueForKey("0") as! String
-    private static var anOtherUrl = NSUserDefaults.standardUserDefaults().valueForKey("0") as! String
+    private static var userUrl=NSUserDefaults .standardUserDefaults().valueForKey("1") as! String
+    private static var anOtherUrl = NSUserDefaults.standardUserDefaults().valueForKey("1") as! String
     
     private static func UserURL()->String?{
         
@@ -32,11 +32,11 @@ import UIKit
             i = i+1
             print(i)
             if (i%2==0){
-                userUrl = NSUserDefaults .standardUserDefaults().valueForKey("0") as! String
+                userUrl = NSUserDefaults .standardUserDefaults().valueForKey("1") as! String
                 anOtherUrl = NSUserDefaults.standardUserDefaults().valueForKey("1") as! String
             }else{
                 userUrl = NSUserDefaults .standardUserDefaults().valueForKey("1") as! String
-                anOtherUrl = NSUserDefaults.standardUserDefaults().valueForKey("0") as! String
+                anOtherUrl = NSUserDefaults.standardUserDefaults().valueForKey("1") as! String
             }
             
         }
@@ -1261,6 +1261,29 @@ import UIKit
                 
         }
     }
+    
+    /**公会排行榜*/
+    public static func findUnionsRank(offset:Int,limit:Int,receiver:(data:NSData?,error:NSError?)->()){
+        var parameters:Dictionary<String,AnyObject> = [:]
+
+        parameters["offset"]=offset
+        parameters["limit"]=limit
+        
+        request(.GET, UserURL()!+"findUnionsRank", parameters:parameters as? [String : NSObject])
+            .response { request, r, data, error in
+                
+                if (error==nil){
+                    
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
+                }
+                
+                receiver(data:data!.gunzippedData(), error:error)
+                
+        }
+    }
+
 
 //    findMyUnionMembers
 //    @QueryParam("session") String session,

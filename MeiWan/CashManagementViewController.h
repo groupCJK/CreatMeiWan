@@ -10,4 +10,6 @@
 
 @interface CashManagementViewController : UIViewController
 
+@property(nonatomic,strong)NSDictionary * dictionary;
+
 @end
