@@ -17,9 +17,9 @@
 #import "UserInfo.h"
 #import "MD5.h"
 #import "CorlorTransform.h"
-//#import "UMSocial.h"
-//#import "UMSocialWechatHandler.h"
-//#import "UMSocialQQHandler.h"
+#import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
+#import "UMSocialQQHandler.h"
 //#import "UMSocialSinaSSOHandler.h"
 @interface AppDelegate ()
 
@@ -81,17 +81,16 @@
     [[EaseMob sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     [self _registerRemoteNotification];
     
-//    /**友盟分享*/
-//    [UMSocialData setAppKey:@"507fcab25270157b37000010"];
-//    
-//    [UMSocialWechatHandler setWXAppId:@"wxd930ea5d5a258f4f" appSecret:@"db426a9829e4b49a0dcac7b4162da6b6" url:@"http://www.umeng.com/social"];
-//
-//    [UMSocialQQHandler setQQWithAppId:@"100424468" appKey:@"c7394704798a158208a74ab60104f0ba" url:@"http://www.umeng.com/social"];
-//
-//    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:@"3921700954"
-//                                              secret:@"04b48b094faeb16683c32669824ebdad"
-//                                         RedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
-//    
+    /**友盟分享*/
+    [UMSocialData setAppKey:@"553b7a5867e58e5b64000cc7"];
+    
+    
+    [UMSocialWechatHandler setWXAppId:@"wx4555cf92f3ab6550" appSecret:@"3e6e6d20156505d96dac62c64b496090" url:@"http://www.umeng.com/social"];
+
+    [UMSocialQQHandler setQQWithAppId:@"1104883138" appKey:@"1FdgC7ac77v0fnfm" url:@"http://www.umeng.com/social"];
+
+    
+
     
     
     return YES;

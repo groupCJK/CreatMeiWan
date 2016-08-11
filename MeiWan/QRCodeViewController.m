@@ -9,18 +9,8 @@
 #import "QRCodeViewController.h"
 #import "QRCodeGenerator.h"
 #import "scanViewController.h"
-
-//#import <AssetsLibrary/ALAsset.h>
-//
-//#import <AssetsLibrary/ALAssetsLibrary.h>
-//
-//#import <AssetsLibrary/ALAssetsGroup.h>
-//
-//#import <AssetsLibrary/ALAssetRepresentation.h>
-//#import "ShowMessage.h"
-
 #import "creatAlbum.h"
-
+#import "UMSocial.h"
 @interface QRCodeViewController ()
 {
     AVCaptureSession * session;//输入输出的中间桥梁
@@ -67,13 +57,12 @@
     [imageView addGestureRecognizer:longPressGesture];
     
 
-    // Do any additional setup after loading the view.
-    //扫码按钮
-    //UIButton * saoScan = [UIButton buttonWithType:UIButtonTypeCustom];
-    //saoScan.frame = CGRectMake(0, 64, 40, 40);
-    //saoScan.backgroundColor = [UIColor greenColor];
-    //[saoScan addTarget:self action:@selector(saoScanClick) forControlEvents:UIControlEventTouchUpInside];
-    //[self.view addSubview:saoScan];
+    UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, imageView.frame.size.height+imageView.frame.origin.y+20, dtScreenWidth, 20)];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.font = [UIFont systemFontOfSize:14.0];
+    label.text = @"长按分享到微信或QQ";
+    label.textColor = [UIColor grayColor];
+    [self.view addSubview:label];
     
 }
 - (void)longPressGesture:(UILongPressGestureRecognizer *)gesture
@@ -102,9 +91,57 @@
 
         [creatAlbum createAlbumSaveImage:image];
     }];
+    UMSocialUrlResource * url = [[UMSocialUrlResource alloc]init];
     
+    url.url =[NSString stringWithFormat:@"http://web.chuangjk.com/wx/peiwan-server/static/promoter/index.html?unionId=%@",self.guildID];
+    
+    NSString * contentext = @"美玩app是一款火爆的社交软件单身汪们还愁情人节没人过么？这里的妹子都是纯正的软妹子，这里的汉子都是纯正的女汉子，到这里来约会，陪你吃，陪你玩，陪你睡";
+    
+    image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.headerURL]]];
+    
+    UIAlertAction * shareAction = [UIAlertAction actionWithTitle:@"分享到微信好友" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [UMSocialData defaultData].extConfig.wechatSessionData.title = @"公会火爆招人中...";
+        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:contentext image:image location:nil urlResource:url presentedController:self completion:^(UMSocialResponseEntity *response){
+            if (response.responseCode == UMSResponseCodeSuccess) {
+                NSLog(@"分享成功！");
+            }
+        }];
+    }];
+    
+    UIAlertAction * share2Action = [UIAlertAction actionWithTitle:@"分享到微信朋友圈" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [UMSocialData defaultData].extConfig.wechatSessionData.title = @"公会火爆招人中...";
+        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:contentext image:image location:nil urlResource:url presentedController:self completion:^(UMSocialResponseEntity *response){
+            if (response.responseCode == UMSResponseCodeSuccess) {
+                NSLog(@"分享成功！");
+            }
+        }];
+
+    }];
+
+    UIAlertAction * share3Action = [UIAlertAction actionWithTitle:@"分享到QQ好友" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [UMSocialData defaultData].extConfig.wechatSessionData.title = @"公会火爆招人中...";
+        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:contentext image:image location:nil urlResource:url presentedController:self completion:^(UMSocialResponseEntity *response){
+            if (response.responseCode == UMSResponseCodeSuccess) {
+                NSLog(@"分享成功！");
+            }
+        }];
+    }];
+
+    UIAlertAction * share4Action = [UIAlertAction actionWithTitle:@"分享到QQ空间" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [UMSocialData defaultData].extConfig.wechatSessionData.title = @"公会火爆招人中...";
+        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:contentext image:image location:nil urlResource:url presentedController:self completion:^(UMSocialResponseEntity *response){
+            if (response.responseCode == UMSResponseCodeSuccess) {
+                NSLog(@"分享成功！");
+            }
+        }];
+    }];
+
     [alertController addAction:cancelAction];
     [alertController addAction:sureAction];
+    [alertController addAction:shareAction];
+    [alertController addAction:share2Action];
+    [alertController addAction:share3Action];
+    [alertController addAction:share4Action];
     [self presentViewController:alertController animated:YES completion:nil];
 }
 

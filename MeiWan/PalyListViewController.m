@@ -59,70 +59,54 @@
 @implementation PalyListViewController
 
 #pragma mark - mapView Delegate
-
-- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    
-    switch (status)
-    {        case kCLAuthorizationStatusNotDetermined:
-        if ([manager respondsToSelector:@selector(requestAlwaysAuthorization)])
-        {
-            [manager requestWhenInUseAuthorization];
-        }
-            break;
-           
-        default:
-            break;
-    }
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+#pragma mark - mapView Delegate
+-(void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation
 {
-
-    NSMutableDictionary *userInfoDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:newLocation.coordinate.latitude],@"latitude",[NSNumber numberWithDouble:newLocation.coordinate.longitude],@"longitude",nil];
-
-    NSString *session = [PersistenceManager getLoginSession];
-    [UserConnector update:session parameters:userInfoDic receiver:^(NSData *data, NSError *error){
-        if (error) {
-            if(!isTest){
-                [ShowMessage showMessage:@"服务器未响应"];
-            }
-        }else{
-            SBJsonParser*parser=[[SBJsonParser alloc]init];
-            NSMutableDictionary *json=[parser objectWithData:data];
-            //                NSLog(@"%@",json);
-            int status = [[json objectForKey:@"status"]intValue];
-            if (status == 0) {
-
-            }else if(status == 1){
-
+    if(updatingLocation) {
+        
+        //取出当前位置的坐标
+        NSMutableDictionary *userInfoDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:userLocation.coordinate.latitude],@"latitude",[NSNumber numberWithDouble:userLocation.coordinate.longitude],@"longitude",nil];
+        NSString *session = [PersistenceManager getLoginSession];
+        [UserConnector update:session parameters:userInfoDic receiver:^(NSData *data, NSError *error){
+            if (error) {
+                if(!isTest){
+                    [ShowMessage showMessage:@"服务器未响应"];
+                }
             }else{
-
+                SBJsonParser*parser=[[SBJsonParser alloc]init];
+                NSMutableDictionary *json=[parser objectWithData:data];
+                //                NSLog(@"%@",json);
+                int status = [[json objectForKey:@"status"]intValue];
+                if (status == 0) {
+                    
+                }else if(status == 1){
+                    
+                }else{
+                    
+                }
+                
             }
             
-        }
-        
-    }];
-    //系统会一直更新数据，直到选择停止更新，因为我们只需要获得一次经纬度即可，所以获取之后就停止更新
-    [manager stopUpdatingLocation];
+        }];
+        //系统会一直更新数据，直到选择停止更新，因为我们只需要获得一次经纬度即可，所以获取之后就停止更新
+    }
+    
 }
+
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
     return YES;
 }
 - (void)loginHuanxin
 {
-    
     NSString *product = [NSString stringWithFormat:@"product_%@",[[PersistenceManager getLoginUser] objectForKey:@"id"]];
     NSString *password = [NSString stringWithString:[MD5 md5:product]];
-    
     //　　测试AppKey
     if (!product){
-        
         //环信用户组
         [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:product password:password completion:^(NSDictionary *loginInfo, EMError *error) {
             NSLog(@"登录成功");
             //获取数据库中的数据
             [[EaseMob sharedInstance].chatManager loadDataFromDatabase];
-            
         } onQueue:nil];
     }else {
         [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:product password:password completion:^(NSDictionary *loginInfo, EMError *error) {
@@ -130,22 +114,17 @@
             [[EaseMob sharedInstance].chatManager setIsAutoLoginEnabled:YES];
         } onQueue:nil];
     }
-    //设置所有的默认美玩用户为好友，包括黑名单用户
-    [[EaseMob sharedInstance].chatManager setIsAutoFetchBuddyList:YES];
+//    //设置所有的默认美玩用户为好友，包括黑名单用户
+//    [[EaseMob sharedInstance].chatManager setIsAutoFetchBuddyList:YES];
 }
 - (void)initializeLocationService {
-    // 初始化定位管理器
-    _locationManager = [[CLLocationManager alloc] init];
-    // 设置代理
-    _locationManager.delegate = self;
-    // 设置定位精确度到米
-    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    // 设置过滤器为无
-    // 开始定位
-    [_locationManager requestAlwaysAuthorization];//这句话ios8以上版本使用。
-    [_locationManager startUpdatingLocation];
+    //创建地图视图
+    self.mapview = [[MAMapView alloc]init];
+    self.mapview.delegate = self;
+    self.mapview.showsUserLocation = YES;
 }
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     [self initializeLocationService];
 
