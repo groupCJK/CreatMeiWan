@@ -2487,7 +2487,7 @@
                             <gestureRecognizers/>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="VJY-4k-TkF">
-                            <rect key="frame" x="0.0" y="502" width="320" height="18"/>
+                            <rect key="frame" x="0.0" y="546" width="320" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
@@ -2561,8 +2561,58 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="15D-oc-hCa">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="MoJ-Wb-Fxw">
                                         <rect key="frame" x="0.0" y="352" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MoJ-Wb-Fxw" id="ejg-EX-Ucp">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="gonghuiSearch.png" translatesAutoresizingMaskIntoConstraints="NO" id="g2M-6M-Ulq">
+                                                    <rect key="frame" x="12" y="12" width="20" height="20"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="搜索好友" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUb-kU-Tcl">
+                                                    <rect key="frame" x="47" y="13" width="68" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="2nd-bG-xAU">
+                                        <rect key="frame" x="0.0" y="396" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2nd-bG-xAU" id="rMJ-gJ-OxI">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sharefenxiang" translatesAutoresizingMaskIntoConstraints="NO" id="KpS-B0-NWm">
+                                                    <rect key="frame" x="12" y="12" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="pjx-s6-A93"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分享" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Zq-qg-nHT">
+                                                    <rect key="frame" x="47" y="13" width="68" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="KpS-B0-NWm" firstAttribute="leading" secondItem="rMJ-gJ-OxI" secondAttribute="leadingMargin" constant="4" id="Gkl-YT-94L"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="2Zq-qg-nHT" secondAttribute="bottom" constant="4" id="KZd-mE-Wc3"/>
+                                                <constraint firstItem="2Zq-qg-nHT" firstAttribute="leading" secondItem="KpS-B0-NWm" secondAttribute="trailing" constant="15" id="SHo-Zx-ljx"/>
+                                                <constraint firstItem="2Zq-qg-nHT" firstAttribute="top" secondItem="rMJ-gJ-OxI" secondAttribute="topMargin" constant="5" id="dri-g3-p8h"/>
+                                                <constraint firstItem="KpS-B0-NWm" firstAttribute="top" secondItem="rMJ-gJ-OxI" secondAttribute="topMargin" constant="4" id="i3W-0n-A6v"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="KpS-B0-NWm" secondAttribute="bottom" constant="3" id="qXb-Lf-tHh"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="2Zq-qg-nHT" secondAttribute="trailing" constant="197" id="yFX-sC-6kv"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="15D-oc-hCa">
+                                        <rect key="frame" x="0.0" y="440" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="15D-oc-hCa" id="fwt-P3-irz">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -2597,7 +2647,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="dl4-Mo-XJh">
-                                        <rect key="frame" x="0.0" y="396" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="484" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dl4-Mo-XJh" id="610-jz-EeD">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -2639,25 +2689,6 @@
                                         <connections>
                                             <segue destination="f7r-ze-Stv" kind="push" identifier="gonghui" id="aXc-0z-doE"/>
                                         </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="MoJ-Wb-Fxw">
-                                        <rect key="frame" x="0.0" y="440" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MoJ-Wb-Fxw" id="ejg-EX-Ucp">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="gonghuiSearch.png" translatesAutoresizingMaskIntoConstraints="NO" id="g2M-6M-Ulq">
-                                                    <rect key="frame" x="12" y="12" width="20" height="20"/>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="搜索好友" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUb-kU-Tcl">
-                                                    <rect key="frame" x="47" y="13" width="68" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -4349,6 +4380,7 @@
         <image name="register_bg.png" width="320" height="455"/>
         <image name="register_bg2.png" width="640" height="910"/>
         <image name="register_btn.png" width="228" height="64"/>
+        <image name="sharefenxiang" width="128" height="128"/>
         <image name="yuanjiao-ju-xing.png" width="574" height="176"/>
     </resources>
     <inferredMetricsTieBreakers>

@@ -113,6 +113,20 @@
     }
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(WillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    
+    UILabel * showtext = [[UILabel alloc]init];
+    showtext.text = @"该服务资金安全由美玩提供全程担保";
+    showtext.font = [UIFont systemFontOfSize:15.0];
+    showtext.textColor = [CorlorTransform colorWithHexString:@"666666"];
+
+    CGSize size_show = [showtext.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:showtext.font,NSFontAttributeName, nil]];
+    showtext.frame = CGRectMake(dtScreenWidth/2-size_show.width/2, dtScreenHeight-80, size_show.width, size_show.height);
+    [self.view addSubview:showtext];
+    UIImageView * imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"dun.jpg"]];
+    imageView.frame = CGRectMake(showtext.frame.origin.x+showtext.frame.size.width, showtext.frame.origin.y, showtext.frame.size.height, showtext.frame.size.height);
+    imageView.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:imageView];
+    
 }
 - (IBAction)chioce:(UIButton *)sender {
     NSArray * usertimeTags = [_playerInfo objectForKey:@"userTimeTags"];

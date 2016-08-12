@@ -65,7 +65,7 @@
     self.guildNameTextFild.borderStyle = UITextBorderStyleRoundedRect;
     self.guildNameTextFild.textAlignment = NSTextAlignmentLeft;
     self.guildNameTextFild.font = [UIFont systemFontOfSize:13.0f];
-    self.guildNameTextFild.placeholder = @"创建工会的昵称";
+    self.guildNameTextFild.placeholder = @"创建公会的昵称";
     [self.guildNameTextFild setValue:[UIFont boldSystemFontOfSize:11.0f] forKeyPath:@"_placeholderLabel.font"];
     [self.guildNameTextFild setValue:[UIColor colorWithWhite:0.5 alpha:0.5] forKeyPath:@"_placeholderLabel.textColor"];
     self.guildNameTextFild.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -98,7 +98,7 @@
 - (void)upDataButton:(UIButton *)sender{
     
     if (self.guildName == nil) {
-        [ShowMessage showMessage:@"工会名不能为空"];
+        [ShowMessage showMessage:@"公会名不能为空"];
     }else{
         NSData *data = UIImagePNGRepresentation(self.guildHeadImage.image);
         NSDictionary * fileInfo = [UMUUploaderManager fetchFileInfoDictionaryWith:data];

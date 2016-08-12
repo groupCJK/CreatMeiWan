@@ -46,11 +46,41 @@
 @property (nonatomic, strong) NSDictionary *stateDatas;
 @property (nonatomic, strong) UserDynamicTableViewCell *dynamicCell;
 @property (nonatomic, strong) NSArray *arr1;
+@property (nonatomic, strong) NSMutableArray * MyfriendArray;
 
 @end
 
 @implementation PlagerinfoViewController
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSString * session = [PersistenceManager getLoginSession];
+    [UserConnector findMyFriends:session receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (error) {
+            [ShowMessage showMessage:@"服务器未响应"];
+        }else{
+            SBJsonParser*parser=[[SBJsonParser alloc]init];
+            NSMutableDictionary *json=[parser objectWithData:data];
+            int status = [json[@"status"] intValue];
+            if (status == 0) {
+                
+                self.MyfriendArray = json[@"entity"];
 
+                NSDictionary *userInfo = [PersistenceManager getLoginUser];
+                NSString *thesame = [NSString stringWithFormat:@"%ld",[[userInfo objectForKey:@"id"]longValue]];
+                if ([thesame isEqualToString:@"100000"] || [thesame isEqualToString:@"100001"])
+                {
+                    [self orderButtonView];
+                }else{
+                    [self buttonView];
+                }
+
+            }else{}
+            
+        }
+    }];
+   
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -60,15 +90,7 @@
     
     [self playerTableView];
     
-    NSDictionary *userInfo = [PersistenceManager getLoginUser];
-    NSString *thesame = [NSString stringWithFormat:@"%ld",[[userInfo objectForKey:@"id"]longValue]];
-    if ([thesame isEqualToString:@"100000"] || [thesame isEqualToString:@"100001"])
-    {
-        [self orderButtonView];
-    }else{
-        [self buttonView];
-    }
-
+    
     NSString *session= [PersistenceManager getLoginSession];
     [UserConnector findPeiwanById:session userId:[self.playerInfo objectForKey:@"id"] receiver:^(NSData *data,NSError *error){
         if (error) {
@@ -239,13 +261,24 @@
         [_buttonView addSubview:invitButton];
         
         UIButton *focusButton = [[UIButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width-90)/2, 20, 90, 30)];
-        [focusButton setTitle:@"关注" forState:UIControlStateNormal];
+        if (self.playerInfo != nil) {
+            [_MyfriendArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([obj isEqualToDictionary:self.playerInfo]) {
+                    [focusButton setTitle:@"取消关注" forState:UIControlStateNormal];
+                    focusButton.backgroundColor = [CorlorTransform colorWithHexString:@"3366cc"];
+
+                }else{
+                     [focusButton setTitle:@"关注" forState:UIControlStateNormal];
+                    focusButton.backgroundColor = [CorlorTransform colorWithHexString:@"#FF69B4"];
+
+                }
+
+            }];
+        }
         [focusButton setTintColor:[UIColor whiteColor]];
-        focusButton.backgroundColor = [CorlorTransform colorWithHexString:@"#FF69B4"];
         focusButton.layer.masksToBounds = YES;
         focusButton.layer.cornerRadius = 6.0f;
         [focusButton addTarget:self action:@selector(didTipfocusButton:) forControlEvents:UIControlEventTouchUpInside];
-        self.addFriend = focusButton;
         [_buttonView addSubview:focusButton];
         
         UIButton *chatButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width-100, 20, 90, 30)];
@@ -330,28 +363,59 @@
         [setting getOpen];
     }
 }
-
+/**关注按钮*/
 - (void)didTipfocusButton:(UIButton *)sender{
+    
     NSString *sesstion = [PersistenceManager getLoginSession];
-    [UserConnector addFriend:sesstion friendId:[self.playerInfo objectForKey:@"id"] receiver:^(NSData *data,NSError *error){
-        if (error) {
-            [ShowMessage showMessage:@"服务器未响应"];
-        }else{
-            SBJsonParser*parser=[[SBJsonParser alloc]init];
-            NSMutableDictionary *json=[parser objectWithData:data];
-            //NSLog(@"%@",json);
-            int status = [[json objectForKey:@"status"]intValue];
-            if (status == 0) {
-                [self.addFriend setTitle:@"已关注" forState:UIControlStateNormal];
-                [ShowMessage showMessage:@"关注成功"];
-            }else if (status == 1){
-                [self jumpout];
+
+    if ([sender.titleLabel.text isEqualToString:@"取消关注"]) {
+        NSLog(@"删除好友");
+        
+        [UserConnector deleteFriend:sesstion friendId:[self.playerInfo objectForKey:@"id"] receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+            if (error) {
+                [ShowMessage showMessage:@"服务器未响应"];
             }else{
-                
+                SBJsonParser*parser=[[SBJsonParser alloc]init];
+                NSMutableDictionary *json=[parser objectWithData:data];
+                //NSLog(@"%@",json);
+                int status = [[json objectForKey:@"status"]intValue];
+                if (status == 0) {
+                    [ShowMessage showMessage:@"取消关注成功"];
+                    [sender setTitle:@"关注" forState:UIControlStateNormal];
+                    [sender setBackgroundColor:[CorlorTransform colorWithHexString:@"#FF69B4"]];
+                }else if (status == 1){
+                    [self jumpout];
+                }else{
+                    
+                }
             }
-        }
-    }];
+        }];
+    }else{
+        NSLog(@"添加好友");
+        [UserConnector addFriend:sesstion friendId:[self.playerInfo objectForKey:@"id"] receiver:^(NSData *data,NSError *error){
+            if (error) {
+                [ShowMessage showMessage:@"服务器未响应"];
+            }else{
+                SBJsonParser*parser=[[SBJsonParser alloc]init];
+                NSMutableDictionary *json=[parser objectWithData:data];
+                //NSLog(@"%@",json);
+                int status = [[json objectForKey:@"status"]intValue];
+                if (status == 0) {
+                    [ShowMessage showMessage:@"关注成功"];
+                    [sender setTitle:@"取消关注" forState:UIControlStateNormal];
+                    [sender setBackgroundColor:[CorlorTransform colorWithHexString:@"3366cc"]];
+                }else if (status == 1){
+                    [self jumpout];
+                }else{
+                    
+                }
+            }
+        }];
+
+    }
 }
+
+
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"userAssess"]) {
@@ -385,7 +449,6 @@
 
 //重加载网络请求
 - (void)setUpLoaduserInfo{
-    self.userInfoDic = [PersistenceManager getLoginUser];
     self.userInfo = [[UserInfo alloc]initWithDictionary: [PersistenceManager getLoginUser]];
 }
 

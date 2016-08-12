@@ -53,7 +53,7 @@
     [self.view addSubview:imageView];
     //长按手势
     UILongPressGestureRecognizer * longPressGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPressGesture:)];
-    longPressGesture.minimumPressDuration = 2.0;
+    longPressGesture.minimumPressDuration = 0.5;
     [imageView addGestureRecognizer:longPressGesture];
     
 
@@ -94,12 +94,12 @@
     
     
     NSString * URLString = [NSString stringWithFormat:@"http://web.chuangjk.com:8083/promoter/index.html?unionId=%@",self.guildID];
-    NSString * contentext = @"美玩app是一款火爆的社交软件单身汪们还愁情人节没人过么？这里的妹子都是纯正的软妹子，这里的汉子都是纯正的女汉子，到这里来约会，陪你吃，陪你玩，陪你睡";
+    NSString * contentext = @"美玩app解决单身汪们的惨淡生活,这里的妹子都是纯正的软妹子，这里的汉子都是纯正的女汉子，到这里来约会，陪你吃，陪你玩，陪你睡";
     
     image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.headerURL]]];
-    
+    NSString * titleString = @"我的公会需要您的到访...";
     UIAlertAction * shareAction = [UIAlertAction actionWithTitle:@"分享到微信好友" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [UMSocialData defaultData].extConfig.wechatSessionData.title = @"公会火爆招人中...";
+        [UMSocialData defaultData].extConfig.wechatSessionData.title = titleString;
         [UMSocialData defaultData].extConfig.wechatTimelineData.url = URLString;
         [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:contentext image:image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
             if (response.responseCode == UMSResponseCodeSuccess) {
@@ -109,7 +109,7 @@
     }];
     
     UIAlertAction * share2Action = [UIAlertAction actionWithTitle:@"分享到微信朋友圈" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [UMSocialData defaultData].extConfig.wechatTimelineData.title = @"公会火爆招人中...";
+        [UMSocialData defaultData].extConfig.wechatTimelineData.title = titleString;
         [UMSocialData defaultData].extConfig.wechatTimelineData.url = URLString;
         [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:contentext image:image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
             if (response.responseCode == UMSResponseCodeSuccess) {
@@ -120,7 +120,7 @@
     }];
 
     UIAlertAction * share3Action = [UIAlertAction actionWithTitle:@"分享到QQ好友" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [UMSocialData defaultData].extConfig.qqData.title = @"公会火爆招人中...";
+        [UMSocialData defaultData].extConfig.qqData.title = titleString;
         [UMSocialData defaultData].extConfig.qqData.url = URLString;
         [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:contentext image:image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
             if (response.responseCode == UMSResponseCodeSuccess) {
@@ -130,7 +130,7 @@
     }];
 
     UIAlertAction * share4Action = [UIAlertAction actionWithTitle:@"分享到QQ空间" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [UMSocialData defaultData].extConfig.qzoneData.title = @"公会火爆招人中...";
+        [UMSocialData defaultData].extConfig.qzoneData.title = titleString;
         [UMSocialData defaultData].extConfig.qzoneData.url = URLString;
 
         [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:contentext image:image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){

@@ -60,7 +60,7 @@
     [super viewDidLoad];
     
     
-    _dataUnionImage = @[@"pw_qr",@"pw_group",@"",@"pw_rank",@"qianbao"];
+    _dataUnionImage = @[@"pw_qr",@"pw_group",@"qianbao",@"pw_rank",@"qianbao"];
     
     [self loadNet];
     
@@ -115,7 +115,7 @@
         case 0:
         {
             QRCodeViewController *orCodeVC = [[QRCodeViewController alloc] init];
-            orCodeVC.title = @"工会二维码";
+            orCodeVC.title = @"公会二维码";
             orCodeVC.guildID = self.guildArray[@"id"];
             orCodeVC.headerURL = self.guildArray[@"headUrl"];
             orCodeVC.view.backgroundColor = [UIColor whiteColor];
@@ -124,21 +124,21 @@
         case 1:
         {
             GuildMembersViewController *guildMemberVC = [[GuildMembersViewController alloc] init];
-            guildMemberVC.title = @"工会成员";
+            guildMemberVC.title = @"公会成员";
             guildMemberVC.view.backgroundColor = [UIColor whiteColor];
-            guildMemberVC.title = @"工会成员";
+            guildMemberVC.title = @"公会成员";
             [self.navigationController pushViewController:guildMemberVC animated:YES];
         }break;
         case 2:{
             OrderListViewController *orderListVC = [[OrderListViewController alloc] init];
             orderListVC.view.backgroundColor = [UIColor whiteColor];
-            orderListVC.title = @"工会订单";
+            orderListVC.title = @"公会订单";
             [self.navigationController pushViewController:orderListVC animated:YES];
         }break;
         case 3:{
             GuildRankListViewController *guildBankListVC = [[GuildRankListViewController alloc] init];
             guildBankListVC.view.backgroundColor = [UIColor whiteColor];
-            guildBankListVC.title = @"工会排行";
+            guildBankListVC.title = @"公会排行";
             [self.navigationController pushViewController:guildBankListVC animated:YES];
         }break;
         case 4:{
@@ -266,7 +266,7 @@
         [guildInfo addSubview:colorLabel];
         
         UILabel *levelLabel = [[UILabel alloc] initWithFrame:CGRectMake(guildHeadImage.frame.origin.y+guildHeadImage.frame.size.width+10, experienceLabel.frame.origin.y+experienceLabel.frame.size.height+5, 80, 10)];
-        levelLabel.text = [NSString stringWithFormat:@"%d 级工会",level];
+        levelLabel.text = [NSString stringWithFormat:@"%d 级公会",level];
         levelLabel.font = [UIFont systemFontOfSize:14.0];
         levelLabel.textColor = [CorlorTransform colorWithHexString:@"#ffd700"];
         UILabel *line2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 150, dtScreenWidth, 1)];
@@ -295,15 +295,51 @@
         sum.textColor = [UIColor blackColor];
         NSString *sumText = [self.guildArray objectForKey:@"totalMoney"];
         sum.font = [UIFont systemFontOfSize:16.0];
-        sum.text = [NSString stringWithFormat:@"累计收益:%@",sumText];
+        sum.text = [NSString stringWithFormat:@"总收益:%@",sumText];
         CGSize size_sum = [sum.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:sum.font,NSFontAttributeName, nil]];
         sum.frame = CGRectMake(sumEarnings.frame.size.width/2-size_sum.width/2,sumEarnings.frame.size.height/2-size_sum.height/2, size_sum.width, size_sum.height);
         [sumEarnings addSubview:sum];
         
+        UIImageView * imageView = [[UIImageView alloc]init];
+        imageView.frame = CGRectMake(sum.frame.origin.x+sum.frame.size.width, sum.frame.origin.y, size_sum.height, size_sum.height);
+        [sumEarnings addSubview:imageView];
+        
+        sum.userInteractionEnabled = YES;
+        UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGestureLabel:)];
+        [sum addGestureRecognizer:tapGesture];
     }
     return _guildCenter;
 }
+- (void)tapGestureLabel:(UITapGestureRecognizer *)gesture
+{
+    UILabel * label = (UILabel *)[gesture view];
 
+    static int i = 0;
+    i++;
+    NSLog(@"%d",i);
+    if (i%2 == 1) {
+        label.text = @"总收益:****";
+
+    }else{
+        label.text = [NSString stringWithFormat:@"总收益:%@",[self.guildArray objectForKey:@"totalMoney"]];
+
+    }
+    NSString * session = [PersistenceManager getLoginSession];
+    [UserConnector updateUnion:session isHide:i%2 receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (error) {
+            
+        }else{
+            SBJsonParser * parser = [[SBJsonParser alloc]init];
+            NSDictionary * json = [parser objectWithData:data];
+            int status = [json[@"status"] intValue];
+            if (status == 0) {
+                
+            }else{
+                
+            }
+        }
+    }];
+}
 //创建工会view
 - (UIView *)createGuild{
     if (!_createGuild) {
@@ -318,7 +354,7 @@
         [_createGuild addSubview:guildHeadImage];
         
         UIButton *createGuildButton = [[UIButton alloc] initWithFrame:CGRectMake(20,guildHeadImage.frame.origin.y+guildHeadImage.frame.size.height+30, dtScreenWidth-40, 44)];
-        [createGuildButton setTitle:@"创建工会" forState:UIControlStateNormal];
+        [createGuildButton setTitle:@"创建公会" forState:UIControlStateNormal];
         [createGuildButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         createGuildButton.titleLabel.textAlignment = NSTextAlignmentCenter;
         createGuildButton.layer.masksToBounds = YES;
@@ -334,7 +370,7 @@
         textview.editable = NO;
         textview.font = [UIFont systemFontOfSize:15.0f];
         textview.textColor = [UIColor grayColor];
-        textview.text = @"1.工会会长拥有专属工会二维码。\n\n2.通过工会二维码下载APP的用户即可成为工会会员。\n\n3.工会成员接单、买单，会长均可拥有平台返现。\n\n4.创建工会需要充值200元平台余额，余额可以在平台内进行消费使用。\n\n5.若工会成员成立工会将成为工会的子工会，子工会增加可以获得工会等级提升，提升工会等级可以获得更高额度的返现以及其他奖励。";//设置显示的文本内容
+        textview.text = @"1.公会会长拥有专属公会二维码。\n\n2.通过公会二维码下载APP的用户即可成为公会会员。\n\n3.公会成员接单、买单，会长均可拥有平台返现。\n\n4.创建公会需要充值200元平台余额，余额可以在平台内进行消费使用。\n\n5.若公会成员成立公会将成为公会的子公会，子公会增加可以获得公会等级提升，提升公会等级可以获得更高额度的返现以及其他奖励。";//设置显示的文本内容
         textview.frame = CGRectMake(20, createGuildButton.frame.origin.y+createGuildButton.frame.size.height+20, dtScreenWidth-40, dtScreenHeight-(createGuildButton.frame.origin.y+createGuildButton.frame.size.height+20));
         [_createGuild addSubview:textview];
     }
@@ -342,10 +378,10 @@
 }
 
 - (void)loadDatasource{
-    NSArray *data = @[@{@"title":@"工会二维码"},
-                      @{@"title":@"工会成员"},
-                      @{@"title":@"订单一览"},
-                      @{@"title":@"工会排行榜"},
+    NSArray *data = @[@{@"title":@"公会二维码"},
+                      @{@"title":@"公会成员"},
+                      @{@"title":@"收益一览"},
+                      @{@"title":@"公会排行榜"},
                       @{@"title":@"提现管理"}];
     self.dataSource = @[data];
 }
@@ -356,7 +392,7 @@
     NSLog(@"创建工会");
     if (self.userInfo.canCreateUnion == 0) {
         
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"你没有创建工会的资格，充值两百元获得创建工会的资格是否去充值" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"你没有创建公会的资格，充值两百元获得创建公会的资格是否去充值" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action){
             
         }];
@@ -372,7 +408,7 @@
 
     }else{
         GreatGuildViewController *greatGuild = [[GreatGuildViewController alloc] init];
-        greatGuild.title = @"创建工会";
+        greatGuild.title = @"创建公会";
         greatGuild.delegate = self;
         [self.navigationController pushViewController:greatGuild animated:YES];
     }
@@ -398,7 +434,7 @@
                         [ShowMessage showMessage:@"支付成功"];
                         GreatGuildViewController *greatGuild = [[GreatGuildViewController alloc] init];
                         greatGuild.delegate = self;
-                        greatGuild.title = @"创建工会";
+                        greatGuild.title = @"创建公会";
                         [self.navigationController pushViewController:greatGuild animated:YES];
                         [self viewDidLoad];
                     }else{

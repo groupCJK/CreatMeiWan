@@ -37,7 +37,8 @@
 #import "CompressImage.h"
 #import "CorlorTransform.h"
 #import "findFriendViewController.h"
-
+#import "UMSocial.h"
+#import "creatAlbum.h"
 @interface PersonTableViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UserInfoDelegate,SettingUserInfoDelegate,MyburseDelegate,MBProgressHUDDelegate,UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *userInfoHeaderView;
@@ -57,6 +58,8 @@
 @property (nonatomic, strong) UIView *clearView;
 @property (nonatomic, strong) UIView *reloginView;
 @property (nonatomic, strong) NSDictionary *userInfoData;
+@property(nonatomic,assign) UIImage * shareImage;
+
 
 @end
 
@@ -79,6 +82,7 @@
     [self updateUI];
     
 }
+
 -(void)pushToLogin{
     [self pushToLoginController];
 }
@@ -110,7 +114,6 @@
     self.userInfoDic = userInfo;
     [PersistenceManager setLoginUser:userInfo];
     [self updateUI];
-    
 }
 
 -(void)updateUI{
@@ -124,7 +127,7 @@
     self.headimage.layer.masksToBounds = YES;
     self.headimage.layer.cornerRadius = 45.0f;
     NSURL *url = [NSURL URLWithString:self.userinfo.headUrl];
-    [self.headimage setImageWithURL:url];
+    [self.headimage setImageWithURL:url placeholderImage:[UIImage imageNamed:@"headerImage"]];
     [self.userInfoHeaderView addSubview:self.headimage];
     
     UIButton *eaditButton = [[UIButton alloc] initWithFrame:CGRectMake(dtScreenWidth-98, 200-70, 96, 20)];
@@ -277,6 +280,7 @@
         self.mywallet.text = @"安全设置";
         self.balanceLabel.text = nil;
         self.imgwallet.image = [UIImage imageNamed:@"shezhi"];
+
         self.recordCenter.hidden = YES;
         self.guildCenter.hidden = YES;
     }else{
@@ -284,8 +288,8 @@
             self.mywallet.text = @"安全设置";
             self.balanceLabel.text = nil;
             self.imgwallet.image = [UIImage imageNamed:@"shezhi"];
-            self.recordCenter.hidden = YES;
-            self.guildCenter.hidden = YES;
+//            self.recordCenter.hidden = YES;
+//            self.guildCenter.hidden = YES;
         }
         [setting getOpen];
     }
@@ -335,10 +339,9 @@
 //退出登录
 - (void)exitClick
 {
-    
     [self showMessageAlert:@"是否退出登录"];
 }
-/**提示框*/
+/**退出登录提示框*/
 - (void)showMessageAlert:(NSString *)message
 {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
@@ -636,12 +639,16 @@
             [setting getOpen];
         }
     }
-    if (indexPath.row==4) {
+   
+    if (indexPath.row==2) {
         findFriendViewController * findVC = [[findFriendViewController alloc]init];
         findVC.title = @"搜索好友";
         findVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:findVC animated:YES];
         
+    }
+    if (indexPath.row==3){
+        [self showMessageAlert:@"分享" image:self.headimage.image];
     }
 }
 
@@ -668,6 +675,75 @@
 -(void)removeView{
     [self.clearView removeFromSuperview];
     [self.reloginView removeFromSuperview];
+}
+/**提示框*/
+- (void)showMessageAlert:(NSString *)message image:(UIImage *)image
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action){
+        
+    }];
+    UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"保存到相册" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        self.shareImage = image;
+        
+        [creatAlbum createAlbumSaveImage:image];
+    }];
+    
+    
+    NSString * URLString = [NSString stringWithFormat:@"http://web.chuangjk.com:8083/promoter/index.html"];
+    NSString * contentext = @"我在美玩app出售自己的技能和时间,情人节过去了,你还在单着么？点我哟...";
+    NSString * titleString = @"既能貌美如花又能赚钱养家";
+    image = [UIImage imageNamed:@"icon"];
+    
+    UIAlertAction * shareAction = [UIAlertAction actionWithTitle:@"分享到微信好友" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [UMSocialData defaultData].extConfig.wechatSessionData.title = titleString;
+        [UMSocialData defaultData].extConfig.wechatTimelineData.url = URLString;
+        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:contentext image:image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+            if (response.responseCode == UMSResponseCodeSuccess) {
+                NSLog(@"分享成功！");
+            }
+        }];
+    }];
+    
+    UIAlertAction * share2Action = [UIAlertAction actionWithTitle:@"分享到微信朋友圈" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [UMSocialData defaultData].extConfig.wechatTimelineData.title = titleString;
+        [UMSocialData defaultData].extConfig.wechatTimelineData.url = URLString;
+        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:contentext image:image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+            if (response.responseCode == UMSResponseCodeSuccess) {
+                NSLog(@"分享成功！");
+            }
+        }];
+        
+    }];
+    
+    UIAlertAction * share3Action = [UIAlertAction actionWithTitle:@"分享到QQ好友" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [UMSocialData defaultData].extConfig.qqData.title = titleString;
+        [UMSocialData defaultData].extConfig.qqData.url = URLString;
+        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:contentext image:image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+            if (response.responseCode == UMSResponseCodeSuccess) {
+                NSLog(@"分享成功！");
+            }
+        }];
+    }];
+    
+    UIAlertAction * share4Action = [UIAlertAction actionWithTitle:@"分享到QQ空间" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [UMSocialData defaultData].extConfig.qzoneData.title = titleString;
+        [UMSocialData defaultData].extConfig.qzoneData.url = URLString;
+        
+        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:contentext image:image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+            if (response.responseCode == UMSResponseCodeSuccess) {
+                NSLog(@"分享成功！");
+            }
+        }];
+    }];
+    
+    [alertController addAction:cancelAction];
+    [alertController addAction:sureAction];
+    [alertController addAction:shareAction];
+    [alertController addAction:share2Action];
+    [alertController addAction:share3Action];
+    [alertController addAction:share4Action];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 @end

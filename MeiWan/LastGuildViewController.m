@@ -157,7 +157,7 @@
         
         UILabel *levelLabel = [[UILabel alloc] initWithFrame:CGRectMake(guildHeadImage.frame.origin.y+guildHeadImage.frame.size.width+10, experienceLabel.frame.origin.y+experienceLabel.frame.size.height+5, 80, 10)];
         NSString *level = [self.dictionary objectForKey:@"level"];
-        levelLabel.text = [NSString stringWithFormat:@"%@ 级工会",level];
+        levelLabel.text = [NSString stringWithFormat:@"%@ 级公会",level];
         levelLabel.font = [UIFont systemFontOfSize:14.0];
         levelLabel.textColor = [CorlorTransform colorWithHexString:@"#ffd700"];
         UILabel *line2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 150, dtScreenWidth, 1)];

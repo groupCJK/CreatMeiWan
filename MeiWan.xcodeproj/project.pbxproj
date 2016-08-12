@@ -614,6 +614,7 @@
 		2B5B7D2D1D3893C700CF5354 /* TimeLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5B7D271D3893C700CF5354 /* TimeLabelTableViewCell.m */; };
 		2B5B7D2E1D3893C700CF5354 /* UserDynamicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5B7D291D3893C700CF5354 /* UserDynamicTableViewCell.m */; };
 		2B7E9F801D5D6F9100207CB7 /* findPeiWanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7E9F7F1D5D6F9100207CB7 /* findPeiWanCell.m */; };
+		2B7E9F821D5DAEC500207CB7 /* sharefenxiang@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B7E9F811D5DAEC500207CB7 /* sharefenxiang@2x.png */; };
 		2BA4F75D1D4DCB6700A6F68C /* fansCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA4F75C1D4DCB6700A6F68C /* fansCell.m */; };
 		2BB4D54D1D235B4D0004BFA9 /* blackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BB4D54C1D235B4D0004BFA9 /* blackModel.m */; };
 		2BBB51BA1D596F5B007045EC /* newViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBB51B91D596F5B007045EC /* newViewController.m */; };
@@ -1749,6 +1750,7 @@
 		2B5B7D291D3893C700CF5354 /* UserDynamicTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDynamicTableViewCell.m; sourceTree = "<group>"; };
 		2B7E9F7E1D5D6F9100207CB7 /* findPeiWanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = findPeiWanCell.h; sourceTree = "<group>"; };
 		2B7E9F7F1D5D6F9100207CB7 /* findPeiWanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = findPeiWanCell.m; sourceTree = "<group>"; };
+		2B7E9F811D5DAEC500207CB7 /* sharefenxiang@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sharefenxiang@2x.png"; sourceTree = "<group>"; };
 		2BA4F75B1D4DCB6700A6F68C /* fansCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fansCell.h; sourceTree = "<group>"; };
 		2BA4F75C1D4DCB6700A6F68C /* fansCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fansCell.m; sourceTree = "<group>"; };
 		2BB4D54B1D235B4D0004BFA9 /* blackModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blackModel.h; sourceTree = "<group>"; };
@@ -4002,6 +4004,7 @@
 		27E0A0C61CE1805100D5FE31 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				2B7E9F811D5DAEC500207CB7 /* sharefenxiang@2x.png */,
 				2BDAF79B1D2271FE008B05EA /* list_icon.png */,
 				27D415FC1CFD845200F4C7BA /* DTDefine.h */,
 				18C8C7B31B76240100BC8EEA /* CorlorTransform.h */,
@@ -4592,6 +4595,7 @@
 				27587ACA1CF5824F00B78F92 /* chatBar_colorMore_videoSelected@2x.png in Resources */,
 				27CA5A371CEEACCB00CC6956 /* baijin.png in Resources */,
 				27587A6D1CF5824F00B78F92 /* VoiceSearchFeedback006.png in Resources */,
+				2B7E9F821D5DAEC500207CB7 /* sharefenxiang@2x.png in Resources */,
 				27D416011CFD868400F4C7BA /* banner图-2.png in Resources */,
 				27587AAD1CF5824F00B78F92 /* chatBar_faceSelected.png in Resources */,
 				27587AF71CF5824F00B78F92 /* groupPublicHeader@2x.png in Resources */,

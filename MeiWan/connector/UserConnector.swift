@@ -1598,8 +1598,33 @@ import UIKit
         }
     }
 
+    /**隐藏总收益*/
+    /**
+     isHide 1 隐藏，0不隐藏
+     */
+    public static func updateUnion(session:String!,isHide:Int,receiver:(data:NSData?,error:NSError?)->()){
+        var parameters:Dictionary<String,AnyObject> = [:]
+        if (session != nil) {
+            parameters["session"]=session
+        }
+        parameters["isHide"] = isHide;
+        
+        request(.GET, UserURL()!+"updateUnion", parameters:parameters as? [String : NSObject])
+            
+            .response { request, r, data, error in
+                
+                if (error==nil){
+                    
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
+                }
+                
+                receiver(data:data!, error:error)
+                
+        }
 
-    
+    }
 }
 
 
