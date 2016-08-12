@@ -144,6 +144,7 @@
     self.playersScollview.showsHorizontalScrollIndicator = NO;
     self.playersScollview.showsVerticalScrollIndicator = NO;
     self.playersScollview.backgroundColor = [UIColor colorWithRed:238.0/255 green:238.0/255 blue:238.0/255 alpha:1];
+//    self.playersScollview.backgroundColor = [UIColor blackColor];
     //self.playersScollview.backgroundColor = [UIColor redColor];
     [self.view addSubview:self.playersScollview];
     
@@ -390,7 +391,6 @@
         self.backView.alpha = 0.2;
         [[ShowMessage mainWindow]addSubview:self.backView];
         [[ShowMessage mainWindow]addSubview:pi];
-
 }
 #pragma mark - superviewdelegate
 -(void)moveBackview{

@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GreatGuildViewController : UIViewController
+@protocol greatGuildDelegate <NSObject>
 
+- (void)popViewLoadView;
+
+@end
+
+@interface GreatGuildViewController : UIViewController
+@property(nonatomic,weak)id<greatGuildDelegate>delegate;
 @end

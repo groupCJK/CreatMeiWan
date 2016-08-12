@@ -191,6 +191,8 @@
         _userInfoHead.userInteractionEnabled = YES;
         _userInfoHead.layer.masksToBounds = YES;
         _userInfoHead.layer.cornerRadius = 40;
+        [_userInfoHead.layer setBorderColor:[UIColor blackColor].CGColor];
+        [_userInfoHead.layer setBorderWidth:0.2];
         [_userInfoHeadView addSubview:_userInfoHead];
         UITapGestureRecognizer* headImageSingleRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(SingleHeadImageTap:)];
         headImageSingleRecognizer.numberOfTapsRequired = 1; // 单击

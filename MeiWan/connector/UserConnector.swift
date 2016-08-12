@@ -154,17 +154,39 @@ import UIKit
     //注册用户
     public static func register(username:String!,password:String!,verifyCode:String!,nickname:String!,gender:NSNumber!,year:NSNumber!,month:NSNumber!,day:NSNumber!,headUrl:String!,city:String!,district:String!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["username"]=username
-        parameters["password"]=password
-        parameters["verifyCode"]=verifyCode
-        parameters["nickname"]=nickname
-        parameters["gender"]=gender
-        parameters["year"]=year
-        parameters["month"]=month
-        parameters["day"]=day
-        parameters["headUrl"]=headUrl
-        parameters["city"]=city
-        parameters["district"]=district
+        if(username != nil){
+            parameters["username"]=username
+        }
+        if(password != nil){
+            parameters["password"]=password
+        }
+        if(verifyCode != nil){
+            parameters["verifyCode"]=verifyCode
+        }
+        if(nickname != nil){
+            parameters["nickname"]=nickname
+        }
+        if(gender != nil){
+            parameters["gender"]=gender
+        }
+        if(year != nil){
+            parameters["year"]=year
+        }
+        if(month != nil){
+            parameters["month"]=month
+        }
+        if(day != nil){
+            parameters["day"]=day
+        }
+        if(headUrl != nil){
+            parameters["headUrl"]=headUrl
+        }
+        if(city != nil){
+            parameters["city"]=city
+        }
+        if(district != nil){
+            parameters["district"]=district
+        }
         request(.GET, UserURL()!+"register", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -185,7 +207,9 @@ import UIKit
         if(session != nil){
             parameters["session"]=session
         }
-        parameters["userId"]=userId
+        if(userId != nil) {
+            parameters["userId"]=userId
+        }
         request(.GET, UserURL()!+"findPeiwanById", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -204,7 +228,9 @@ import UIKit
     //寻找游戏角色
     public static func findRoles(userId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["userId"]=userId
+        if (userId != nil) {
+            parameters["userId"]=userId
+        }
         request(.GET, UserURL()!+"findRoles", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -222,9 +248,15 @@ import UIKit
     //查询订单评价
     public static func findOrderEvaluationByUserId(peiwanId:NSNumber!,offset:NSNumber!,limit:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["peiwanId"]=peiwanId
-        parameters["offset"]=offset
-        parameters["limit"]=limit
+        if (peiwanId != nil) {
+            parameters["peiwanId"]=peiwanId
+        }
+        if (offset != nil) {
+            parameters["offset"]=offset
+        }
+        if (limit != nil) {
+            parameters["limit"]=limit
+        }
         request(.GET, UserURL()!+"findOrderEvaluationByUserId", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -242,7 +274,9 @@ import UIKit
     //查询常去网吧
     public static func peiwanNetbars(peiwanId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["peiwanId"]=peiwanId
+        if (peiwanId != nil) {
+            parameters["peiwanId"]=peiwanId
+        }
         request(.GET,UserURL()!+"peiwanNetbars", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -260,8 +294,14 @@ import UIKit
     //发送验证码（注册）
     public static func sendCode(phone:String!,sign:String!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["phone"]=phone;
-        parameters["sign"]=sign;
+        
+        if (phone != nil) {
+            parameters["phone"]=phone
+        }
+        if (sign != nil) {
+            parameters["sign"]=sign
+        }
+        
         request(.GET, UserURL()!+"sendCode", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -279,8 +319,13 @@ import UIKit
     //发送验证码（找回密码）
     public static func sendCode2(phone:String!,sign:String!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["phone"]=phone;
-        parameters["sign"]=sign;
+        if (phone != nil) {
+            parameters["phone"]=phone
+        }
+        if (sign != nil) {
+            parameters["sign"]=sign
+        }
+        
         request(.GET, UserURL()!+"sendCode2", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -298,7 +343,10 @@ import UIKit
     //查找好友列表
     public static func findMyFriends(session:String!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
+        if (session != nil) {
+            parameters["session"]=session
+        }
+        
         request(.GET, UserURL()!+"findMyFriends", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -316,8 +364,12 @@ import UIKit
     //添加好友
     public static func addFriend(session:String!,friendId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
-        parameters["friendId"]=friendId
+        if (session != nil) {
+            parameters["session"]=session
+        }
+        if (friendId != nil) {
+            parameters["friendId"]=friendId
+        }
         request(.GET,UserURL()!+"addFriend", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -335,8 +387,13 @@ import UIKit
     //删除好友
     public static func deleteFriend(session:String!,friendId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
-        parameters["friendId"]=friendId
+        if (session != nil) {
+            parameters["session"]=session
+        }
+        if (friendId != nil) {
+            parameters["friendId"]=friendId
+        }
+        
         request(.GET, UserURL()!+"deleteFriend", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -354,9 +411,16 @@ import UIKit
     //投诉
     public static func accusation(session:String!,peiwanId:NSNumber!,contentIndex:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
-        parameters["peiwanId"]=peiwanId
-        parameters["contentIndex"]=contentIndex
+        if (session != nil) {
+            parameters["session"]=session
+        }
+        if (peiwanId != nil) {
+            parameters["peiwanId"]=peiwanId
+        }
+        if (contentIndex != nil) {
+            parameters["contentIndex"]=contentIndex
+        }
+        
         request(.GET, UserURL()!+"accusation", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -374,7 +438,10 @@ import UIKit
     //查询网吧图片
     public static func findNetbarPhoto(netbarId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["netbarId"]=netbarId
+        if (netbarId != nil) {
+            parameters["netbarId"]=netbarId
+        }
+        
         request(.GET, UserURL()!+"findNetbarPhoto", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -392,9 +459,18 @@ import UIKit
     //添加游戏角色
     public static func addRole(session:String!,part:String!,name:String!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
-        parameters["part"]=part
-        parameters["name"]=name
+        if (session != nil) {
+            parameters["session"]=session
+        }
+        
+        if (part != nil) {
+            parameters["part"]=part
+        }
+        
+        if (name != nil) {
+            parameters["name"]=name
+        }
+        
         request(.GET, UserURL()!+"addRole", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -412,8 +488,13 @@ import UIKit
     //删除游戏角色
     public static func deleteRole(session:String!,lolRoleId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
-        parameters["lolRoleId"]=lolRoleId
+        if (session != nil) {
+            parameters["session"]=session
+        }
+        if (lolRoleId != nil) {
+            parameters["lolRoleId"]=lolRoleId
+        }
+        
         request(.GET,UserURL()!+"deleteRole", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -431,18 +512,31 @@ import UIKit
     //创建订单，废弃的接口，因为要传入时间标签的需要
     public static func createOrder(session:String!,peiwanId:NSNumber!,netbarId:NSNumber?,price:NSNumber!,type:NSNumber!,hours:NSNumber!,isWin:NSNumber!,promoterId:NSNumber?,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
-        parameters["peiwanId"]=peiwanId
+        if (session != nil) {
+            parameters["session"]=session
+        }
+        if (peiwanId != nil) {
+            parameters["peiwanId"]=peiwanId
+        }
         if(netbarId != nil){
             parameters["netbarId"]=netbarId
         }
         if(promoterId != nil){
             parameters["promoterId"]=promoterId
         }
-        parameters["price"]=price
-        parameters["type"]=type
-        parameters["hours"]=hours
-        parameters["isWin"]=isWin
+        if (price != nil) {
+            parameters["price"]=price
+        }
+        if (type != nil) {
+            parameters["type"]=type
+        }
+        if (hours != nil) {
+            parameters["hours"]=hours
+        }
+        if (isWin != nil) {
+            parameters["isWin"]=isWin
+        }
+        
         request(.GET, OrderURL()!+"createOrder", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -457,8 +551,8 @@ import UIKit
         }
     }
     
-    //创建订单
-    public static func createOrder2(session:String!,peiwanId:NSNumber!,price:NSNumber!,tagIndex:NSNumber!,hours:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
+    /**创建订单*/
+    public static func createOrder2(session:String!,peiwanId:NSNumber!,price:NSNumber!,tagIndex:NSNumber!,hours:NSNumber!,carFee:NSNumber!,userUnionId:NSNumber!,peiwanUnionId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
         if(session != nil){
             parameters["session"]=session
@@ -475,6 +569,16 @@ import UIKit
         if(hours != nil){
             parameters["hours"]=hours
         }
+        if(carFee != nil){
+            parameters["carFee"]=carFee
+        }
+        if(userUnionId != nil){
+            parameters["userUnionId"]=userUnionId
+        }
+        if(peiwanUnionId != nil){
+            parameters["peiwanUnionId"]=peiwanUnionId
+        }
+        
         request(.GET, OrderURL()!+"createOrder2", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -492,10 +596,19 @@ import UIKit
     //我的动态
     public static func findStates(session:String!, userId:NSNumber!,offset:NSNumber!,limit:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"] = session
-        parameters["userId"]=userId
-        parameters["offset"]=offset
-        parameters["limit"]=limit
+        if (session != nil) {
+            parameters["session"] = session
+        }
+        if (userId != nil) {
+            parameters["userId"]=userId
+        }
+        if (offset != nil) {
+            parameters["offset"]=offset
+        }
+        if (limit != nil) {
+            parameters["limit"]=limit
+        }
+        
         request(.GET, UserURL()!+"findStates2", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -513,9 +626,15 @@ import UIKit
     //附近动态
     public static func findAroundStates(session:String!,offset:NSNumber!,limit:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
-        parameters["offset"]=offset
-        parameters["limit"]=limit
+        if (session != nil) {
+            parameters["session"] = session
+        }
+        if (offset != nil) {
+            parameters["offset"]=offset
+        }
+        if (limit != nil) {
+            parameters["limit"]=limit
+        }
         request(.GET, UserURL()!+"findAroundStates", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -533,10 +652,19 @@ import UIKit
     //加入动态评论
     public static func insertStateComment(session:String!,toId:NSNumber!,content:String!,stateId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
-        parameters["toId"] = toId
-        parameters["content"]=content
-        parameters["stateId"]=stateId
+        if (session != nil) {
+            parameters["session"] = session
+        }
+        if (toId != nil) {
+            parameters["toId"]=toId
+        }
+        if (content != nil) {
+            parameters["content"]=content
+        }
+        if (stateId != nil) {
+            parameters["stateId"]=stateId
+        }
+        
         request(.GET, UserURL()!+"insertStateComment", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -554,10 +682,21 @@ import UIKit
     //插入评论回复
     public static func insertStateReplay(session:String!,toId:NSNumber!,content:String!,stateCommentId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
-        parameters["toId"] = toId
-        parameters["content"]=content
-        parameters["stateCommentId"]=stateCommentId
+        
+        if (session != nil) {
+            parameters["session"] = session
+        }
+        if (toId != nil) {
+            parameters["toId"]=toId
+        }
+        if (content != nil) {
+            parameters["content"]=content
+        }
+        if (stateCommentId != nil) {
+            parameters["stateCommentId"]=stateCommentId
+        }
+
+        
         request(.GET, UserURL()!+"insertStateReplay", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -575,8 +714,13 @@ import UIKit
     //全部动态评论
     public static func findStateComment(session:String!,stateId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
-        parameters["stateId"]=stateId
+
+        if (session != nil) {
+            parameters["session"] = session
+        }
+        if (stateId != nil) {
+            parameters["stateId"]=stateId
+        }
         request(.GET,UserURL()!+"findStateComment", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -594,9 +738,17 @@ import UIKit
     //发表动态
     public static func insertState(session:String!,content:String!,statePhotos:String!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
-        parameters["content"]=content
-        parameters["statePhotos"]=statePhotos
+
+        if (session != nil) {
+            parameters["session"] = session
+        }
+        if (content != nil) {
+            parameters["content"]=content
+        }
+        if (statePhotos != nil) {
+            parameters["statePhotos"] = statePhotos
+        }
+        
         request(.GET, UserURL()!+"insertState", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -614,8 +766,12 @@ import UIKit
     //删除动态
     public static func deleteState(session:String!,stateId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
-        parameters["stateId"]=stateId
+        if (session != nil) {
+            parameters["session"] = session
+        }
+        if (stateId != nil) {
+            parameters["stateId"]=stateId
+        }
         request(.GET,UserURL()!+"deleteState", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -633,9 +789,15 @@ import UIKit
     //点赞
     public static func likeUserState(session:String!,toId:NSNumber!,stateId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"] = session
-        parameters["toId"] = toId
-        parameters["stateId"] = stateId
+        if (session != nil) {
+            parameters["session"] = session
+        }
+        if (stateId != nil) {
+            parameters["stateId"]=stateId
+        }
+        if (toId != nil) {
+            parameters["toId"]=toId
+        }
         request(.GET, UserURL()!+"likeUserState",parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -653,9 +815,16 @@ import UIKit
     //取消点赞
     public static func unlikeUserState(session:String!,toId:NSNumber!,stateId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"] = session
-        parameters["toId"] = toId
-        parameters["stateId"] = stateId
+        if (session != nil) {
+            parameters["session"] = session
+        }
+        if (stateId != nil) {
+            parameters["stateId"]=stateId
+        }
+        if (toId != nil) {
+            parameters["toId"]=toId
+        }
+
         request(.GET, UserURL()!+"unlikeUserState",parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -673,7 +842,11 @@ import UIKit
     //用户标签
     public static func findUserTags(userId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["userId"] = userId
+        if (userId != nil) {
+            parameters["userId"] = userId
+        }
+        
+
         request(.GET, UserURL()!+"findUserTags", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -691,9 +864,15 @@ import UIKit
     //排行榜
     public static func rankUsers(session:String!,offset:NSNumber!,limit:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"] = session
-        parameters["offset"] = offset
-        parameters["limit"] = limit
+        if (session != nil) {
+            parameters["session"] = session
+        }
+        if (offset != nil) {
+            parameters["offset"]=offset
+        }
+        if (limit != nil) {
+            parameters["limit"]=limit
+        }
         request(.GET, UserURL()!+"rankUsers", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -711,13 +890,28 @@ import UIKit
     //提交陪玩申请
     public static func createPeiwanForm(session:String!,phone:String!,gameName:String!,gameNickname:String!,headPhoto:String!,idPhoto:String!,address:String!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
-        parameters["phone"]=phone
-        parameters["gameName"]=gameName
-        parameters["gameNickname"]=gameNickname
-        parameters["headPhoto"]=headPhoto
-        parameters["idPhoto"]=idPhoto
-        parameters["address"]=address
+        if (session != nil) {
+            parameters["session"] = session
+        }
+        if (phone != nil) {
+            parameters["phone"]=phone
+        }
+        if (gameName != nil) {
+            parameters["gameName"]=gameName
+        }
+        if (gameNickname != nil) {
+            parameters["gameNickname"] = gameNickname
+        }
+        if (headPhoto != nil) {
+            parameters["headPhoto"]=headPhoto
+        }
+        if (address != nil) {
+            parameters["address"]=address
+        }
+        if (idPhoto != nil) {
+            parameters["idPhoto"] = idPhoto
+        }
+        
         request(.GET, UserURL()!+"createPeiwanForm", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -735,9 +929,16 @@ import UIKit
     //通过名称查询网吧
     public static func findNetbarLikeName(name:String!,offset:NSNumber!,limit:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["name"]=name
-        parameters["offset"]=offset
-        parameters["limit"]=limit
+        if (name != nil) {
+            parameters["name"] = name
+        }
+        if (offset != nil) {
+            parameters["offset"]=offset
+        }
+        if (limit != nil) {
+            parameters["limit"]=limit
+        }
+
         request(.GET, UserURL()!+"findNetbarLikeName", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -755,9 +956,16 @@ import UIKit
     //我的订单
     public static func myOrders(session:String!,offset:NSNumber!,limit:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
-        parameters["offset"]=offset
-        parameters["limit"]=limit
+        if (session != nil) {
+            parameters["session"] = session
+        }
+        if (offset != nil) {
+            parameters["offset"]=offset
+        }
+        if (limit != nil) {
+            parameters["limit"]=limit
+        }
+        
         request(.GET, OrderURL()!+"myOrders", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -775,8 +983,13 @@ import UIKit
     //接受邀请
     public static func acceptOrder(session:String!,orderId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
-        parameters["orderId"]=orderId
+        if (session != nil) {
+            parameters["session"] = session
+        }
+        if (orderId != nil) {
+            parameters["orderId"]=orderId
+        }
+
         request(.GET, OrderURL()!+"acceptOrder", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -794,9 +1007,16 @@ import UIKit
     //邀请我的
     public static func inviteMeOrders(session:String!,offset:NSNumber!,limit:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
-        parameters["offset"]=offset
-        parameters["limit"]=limit
+        if (session != nil) {
+            parameters["session"] = session
+        }
+        if (offset != nil) {
+            parameters["offset"]=offset
+        }
+        if (limit != nil) {
+            parameters["limit"]=limit
+        }
+
         request(.GET, OrderURL()!+"inviteMeOrders", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -814,8 +1034,12 @@ import UIKit
     //完成订单
     public static func orderOk(session:String!,orderId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
-        parameters["orderId"]=orderId
+        if (session != nil) {
+            parameters["session"] = session
+        }
+        if (orderId != nil) {
+            parameters["orderId"]=orderId
+        }
         request(.GET, OrderURL()!+"orderOk", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -829,12 +1053,17 @@ import UIKit
                 receiver(data:data, error:error)
         }
     }
-    
-    //余额支付
+        //余额支付
     public static func payWithAccountMoney(session:String!,orderId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
-        parameters["orderId"]=orderId
+        
+        if(session != nil){
+            parameters["session"]=session
+        }
+        if(session != nil){
+            parameters["orderId"]=orderId
+        }
+        
         request(.GET, OrderURL()!+"payWithAccountMoney", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -852,11 +1081,22 @@ import UIKit
     //订单投诉
     public static func sendComplain(session:String!,orderId:NSNumber!,title:String?,content:String?,photos:String?,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
-        parameters["orderId"]=orderId
-        parameters["title"]=title
-        parameters["content"]=content
-        parameters["photos"]=photos
+        if (session != nil) {
+            parameters["session"] = session
+        }
+        if (orderId != nil) {
+            parameters["orderId"]=orderId
+        }
+        if (title != nil) {
+            parameters["title"]=title
+        }
+        if (content != nil) {
+            parameters["content"]=content
+        }
+        if (photos != nil) {
+            parameters["photos"]=photos
+        }
+    
         request(.GET, OrderURL()!+"sendComplain", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -874,12 +1114,26 @@ import UIKit
     //订单评价
     public static func evaluationOrder(session:String!,orderId:NSNumber!,peiwanId:NSNumber!,point:NSNumber!,tagIndexs:String!,content:String?,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
-        parameters["orderId"]=orderId
-        parameters["peiwanId"]=peiwanId
-        parameters["point"]=point
-        parameters["tagIndexs"]=tagIndexs
-        parameters["content"]=content
+
+        if (session != nil) {
+            parameters["session"] = session
+        }
+        if (orderId != nil) {
+            parameters["orderId"]=orderId
+        }
+        if (peiwanId != nil) {
+            parameters["peiwanId"]=peiwanId
+        }
+        if (point != nil) {
+            parameters["point"]=point
+        }
+        if (tagIndexs != nil) {
+            parameters["tagIndexs"]=tagIndexs
+        }
+        if (content != nil) {
+            parameters["content"]=content
+        }
+
         request(.GET, OrderURL()!+"evaluationOrder", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -897,8 +1151,13 @@ import UIKit
     //申请提现
     public static func createCashRequest(session:String!,money:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
-        parameters["money"]=money
+        if (session != nil) {
+            parameters["session"]=session
+        }
+        if (money != nil) {
+            parameters["money"]=money
+        }
+
         request(.GET, UserURL()!+"createCashRequest", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -916,9 +1175,16 @@ import UIKit
     //查询提现列表
     public static func myCashRequests(session:String!,offset:NSNumber!,limit:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
-        parameters["offset"]=offset
-        parameters["limit"]=limit
+        if (session != nil) {
+            parameters["session"] = session
+        }
+        if (offset != nil) {
+            parameters["offset"]=offset
+        }
+        if (limit != nil) {
+            parameters["limit"]=limit
+        }
+
         request(.GET, UserURL()!+"myCashRequests", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -936,9 +1202,16 @@ import UIKit
     //重设密码
     public static func resetPwd(username:String!,password:String!,verifyCode:String!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["username"]=username
-        parameters["password"]=password
-        parameters["verifyCode"]=verifyCode
+        if (username != nil) {
+            parameters["username"] = username
+        }
+        if (password != nil) {
+            parameters["password"]=password
+        }
+        if (verifyCode != nil) {
+            parameters["verifyCode"]=verifyCode
+        }
+
         request(.GET, UserURL()!+"resetPassword", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -956,9 +1229,16 @@ import UIKit
     //添加标签
     public static func addUserTimeTag(session:String!,tagIndex:NSNumber!,price:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
-        parameters["tagIndex"]=tagIndex
-        parameters["price"]=price
+        if (session != nil) {
+            parameters["session"] = session
+        }
+        if (tagIndex != nil) {
+            parameters["tagIndex"]=tagIndex
+        }
+        if (price != nil) {
+            parameters["price"]=price
+        }
+
         request(.GET, UserURL()!+"addUserTimeTag", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -976,9 +1256,17 @@ import UIKit
     //删除标签
     public static func deleteUserTimeTag(session:String!,tagIndex:NSNumber!,price:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
-        parameters["tagIndex"]=tagIndex
-        parameters["price"]=price
+        
+        if (session != nil) {
+            parameters["session"] = session
+        }
+        if (tagIndex != nil) {
+            parameters["tagIndex"]=tagIndex
+        }
+        if (price != nil) {
+            parameters["price"]=price
+        }
+        
         request(.GET, UserURL()!+"deleteUserTimeTag", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -1018,7 +1306,9 @@ import UIKit
     //获取用户动态 粉丝 关注数量
     public static func getLoginedUser(session:String!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
+        if (session != nil) {
+            parameters["session"]=session
+        }
         request(.GET, UserURL()!+"findMyInfo", parameters:parameters as? [String : NSObject])
             
             .response { request, r, data, error in
@@ -1055,32 +1345,40 @@ import UIKit
                     print(userUrl)
                 }
                 
-                receiver(data:data!.gunzippedData(), error:error)
+                receiver(data:data, error:error)
         }
         
         
     }
     
-    public static func payWithAccountMoney(session:String!,peiwanId:NSNumber!,price:NSNumber!,hours:NSNumber!,tagIndex:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
+    public static func payWithAccountMoney(session:String!,peiwanId:NSNumber!,price:NSNumber!,hours:NSNumber!,tagIndex:NSNumber!,carFee:NSNumber!,userUnionId:NSNumber!,peiwanUnionId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         
         var parameters:Dictionary<String,AnyObject> = [:]
         
         if(session != nil){
             parameters["session"]=session
         }
-        if(price != nil){
+        if(peiwanId != nil){
             parameters["peiwanId"]=peiwanId
         }
         if(price != nil){
             parameters["price"]=price
         }
-        if(price != nil){
+        if(hours != nil){
             parameters["hours"]=hours
         }
-        if(price != nil){
+        if(tagIndex != nil){
             parameters["tagIndex"]=tagIndex
         }
-        
+        if(carFee != nil){
+            parameters["carFee"]=carFee
+        }
+        if(userUnionId != nil){
+            parameters["userUnionId"]=userUnionId
+        }
+        if(peiwanUnionId != nil){
+            parameters["peiwanUnionId"]=peiwanUnionId
+        }
         request(.GET, OrderURL()!+"payWithAccountMoney", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -1097,26 +1395,34 @@ import UIKit
         
     }
     
-    public static func aliOrderSign(session:String!,peiwanId:NSNumber!,price:NSNumber!,hours:NSNumber!,tagIndex:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
+    public static func aliOrderSign(session:String!,peiwanId:NSNumber!,price:NSNumber!,hours:NSNumber!,tagIndex:NSNumber!,carFee:NSNumber!,userUnionId:NSNumber!,peiwanUnionId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         
         var parameters:Dictionary<String,AnyObject> = [:]
         
         if(session != nil){
             parameters["session"]=session
         }
-        if(price != nil){
+        if(peiwanId != nil){
             parameters["peiwanId"]=peiwanId
         }
         if(price != nil){
             parameters["price"]=price
         }
-        if(price != nil){
+        if(hours != nil){
             parameters["hours"]=hours
         }
-        if(price != nil){
+        if(tagIndex != nil){
             parameters["tagIndex"]=tagIndex
         }
-        
+        if(carFee != nil){
+            parameters["carFee"]=carFee
+        }
+        if(userUnionId != nil){
+            parameters["userUnionId"]=userUnionId
+        }
+        if(peiwanUnionId != nil){
+            parameters["peiwanUnionId"]=peiwanUnionId
+        }
         request(.GET, OrderURL()!+"aliOrderSign", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
@@ -1136,7 +1442,9 @@ import UIKit
     //查找关注列表
     public static func findMyFocus(session:String!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
+        if (session != nil) {
+            parameters["session"]=session
+        }
         request(.GET, UserURL()!+"findFollowersByUserId", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error==nil){
@@ -1155,8 +1463,12 @@ import UIKit
         var parameters:Dictionary<String,AnyObject> = [:]
         if(session != nil){
             parameters["session"]=session
-            parameters["name"]=name
-            parameters["headUrl"]=headUrl
+        }
+        if (name != nil) {
+            parameters["name"]=name;
+        }
+        if (headUrl != nil) {
+            parameters["headUrl"]=headUrl;
         }
         request(.GET, UserURL()!+"createUnion", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
@@ -1175,7 +1487,9 @@ import UIKit
     //查找工会
     public static func findMyUnion(session:String!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
-        parameters["session"]=session
+        if (session != nil) {
+            parameters["session"]=session
+        }
         request(.GET, UserURL()!+"findMyUnion", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error==nil){
@@ -1285,10 +1599,6 @@ import UIKit
     }
 
 
-//    findMyUnionMembers
-//    @QueryParam("session") String session,
-//    @QueryParam("offset") Integer offset,
-//    @QueryParam("limit") Integer limit
     
 }
 

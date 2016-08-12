@@ -29,6 +29,8 @@
 }
 //选择时间
 @property (weak, nonatomic) IBOutlet UILabel *chooseTimeForHour;
+/**车费*/
+@property (weak, nonatomic) IBOutlet UILabel *CarFee;
 //大人标签
 @property (weak, nonatomic) IBOutlet UILabel *biaoqianForDaRen;
 //所需费用
@@ -60,7 +62,11 @@
 @property (nonatomic,assign) int isWin;
 @property (nonatomic,strong) NSDictionary * orderInfoDic;
 @property (nonatomic,assign) CGFloat price;
-
+/**距离*/
+@property (nonatomic,assign) CGFloat distance;
+@property (nonatomic,assign) float carFeeNumber;
+@property (nonatomic,assign) NSNumber * userUnionID;
+@property (nonatomic,assign) NSNumber * peiwanUnionID;
 @end
 
 @implementation InviteViewController
@@ -85,6 +91,27 @@
     self.chooseTimeForHour.text = @"选择时间";
     self.feiYong.text = @"所需费用";
     self.sumPrice.text = @"合计";
+
+    self.distance = [[self.playerInfo objectForKey:@"distance"] doubleValue]/1000;
+    self.CarFee.text = [NSString stringWithFormat:@"%.3f元",self.distance*2];
+    
+    NSScanner *scanner = [NSScanner scannerWithString:self.CarFee.text];
+    [scanner scanUpToCharactersFromSet:[NSCharacterSet decimalDigitCharacterSet] intoString:nil];
+    int number;
+    [scanner scanInt:&number];
+    _carFeeNumber = number;
+    NSDictionary * userInfo = [PersistenceManager getLoginUser];
+    NSLog(@"%@",userInfo);
+    
+    self.userUnionID = [NSNumber numberWithInteger:[[userInfo objectForKey:@"Unionid"] integerValue]];
+    if (_userUnionID == 0) {
+        _userUnionID = nil;
+    }
+    self.peiwanUnionID = [NSNumber numberWithInteger:[[self.playerInfo objectForKey:@"Unionid"] integerValue]];
+    if (_peiwanUnionID == 0) {
+        _peiwanUnionID = nil;
+    }
+    
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(WillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 - (IBAction)chioce:(UIButton *)sender {
@@ -396,6 +423,10 @@
 
 - (IBAction)MakeSure:(UIButton *)sender {
     
+    [UserConnector createOrder:nil peiwanId:nil netbarId:nil price:nil type:nil hours:nil isWin:nil promoterId:nil receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        
+    }];
+    
     if (self.myRice>0) {
         if ([[self.playerInfo objectForKey:@"isAudit"]intValue] == 0) {
             [ShowMessage showMessage:@"你所邀请的人没有经过资质审核"];
@@ -417,32 +448,50 @@
     
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex == 1) {
-        
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"如果使用余额支付,系统将会在您的余额中扣除费用。" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-        UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            //余额支付
-            [self banecePay];
+//    NSString * string = [NSString stringWithFormat:@"%.3f",self.distance*2];
+//    self.carFeeNumber = [NSNumber numberWithDouble:[string doubleValue]];
+//    NSLog(@"%@",_carFeeNumber);
+    NSString *session = [PersistenceManager getLoginSession];
+    [UserConnector createOrder2:session peiwanId:[self.playerInfo objectForKey:@"id"] price:[NSNumber numberWithFloat:_riceDownline] tagIndex:[NSNumber numberWithInteger:self.tagIndex] hours:[NSNumber numberWithInt:_playTime] carFee:[NSNumber numberWithFloat:_carFeeNumber] userUnionId:_userUnionID peiwanUnionId:_peiwanUnionID receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (error) {
             
-        }];
-        [alertController addAction:cancelAction];
-        [alertController addAction:sureAction];
-        [self presentViewController:alertController animated:YES completion:nil];
-        
-        
-        
-    }else if(buttonIndex == 2){
-        //支付宝支付
-        [self aliPay];
-    }
-    
+        }else{
+            
+            SBJsonParser*parser=[[SBJsonParser alloc]init];
+            NSMutableDictionary *json=[parser objectWithData:data];
+            int status = [[json objectForKey:@"status"]intValue];
+            if (status==0) {
+                if (buttonIndex == 1) {
+                    
+                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"如果使用余额支付,系统将会在您的余额中扣除费用。" preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+                    UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                        //余额支付
+                        [self banecePay];
+                    }];
+                    [alertController addAction:cancelAction];
+                    [alertController addAction:sureAction];
+                    [self presentViewController:alertController animated:YES completion:nil];
+                    
+                }else if(buttonIndex == 2){
+                    //支付宝支付
+                    [self aliPay];
+                }
+
+            }else if (status ==1 ){
+                [self loginAgain];
+            }else{
+                [ShowMessage showMessage:@"信息不正确"];
+            }
+            
+        }
+    }];
 }
 /**余额支付*/
 - (void)banecePay
 {
     NSString *session = [PersistenceManager getLoginSession];
-    [UserConnector payWithAccountMoney:session peiwanId:[self.playerInfo objectForKey:@"id"] price:[NSNumber numberWithFloat:_riceDownline] hours:[NSNumber numberWithInt:_playTime] tagIndex:[NSNumber numberWithInteger:self.tagIndex] receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+    [UserConnector payWithAccountMoney:session peiwanId:[self.playerInfo objectForKey:@"id"] price:[NSNumber numberWithFloat:_riceDownline] hours:[NSNumber numberWithInt:_playTime] tagIndex:[NSNumber numberWithInteger:self.tagIndex] carFee:[NSNumber numberWithFloat:_carFeeNumber] userUnionId:_userUnionID peiwanUnionId:_peiwanUnionID receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
         
         if (error) {
             
@@ -501,7 +550,7 @@
 - (void)aliPay
 {
     NSString *session = [PersistenceManager getLoginSession];
-    [UserConnector aliOrderSign:session peiwanId:[self.playerInfo objectForKey:@"id"] price:[NSNumber numberWithFloat:_riceDownline] hours:[NSNumber numberWithInt:_playTime] tagIndex:[NSNumber numberWithInteger:self.tagIndex] receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+    [UserConnector aliOrderSign:session peiwanId:[self.playerInfo objectForKey:@"id"] price:[NSNumber numberWithFloat:_riceDownline] hours:[NSNumber numberWithInt:_playTime] tagIndex:[NSNumber numberWithInteger:self.tagIndex] carFee:[NSNumber numberWithFloat:_carFeeNumber] userUnionId:_userUnionID peiwanUnionId:_peiwanUnionID receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
         if (error) {
             
         }else{

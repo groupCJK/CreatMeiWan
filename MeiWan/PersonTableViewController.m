@@ -36,6 +36,7 @@
 #import "MBProgressHUD.h"
 #import "CompressImage.h"
 #import "CorlorTransform.h"
+#import "findFriendViewController.h"
 
 @interface PersonTableViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UserInfoDelegate,SettingUserInfoDelegate,MyburseDelegate,MBProgressHUDDelegate,UIGestureRecognizerDelegate>
 
@@ -47,6 +48,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imgwallet;
 @property (strong, nonatomic) IBOutlet UITableViewCell *recordCenter;
 @property (weak, nonatomic) IBOutlet UITableViewCell *guildCenter;
+@property (weak, nonatomic) IBOutlet UITableViewCell *searchFriend;
 @property (strong, nonatomic) UIImageView *headimage;
 
 @property (nonatomic, strong) NSDictionary *userInfoDic;
@@ -67,6 +69,7 @@
     self.title = @"个人";
     [self.navigationController.navigationBar setBarTintColor:[CorlorTransform colorWithHexString:@"#3f90a4"]];
     self.navigationController.navigationBar.titleTextAttributes=[NSDictionary dictionaryWithObject:[UIColor whiteColor]forKey:NSForegroundColorAttributeName];
+    
     
     //初始化界面
 //        [self initUI];
@@ -318,7 +321,6 @@
 {
     UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, dtScreenWidth, 64)];
     view.backgroundColor = [UIColor whiteColor];
-    
     UIButton * exit = [UIButton buttonWithType:UIButtonTypeCustom];
     exit.frame = CGRectMake(20, 20, dtScreenWidth-40, 44);
     exit.layer.cornerRadius = 5;
@@ -602,6 +604,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0) {
         
         if(self.userinfo.isAudit == 0){
@@ -632,6 +635,13 @@
             }
             [setting getOpen];
         }
+    }
+    if (indexPath.row==4) {
+        findFriendViewController * findVC = [[findFriendViewController alloc]init];
+        findVC.title = @"搜索好友";
+        findVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:findVC animated:YES];
+        
     }
 }
 

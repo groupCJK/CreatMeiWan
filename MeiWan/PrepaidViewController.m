@@ -88,14 +88,11 @@
                 [[AlipaySDK defaultService] payOrder:sign fromScheme:@"meiwan" callback:^(NSDictionary *resultDic) {
                     
                     NSInteger  resultNum= [[resultDic objectForKey:@"resultStatus"]integerValue];
-                    
                     if (resultNum == 9000) {
-                        
                         [self showMessageAlert:@"支付成功"];
                         [self.navigationController popViewControllerAnimated:YES];
                         
                     }else{
-                        
                         [self showMessageAlert:@"支付失败"];
                         
                     }

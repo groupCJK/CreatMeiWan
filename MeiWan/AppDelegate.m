@@ -20,6 +20,7 @@
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
 #import "UMSocialQQHandler.h"
+#import <AlipaySDK/AlipaySDK.h>
 //#import "UMSocialSinaSSOHandler.h"
 @interface AppDelegate ()
 
@@ -172,7 +173,16 @@
     self.userInfoDic = [PersistenceManager getLoginUser];
     self.userinfo = [[UserInfo alloc]initWithDictionary: [PersistenceManager getLoginUser]];
 }
-
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options
+{
+    // 当用户通过支付宝客户端进行支付时,会回调该block:standbyCallback
+    [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+        NSLog(@"result = %@",resultDic);
+        
+    }];
+    
+    return YES;
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -596,6 +596,8 @@
 		2B2D09621D532BC300139467 /* rscode.c in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D09581D532BC300139467 /* rscode.c */; };
 		2B2D09631D532BC300139467 /* split.c in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D095A1D532BC300139467 /* split.c */; };
 		2B2D09671D533CFB00139467 /* scanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D09661D533CFB00139467 /* scanViewController.m */; };
+		2B409A761D5C903100408431 /* gonghuiSearch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B409A751D5C903100408431 /* gonghuiSearch@2x.png */; };
+		2B409A791D5C9CCA00408431 /* findFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B409A781D5C9CCA00408431 /* findFriendViewController.m */; };
 		2B5805B21D2A386800721653 /* label1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805A91D2A386800721653 /* label1.png */; };
 		2B5805B31D2A386800721653 /* label2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805AA1D2A386800721653 /* label2.png */; };
 		2B5805B41D2A386800721653 /* label3.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805AB1D2A386800721653 /* label3.png */; };
@@ -611,6 +613,7 @@
 		2B5B7D2C1D3893C700CF5354 /* playerInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5B7D251D3893C700CF5354 /* playerInfoTableViewCell.m */; };
 		2B5B7D2D1D3893C700CF5354 /* TimeLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5B7D271D3893C700CF5354 /* TimeLabelTableViewCell.m */; };
 		2B5B7D2E1D3893C700CF5354 /* UserDynamicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5B7D291D3893C700CF5354 /* UserDynamicTableViewCell.m */; };
+		2B7E9F801D5D6F9100207CB7 /* findPeiWanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7E9F7F1D5D6F9100207CB7 /* findPeiWanCell.m */; };
 		2BA4F75D1D4DCB6700A6F68C /* fansCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA4F75C1D4DCB6700A6F68C /* fansCell.m */; };
 		2BB4D54D1D235B4D0004BFA9 /* blackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BB4D54C1D235B4D0004BFA9 /* blackModel.m */; };
 		2BBB51BA1D596F5B007045EC /* newViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBB51B91D596F5B007045EC /* newViewController.m */; };
@@ -1720,6 +1723,9 @@
 		2B2D095B1D532BC300139467 /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
 		2B2D09651D533CFB00139467 /* scanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scanViewController.h; sourceTree = "<group>"; };
 		2B2D09661D533CFB00139467 /* scanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = scanViewController.m; sourceTree = "<group>"; };
+		2B409A751D5C903100408431 /* gonghuiSearch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gonghuiSearch@2x.png"; sourceTree = "<group>"; };
+		2B409A771D5C9CCA00408431 /* findFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = findFriendViewController.h; sourceTree = "<group>"; };
+		2B409A781D5C9CCA00408431 /* findFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = findFriendViewController.m; sourceTree = "<group>"; };
 		2B5805A91D2A386800721653 /* label1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label1.png; sourceTree = "<group>"; };
 		2B5805AA1D2A386800721653 /* label2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label2.png; sourceTree = "<group>"; };
 		2B5805AB1D2A386800721653 /* label3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label3.png; sourceTree = "<group>"; };
@@ -1741,6 +1747,8 @@
 		2B5B7D271D3893C700CF5354 /* TimeLabelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeLabelTableViewCell.m; sourceTree = "<group>"; };
 		2B5B7D281D3893C700CF5354 /* UserDynamicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDynamicTableViewCell.h; sourceTree = "<group>"; };
 		2B5B7D291D3893C700CF5354 /* UserDynamicTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDynamicTableViewCell.m; sourceTree = "<group>"; };
+		2B7E9F7E1D5D6F9100207CB7 /* findPeiWanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = findPeiWanCell.h; sourceTree = "<group>"; };
+		2B7E9F7F1D5D6F9100207CB7 /* findPeiWanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = findPeiWanCell.m; sourceTree = "<group>"; };
 		2BA4F75B1D4DCB6700A6F68C /* fansCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fansCell.h; sourceTree = "<group>"; };
 		2BA4F75C1D4DCB6700A6F68C /* fansCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fansCell.m; sourceTree = "<group>"; };
 		2BB4D54B1D235B4D0004BFA9 /* blackModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blackModel.h; sourceTree = "<group>"; };
@@ -3980,7 +3988,9 @@
 				2B2D084E1D519E4D00139467 /* guildCenterViewController.m */,
 				98BB8B7F1D570FCB001C79A4 /* GreatGuildViewController.h */,
 				98BB8B801D570FCB001C79A4 /* GreatGuildViewController.m */,
+				2B409A7A1D5C9CD800408431 /* 搜索好友 */,
 				2B2D09461D5321B100139467 /* gonghui.png */,
+				2B409A751D5C903100408431 /* gonghuiSearch@2x.png */,
 				2B2D08531D530C0E00139467 /* 公会中心 */,
 				2B1B0AD11D4AF14B00F193A4 /* 粉丝 */,
 				2B1B0AD21D4AF15900F193A4 /* 我的关注 */,
@@ -4170,6 +4180,16 @@
 			name = "扫码";
 			sourceTree = "<group>";
 		};
+		2B409A7A1D5C9CD800408431 /* 搜索好友 */ = {
+			isa = PBXGroup;
+			children = (
+				2B409A771D5C9CCA00408431 /* findFriendViewController.h */,
+				2B409A781D5C9CCA00408431 /* findFriendViewController.m */,
+				2B7E9F7D1D5D6F6500207CB7 /* cell */,
+			);
+			name = "搜索好友";
+			sourceTree = "<group>";
+		};
 		2B5805BB1D2A508100721653 /* animationVIew */ = {
 			isa = PBXGroup;
 			children = (
@@ -4192,6 +4212,15 @@
 				2B5B7D271D3893C700CF5354 /* TimeLabelTableViewCell.m */,
 				2B5B7D281D3893C700CF5354 /* UserDynamicTableViewCell.h */,
 				2B5B7D291D3893C700CF5354 /* UserDynamicTableViewCell.m */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
+		2B7E9F7D1D5D6F6500207CB7 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				2B7E9F7E1D5D6F9100207CB7 /* findPeiWanCell.h */,
+				2B7E9F7F1D5D6F9100207CB7 /* findPeiWanCell.m */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -4735,6 +4764,7 @@
 				27587ACF1CF5824F00B78F92 /* chatBar_more_location.png in Resources */,
 				27ADB84F1CFEF67F00F11453 /* pai-hang-bang@2x.png in Resources */,
 				27CA5A331CEEACCB00CC6956 /* 4_loadingҳ.png in Resources */,
+				2B409A761D5C903100408431 /* gonghuiSearch@2x.png in Resources */,
 				27587A761CF5824F00B78F92 /* VoiceSearchFeedback010@2x.png in Resources */,
 				27587ADF1CF5824F00B78F92 /* chat_sender_audio_playing_000@2x.png in Resources */,
 				27CA5A6A1CEEACCB00CC6956 /* peiwan_sanjiao.png in Resources */,
@@ -4872,6 +4902,7 @@
 				18F6D2C21B8FF2D900B1F0C3 /* MoveActionFrame.m in Sources */,
 				2B5B7D1E1D38932500CF5354 /* PlagerinfoViewController.m in Sources */,
 				18E57A121B7DE22700771063 /* AFURLRequestSerialization.m in Sources */,
+				2B7E9F801D5D6F9100207CB7 /* findPeiWanCell.m in Sources */,
 				04B138AB1BA07EAF00AAD93F /* NSDataEx.m in Sources */,
 				1883F92D1B9E89FE004A19BA /* LOLInfo.swift in Sources */,
 				27587C491CF5861900B78F92 /* EMSDWebImagePrefetcher.m in Sources */,
@@ -4904,6 +4935,7 @@
 				18F1CC091B948C51003EF78A /* JiHelper.swift in Sources */,
 				27587C4E1CF5861900B78F92 /* UIImage+EMMultiFormat.m in Sources */,
 				27587C8D1CF5861A00B78F92 /* EaseChatBarMoreView.m in Sources */,
+				2B409A791D5C9CCA00408431 /* findFriendViewController.m in Sources */,
 				2BF43CE41D56D8F800C5B6C6 /* guildMementCell.m in Sources */,
 				27587C781CF5861A00B78F92 /* EaseMessageViewController.m in Sources */,
 				27587C831CF5861A00B78F92 /* EaseBubbleView+Text.m in Sources */,

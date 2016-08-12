@@ -25,8 +25,11 @@
 #import "CorlorTransform.h"
 //#import "RecordTableViewController.h"
 #import "ShowMessage.h"
+#import "LoginViewController.h"
+#import <AlipaySDK/AlipaySDK.h>
 
-@interface guildCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
+
+@interface guildCenterViewController ()<UITableViewDelegate,UITableViewDataSource,greatGuildDelegate>
 
 @property (nonatomic, strong)UIView *createGuild;
 
@@ -35,6 +38,7 @@
 @property (nonatomic, strong)UITableView *guildCenterTableView;
 
 @property (nonatomic, strong)NSArray *dataSource;
+@property (nonatomic, strong)NSArray *dataUnionImage;
 
 @property (nonatomic, strong)NSDictionary *userInfoDic;
 
@@ -46,30 +50,46 @@
 
 @implementation guildCenterViewController
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     
+    _dataUnionImage = @[@"pw_qr",@"pw_group",@"",@"pw_rank",@"qianbao"];
+    
+    [self loadNet];
+    
     [self loadDatasource];
-
     
-//    [self guildCenter];
-    self.userInfoDic = [PersistenceManager getLoginUser];
-    
-    self.userInfo = [[UserInfo alloc]initWithDictionary: [PersistenceManager getLoginUser]];
-//    NSDictionary * dic = [PersistenceManager getLoginUser];
-    
-    if (self.userInfo.hasUnion == 1) {
-        
-        [self loadFindGuildData];
-    
-    }else{
-        [self createGuild];
-    }
-    
-    // Do any additional setup after loading the view.
 }
-
+- (void)loadNet{
+    NSString * session = [PersistenceManager getLoginSession];
+    [UserConnector getLoginedUser:session receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (error) {
+            
+        }else{
+            SBJsonParser*parser=[[SBJsonParser alloc]init];
+            NSMutableDictionary *json=[parser objectWithData:data];
+            int status = [json[@"status"] intValue];
+            if (status==0) {
+                self.userInfo = [[UserInfo alloc]initWithDictionary:json[@"entity"]];
+                if (self.userInfo.hasUnion == 1) {
+                    [self loadFindGuildData];
+                }else if (self.userInfo.hasUnion==0){
+                    [self createGuild];
+                }
+            }else if (status==1){
+                [self pushLoginPage];
+            }
+            
+        }
+    }];
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSArray *sectionArray = self.dataSource[section];
     return sectionArray.count;
@@ -82,6 +102,7 @@
     NSArray *sectionArray = self.dataSource[indexPath.section];
     NSDictionary *dic = sectionArray[indexPath.row];
     cell.textLabel.text = dic[@"title"];
+    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",_dataUnionImage[indexPath.row]]];
     cell.textLabel.font = [UIFont systemFontOfSize:16.0];
     
     return cell;
@@ -142,6 +163,7 @@
             NSMutableDictionary *json=[parser objectWithData:data];
             self.guildArray = json[@"entity"];
             self.guildCenterTableView.tableHeaderView = self.guildCenter;
+            [self.guildCenterTableView reloadData];
         }
     }];
 }
@@ -193,7 +215,6 @@
         
         /**经验条*/
         UILabel *experienceLabel = [[UILabel alloc] initWithFrame:CGRectMake(guildHeadImage.frame.origin.y+guildHeadImage.frame.size.width+10, guildNick.frame.origin.y+guildNick.frame.size.height+5, 100, 10)];
-//        experienceLabel.backgroundColor = [CorlorTransform colorWithHexString:@"#708090"];
         experienceLabel.layer.cornerRadius = 5;
         experienceLabel.layer.borderColor = [UIColor blackColor].CGColor;
         experienceLabel.layer.borderWidth = 1;
@@ -307,13 +328,14 @@
 
         [_createGuild addSubview:createGuildButton];
         
-        UITextView *textview = [[UITextView alloc] initWithFrame:CGRectMake(20, createGuildButton.frame.origin.y+createGuildButton.frame.size.height+20, dtScreenWidth-40, 200)];
+        UITextView *textview = [[UITextView alloc] init];
         textview.backgroundColor=[UIColor whiteColor];
-        textview.scrollEnabled = NO;
+        textview.scrollEnabled = YES;
         textview.editable = NO;
         textview.font = [UIFont systemFontOfSize:15.0f];
         textview.textColor = [UIColor grayColor];
-        textview.text = @"1:工会会长拥有专属二维码\n\n2:工会会长永久享受旗下达人接单百分比分成\n\n3:更多特权";//设置显示的文本内容
+        textview.text = @"1.工会会长拥有专属工会二维码。\n\n2.通过工会二维码下载APP的用户即可成为工会会员。\n\n3.工会成员接单、买单，会长均可拥有平台返现。\n\n4.创建工会需要充值200元平台余额，余额可以在平台内进行消费使用。\n\n5.若工会成员成立工会将成为工会的子工会，子工会增加可以获得工会等级提升，提升工会等级可以获得更高额度的返现以及其他奖励。";//设置显示的文本内容
+        textview.frame = CGRectMake(20, createGuildButton.frame.origin.y+createGuildButton.frame.size.height+20, dtScreenWidth-40, dtScreenHeight-(createGuildButton.frame.origin.y+createGuildButton.frame.size.height+20));
         [_createGuild addSubview:textview];
     }
     return _createGuild;
@@ -333,28 +355,94 @@
 - (void)didTipcreateGuild:(UIButton *)sender{
     NSLog(@"创建工会");
     if (self.userInfo.canCreateUnion == 0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你没有创建工会的资格，充值两百元获得创建工会的资格" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"你没有创建工会的资格，充值两百元获得创建工会的资格是否去充值" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action){
+            
+        }];
+        UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"GO" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            /**直接去支付宝充值200*/
+            [self aliPayTWO];
+            
+        }];
+        [alertController addAction:cancelAction];
+        [alertController addAction:sureAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+
     }else{
         GreatGuildViewController *greatGuild = [[GreatGuildViewController alloc] init];
         greatGuild.title = @"创建工会";
+        greatGuild.delegate = self;
         [self.navigationController pushViewController:greatGuild animated:YES];
     }
 }
+- (void)aliPayTWO
+{
+    /*创建充值订单*/
+    NSString *session = [PersistenceManager getLoginSession];
+    [UserConnector aliRechargeSigh:session price:@200 receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        
+        if (error) {
+            [ShowMessage showMessage:@"服务器未响应"];
+        }else{
+            SBJsonParser*parser=[[SBJsonParser alloc]init];
+            NSMutableDictionary *json=[parser objectWithData:data];
+            int status = [json[@"status"] intValue];
+            if (status==0) {
+                NSString * sign = json[@"entity"];
+                [[AlipaySDK defaultService] payOrder:sign fromScheme:@"meiwan" callback:^(NSDictionary *resultDic) {
+                    NSInteger  resultNum= [[resultDic objectForKey:@"resultStatus"]integerValue];
+                    NSLog(@"%@",resultDic);
+                    if (resultNum == 9000) {
+                        [ShowMessage showMessage:@"支付成功"];
+                        GreatGuildViewController *greatGuild = [[GreatGuildViewController alloc] init];
+                        greatGuild.delegate = self;
+                        greatGuild.title = @"创建工会";
+                        [self.navigationController pushViewController:greatGuild animated:YES];
+                        [self viewDidLoad];
+                    }else{
+                        
+                        [self showMessageAlert:@"支付失败"];
+                        
+                    }
+                }];
+               
+                
+            }else if (status==1){
+                /** status=1 没有登录 */
+                [self pushLoginPage];
+            }else{
+                /** status=2 参数错误 */
+            }
+        }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    }];
+}
+- (void)showMessageAlert:(NSString *)message
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action){
+        
+    }];
+    UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:nil];
+    [alertController addAction:cancelAction];
+    [alertController addAction:sureAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+/**未登录跳出登陆页面*/
+- (void)pushLoginPage
+{
+    [PersistenceManager setLoginSession:@""];
+    LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
+    lv.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:lv animated:YES];
+    
 }
-*/
+-(void)popViewLoadView
+{
+//    [self viewDidLoad];
+}
 
 @end

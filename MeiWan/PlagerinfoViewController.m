@@ -245,6 +245,7 @@
         focusButton.layer.masksToBounds = YES;
         focusButton.layer.cornerRadius = 6.0f;
         [focusButton addTarget:self action:@selector(didTipfocusButton:) forControlEvents:UIControlEventTouchUpInside];
+        self.addFriend = focusButton;
         [_buttonView addSubview:focusButton];
         
         UIButton *chatButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width-100, 20, 90, 30)];
@@ -341,6 +342,7 @@
             //NSLog(@"%@",json);
             int status = [[json objectForKey:@"status"]intValue];
             if (status == 0) {
+                [self.addFriend setTitle:@"已关注" forState:UIControlStateNormal];
                 [ShowMessage showMessage:@"关注成功"];
             }else if (status == 1){
                 [self jumpout];

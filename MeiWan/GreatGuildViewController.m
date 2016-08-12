@@ -48,6 +48,10 @@
     self.userInfo = [[UserInfo alloc]initWithDictionary: [PersistenceManager getLoginUser]];
     
     self.guildHeadImage = [[UIImageView alloc] initWithFrame:CGRectMake((dtScreenWidth-70)/2, dtNavBarDefaultHeight+40, 70, 70)];
+    [self.guildHeadImage.layer setBorderWidth:0.5];
+    [self.guildHeadImage.layer setBorderColor:[UIColor blackColor].CGColor];
+    self.guildHeadImage.layer.cornerRadius = 35;
+    self.guildHeadImage.clipsToBounds = YES;
     NSURL *url = [NSURL URLWithString:self.userInfo.headUrl];
     [self.guildHeadImage setImageWithURL:url];
     [self.view addSubview:self.guildHeadImage];
@@ -123,13 +127,17 @@
                     }else{
                         SBJsonParser*parser=[[SBJsonParser alloc]init];
                         NSMutableDictionary *json=[parser objectWithData:data];
-                        self.userInfoDic = [json objectForKey:@"hasUnion"];
-                        self.userInfo = [[UserInfo alloc]initWithDictionary:self.userInfoDic];
-                        self.userInfo.hasUnion = 1;
-                        [PersistenceManager setLoginUser:json];
-                        [ShowMessage showMessage:@"资料提交成功"];
+                        int status = [json[@"status"] intValue];
+                        if (status == 0) {
+                            [ShowMessage showMessage:@"资料提交成功"];
+                            [self performSelector:@selector(pushViewController) withObject:nil afterDelay:0.5];
+
+                        }else if (status == 1){
+                            [ShowMessage showMessage:@"没有登录"];
+                        }else{
+                            [ShowMessage showMessage:@"信息错误"];
+                        }
                         
-                        [self performSelector:@selector(pushViewController) withObject:nil afterDelay:0.5];
                         
                     }
                 }];
@@ -185,8 +193,7 @@
 {
     if (textField.text.length > 8) {
         textField.text = [textField.text substringToIndex:8];
-        UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"提示" message:@"昵称不能大于8个字符串" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-        [alertview show];
+        [self showMessageAlert:@"字符不能大于8个字符"];
     }
     self.guildName = textField.text;
     NSLog(@"%@",textField.text);
@@ -243,8 +250,25 @@
 
 - (void)pushViewController
 {
-    guildCenterViewController * guildVC = [[guildCenterViewController alloc]init];
-    [self.navigationController pushViewController:guildVC animated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
+    [self.delegate popViewLoadView];
+}
+- (void)showMessageAlert:(NSString *)message
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action){
+        
+    }];
+    UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [self.view endEditing:YES];
+    }];
+    [alertController addAction:cancelAction];
+    [alertController addAction:sureAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
 /*
 #pragma mark - Navigation
