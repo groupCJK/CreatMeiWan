@@ -19,7 +19,7 @@ import UIKit
 @objc public class UserConnector: NSObject {
     
     private static var userUrl=NSUserDefaults .standardUserDefaults().valueForKey("1") as! String
-    private static var anOtherUrl = NSUserDefaults.standardUserDefaults().valueForKey("1") as! String
+    private static var anOtherUrl = NSUserDefaults.standardUserDefaults().valueForKey("0") as! String
     
     private static func UserURL()->String?{
         
@@ -33,9 +33,9 @@ import UIKit
             print(i)
             if (i%2==0){
                 userUrl = NSUserDefaults .standardUserDefaults().valueForKey("1") as! String
-                anOtherUrl = NSUserDefaults.standardUserDefaults().valueForKey("1") as! String
+                anOtherUrl = NSUserDefaults.standardUserDefaults().valueForKey("0") as! String
             }else{
-                userUrl = NSUserDefaults .standardUserDefaults().valueForKey("1") as! String
+                userUrl = NSUserDefaults .standardUserDefaults().valueForKey("0") as! String
                 anOtherUrl = NSUserDefaults.standardUserDefaults().valueForKey("1") as! String
             }
             
@@ -1625,6 +1625,61 @@ import UIKit
         }
 
     }
+
+    /**公会提现*/
+    public static func createUnionCashRequest(session:String!,money:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
+        var parameters:Dictionary<String,AnyObject> = [:]
+        if (session != nil) {
+            parameters["session"]=session
+        }
+        if (money != nil) {
+            parameters["money"]=money
+        }
+        
+        request(.GET, UserURL()!+"createUnionCashRequest", parameters:parameters as? [String : NSObject])
+            
+            .response { request, r, data, error in
+                
+                if (error==nil){
+                    
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
+                }
+                
+                receiver(data:data!, error:error)
+                
+        }
+
+        
+    }
+    
+    /**公会收益列表*/
+    public static func findMyUnionEarn(session:String?,offset:Int,limit:Int,receiver:(data:NSData?,error:NSError?)->()){
+        var parameters:Dictionary<String,AnyObject> = [:]
+        if(session != nil){
+            parameters["session"]=session
+        }
+        parameters["offset"]=offset
+        parameters["limit"]=limit
+        
+        request(.GET, UserURL()!+"findMyUnionEarn", parameters:parameters as? [String : NSObject])
+            .response { request, r, data, error in
+                
+                if (error==nil){
+                    
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
+                }
+                
+                receiver(data:data!.gunzippedData(), error:error)
+                
+                
+        }
+    }
+
+
 }
 
 

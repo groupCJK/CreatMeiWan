@@ -697,7 +697,7 @@
     
     UIAlertAction * shareAction = [UIAlertAction actionWithTitle:@"分享到微信好友" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [UMSocialData defaultData].extConfig.wechatSessionData.title = titleString;
-        [UMSocialData defaultData].extConfig.wechatTimelineData.url = URLString;
+        [UMSocialData defaultData].extConfig.wechatSessionData.url = URLString;
         [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:contentext image:image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
             if (response.responseCode == UMSResponseCodeSuccess) {
                 NSLog(@"分享成功！");

@@ -184,7 +184,7 @@
             if (status == 0) {
                 
                 [ShowMessage showMessage:@"关注成功"];
-                [findcell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                [findcell.addButton setTitle:@"已关注" forState:UIControlStateNormal];
                 
                 
             }else if (status == 1){

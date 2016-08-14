@@ -774,20 +774,29 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="车费" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7aK-gd-GGD">
-                                        <rect key="frame" x="281" y="10" width="34" height="20"/>
+                                        <rect key="frame" x="220" y="10" width="34" height="20"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TJv-Fx-0lr">
+                                        <rect key="frame" x="266" y="4" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="chooseCarFee:" destination="zo7-Pb-zAt" eventType="valueChanged" id="eh1-j2-ZK1"/>
+                                        </connections>
+                                    </switch>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="TJv-Fx-0lr" secondAttribute="bottom" constant="5" id="5ZI-mN-IsF"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="hph-IS-lOa" secondAttribute="bottom" constant="2" id="5aR-Ip-xQ2"/>
+                                    <constraint firstAttribute="trailing" secondItem="TJv-Fx-0lr" secondAttribute="trailing" constant="13" id="LyG-25-Bbe"/>
                                     <constraint firstAttribute="height" constant="40" id="Wbh-OM-FuR"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="7aK-gd-GGD" secondAttribute="trailing" constant="5" id="aq8-QG-iIJ"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="7aK-gd-GGD" secondAttribute="bottom" constant="2" id="gaE-2s-Ohd"/>
                                     <constraint firstItem="hph-IS-lOa" firstAttribute="top" secondItem="0Ne-iP-gwq" secondAttribute="topMargin" constant="2" id="hUQ-ux-pvC"/>
+                                    <constraint firstItem="TJv-Fx-0lr" firstAttribute="top" secondItem="0Ne-iP-gwq" secondAttribute="top" constant="4" id="jfA-Ue-t1g"/>
                                     <constraint firstItem="hph-IS-lOa" firstAttribute="leading" secondItem="0Ne-iP-gwq" secondAttribute="leading" constant="17" id="oBu-hS-Ove"/>
+                                    <constraint firstAttribute="trailing" secondItem="7aK-gd-GGD" secondAttribute="trailing" constant="74" id="r6a-Ni-G7N"/>
                                     <constraint firstItem="7aK-gd-GGD" firstAttribute="top" secondItem="0Ne-iP-gwq" secondAttribute="topMargin" constant="2" id="yIh-N9-YML"/>
                                 </constraints>
                             </view>
@@ -2574,7 +2583,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="搜索好友" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUb-kU-Tcl">
                                                     <rect key="frame" x="47" y="13" width="68" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -2596,7 +2605,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分享" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Zq-qg-nHT">
                                                     <rect key="frame" x="47" y="13" width="68" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>

@@ -7,6 +7,8 @@
 //
 
 #import "OrderLiseCell.h"
+#import "MeiWan-Swift.h"
+#define RGB(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 
 @implementation OrderLiseCell
 
@@ -16,29 +18,45 @@
         /**
          
          */
-        UILabel * orderNumber = [[UILabel alloc]init];
-        [self addSubview:orderNumber];
-        self.orderNumber = orderNumber;
+        _userHeaderImageView = [[UIImageView alloc]initWithFrame:CGRectMake(20, 10, 40, 40)];
+        _userHeaderImageView.layer.cornerRadius = 20;
+        _userHeaderImageView.clipsToBounds = YES;
+        [self addSubview:_userHeaderImageView];
         
-        UILabel * moneyNumber = [[UILabel alloc]init];
-        [self addSubview:moneyNumber];
-        self.moneyLabel = moneyNumber;
+        _nickName = [[UILabel alloc]init];
+        [self addSubview:_nickName];
+        
+        
+        _moneyLabel = [[UILabel alloc]init];
+        [self addSubview:_moneyLabel];
+        
+        _timeLable = [[UILabel alloc]init];
+        [self addSubview:_timeLable];
+        
         
     }
     return self;
 }
 -(void)setDictionary:(NSDictionary *)dictionary
 {
-    _orderNumber.text = dictionary[@"dingdan"];
-    _orderNumber.font = [UIFont systemFontOfSize:16.0];
-    CGSize size_order = [_orderNumber.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_orderNumber.font,NSFontAttributeName, nil]];
-    _orderNumber.frame = CGRectMake(10, 0, size_order.width, self.frame.size.height);
+    NSDictionary * formUser = dictionary[@"fromUser"];
+    [self.userHeaderImageView sd_setImageWithURL:[NSURL URLWithString:formUser[@"headUrl"]] placeholderImage:[UIImage imageNamed:@"gonghui"]];
+    self.nickName.text = formUser[@"nickname"];
+    self.nickName.font  = [UIFont systemFontOfSize:16.0];
+    CGSize nicksize = [self.nickName.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:self.nickName.font,NSFontAttributeName, nil]];
+    self.nickName.frame = CGRectMake(self.userHeaderImageView.frame.origin.x+self.userHeaderImageView.frame.size.width+10, self.userHeaderImageView.center.y-nicksize.height/2, nicksize.width, nicksize.height);
     
-    _moneyLabel.text = dictionary[@"ticheng"];
-    _moneyLabel.font = [UIFont systemFontOfSize:15.0];
+
+    double lastActiveTime = [[dictionary objectForKey:@"time"]doubleValue];
+    _timeLable.text = [DateTool getTimeDescription:lastActiveTime];
+    _timeLable.font = [UIFont systemFontOfSize:16.0];
+    CGSize size_time = [_timeLable.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_timeLable.font,NSFontAttributeName, nil]];
+    _timeLable.frame = CGRectMake(dtScreenWidth/2, 0, size_time.width, 60);
+    
+    _moneyLabel.text = [NSString stringWithFormat:@"￥:%@",dictionary[@"monney"]];
+    _moneyLabel.font = [UIFont systemFontOfSize:16.0];
     CGSize size_money = [_moneyLabel.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_moneyLabel.font,NSFontAttributeName, nil]];
-    _moneyLabel.frame = CGRectMake(dtScreenWidth-10-size_money.width, 0, size_money.width, self.frame.size.height);
-    
+    _moneyLabel.frame = CGRectMake(dtScreenWidth-size_money.width-20, 0, size_money.width, 60);
     
 }
 @end

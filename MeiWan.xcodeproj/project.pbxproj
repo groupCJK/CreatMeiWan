@@ -583,7 +583,6 @@
 		2B2D08521D51F98E00139467 /* changeArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D08511D51F98E00139467 /* changeArray.m */; };
 		2B2D085C1D530C8F00139467 /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D085B1D530C8F00139467 /* QRCodeViewController.m */; };
 		2B2D085F1D530CBF00139467 /* GuildMembersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D085E1D530CBF00139467 /* GuildMembersViewController.m */; };
-		2B2D08621D530CDC00139467 /* OrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D08611D530CDC00139467 /* OrderListViewController.m */; };
 		2B2D08651D530CFC00139467 /* GuildRankListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D08641D530CFC00139467 /* GuildRankListViewController.m */; };
 		2B2D08681D530D3200139467 /* CashManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D08671D530D3200139467 /* CashManagementViewController.m */; };
 		2B2D09471D5321B100139467 /* gonghui.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2D09461D5321B100139467 /* gonghui.png */; };
@@ -613,6 +612,8 @@
 		2B5B7D2C1D3893C700CF5354 /* playerInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5B7D251D3893C700CF5354 /* playerInfoTableViewCell.m */; };
 		2B5B7D2D1D3893C700CF5354 /* TimeLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5B7D271D3893C700CF5354 /* TimeLabelTableViewCell.m */; };
 		2B5B7D2E1D3893C700CF5354 /* UserDynamicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5B7D291D3893C700CF5354 /* UserDynamicTableViewCell.m */; };
+		2B6D634B1D6043EF00B3E3BC /* pw_visible.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B6D63491D6043EF00B3E3BC /* pw_visible.png */; };
+		2B6D634D1D6045E600B3E3BC /* pw_hide.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B6D634C1D6045E600B3E3BC /* pw_hide.png */; };
 		2B7E9F801D5D6F9100207CB7 /* findPeiWanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7E9F7F1D5D6F9100207CB7 /* findPeiWanCell.m */; };
 		2B7E9F821D5DAEC500207CB7 /* sharefenxiang@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B7E9F811D5DAEC500207CB7 /* sharefenxiang@2x.png */; };
 		2BA4F75D1D4DCB6700A6F68C /* fansCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA4F75C1D4DCB6700A6F68C /* fansCell.m */; };
@@ -1699,8 +1700,6 @@
 		2B2D085B1D530C8F00139467 /* QRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeViewController.m; sourceTree = "<group>"; };
 		2B2D085D1D530CBF00139467 /* GuildMembersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuildMembersViewController.h; sourceTree = "<group>"; };
 		2B2D085E1D530CBF00139467 /* GuildMembersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuildMembersViewController.m; sourceTree = "<group>"; };
-		2B2D08601D530CDC00139467 /* OrderListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListViewController.h; sourceTree = "<group>"; };
-		2B2D08611D530CDC00139467 /* OrderListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListViewController.m; sourceTree = "<group>"; };
 		2B2D08631D530CFC00139467 /* GuildRankListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuildRankListViewController.h; sourceTree = "<group>"; };
 		2B2D08641D530CFC00139467 /* GuildRankListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuildRankListViewController.m; sourceTree = "<group>"; };
 		2B2D08661D530D3200139467 /* CashManagementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashManagementViewController.h; sourceTree = "<group>"; };
@@ -1748,6 +1747,8 @@
 		2B5B7D271D3893C700CF5354 /* TimeLabelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeLabelTableViewCell.m; sourceTree = "<group>"; };
 		2B5B7D281D3893C700CF5354 /* UserDynamicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDynamicTableViewCell.h; sourceTree = "<group>"; };
 		2B5B7D291D3893C700CF5354 /* UserDynamicTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDynamicTableViewCell.m; sourceTree = "<group>"; };
+		2B6D63491D6043EF00B3E3BC /* pw_visible.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pw_visible.png; sourceTree = "<group>"; };
+		2B6D634C1D6045E600B3E3BC /* pw_hide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pw_hide.png; sourceTree = "<group>"; };
 		2B7E9F7E1D5D6F9100207CB7 /* findPeiWanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = findPeiWanCell.h; sourceTree = "<group>"; };
 		2B7E9F7F1D5D6F9100207CB7 /* findPeiWanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = findPeiWanCell.m; sourceTree = "<group>"; };
 		2B7E9F811D5DAEC500207CB7 /* sharefenxiang@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sharefenxiang@2x.png"; sourceTree = "<group>"; };
@@ -3993,6 +3994,8 @@
 				2B409A7A1D5C9CD800408431 /* 搜索好友 */,
 				2B2D09461D5321B100139467 /* gonghui.png */,
 				2B409A751D5C903100408431 /* gonghuiSearch@2x.png */,
+				2B6D634C1D6045E600B3E3BC /* pw_hide.png */,
+				2B6D63491D6043EF00B3E3BC /* pw_visible.png */,
 				2B2D08531D530C0E00139467 /* 公会中心 */,
 				2B1B0AD11D4AF14B00F193A4 /* 粉丝 */,
 				2B1B0AD21D4AF15900F193A4 /* 我的关注 */,
@@ -4093,7 +4096,7 @@
 			children = (
 				2B2D08541D530C2400139467 /* 二维码 */,
 				2B2D08591D530C6D00139467 /* 公会成员 */,
-				2B2D08581D530C5D00139467 /* 订单一览 */,
+				2B2D08581D530C5D00139467 /* 收益一览 */,
 				2B2D08571D530C4D00139467 /* 公会排行榜 */,
 				2B2D08551D530C2E00139467 /* 提现管理 */,
 			);
@@ -4116,6 +4119,7 @@
 			children = (
 				2B2D08661D530D3200139467 /* CashManagementViewController.h */,
 				2B2D08671D530D3200139467 /* CashManagementViewController.m */,
+				2B0C707E1D546F89001AB100 /* cell */,
 			);
 			name = "提现管理";
 			sourceTree = "<group>";
@@ -4130,14 +4134,11 @@
 			name = "公会排行榜";
 			sourceTree = "<group>";
 		};
-		2B2D08581D530C5D00139467 /* 订单一览 */ = {
+		2B2D08581D530C5D00139467 /* 收益一览 */ = {
 			isa = PBXGroup;
 			children = (
-				2B2D08601D530CDC00139467 /* OrderListViewController.h */,
-				2B2D08611D530CDC00139467 /* OrderListViewController.m */,
-				2B0C707E1D546F89001AB100 /* cell */,
 			);
-			name = "订单一览";
+			name = "收益一览";
 			sourceTree = "<group>";
 		};
 		2B2D08591D530C6D00139467 /* 公会成员 */ = {
@@ -4717,6 +4718,7 @@
 				27587A821CF5824F00B78F92 /* VoiceSearchFeedback016@2x.png in Resources */,
 				27587A781CF5824F00B78F92 /* VoiceSearchFeedback011@2x.png in Resources */,
 				27587AA41CF5824F00B78F92 /* chat_location_detail_disclosureHL@2x.png in Resources */,
+				2B6D634D1D6045E600B3E3BC /* pw_hide.png in Resources */,
 				987E7F831D4EE7B900613C6F /* black.jpg in Resources */,
 				27587AF01CF5824F00B78F92 /* group_creategroup@2x.png in Resources */,
 				27587A601CF5824F00B78F92 /* 80.png in Resources */,
@@ -4740,6 +4742,7 @@
 				27587AC71CF5824F00B78F92 /* chatBar_colorMore_video@2x.png in Resources */,
 				27587A771CF5824F00B78F92 /* VoiceSearchFeedback011.png in Resources */,
 				27CA5A3A1CEEACCB00CC6956 /* default-568@2x.png in Resources */,
+				2B6D634B1D6043EF00B3E3BC /* pw_visible.png in Resources */,
 				27ADB8501CFEF67F00F11453 /* pai-hang-bang2@2x.png in Resources */,
 				27ADB8301CFEBD5F00F11453 /* Profile.png in Resources */,
 				27587AC91CF5824F00B78F92 /* chatBar_colorMore_videoCallSelected@2x.png in Resources */,
@@ -5055,7 +5058,6 @@
 				2B2B56C71D473D170048AA20 /* PrepaidViewController.m in Sources */,
 				27587C271CF5861900B78F92 /* EMCDDeviceManagerBase.m in Sources */,
 				18EB4E4D1B803471000AE087 /* AddPlayerBeingViewController.m in Sources */,
-				2B2D08621D530CDC00139467 /* OrderListViewController.m in Sources */,
 				18E579F51B7DDDB000771063 /* UIProgressView+AFNetworking.m in Sources */,
 				18C1FBC51B9ECB3700151BB2 /* DetailOrderViewController.m in Sources */,
 				27587C311CF5861900B78F92 /* MJRefreshFooter.m in Sources */,

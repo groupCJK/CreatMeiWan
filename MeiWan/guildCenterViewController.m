@@ -9,7 +9,6 @@
 #import "guildCenterViewController.h"
 #import "QRCodeViewController.h"
 #import "GuildMembersViewController.h"
-#import "OrderListViewController.h"
 #import "GuildRankListViewController.h"
 #import "CashManagementViewController.h"
 #import "GreatGuildViewController.h"
@@ -45,6 +44,7 @@
 @property (nonatomic, strong)UserInfo *userInfo;
 
 @property (nonatomic, strong) NSMutableDictionary * guildArray;
+@property (nonatomic, strong) UIImageView * hideImageView;
 
 @end
 
@@ -60,7 +60,7 @@
     [super viewDidLoad];
     
     
-    _dataUnionImage = @[@"pw_qr",@"pw_group",@"qianbao",@"pw_rank",@"qianbao"];
+    _dataUnionImage = @[@"pw_qr",@"pw_group",@"pw_rank",@"qianbao"];
     
     [self loadNet];
     
@@ -130,18 +130,12 @@
             [self.navigationController pushViewController:guildMemberVC animated:YES];
         }break;
         case 2:{
-            OrderListViewController *orderListVC = [[OrderListViewController alloc] init];
-            orderListVC.view.backgroundColor = [UIColor whiteColor];
-            orderListVC.title = @"公会订单";
-            [self.navigationController pushViewController:orderListVC animated:YES];
-        }break;
-        case 3:{
             GuildRankListViewController *guildBankListVC = [[GuildRankListViewController alloc] init];
             guildBankListVC.view.backgroundColor = [UIColor whiteColor];
             guildBankListVC.title = @"公会排行";
             [self.navigationController pushViewController:guildBankListVC animated:YES];
         }break;
-        case 4:{
+        case 3:{
             CashManagementViewController *cashManageMentVC = [[CashManagementViewController alloc] init];
             cashManageMentVC.title = @"提现管理";
             cashManageMentVC.dictionary = self.guildArray;
@@ -274,39 +268,48 @@
         [guildInfo addSubview:line2];
         [guildInfo addSubview:levelLabel];
         
-        UIView *todayEarnings = [[UIView alloc] initWithFrame:CGRectMake(0, 101, dtScreenWidth/2-1, 49)];
-        [_guildCenter addSubview:todayEarnings];
         UILabel *today = [[UILabel alloc] init];
         today.textColor = [UIColor blackColor];
-        NSString *earningsText = [self.guildArray objectForKey:@"todayMoney"];
-        today.text = [NSString stringWithFormat:@"今日收益:%@",earningsText];
+//        NSString *earningsText = [self.guildArray objectForKey:@"todayMoney"];
+        today.text = [NSString stringWithFormat:@"今日收益:%.2f",[self.guildArray[@"todayMoney"] doubleValue]];
         today.font = [UIFont systemFontOfSize:16.0];
-        CGSize size_today = [today.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:today.font,NSFontAttributeName, nil]];
-        today.frame = CGRectMake(todayEarnings.frame.size.width/2-size_today.width/2,todayEarnings.frame.size.height/2-size_today.height/2, size_today.width, size_today.height);
-        [todayEarnings addSubview:today];
+        today.textAlignment = NSTextAlignmentCenter;
+        today.frame = CGRectMake(0, 101, dtScreenWidth/2-1, 49);
+        [_guildCenter addSubview:today];
         
-        UILabel *line3 = [[UILabel alloc] initWithFrame:CGRectMake(todayEarnings.frame.origin.x+todayEarnings.frame.size.width, 110, 2, 30)];
+        UILabel *line3 = [[UILabel alloc] initWithFrame:CGRectMake(today.frame.origin.x+today.frame.size.width, 110, 2, 30)];
         line3.backgroundColor = [UIColor blackColor];
         [guildInfo addSubview:line3];
         
-        UIView *sumEarnings = [[UIView alloc] initWithFrame:CGRectMake(dtScreenWidth/2+2, 101, dtScreenWidth/2-1, 49)];
-        [_guildCenter addSubview:sumEarnings];
         UILabel *sum = [[UILabel alloc] init];
         sum.textColor = [UIColor blackColor];
-        NSString *sumText = [self.guildArray objectForKey:@"totalMoney"];
+//        NSString *sumText = [self.guildArray objectForKey:@"totalMoney"];
         sum.font = [UIFont systemFontOfSize:16.0];
-        sum.text = [NSString stringWithFormat:@"总收益:%@",sumText];
-        CGSize size_sum = [sum.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:sum.font,NSFontAttributeName, nil]];
-        sum.frame = CGRectMake(sumEarnings.frame.size.width/2-size_sum.width/2,sumEarnings.frame.size.height/2-size_sum.height/2, size_sum.width, size_sum.height);
-        [sumEarnings addSubview:sum];
-        
-        UIImageView * imageView = [[UIImageView alloc]init];
-        imageView.frame = CGRectMake(sum.frame.origin.x+sum.frame.size.width, sum.frame.origin.y, size_sum.height, size_sum.height);
-        [sumEarnings addSubview:imageView];
-        
+
+        _hideImageView = [[UIImageView alloc]init];
+
+        if ([self.guildArray[@"isHide"] intValue]==0) {
+            sum.text = [NSString stringWithFormat:@"总收益:%.2f",[self.guildArray[@"totalMoney"] doubleValue]];
+            _hideImageView.image = [UIImage imageNamed:@"pw_visible"];
+
+        }else{
+            sum.text = @"****";
+            _hideImageView.image = [UIImage imageNamed:@"pw_hide"];
+
+        }
+        sum.textAlignment = NSTextAlignmentCenter;
+
+        sum.frame = CGRectMake(dtScreenWidth/2+2, today.frame.origin.y, dtScreenWidth/2-1, 49);
+        [_guildCenter addSubview:sum];
         sum.userInteractionEnabled = YES;
         UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGestureLabel:)];
         [sum addGestureRecognizer:tapGesture];
+        
+        
+        /**隐藏的眼睛*/
+        CGSize size_imageFrame = [sum.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:sum.font,NSFontAttributeName, nil]];
+        _hideImageView.frame = CGRectMake(sum.frame.size.width/2+size_imageFrame.width/2+10, sum.frame.size.height/2-size_imageFrame.height/2, size_imageFrame.height, size_imageFrame.height);
+        [sum addSubview:_hideImageView];
     }
     return _guildCenter;
 }
@@ -317,15 +320,24 @@
     static int i = 0;
     i++;
     NSLog(@"%d",i);
-    if (i%2 == 1) {
-        label.text = @"总收益:****";
+    int counts = i%2;
+    if (counts == 1) {
+        label.text = @"****";
+        _hideImageView.image = [UIImage imageNamed:@"pw_hide"];
+        CGSize size_imageFrame = [label.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:label.font,NSFontAttributeName, nil]];
+
+        _hideImageView.frame = CGRectMake(label.frame.size.width/2+size_imageFrame.width/2+10, label.frame.size.height/2-size_imageFrame.height/2, size_imageFrame.height, size_imageFrame.height);
 
     }else{
-        label.text = [NSString stringWithFormat:@"总收益:%@",[self.guildArray objectForKey:@"totalMoney"]];
-
+        label.text = [NSString stringWithFormat:@"总收益:%.2f",[self.guildArray[@"totalMoney"] doubleValue]];
+        _hideImageView.image = [UIImage imageNamed:@"pw_visible"];
+        CGSize size_imageFrame = [label.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:label.font,NSFontAttributeName, nil]];
+        
+        _hideImageView.frame = CGRectMake(label.frame.size.width/2+size_imageFrame.width/2+10, label.frame.size.height/2-size_imageFrame.height/2, size_imageFrame.height, size_imageFrame.height);
     }
+    
     NSString * session = [PersistenceManager getLoginSession];
-    [UserConnector updateUnion:session isHide:i%2 receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+    [UserConnector updateUnion:session isHide:counts receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
         if (error) {
             
         }else{
@@ -380,9 +392,8 @@
 - (void)loadDatasource{
     NSArray *data = @[@{@"title":@"公会二维码"},
                       @{@"title":@"公会成员"},
-                      @{@"title":@"收益一览"},
                       @{@"title":@"公会排行榜"},
-                      @{@"title":@"提现管理"}];
+                      @{@"title":@"资金管理"}];
     self.dataSource = @[data];
 }
 
@@ -478,7 +489,7 @@
 }
 -(void)popViewLoadView
 {
-//    [self viewDidLoad];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end

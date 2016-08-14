@@ -86,7 +86,7 @@
     _chatButton.frame = CGRectMake(dtScreenWidth-size_buttonTittle.width-60, 20, size_buttonTittle.width+40, size_buttonTittle.height+10);
     
     
-    [_addButton setTitle:@"加好友" forState:UIControlStateNormal];
+    [_addButton setTitle:@"关注" forState:UIControlStateNormal];
     _addButton.titleLabel.font = [UIFont systemFontOfSize:16.0];
     [_addButton setBackgroundColor:[CorlorTransform colorWithHexString:@"cc9966"]];
     CGSize size_addButton = [_addButton.titleLabel.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_addButton.titleLabel.font,NSFontAttributeName, nil]];

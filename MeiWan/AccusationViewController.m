@@ -206,8 +206,8 @@
                 NSMutableDictionary *json = [parser objectWithData:data];
                 int status = [[json objectForKey:@"status"]intValue];
                 if (status == 0) {
-                    [ShowMessage showMessage:@"投诉成功"];
-                    [self.navigationController popViewControllerAnimated:YES];
+
+                    [self showMessageAlert:@"投诉成功，我们的客服正在处理您的退款请求"];
                 }else if (status == 1){
                     [PersistenceManager setLoginSession:@""];
                     LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
@@ -224,4 +224,23 @@
     }
     
 }
+
+- (void)showMessageAlert:(NSString *)message
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action){
+
+        [self.navigationController popViewControllerAnimated:YES];
+
+    }];
+    UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    
+    }];
+    [alertController addAction:cancelAction];
+    [alertController addAction:sureAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
 @end

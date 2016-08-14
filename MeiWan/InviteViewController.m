@@ -94,29 +94,33 @@
 
     self.distance = [[self.playerInfo objectForKey:@"distance"] doubleValue]/1000;
     self.CarFee.text = [NSString stringWithFormat:@"%.3f元",self.distance*2];
-    
     NSScanner *scanner = [NSScanner scannerWithString:self.CarFee.text];
     [scanner scanUpToCharactersFromSet:[NSCharacterSet decimalDigitCharacterSet] intoString:nil];
     int number;
     [scanner scanInt:&number];
     _carFeeNumber = number;
+   
     NSDictionary * userInfo = [PersistenceManager getLoginUser];
     NSLog(@"%@",userInfo);
-    
-    self.userUnionID = [NSNumber numberWithInteger:[[userInfo objectForKey:@"Unionid"] integerValue]];
-    if (_userUnionID == 0) {
-        _userUnionID = nil;
-    }
-    self.peiwanUnionID = [NSNumber numberWithInteger:[[self.playerInfo objectForKey:@"Unionid"] integerValue]];
-    if (_peiwanUnionID == 0) {
-        _peiwanUnionID = nil;
-    }
-    
+//    if ([[userInfo objectForKey:@"Unionid"] isEqualToString:@""]) {
+//        
+//    }else{
+//        self.userUnionID = [NSNumber numberWithInteger:[userInfo[@"Unionid"] integerValue]];
+//    }
+//    
+//    if ([self.playerInfo[@"Unionid"] isEqualToString:@""]) {
+//        
+//    }else{
+//        self.peiwanUnionID = [NSNumber numberWithInteger:[[self.playerInfo objectForKey:@"Unionid"] integerValue]];
+//    }
+    self.userUnionID = userInfo[@"Unionid"];
+    self.peiwanUnionID = self.playerInfo[@"Unionid"];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(WillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
     UILabel * showtext = [[UILabel alloc]init];
-    showtext.text = @"该服务资金安全由美玩提供全程担保";
+    showtext.text = @"该服务资金安全由美玩提供全程担保\n投诉退款请在下单完成后前往记录中心";
     showtext.font = [UIFont systemFontOfSize:15.0];
+    showtext.numberOfLines = 2;
     showtext.textColor = [CorlorTransform colorWithHexString:@"666666"];
 
     CGSize size_show = [showtext.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:showtext.font,NSFontAttributeName, nil]];
@@ -128,6 +132,36 @@
     [self.view addSubview:imageView];
     
 }
+- (IBAction)chooseCarFee:(UISwitch *)sender {
+    if ([sender isOn]) {
+        
+        self.CarFee.hidden = NO;
+        NSScanner *scanner = [NSScanner scannerWithString:self.CarFee.text];
+        [scanner scanUpToCharactersFromSet:[NSCharacterSet decimalDigitCharacterSet] intoString:nil];
+        int number;
+        [scanner scanInt:&number];
+        _carFeeNumber = number;
+
+    }else{
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"如果你取消车费，请先与达人商议好，不然将是违规行为" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action){
+            sender.on = YES;
+        }];
+        UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            
+            self.CarFee.hidden = YES;
+            _carFeeNumber = 0;
+
+        }];
+        [alertController addAction:cancelAction];
+        [alertController addAction:sureAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        
+
+    }
+}
+
+
 - (IBAction)chioce:(UIButton *)sender {
     NSArray * usertimeTags = [_playerInfo objectForKey:@"userTimeTags"];
     if (usertimeTags.count>0) {
@@ -501,15 +535,18 @@
         }
     }];
 }
+#pragma mark---余额支付
 /**余额支付*/
 - (void)banecePay
 {
     NSString *session = [PersistenceManager getLoginSession];
+//    NSLog(@"%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@",session,[self.playerInfo objectForKey:@"id"],[NSNumber numberWithFloat:_riceDownline],[NSNumber numberWithInt:_playTime],[NSNumber numberWithInteger:_tagIndex],[NSNumber numberWithFloat:_carFeeNumber],_userUnionID,_peiwanUnionID);
     [UserConnector payWithAccountMoney:session peiwanId:[self.playerInfo objectForKey:@"id"] price:[NSNumber numberWithFloat:_riceDownline] hours:[NSNumber numberWithInt:_playTime] tagIndex:[NSNumber numberWithInteger:self.tagIndex] carFee:[NSNumber numberWithFloat:_carFeeNumber] userUnionId:_userUnionID peiwanUnionId:_peiwanUnionID receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
         
         if (error) {
             
         }else{
+            
             SBJsonParser*parser=[[SBJsonParser alloc]init];
             NSMutableDictionary *json=[parser objectWithData:data];
             int status = [[json objectForKey:@"status"]intValue];
@@ -535,7 +572,7 @@
                     
                 case 3:
                 {
-                    [self showMessageAlert:@"余额不足"];
+                    [self showMessageAlert2:@"余额不足请到充值界面进行充值"];
                 }
                     break;
                     
@@ -634,10 +671,10 @@
 - (void)showMessageAlert2:(NSString *)message
 {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action){
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action){
         
     }];
-    UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"去充值" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
        
         PrepaidViewController * prepaid = [[PrepaidViewController alloc]init];
         [self.navigationController pushViewController:prepaid animated:YES];

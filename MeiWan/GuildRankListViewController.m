@@ -82,10 +82,13 @@
         }else{
             SBJsonParser*parser=[[SBJsonParser alloc]init];
             NSDictionary * json = [parser objectWithData:data];
+            NSArray * testArray = json[@"entity"];
             int status = [json[@"status"] intValue];
             if (status==0) {
                 self.rankArray = json[@"entity"];
-                [self.tableview reloadData];
+                if ( self.rankArray.count == testArray.count) {
+                    [self.tableview reloadData];
+                }
             }else if (status==1) {
                 [PersistenceManager setLoginSession:@""];
                 LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];

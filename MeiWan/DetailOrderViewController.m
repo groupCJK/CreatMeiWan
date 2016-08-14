@@ -109,7 +109,7 @@
             [makeSure setTitleColor:[CorlorTransform  colorWithHexString:@"#36C8FF"] forState:UIControlStateNormal];
             [makeSure addTarget:self action:@selector(makeSure) forControlEvents:UIControlEventTouchUpInside];
             UIButton *accusation = [[UIButton alloc]initWithFrame:CGRectMake(self.view.bounds.size.width-120, 0, 100, 40)];
-            [accusation setTitle:@"我要投诉" forState:UIControlStateNormal];
+            [accusation setTitle:@"申请退款" forState:UIControlStateNormal];
             [accusation setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
             [accusation addTarget:self action:@selector(accusation) forControlEvents:UIControlEventTouchUpInside];
              

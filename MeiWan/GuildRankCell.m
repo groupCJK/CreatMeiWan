@@ -44,7 +44,6 @@
  公会等级 公会会长 累积收益
  
  */
-    
     [self.guildLogo sd_setImageWithURL:[NSURL URLWithString:dictionary[@"headUrl"]] placeholderImage:[UIImage imageNamed:@"gonghui"]];
   
     _guidName.font = [UIFont systemFontOfSize:14.0];
@@ -93,10 +92,15 @@
     _huiZhang.frame = CGRectMake(dtScreenWidth/2, _guidName.center.y-size_huiZhang.height/2, size_huiZhang.width, size_huiZhang.height);
     
     
-    
-    NSMutableAttributedString * shouyiText = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"累积收益\n%@￥",dictionary[@"totalMoney"]]];
-    NSRange rangeShouyi = [[shouyiText string]rangeOfString:@"累积收益"];
-    NSRange rangeMoney = [[shouyiText string]rangeOfString:[NSString stringWithFormat:@"%@￥",dictionary[@"totalMoney"]]];
+    NSString * money = [NSString stringWithFormat:@"%@",dictionary[@"totalMoney"]];
+    if ([dictionary[@"isHide"] intValue]==0) {
+        money = [NSString stringWithFormat:@"%@",dictionary[@"totalMoney"]];
+    }else{
+        money = @"****";
+    }
+    NSMutableAttributedString * shouyiText = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"总收益\n%.2f￥",[money doubleValue]]];
+    NSRange rangeShouyi = [[shouyiText string]rangeOfString:@"总收益"];
+    NSRange rangeMoney = [[shouyiText string]rangeOfString:[NSString stringWithFormat:@"%.2f￥",[money doubleValue]]];
     [shouyiText addAttribute:NSForegroundColorAttributeName value:[CorlorTransform colorWithHexString:@"003300"] range:rangeShouyi];
     [shouyiText addAttribute:NSForegroundColorAttributeName value:[CorlorTransform colorWithHexString:@"003366"] range:rangeMoney];
 
