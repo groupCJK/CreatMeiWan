@@ -859,6 +859,7 @@
                         <outlet property="rice" destination="vK5-OT-Yvo" id="7Te-gy-TSH"/>
                         <outlet property="sumPrice" destination="Ic0-AN-zhB" id="TAh-C8-USq"/>
                         <outlet property="time" destination="tld-ih-yhg" id="leB-jF-MFN"/>
+                        <segue destination="boZ-bE-ZtE" kind="push" identifier="labelPush" id="ZP7-VI-zsD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BIK-Pp-4CG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4393,16 +4394,17 @@
         <image name="yuanjiao-ju-xing.png" width="574" height="176"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="a2L-pk-feb"/>
-        <segue reference="TE0-cN-cJS"/>
-        <segue reference="S0y-tW-KPA"/>
-        <segue reference="GI5-Ug-Nan"/>
-        <segue reference="lkr-Fs-pVo"/>
+        <segue reference="Cbe-BK-afe"/>
         <segue reference="KR5-l0-YjU"/>
+        <segue reference="GI5-Ug-Nan"/>
+        <segue reference="a2L-pk-feb"/>
+        <segue reference="S0y-tW-KPA"/>
+        <segue reference="TE0-cN-cJS"/>
+        <segue reference="lkr-Fs-pVo"/>
+        <segue reference="paO-aE-i4M"/>
         <segue reference="765-rk-Vfn"/>
         <segue reference="T0n-fg-bJC"/>
-        <segue reference="Cbe-BK-afe"/>
         <segue reference="XWm-D2-zfT"/>
-        <segue reference="paO-aE-i4M"/>
+        <segue reference="ZP7-VI-zsD"/>
     </inferredMetricsTieBreakers>
 </document>

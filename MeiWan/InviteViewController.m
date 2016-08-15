@@ -17,6 +17,7 @@
 #import "AliHelper.h"
 #import "setting.h"
 #import "PrepaidViewController.h"
+#import "InviteRecordViewController.h"
 #import <AlipaySDK/AlipaySDK.h>
 
 
@@ -118,19 +119,35 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(WillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
     UILabel * showtext = [[UILabel alloc]init];
-    showtext.text = @"该服务资金安全由美玩提供全程担保\n投诉退款请在下单完成后前往记录中心";
+    showtext.textColor = [CorlorTransform colorWithHexString:@"666666"];
+    
+    NSString * jilu = @"记录中心";
+    NSMutableAttributedString * changeText = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"该服务资金安全由美玩提供全程担保\n投诉退款请在下单完成后前往%@",jilu]];
+    NSRange range = [[changeText string]rangeOfString:jilu];
+    
+    [changeText addAttribute:NSForegroundColorAttributeName value:[CorlorTransform colorWithHexString:@"3366cc"] range:range];
+    
+    showtext.attributedText = changeText;
     showtext.font = [UIFont systemFontOfSize:15.0];
     showtext.numberOfLines = 2;
-    showtext.textColor = [CorlorTransform colorWithHexString:@"666666"];
-
     CGSize size_show = [showtext.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:showtext.font,NSFontAttributeName, nil]];
     showtext.frame = CGRectMake(dtScreenWidth/2-size_show.width/2, dtScreenHeight-80, size_show.width, size_show.height);
     [self.view addSubview:showtext];
+    
+    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(showtext.frame.origin.x+showtext.frame.size.width-60, showtext.frame.size.height/2+showtext.frame.origin.y, 60, showtext.frame.size.height/2);
+    [button addTarget:self action:@selector(labelPush:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    
     UIImageView * imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"dun.jpg"]];
     imageView.frame = CGRectMake(showtext.frame.origin.x+showtext.frame.size.width, showtext.frame.origin.y, showtext.frame.size.height, showtext.frame.size.height);
     imageView.backgroundColor = [UIColor blackColor];
     [self.view addSubview:imageView];
     
+}
+- (void)labelPush:(UIButton *)sender
+{
+    [self performSegueWithIdentifier:@"labelPush" sender:nil];
 }
 - (IBAction)chooseCarFee:(UISwitch *)sender {
     if ([sender isOn]) {
@@ -701,5 +718,13 @@
  // Pass the selected object to the new view controller.
  }
  */
+#pragma mark - Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"labelPush"]) {
+        InviteRecordViewController *pv = segue.destinationViewController;
+        pv.hidesBottomBarWhenPushed = YES;
+//        pv.playerInfo = sender;
+    }
+}
 
 @end
