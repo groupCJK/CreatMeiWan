@@ -134,7 +134,7 @@
     imageArray =  @[@"sing",@"video-chat",@"dining",@"sing-expert",@"go-nightclubbing",@"clock",@"shadow-with",@"sports",@"lol",@"all"];
     [self loginHuanxin];
 
-    self.infoCount = 20;
+    self.infoCount = 10;
     self.playerviews = [NSMutableArray array];
     self.myRandNumber = [[RandNumber alloc]init];
     self.searchDic = [NSMutableDictionary dictionary];
@@ -505,7 +505,7 @@
         if (self.sum < self.playersScollview.bounds.size.height) {
             self.sum = self.playersScollview.bounds.size.height;
         }
-        self.playersScollview.contentSize = CGSizeMake(self.playersScollview.bounds.size.width, self.sum+40);
+        self.playersScollview.contentSize = CGSizeMake(self.playersScollview.bounds.size.width, self.sum+170);
         [self.playerviews addObject:self.myPv];
         [self.playersScollview addSubview:self.myPv];
     }
@@ -569,7 +569,7 @@
         if (self.sum < self.playersScollview.bounds.size.height) {
             self.sum = self.playersScollview.bounds.size.height+1;
         }
-        self.playersScollview.contentSize = CGSizeMake(self.playersScollview.bounds.size.width, self.sum +40);
+        self.playersScollview.contentSize = CGSizeMake(self.playersScollview.bounds.size.width, self.sum + 170);
         [self.playerviews addObject:self.myPv];
         [self.playersScollview addSubview:self.myPv];
     }
