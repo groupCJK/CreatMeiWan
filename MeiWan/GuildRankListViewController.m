@@ -59,6 +59,10 @@
     }
     if (self.rankArray.count>0) {
         cell.dictionary = self.rankArray[indexPath.row];
+        if ([self.rankArray[indexPath.row][@"isHide"] intValue]==1) {
+            cell.shouYi.text = @"****";
+            cell.shouYi.font = [UIFont systemFontOfSize:20.0];
+        }
     }
     return cell;
 }
