@@ -74,7 +74,7 @@
                   moduleName = "MeiWan"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user_kevin/Desktop/CreatMeiWan/MeiWan/InviteViewController.m"
-                  timestampString = "493029780.635711"
+                  timestampString = "493033317.07835"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "618"
@@ -89,7 +89,7 @@
                   moduleName = "MeiWan"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user_kevin/Desktop/CreatMeiWan/MeiWan/InviteViewController.m"
-                  timestampString = "493029780.635989"
+                  timestampString = "493033317.078518"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "619"
@@ -128,6 +128,22 @@
             startingLineNumber = "625"
             endingLineNumber = "625"
             landmarkName = "-aliPay"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MeiWan/DetailOrderViewController.m"
+            timestampString = "493032031.323114"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

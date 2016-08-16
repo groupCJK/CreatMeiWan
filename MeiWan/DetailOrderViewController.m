@@ -19,6 +19,7 @@
 #import "CorlorTransform.h"
 #import "PlagerinfoViewController.h"
 @interface DetailOrderViewController ()<UINavigationControllerDelegate>
+@property (weak, nonatomic) IBOutlet UILabel *carFee;
 @property (strong, nonatomic) IBOutlet UILabel *creatTime;
 @property (strong, nonatomic) IBOutlet UILabel *peiwanNickname;
 @property (strong, nonatomic) IBOutlet UILabel *choiceBar;
@@ -47,14 +48,6 @@
         NSDictionary *peiwan = [self.detailOrderDic objectForKey:@"peiwan"];
         self.peiwanNickname.text = [peiwan objectForKey:@"nickname"];
     }
-    
-//    NSDictionary *netBar = [self.detailOrderDic objectForKey:@"netbar"];
-//    NSString *netbar = [netBar objectForKey:@"name"];
-//    if (netbar.length == 0) {
-//        self.choiceBar.text = @"未指定";
-//    }else{
-//        self.choiceBar.text = netbar;
-//    }
     
     double typedouble = [[self.detailOrderDic objectForKey:@"tagIndex"]doubleValue];
     if (typedouble == 1) {
@@ -85,7 +78,8 @@
     float price = [[self.detailOrderDic objectForKey:@"price"]floatValue];
     self.money = hours * price;
     self.needPay.text = [NSString stringWithFormat:@"%.1f",self.money];
-    
+    /**车费*/
+    self.carFee.text = [NSString stringWithFormat:@" %.1f",[self.detailOrderDic[@"carFee"] doubleValue]];
     NSDictionary *evaluationDic = [self.detailOrderDic objectForKey:@"evaluation"];
 
     int status = [[self.detailOrderDic objectForKey:@"status"]intValue];
