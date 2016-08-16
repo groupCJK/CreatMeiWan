@@ -1654,8 +1654,28 @@ import UIKit
                 
         }
     }
+    /**升级按钮请求*/
+    public static func upgradeUnion(session:String?,receiver:(data:NSData?,error:NSError?)->()){
+        var parameters:Dictionary<String,AnyObject> = [:]
+        if(session != nil){
+            parameters["session"]=session
+        }
+        request(.GET, UserURL()!+"upgradeUnion", parameters:parameters as? [String : NSObject])
+            .response { request, r, data, error in
+                
+                if (error==nil){
+                    
+                }else{
+                    userUrl = anOtherUrl
+                    print(userUrl)
+                }
+                
+                receiver(data:data!, error:error)
+                
+                
+        }
 
-
+    }
 }
 
 

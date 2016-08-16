@@ -59,7 +59,6 @@
 @implementation PalyListViewController
 
 #pragma mark - mapView Delegate
-#pragma mark - mapView Delegate
 -(void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation
 {
     if(updatingLocation) {
@@ -89,6 +88,7 @@
             
         }];
         //系统会一直更新数据，直到选择停止更新，因为我们只需要获得一次经纬度即可，所以获取之后就停止更新
+        
     }
     
 }
@@ -581,7 +581,6 @@
     
     
     UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width_screen, 161)];
-    [self.playersScollview addSubview:view];
        for (int i = 0; i<10; i++) {
            
            UIButton * styleButton = [UIButton  buttonWithType:UIButtonTypeCustom];
@@ -608,13 +607,13 @@
            label.textAlignment = NSTextAlignmentCenter;
            label.font = [UIFont systemFontOfSize:11.0];
            label.text = titlelabel[i];
-//           label.backgroundColor = [UIColor colorWithRed:arc4random()%256/255.0 green:arc4random()%256/255.0 blue:arc4random()%256/255.0 alpha:1];
-            label.textColor = [CorlorTransform colorWithHexString:@"#6e6e6e"];
-//           label.textColor = [UIColor blackColor];
-//           label.textColor = [UIColor whiteColor];
+
+           label.textColor = [CorlorTransform colorWithHexString:@"#6e6e6e"];
+
            [view addSubview:label];
     }
-    
+    [self.playersScollview addSubview:view];
+
     UIView * collectionTopView = [[UIView alloc]initWithFrame:CGRectMake(0, 160, width_screen, 50)];
     collectionTopView.backgroundColor = [UIColor whiteColor];
     [self.playersScollview addSubview:collectionTopView];
@@ -685,6 +684,7 @@
         [pv removeFromSuperview];
     }
     [self .playerviews removeAllObjects];
+    
     NSString *session= [PersistenceManager getLoginSession];
     [UserConnector aroundPeiwan:session gender:[self.searchDic objectForKey:@"gender"] minPrice:[self.searchDic objectForKey:@"minPrice"] maxPrice:[self.searchDic objectForKey:@"maxPrice"] isWin:nil offset:0 limit:self.infoCount
                     isRecommend:nil mode:[self.searchDic objectForKey:@"mode"] tagIndex:number receiver:^(NSData *data,NSError *error){

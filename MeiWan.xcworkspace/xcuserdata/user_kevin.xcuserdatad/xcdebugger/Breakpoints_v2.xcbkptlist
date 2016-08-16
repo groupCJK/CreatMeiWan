@@ -42,22 +42,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MeiWan/PalyListViewController.m"
-            timestampString = "492925554.73383"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "508"
-            endingLineNumber = "508"
-            landmarkName = "-layoutSubviews"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MeiWan/PalyListViewController.m"
             timestampString = "492925578.461262"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -90,7 +74,7 @@
                   moduleName = "MeiWan"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user_kevin/Desktop/CreatMeiWan/MeiWan/InviteViewController.m"
-                  timestampString = "493022571.751352"
+                  timestampString = "493028395.425989"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "618"
@@ -105,7 +89,7 @@
                   moduleName = "MeiWan"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user_kevin/Desktop/CreatMeiWan/MeiWan/InviteViewController.m"
-                  timestampString = "493022571.751547"
+                  timestampString = "493028395.426137"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "619"

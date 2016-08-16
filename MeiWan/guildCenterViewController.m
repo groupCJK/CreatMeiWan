@@ -216,33 +216,21 @@
         [guildInfo addSubview:experienceLabel];
         CGFloat allNeedPeople;
         CGFloat people = [self.guildArray[@"exp"] integerValue];
-        int level;
-        if (people<=200) {
-            level = 1;
-        }else if (50<people&&people<=200){
-            level = 2;
-        }else if (people>100&&people<=1000){
-            level = 3;
-        }else if (people>500&&people<=2000){
-            level = 4;
-        }else if (people>2000&&people<=5000){
-            level = 5;
-        }else{
-            level = 6;
-        }
+        int level = [self.guildArray[@"level"] intValue];
         if (level==1){
             allNeedPeople = 200;
         }else if (level==2){
-            allNeedPeople = 100;
-        }else if (level==3){
-            allNeedPeople = 500;
-        }else if (level==4){
             allNeedPeople = 2000;
+        }else if (level==3){
+            allNeedPeople = 40000;
+        }else if (level==4){
+            allNeedPeople = 400000;
         }else if (level==5){
-            allNeedPeople = 5000;
-        }else{
             allNeedPeople = 4000000;
+        }else{
+            
         }
+
         CGFloat baifenbi = people/allNeedPeople;
         /**公会人数比例*/
         UILabel * people_allNeedPeople = [[UILabel alloc]init];
@@ -252,6 +240,49 @@
         CGSize size_people = [people_allNeedPeople.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:people_allNeedPeople.font,NSFontAttributeName, nil]];
         people_allNeedPeople.frame = CGRectMake(experienceLabel.frame.origin.x+experienceLabel.frame.size.width+10, experienceLabel.frame.origin.y-2, size_people.width, size_people.height);
         [guildInfo addSubview:people_allNeedPeople];
+        
+        /**升级按钮*/
+        UIButton * levelUP = [UIButton buttonWithType:UIButtonTypeCustom];
+        levelUP.frame = CGRectMake(people_allNeedPeople.frame.size.width+people_allNeedPeople.frame.origin.x+10, people_allNeedPeople.center.y-15, dtScreenWidth-(people_allNeedPeople.frame.size.width+people_allNeedPeople.frame.origin.x+10)-10, 30);
+        [levelUP setTitle:@"升级" forState:UIControlStateNormal];
+        levelUP.titleLabel.font = [UIFont systemFontOfSize:15.0];
+        levelUP.layer.cornerRadius = 5;
+        levelUP.clipsToBounds = YES;
+        if (level==1) {
+            if (people<200) {
+                levelUP.backgroundColor = [UIColor grayColor];
+            }else{
+                levelUP.backgroundColor = [CorlorTransform colorWithHexString:@"0066ff"];
+            }
+        }else if (level == 2){
+            if (people<2000) {
+                levelUP.backgroundColor = [UIColor grayColor];
+            }else{
+                levelUP.backgroundColor = [CorlorTransform colorWithHexString:@"0066ff"];
+            }
+        }else if (level == 3){
+            if (people<40000) {
+                levelUP.backgroundColor = [UIColor grayColor];
+            }else{
+                levelUP.backgroundColor = [CorlorTransform colorWithHexString:@"0066ff"];
+            }
+        }else if (level == 4){
+            if (people<400000) {
+                levelUP.backgroundColor = [UIColor grayColor];
+            }else{
+                levelUP.backgroundColor = [CorlorTransform colorWithHexString:@"0066ff"];
+            }
+        }else if (level == 5){
+            if (people<4000000) {
+                levelUP.backgroundColor = [UIColor grayColor];
+            }else{
+                levelUP.backgroundColor = [CorlorTransform colorWithHexString:@"0066ff"];
+            }
+        }else{
+            levelUP.hidden = YES;
+        }
+        [levelUP addTarget:self action:@selector(levelUPRequest:) forControlEvents:UIControlEventTouchUpInside];
+        [guildInfo addSubview:levelUP];
         
         UILabel * colorLabel = [[UILabel alloc]initWithFrame:CGRectMake(experienceLabel.frame.origin.x+1, experienceLabel.frame.origin.y+1, (experienceLabel.frame.size.width-2)*baifenbi, experienceLabel.frame.size.height-2)];
         colorLabel.backgroundColor = [CorlorTransform colorWithHexString:@"#3399cc"];
@@ -490,6 +521,27 @@
 -(void)popViewLoadView
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+- (void)levelUPRequest:(UIButton *)sender
+{
+    NSString * session = [PersistenceManager getLoginSession];
+    [UserConnector upgradeUnion:session receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (error) {
+            
+        }else{
+            
+            NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+             NSLog(@"%@",dic);
+            int status = [dic[@"status"] intValue];
+            if (status==0) {
+                [ShowMessage showMessage:@"升级成功"];
+                [self.guildCenterTableView reloadData];
+            }else{
+                [ShowMessage showMessage:@"升级失败,经验点不足"];
+            }
+
+        }
+    }];
 }
 
 @end
