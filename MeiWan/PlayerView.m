@@ -72,9 +72,14 @@
     
 //定位标签
     self.distance = [[UILabel alloc]init];
-    if ([[playerInfo objectForKey:@"distance"]intValue]>1000)
+    if ([[playerInfo objectForKey:@"distance"]doubleValue]>1000)
     {
-        self.distance.text = [NSString stringWithFormat:@"%.1f km", [[_playerInfo objectForKey:@"distance"] doubleValue]/1000];
+        if ([[playerInfo objectForKey:@"distance"]doubleValue]/1000>1000) {
+            self.distance.text = @"太遥远";
+        }else{
+        
+            self.distance.text = [NSString stringWithFormat:@"%.1f km", [[_playerInfo objectForKey:@"distance"] doubleValue]/1000];
+        }
     }
     else
     {

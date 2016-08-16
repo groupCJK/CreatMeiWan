@@ -1053,31 +1053,7 @@ import UIKit
                 receiver(data:data, error:error)
         }
     }
-        //余额支付
-    public static func payWithAccountMoney(session:String!,orderId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
-        var parameters:Dictionary<String,AnyObject> = [:]
-        
-        if(session != nil){
-            parameters["session"]=session
-        }
-        if(session != nil){
-            parameters["orderId"]=orderId
-        }
-        
-        request(.GET, OrderURL()!+"payWithAccountMoney", parameters:parameters as? [String : NSObject])
-            .response { request, r, data, error in
-                
-                if (error==nil){
-                    
-                }else{
-                    userUrl = anOtherUrl
-                    print(userUrl)
-                }
-                
-                receiver(data:data, error:error)
-        }
-    }
-    
+
     //订单投诉
     public static func sendComplain(session:String!,orderId:NSNumber!,title:String?,content:String?,photos:String?,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
@@ -1389,7 +1365,7 @@ import UIKit
                     print(userUrl)
                 }
                 
-                receiver(data:data!.gunzippedData(), error:error)
+                receiver(data:data!, error:error)
         }
         
         

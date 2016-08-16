@@ -39,6 +39,7 @@
 #import "findFriendViewController.h"
 #import "UMSocial.h"
 #import "creatAlbum.h"
+#import "MJRefresh.h"
 @interface PersonTableViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UserInfoDelegate,SettingUserInfoDelegate,MyburseDelegate,MBProgressHUDDelegate,UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *userInfoHeaderView;
@@ -73,9 +74,6 @@
     [self.navigationController.navigationBar setBarTintColor:[CorlorTransform colorWithHexString:@"#3f90a4"]];
     self.navigationController.navigationBar.titleTextAttributes=[NSDictionary dictionaryWithObject:[UIColor whiteColor]forKey:NSForegroundColorAttributeName];
     
-    
-    //初始化界面
-//        [self initUI];
     //获得个人信息，更新界面
     self.userInfoDic = [PersistenceManager getLoginUser];
     self.userinfo = [[UserInfo alloc]initWithDictionary: [PersistenceManager getLoginUser]];
@@ -313,6 +311,7 @@
                 self.userInfoData = [json objectForKey:@"entity"];
                 
                 [self updateUI];
+                [self.tableView.header endRefreshing];
             }
         }
     }];

@@ -81,6 +81,7 @@
         
         if ([obj isEqualToDictionary:self.focusArray[indexPath.row]]) {
             [cell.focusButton setTitle:@"互相关注" forState:UIControlStateNormal];
+
         }
     }];
     
@@ -118,8 +119,8 @@
 
                     [ShowMessage showMessage:@"关注成功"];
                     [cell.focusButton setTitle:@"互相关注" forState:UIControlStateNormal];
-                    cell.focusButton.userInteractionEnabled = YES;
 
+                    
                 }else if (status == 1){
                     
                     [PersistenceManager setLoginSession:@""];

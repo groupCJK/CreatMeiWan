@@ -38,8 +38,8 @@
     [userdefau setObject:@"https://web.chuangjk.com:8443/" forKey:@"0"];
     [userdefau setObject:@"https://chuangjk.com:8443/" forKey:@"1"];
     [userdefau synchronize];
-    
     [setting getOpen];
+    
     [UserConnector acceptInvalidSSLCerts];
     NSString *session = [PersistenceManager getLoginSession];
     if (session.length != 0) {

@@ -28,6 +28,7 @@
 #import "MBProgressHUD.h"
 #import "CompressImage.h"
 #import "CorlorTransform.h"
+#import "SDWebImage/SDImageCache.h"
 
 @interface UserInfoViewController ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate,MBProgressHUDDelegate,UITextFieldDelegate>
 
@@ -118,6 +119,10 @@
     }else if (indexPath.row == 5){
         cell.timeImage1.hidden = NO;
         cell.timeDic = self.playerInfo;
+    }else{
+        cell.textLabel.text = @"清除缓存";
+        cell.textLabel.font = [UIFont systemFontOfSize:16.0];
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
     }
     cell.backgroundColor = [UIColor whiteColor];
     return cell;
@@ -134,7 +139,24 @@
     }else if (indexPath.row == 4){
         
     }else if(indexPath.row == 5){
-        NSLog(@"选择标签");
+//        NSLog(@"选择标签");
+    }else{
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"清除缓存" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+#if TARGET_IPHONE_SIMULATOR//模拟器
+            
+#elif TARGET_OS_IPHONE//真机
+            [[SDImageCache sharedImageCache]clearDisk];
+#endif
+
+        }];
+        [alertController addAction:cancelAction];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        [tableView reloadData];
+
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -433,7 +455,10 @@
                       @{@"title":@"性别:"},
                       @{@"title":@"年龄:"},
                       @{@"title":@"签名:"},
-                      @{@"title":@"标签:"}];
+                      @{@"title":@"标签:"},
+                      @{@"title":@""}
+                      ];
+    
     self.dataSource = @[data];
 }
 

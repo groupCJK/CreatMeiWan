@@ -297,32 +297,35 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView == self.payAlert) {
         if (buttonIndex == 1) {
-            //余额支付
-            NSString *session = [PersistenceManager getLoginSession];
-            [UserConnector payWithAccountMoney:session orderId:[self.detailOrderDic objectForKey:@"id"] receiver:^(NSData *data, NSError *error){
-                if (error) {
-                    [ShowMessage showMessage:@"服务器未响应"];
-                }else{
-                    SBJsonParser *parser = [[SBJsonParser alloc]init];
-                    NSMutableDictionary *json = [parser objectWithData:data];
-                    int status = [[json objectForKey:@"status"]intValue];
-                     if (status == 0) {
-                        [ShowMessage showMessage:@"支付成功"];
-                        [self.navigationController popViewControllerAnimated:YES];
-                    }else if (status == 1){
-                        [PersistenceManager setLoginSession:@""];
-                       LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
-                       lv.hidesBottomBarWhenPushed = YES;
-                       [self.navigationController pushViewController:lv animated:YES];
-        
-                    }else if (status == 2){
-                        [ShowMessage showMessage:@"余额不足"];
-                    }else{
-                        
-                    }
-                    
-                }
-            }];
+            
+            
+//            //余额支付
+//            NSString *session = [PersistenceManager getLoginSession];
+//            [UserConnector payWithAccountMoney:session orderId:[self.detailOrderDic objectForKey:@"id"] receiver:^(NSData *data, NSError *error){
+//                if (error) {
+//                    [ShowMessage showMessage:@"服务器未响应"];
+//                }else{
+//                    SBJsonParser *parser = [[SBJsonParser alloc]init];
+//                    NSMutableDictionary *json = [parser objectWithData:data];
+//                    int status = [[json objectForKey:@"status"]intValue];
+//                     if (status == 0) {
+//                        [ShowMessage showMessage:@"支付成功"];
+//                        [self.navigationController popViewControllerAnimated:YES];
+//                    }else if (status == 1){
+//                        [PersistenceManager setLoginSession:@""];
+//                       LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
+//                       lv.hidesBottomBarWhenPushed = YES;
+//                       [self.navigationController pushViewController:lv animated:YES];
+//        
+//                    }else if (status == 2){
+//                        [ShowMessage showMessage:@"余额不足"];
+//                    }else{
+//                        
+//                    }
+//                    
+//                }
+//            }];
+            
         }else if(buttonIndex == 2){
             //支付宝支付
             double money = [[self.detailOrderDic objectForKey:@"price"]doubleValue]*[[self.detailOrderDic objectForKey:@"hours"]intValue];

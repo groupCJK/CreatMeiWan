@@ -221,7 +221,7 @@
     [self addSubview:currentState];
     self.currentState = currentState;
     
-    UILabel *orderIdTitle = [[UILabel alloc] initWithFrame:CGRectMake(currentStateTitle.frame.origin.x+currentState.frame.origin.x+currentStateTitle.frame.size.width, priseSunitle.frame.origin.y+priseSunitle.frame.size.height+5, 50, 20)];
+    UILabel *orderIdTitle = [[UILabel alloc] initWithFrame:CGRectMake(currentStateTitle.frame.origin.x+currentState.frame.origin.x+currentStateTitle.frame.size.width+10, priseSunitle.frame.origin.y+priseSunitle.frame.size.height+5, 50, 20)];
     orderIdTitle.text = @"订单ID:";
     orderIdTitle.font = [UIFont systemFontOfSize:13.0f];
     [self addSubview:orderIdTitle];

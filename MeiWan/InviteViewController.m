@@ -94,11 +94,11 @@
     self.sumPrice.text = @"合计";
 
     self.distance = [[self.playerInfo objectForKey:@"distance"] doubleValue]/1000;
-    self.CarFee.text = [NSString stringWithFormat:@"%.3f元",self.distance*2];
+    self.CarFee.text = [NSString stringWithFormat:@"%.2f元",self.distance*2];
     NSScanner *scanner = [NSScanner scannerWithString:self.CarFee.text];
     [scanner scanUpToCharactersFromSet:[NSCharacterSet decimalDigitCharacterSet] intoString:nil];
-    int number;
-    [scanner scanInt:&number];
+    double number;
+    [scanner scanDouble:&number];
     _carFeeNumber = number;
    
     NSDictionary * userInfo = [PersistenceManager getLoginUser];
@@ -118,24 +118,33 @@
     self.peiwanUnionID = self.playerInfo[@"Unionid"];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(WillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
+    
+    
     UILabel * showtext = [[UILabel alloc]init];
     showtext.textColor = [CorlorTransform colorWithHexString:@"666666"];
-    
-    NSString * jilu = @"记录中心";
-    NSMutableAttributedString * changeText = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"该服务资金安全由美玩提供全程担保\n投诉退款请在下单完成后前往%@",jilu]];
-    NSRange range = [[changeText string]rangeOfString:jilu];
-    
-    [changeText addAttribute:NSForegroundColorAttributeName value:[CorlorTransform colorWithHexString:@"3366cc"] range:range];
-    
-    showtext.attributedText = changeText;
+    showtext.text = @"该服务资金安全由美玩提供全程担保";
     showtext.font = [UIFont systemFontOfSize:15.0];
     showtext.numberOfLines = 2;
     CGSize size_show = [showtext.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:showtext.font,NSFontAttributeName, nil]];
-    showtext.frame = CGRectMake(dtScreenWidth/2-size_show.width/2, dtScreenHeight-80, size_show.width, size_show.height);
+    showtext.frame = CGRectMake(dtScreenWidth/2-size_show.width/2-size_show.height/2, dtScreenHeight-80, size_show.width, size_show.height);
     [self.view addSubview:showtext];
+    //
+    //
+    UILabel * showText2 = [[UILabel alloc]init];
+    showText2.textColor = showtext.textColor;
+    NSString * jilu = @"记录中心";
+    NSMutableAttributedString * changeText = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"投诉退款请在下单完成后前往%@",jilu]];
+    NSRange range = [[changeText string]rangeOfString:jilu];
+    [changeText addAttribute:NSForegroundColorAttributeName value:[CorlorTransform colorWithHexString:@"3366cc"] range:range];
+    showText2.attributedText = changeText;
+    showText2.font = [UIFont systemFontOfSize:15.0];
+    CGSize size_show2 = [showText2.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:showText2.font,NSFontAttributeName, nil]];
+    
+    showText2.frame = CGRectMake(dtScreenWidth/2-size_show2.width/2, showtext.frame.size.height+showtext.frame.origin.y, size_show2.width, size_show2.height);
+    [self.view addSubview:showText2];
     
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(showtext.frame.origin.x+showtext.frame.size.width-60, showtext.frame.size.height/2+showtext.frame.origin.y, 60, showtext.frame.size.height/2);
+    button.frame = CGRectMake(showText2.frame.origin.x+showText2.frame.size.width-60, showText2.frame.size.height/2+showText2.frame.origin.y, 60, showText2.frame.size.height/2);
     [button addTarget:self action:@selector(labelPush:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
     
@@ -516,57 +525,48 @@
 //    NSString * string = [NSString stringWithFormat:@"%.3f",self.distance*2];
 //    self.carFeeNumber = [NSNumber numberWithDouble:[string doubleValue]];
 //    NSLog(@"%@",_carFeeNumber);
-    NSString *session = [PersistenceManager getLoginSession];
-    [UserConnector createOrder2:session peiwanId:[self.playerInfo objectForKey:@"id"] price:[NSNumber numberWithFloat:_riceDownline] tagIndex:[NSNumber numberWithInteger:self.tagIndex] hours:[NSNumber numberWithInt:_playTime] carFee:[NSNumber numberWithFloat:_carFeeNumber] userUnionId:_userUnionID peiwanUnionId:_peiwanUnionID receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
-        if (error) {
-            
-        }else{
-            
-            SBJsonParser*parser=[[SBJsonParser alloc]init];
-            NSMutableDictionary *json=[parser objectWithData:data];
-            int status = [[json objectForKey:@"status"]intValue];
-            if (status==0) {
-                if (buttonIndex == 1) {
-                    
-                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"如果使用余额支付,系统将会在您的余额中扣除费用。" preferredStyle:UIAlertControllerStyleAlert];
-                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-                    UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                        //余额支付
-                        [self banecePay];
-                    }];
-                    [alertController addAction:cancelAction];
-                    [alertController addAction:sureAction];
-                    [self presentViewController:alertController animated:YES completion:nil];
-                    
-                }else if(buttonIndex == 2){
-                    //支付宝支付
-                    [self aliPay];
-                }
-
-            }else if (status ==1 ){
-                [self loginAgain];
-            }else{
-                [ShowMessage showMessage:@"信息不正确"];
-            }
-            
-        }
-    }];
+    if (buttonIndex == 1) {
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"如果使用余额支付,系统将会在您的余额中扣除费用。" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            //余额支付
+            [self banecePay];
+        }];
+        [alertController addAction:cancelAction];
+        [alertController addAction:sureAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        
+    }else if(buttonIndex == 2){
+        //支付宝支付
+        [self aliPay];
+    }
 }
 #pragma mark---余额支付
 /**余额支付*/
 - (void)banecePay
 {
+//    [NSNumber numberWithFloat:_carFeeNumber]
     NSString *session = [PersistenceManager getLoginSession];
-//    NSLog(@"%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@",session,[self.playerInfo objectForKey:@"id"],[NSNumber numberWithFloat:_riceDownline],[NSNumber numberWithInt:_playTime],[NSNumber numberWithInteger:_tagIndex],[NSNumber numberWithFloat:_carFeeNumber],_userUnionID,_peiwanUnionID);
+    NSLog(@"陪玩ID%@",[self.playerInfo objectForKey:@"id"]);
+    NSLog(@"时间%@",[NSNumber numberWithInt:_playTime]);
+    NSLog(@"索引%@",[NSNumber numberWithInteger:self.tagIndex]);
+    NSLog(@"车费%@",[NSNumber numberWithFloat:_carFeeNumber]);
+    NSLog(@"用户公会%@",_userUnionID);
+    NSLog(@"陪玩公会%@",_peiwanUnionID);
     [UserConnector payWithAccountMoney:session peiwanId:[self.playerInfo objectForKey:@"id"] price:[NSNumber numberWithFloat:_riceDownline] hours:[NSNumber numberWithInt:_playTime] tagIndex:[NSNumber numberWithInteger:self.tagIndex] carFee:[NSNumber numberWithFloat:_carFeeNumber] userUnionId:_userUnionID peiwanUnionId:_peiwanUnionID receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
         
         if (error) {
             
         }else{
+//           NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
             
             SBJsonParser*parser=[[SBJsonParser alloc]init];
             NSMutableDictionary *json=[parser objectWithData:data];
             int status = [[json objectForKey:@"status"]intValue];
+            
+//            NSString * string = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+            
             switch (status) {
                 case 0:
                 {
@@ -605,13 +605,10 @@
                 }
                     break;
                     
-                    
-                    
                 default:
                     break;
             }
         }
-        
     }];
 }
 

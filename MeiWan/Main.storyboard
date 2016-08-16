@@ -4394,17 +4394,17 @@
         <image name="yuanjiao-ju-xing.png" width="574" height="176"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Cbe-BK-afe"/>
-        <segue reference="KR5-l0-YjU"/>
-        <segue reference="GI5-Ug-Nan"/>
         <segue reference="a2L-pk-feb"/>
         <segue reference="S0y-tW-KPA"/>
-        <segue reference="TE0-cN-cJS"/>
+        <segue reference="GI5-Ug-Nan"/>
         <segue reference="lkr-Fs-pVo"/>
-        <segue reference="paO-aE-i4M"/>
-        <segue reference="765-rk-Vfn"/>
-        <segue reference="T0n-fg-bJC"/>
         <segue reference="XWm-D2-zfT"/>
+        <segue reference="2kF-w6-CmH"/>
         <segue reference="ZP7-VI-zsD"/>
+        <segue reference="TgU-ON-UTc"/>
+        <segue reference="paO-aE-i4M"/>
+        <segue reference="T0n-fg-bJC"/>
+        <segue reference="Cbe-BK-afe"/>
+        <segue reference="765-rk-Vfn"/>
     </inferredMetricsTieBreakers>
 </document>

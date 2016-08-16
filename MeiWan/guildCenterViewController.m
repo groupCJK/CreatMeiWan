@@ -80,7 +80,7 @@
                 self.userInfo = [[UserInfo alloc]initWithDictionary:json[@"entity"]];
                 if (self.userInfo.hasUnion == 1) {
                     [self loadFindGuildData];
-                }else if (self.userInfo.hasUnion==0){
+                }else if (self.userInfo.hasUnion == 0){
                     [self createGuild];
                 }
             }else if (status==1){
@@ -217,11 +217,11 @@
         CGFloat allNeedPeople;
         CGFloat people = [self.guildArray[@"exp"] integerValue];
         int level;
-        if (people<=20) {
+        if (people<=200) {
             level = 1;
-        }else if (20<people&&people<=100){
+        }else if (50<people&&people<=200){
             level = 2;
-        }else if (people>100&&people<=500){
+        }else if (people>100&&people<=1000){
             level = 3;
         }else if (people>500&&people<=2000){
             level = 4;
@@ -231,7 +231,7 @@
             level = 6;
         }
         if (level==1){
-            allNeedPeople = 20;
+            allNeedPeople = 200;
         }else if (level==2){
             allNeedPeople = 100;
         }else if (level==3){
@@ -241,7 +241,7 @@
         }else if (level==5){
             allNeedPeople = 5000;
         }else{
-            allNeedPeople = 10000;
+            allNeedPeople = 4000000;
         }
         CGFloat baifenbi = people/allNeedPeople;
         /**公会人数比例*/
