@@ -49,21 +49,8 @@
     _guidName.font = [UIFont systemFontOfSize:14.0];
     int people;
     people = [dictionary[@"exp"] intValue];
-    int level;
-    if (people<=20) {
-        level = 1;
-    }else if (20<people&&people<=100){
-        level = 2;
-    }else if (people>100&&people<=500){
-        level = 3;
-    }else if (people>500&&people<=2000){
-        level = 4;
-    }else if (people>2000&&people<=5000){
-        level = 5;
-    }else{
-        level = 6;
-    }
-    
+    int level = [dictionary[@"level"] intValue];
+
     NSMutableAttributedString * nameText = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@\n%d级公会",dictionary[@"name"],level]];
     NSRange rangeName = [[nameText string]rangeOfString:[NSString stringWithFormat:@"%@",dictionary[@"name"]]];
     NSRange rangelevel = [[nameText string]rangeOfString:[NSString stringWithFormat:@"%d级公会",level]];
