@@ -20,7 +20,7 @@
     _guildName.font = [UIFont systemFontOfSize:14.0];
     _guildName.textColor = [CorlorTransform colorWithHexString:@"ff6633"];
 
-    NSMutableAttributedString * changeText = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@\n累积收益:%@",dictionary[@"name"],dictionary[@"totalMoney"]]];
+    NSMutableAttributedString * changeText = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@\n累积收益:%.2f",dictionary[@"name"],[dictionary[@"totalMoney"] doubleValue]]];
     NSRange range = [[changeText string]rangeOfString:dictionary[@"name"]];
     [changeText addAttribute:NSForegroundColorAttributeName value:[CorlorTransform colorWithHexString:@"cc9900"] range:range];
     [changeText addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:16.0] range:range];

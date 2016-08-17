@@ -169,8 +169,8 @@
         [_guildCenter addSubview:todayEarnings];
         UILabel *today = [[UILabel alloc] init];
         today.textColor = [UIColor blackColor];
-        NSString *earningsText = [self.dictionary objectForKey:@"todayMoney"];
-        today.text = [NSString stringWithFormat:@"今日收益:%@",earningsText];
+        CGFloat earningsText = [[self.dictionary objectForKey:@"todayMoney"] doubleValue];
+        today.text = [NSString stringWithFormat:@"今日收益:%.2f",earningsText];
         today.font = [UIFont systemFontOfSize:16.0];
         CGSize size_today = [today.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:today.font,NSFontAttributeName, nil]];
         today.frame = CGRectMake(todayEarnings.frame.size.width/2-size_today.width/2,todayEarnings.frame.size.height/2-size_today.height/2, size_today.width, size_today.height);
@@ -184,9 +184,9 @@
         [_guildCenter addSubview:sumEarnings];
         UILabel *sum = [[UILabel alloc] init];
         sum.textColor = [UIColor blackColor];
-        NSString *sumText = [self.dictionary objectForKey:@"totalMoney"];
+        CGFloat sumText = [[self.dictionary objectForKey:@"totalMoney"] doubleValue];
         sum.font = [UIFont systemFontOfSize:16.0];
-        sum.text = [NSString stringWithFormat:@"累计收益:%@",sumText];
+        sum.text = [NSString stringWithFormat:@"累计收益:%.2f",sumText];
         CGSize size_sum = [sum.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:sum.font,NSFontAttributeName, nil]];
         sum.frame = CGRectMake(sumEarnings.frame.size.width/2-size_sum.width/2,sumEarnings.frame.size.height/2-size_sum.height/2, size_sum.width, size_sum.height);
         [sumEarnings addSubview:sum];
