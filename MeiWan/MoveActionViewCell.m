@@ -34,6 +34,11 @@
      [self.contentView addSubview:name];
     self.name = name;
     
+    self.UnionTitle = [[UILabel alloc]init];
+    self.UnionTitle.font = [UIFont systemFontOfSize:12];
+    self.UnionTitle.textColor = [CorlorTransform colorWithHexString:@"ff3333"];
+    [self.contentView addSubview:self.UnionTitle];
+    
     UILabel *time = [[UILabel alloc]init];
     time.font = [UIFont systemFontOfSize:10];
     [self.contentView addSubview:time];
@@ -227,6 +232,7 @@
         self.praise.lyTitleLable.textColor = [CorlorTransform colorWithHexString:@"a9b7b7"];
     }
     self.name.text = moveActionModel.nackname;
+    self.UnionTitle.text = moveActionModel.unionTitle;
     self.time.text = moveActionModel.time;
     if (moveActionModel.sex == 0) {
         self.seximage.image = [UIImage imageNamed:@"peiwan_male"];
@@ -267,6 +273,10 @@
     
     self.icon.frame = self.moveActionFrame.iconF;
     self.name.frame = self.moveActionFrame.nameF;
+    
+    CGSize size_union = [self.UnionTitle.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:self.UnionTitle.font,NSFontAttributeName, nil]];
+    self.UnionTitle.frame = CGRectMake(self.name.frame.size.width+self.name.frame.origin.x+10, self.name.center.y-size_union.height/2, size_union.width, size_union.height);
+    
     self.time.frame = self.moveActionFrame.timeF;
     self.ageAndSex.frame = self.moveActionFrame.ageAndSexF;
     self.seximage.frame = self.moveActionFrame.sexImageF;

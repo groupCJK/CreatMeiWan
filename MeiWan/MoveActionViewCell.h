@@ -23,6 +23,7 @@
 @property (nonatomic,weak) id<MoveActionCellDelegate> delegate;
 @property (strong, nonatomic)  UIImageView *icon;
 @property (strong, nonatomic)  UILabel *name;
+@property (strong, nonatomic)  UILabel *UnionTitle;
 @property (strong, nonatomic)  UILabel *time;
 @property (strong, nonatomic)  UIView *ageAndSex;
 @property (strong, nonatomic)  UIImageView *seximage;

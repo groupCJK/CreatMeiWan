@@ -12,6 +12,7 @@
 
 @property (nonatomic,assign) long stateId;
 @property (nonatomic,copy) NSString *nackname;
+@property (nonatomic,copy) NSString * unionTitle;
 @property (nonatomic,assign) long userId;
 @property (nonatomic,copy) NSString *time;
 @property (nonatomic,copy) NSString *age;

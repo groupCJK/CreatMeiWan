@@ -39,7 +39,7 @@
     [self.view addSubview:imageView];
     
     UILabel * showlabel = [[UILabel alloc]init];
-    NSString * string = [NSString stringWithFormat:@"￥:%.2f",[self.dictionary[@"money"] doubleValue]];
+    NSString * string = [NSString stringWithFormat:@"￥%.2f",[self.dictionary[@"money"] doubleValue]];
     NSString * stringHan = @"可提金额";
     NSMutableAttributedString * changeText = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@\n%@",stringHan,string]];
     NSRange range1 = [[changeText string]rangeOfString:stringHan];
@@ -54,7 +54,6 @@
     CGSize size_show = [showlabel.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:showlabel.font,NSFontAttributeName, nil]];
     showlabel.frame = CGRectMake(imageView.frame.origin.x+imageView.frame.size.width+10, imageView.frame.origin.y, size_show.width, imageView.frame.size.height);
     [self.view addSubview:showlabel];
-    
     
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setTitle:@"提现" forState:UIControlStateNormal];

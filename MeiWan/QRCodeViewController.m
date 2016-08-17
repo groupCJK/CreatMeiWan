@@ -100,8 +100,10 @@
     NSString * titleString = @"我的公会需要您的到访...";
     UIAlertAction * shareAction = [UIAlertAction actionWithTitle:@"分享到微信好友" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [UMSocialData defaultData].extConfig.wechatSessionData.title = titleString;
-        [UMSocialData defaultData].extConfig.wechatTimelineData.url = URLString;
-        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:contentext image:image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+//        [UMSocialData defaultData].extConfig.wechatTimelineData.url = URLString;
+        UMSocialUrlResource * urlstring = [[UMSocialUrlResource alloc]init];
+        urlstring.url = URLString;
+        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:contentext image:image location:nil urlResource:urlstring presentedController:self completion:^(UMSocialResponseEntity *response){
             if (response.responseCode == UMSResponseCodeSuccess) {
                 NSLog(@"分享成功！");
             }

@@ -23,6 +23,7 @@
 #import "MD5.h"
 #import "MBProgressHUD.h"
 #import "WGS84TOGCJ02.h"
+#import "creatAlbum.h"
 
 #define width_screen [UIScreen mainScreen].bounds.size.width
 
@@ -726,4 +727,6 @@
         pv.playerInfo = sender;
     }
 }
+
+
 @end

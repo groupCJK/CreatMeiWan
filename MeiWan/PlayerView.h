@@ -39,5 +39,6 @@
 @property (strong, nonatomic) UIImageView *biaoqianImage3;
 @property (assign, nonatomic) NSArray * titlelabel;
 
+
 @property (strong, nonatomic) NSDictionary *playerInfo;
 @end

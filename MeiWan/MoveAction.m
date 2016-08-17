@@ -18,8 +18,15 @@
         //NSLog(@"%@",moveDic);
         self.discussCount = [[moveDic objectForKey:@"count"]intValue];
         self.praiseCount = [[moveDic objectForKey:@"likes"]intValue];
-        self.isPraise = [[moveDic objectForKey:@"isLike"]boolValue];;
+        self.isPraise = [[moveDic objectForKey:@"isLike"]boolValue];
+        
+        if ([moveDic objectForKey:@"user"][@"unionLevel"]!=nil) {
+            self.unionTitle = [NSString stringWithFormat:@"%@级公会会长",[moveDic objectForKey:@"user"][@"unionLevel"]];
+        }else{
+            self.unionTitle = @"";
+        }
         self.nackname = [userInfoDic objectForKey:@"nickname"];
+        
         self.userId = [[userInfoDic objectForKey:@"id"]longValue];
         self.stateId = [[moveDic objectForKey:@"id"]longValue];
         NSDate *today = [NSDate date];

@@ -53,7 +53,7 @@
     CGSize size_time = [_timeLable.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_timeLable.font,NSFontAttributeName, nil]];
     _timeLable.frame = CGRectMake(dtScreenWidth/2, 0, size_time.width, 60);
     
-    _moneyLabel.text = [NSString stringWithFormat:@"￥:%@",dictionary[@"monney"]];
+    _moneyLabel.text = [NSString stringWithFormat:@"￥%@",dictionary[@"monney"]];
     _moneyLabel.font = [UIFont systemFontOfSize:16.0];
     CGSize size_money = [_moneyLabel.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_moneyLabel.font,NSFontAttributeName, nil]];
     _moneyLabel.frame = CGRectMake(dtScreenWidth-size_money.width-20, 0, size_money.width, 60);

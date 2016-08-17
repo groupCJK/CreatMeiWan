@@ -11,6 +11,9 @@
 #import "UIImageView+WebCache.h"
 #import "Meiwan-Swift.h"
 #import "CorlorTransform.h"
+#import "UMSocial.h"
+#import "creatAlbum.h"
+
 
 #define RGB(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 
@@ -26,6 +29,7 @@
     self.Head.userInteractionEnabled = YES;
     UITapGestureRecognizer * tapges = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showPlayerInfo)];
     [self.Head addGestureRecognizer:tapges];
+    
     self.signature.text = [playerInfo objectForKey:@"description"];
     
     self.signature.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.0];
@@ -311,4 +315,6 @@
 {
     [self.delegate showPlayerInfo:_playerInfo];
 }
+
+
 @end

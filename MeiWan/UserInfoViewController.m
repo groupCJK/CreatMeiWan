@@ -148,7 +148,7 @@
 #if TARGET_IPHONE_SIMULATOR//模拟器
             
 #elif TARGET_OS_IPHONE//真机
-            [[SDImageCache sharedImageCache]clearDisk];
+//            [[SDImageCache sharedImageCache]clearDisk];
 #endif
 
         }];

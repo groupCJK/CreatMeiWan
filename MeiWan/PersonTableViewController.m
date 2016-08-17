@@ -41,6 +41,8 @@
 #import "creatAlbum.h"
 #import "MJRefresh.h"
 @interface PersonTableViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UserInfoDelegate,SettingUserInfoDelegate,MyburseDelegate,MBProgressHUDDelegate,UIGestureRecognizerDelegate>
+/** 今日收益 */
+@property (weak, nonatomic) IBOutlet UILabel *todayMoneyUnion;
 
 @property (weak, nonatomic) IBOutlet UIView *userInfoHeaderView;
 @property (strong, nonatomic) IBOutlet UILabel *askfor;
