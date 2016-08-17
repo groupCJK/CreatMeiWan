@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MeiWan/InviteViewController.m"
-            timestampString = "493021767.438361"
+            timestampString = "493118447.244727"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "618"
-            endingLineNumber = "618"
+            startingLineNumber = "624"
+            endingLineNumber = "624"
             landmarkName = "-aliPay"
             landmarkType = "5">
             <Locations>
@@ -58,11 +58,11 @@
                   moduleName = "MeiWan"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user_kevin/Desktop/CreatMeiWan/MeiWan/InviteViewController.m"
-                  timestampString = "493117621.711825"
+                  timestampString = "493118651.944738"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "618"
-                  endingLineNumber = "618"
+                  startingLineNumber = "624"
+                  endingLineNumber = "624"
                   offsetFromSymbolStart = "68">
                </Location>
                <Location
@@ -73,11 +73,11 @@
                   moduleName = "MeiWan"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user_kevin/Desktop/CreatMeiWan/MeiWan/InviteViewController.m"
-                  timestampString = "493117621.7123"
+                  timestampString = "493118651.945095"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "619"
-                  endingLineNumber = "619"
+                  startingLineNumber = "625"
+                  endingLineNumber = "625"
                   offsetFromSymbolStart = "78">
                </Location>
             </Locations>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MeiWan/InviteViewController.m"
-            timestampString = "493021767.438361"
+            timestampString = "493118447.244727"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "621"
-            endingLineNumber = "621"
+            startingLineNumber = "627"
+            endingLineNumber = "627"
             landmarkName = "-aliPay"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MeiWan/InviteViewController.m"
-            timestampString = "493021767.438361"
+            timestampString = "493118447.244727"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "625"
-            endingLineNumber = "625"
+            startingLineNumber = "631"
+            endingLineNumber = "631"
             landmarkName = "-aliPay"
             landmarkType = "5">
          </BreakpointContent>

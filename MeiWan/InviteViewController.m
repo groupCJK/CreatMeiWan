@@ -118,15 +118,19 @@
     self.peiwanUnionID = self.playerInfo[@"Unionid"];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(WillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
-    
-    
     UILabel * showtext = [[UILabel alloc]init];
     showtext.textColor = [CorlorTransform colorWithHexString:@"666666"];
     showtext.text = @"该服务资金安全由美玩提供全程担保";
     showtext.font = [UIFont systemFontOfSize:15.0];
     showtext.numberOfLines = 2;
     CGSize size_show = [showtext.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:showtext.font,NSFontAttributeName, nil]];
-    showtext.frame = CGRectMake(dtScreenWidth/2-size_show.width/2-size_show.height/2, dtScreenHeight-80, size_show.width, size_show.height);
+   
+    if (IS_IPHONE_4_OR_LESS) {
+        showtext.frame = CGRectMake(dtScreenWidth/2-size_show.width/2-size_show.height/2, dtScreenHeight-size_show.height*2, size_show.width, size_show.height);
+    }else{
+        showtext.frame = CGRectMake(dtScreenWidth/2-size_show.width/2-size_show.height/2, dtScreenHeight-80, size_show.width, size_show.height);
+    }
+    
     [self.view addSubview:showtext];
     //
     //
