@@ -103,17 +103,7 @@
    
     NSDictionary * userInfo = [PersistenceManager getLoginUser];
     NSLog(@"%@",userInfo);
-//    if ([[userInfo objectForKey:@"Unionid"] isEqualToString:@""]) {
-//        
-//    }else{
-//        self.userUnionID = [NSNumber numberWithInteger:[userInfo[@"Unionid"] integerValue]];
-//    }
-//    
-//    if ([self.playerInfo[@"Unionid"] isEqualToString:@""]) {
-//        
-//    }else{
-//        self.peiwanUnionID = [NSNumber numberWithInteger:[[self.playerInfo objectForKey:@"Unionid"] integerValue]];
-//    }
+
     self.userUnionID = userInfo[@"Unionid"];
     self.peiwanUnionID = self.playerInfo[@"Unionid"];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(WillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];

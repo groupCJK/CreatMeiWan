@@ -61,6 +61,7 @@
     //self.moveActionFrames = [NSMutableArray array];
     [self setupRefresh];
     [self getDataWithNumber:self.stateCount];
+    
 }
 #pragma mark - getData
 -(void)getDataWithNumber:(int)limit{

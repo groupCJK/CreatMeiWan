@@ -75,12 +75,12 @@
     } ];
         //NSLog(@"%@",usertimeTags);
     colorArray = @[@"#ff5d90",@"eb4f38",@"#ff6f36",@"#fdd32d",@"#36cdff",@"#ff3674",@"#7667e5",@"#f55d52",@"#ff5d90"];
-    priceArray = @[@29,@59,@99,@129,@199];
+    priceArray = @[@39,@69,@99,@129,@159,@199];
     titleArray = @[@"线上点歌",@"视屏聊天",@"聚餐",@"线下K歌",@"夜店达人",@"叫醒服务",@"影伴",@"运动健身",@"LOL"];
     /**线上点歌-叫醒服务*/
-    changePriceArray = @[@5,@10,@15,@20,@30];
+    changePriceArray = @[@5,@10,@15,@20];
     /**视频聊天*/
-    VideoChatArray = @[@19,@29,@39,@59,@79];
+    VideoChatArray = @[@5,@10,@15,@20];
     /**线下点歌*/
     downLineVoiceArray = @[@39,@69,@99,@129,@159,@199];
     
@@ -106,7 +106,7 @@
     showView.hidden = YES;
     [self.view addSubview:showView];
     
-    priceTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 250, 200)];
+    priceTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 250, 240)];
     priceTableview.delegate = self;
     priceTableview.dataSource = self;
     priceTableview.scrollEnabled = NO;
@@ -171,7 +171,12 @@
         if (!cell1) {
             cell1 = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         }
-        cell1.textLabel.text = [NSString stringWithFormat:@"%@ 元／时",priceArray[indexPath.row]];
+        if (level+1<indexPath.row+1) {
+            cell1.textLabel.text = [NSString stringWithFormat:@"%@ 元／时 等级不足",priceArray[indexPath.row]];
+            cell1.userInteractionEnabled = NO;
+        }else{
+            cell1.textLabel.text = [NSString stringWithFormat:@"%@ 元／时",priceArray[indexPath.row]];
+        }
         cell1.textLabel.textAlignment = NSTextAlignmentCenter;
 
         cell1.backgroundColor = [UIColor colorWithRed:arc4random()%256/255.0 green:arc4random()%256/255.0 blue:arc4random()%256/255.0 alpha:1];
@@ -216,7 +221,7 @@
                     if (usertimeTags.count>=3) {
                     
                     }else{
-                        [usertimeTags addObject:[NSString stringWithFormat:@"%ld",indexPath.row+1]];
+                        [usertimeTags addObject:[NSString stringWithFormat:@"%d",indexPath.row+1]];
                         Jiaoview = [[UIView alloc]initWithFrame:self.priceView.frame];
                         Jiaoview.backgroundColor = [UIColor blackColor];
                         [self.view addSubview:Jiaoview];
@@ -276,7 +281,7 @@
                                 for (int i = 0; i<4; i++) {
                                     UIButton * jiaoButton = [UIButton buttonWithType:UIButtonTypeCustom];
                                     jiaoButton.frame = CGRectMake(0, i*(Jiaoview.frame.size.height/4), Jiaoview.frame.size.width, Jiaoview.frame.size.height/4);
-                                    if (i>level+1) {
+                                    if (i>level) {
                                         [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／次 等级不足",priceArray[i]] forState:UIControlStateNormal];
                                         
                                     }else{

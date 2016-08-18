@@ -89,10 +89,6 @@
     [UMSocialWechatHandler setWXAppId:@"wx4555cf92f3ab6550" appSecret:@"3e6e6d20156505d96dac62c64b496090" url:@"http://www.umeng.com/social"];
 
     [UMSocialQQHandler setQQWithAppId:@"1104883138" appKey:@"1FdgC7ac77v0fnfm" url:@"http://www.umeng.com/social"];
-
-    
-
-    
     
     return YES;
     
@@ -117,14 +113,6 @@
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:notificationTypes];
     }   
 }
-//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-//{
-//    BOOL result = [UMSocialSnsService handleOpenURL:url];
-//    if (result == FALSE) {
-//        //调用其他SDK，例如支付宝SDK等
-//    }
-//    return result;
-//}
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
     [application registerForRemoteNotifications];
 }
@@ -133,6 +121,9 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     [[EaseMob sharedInstance] applicationDidEnterBackground:application];
+
+    /**设置当程序进入后台时，小红点的个数*/
+    application.applicationIconBadgeNumber = [[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase];
 }
 
 // App将要从后台返回
@@ -156,7 +147,7 @@
 //注册远程通知失败回调
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
     [[EaseMob sharedInstance] application:application didFailToRegisterForRemoteNotificationsWithError:error];
-    NSLog(@"error -- %@",error);
+    NSLog(@"注册远程通知失败回调error -- %@",error);
 }
 + (BOOL)allowsAnyHTTPSCertificateForHost:(NSString *)host
 {

@@ -19,7 +19,6 @@
 #import "LoginViewController.h"
 #import "setting.h"
 #import <MAMapKit/MAMapKit.h>
-#import "ConnectTableViewController.h"
 #import "MD5.h"
 #import "MBProgressHUD.h"
 #import "WGS84TOGCJ02.h"
@@ -27,7 +26,7 @@
 
 #define width_screen [UIScreen mainScreen].bounds.size.width
 
-@interface PalyListViewController ()<playerviewdelegate,superviewdelegate,MAMapViewDelegate,MBProgressHUDDelegate,CLLocationManagerDelegate>
+@interface PalyListViewController ()<playerviewdelegate,superviewdelegate,MAMapViewDelegate,MBProgressHUDDelegate,CLLocationManagerDelegate,EaseMessageViewControllerDelegate,IChatManagerDelegate>
 {
     MBProgressHUD * HUD;
     NSArray * titlelabel;
@@ -113,10 +112,9 @@
         [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:product password:password completion:^(NSDictionary *loginInfo, EMError *error) {
             //设置自动登录
             [[EaseMob sharedInstance].chatManager setIsAutoLoginEnabled:YES];
+            [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
         } onQueue:nil];
     }
-//    //设置所有的默认美玩用户为好友，包括黑名单用户
-//    [[EaseMob sharedInstance].chatManager setIsAutoFetchBuddyList:YES];
 }
 - (void)initializeLocationService {
     //创建地图视图
@@ -127,6 +125,8 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    [self didReceiveMessage:nil];
+
     [self initializeLocationService];
 
     tagIndexNumber = [[NSNumber alloc]init];
@@ -163,9 +163,6 @@
         [self beginNetWorking];
 
     }];
-    
-    
-    
 }
 - (void)beginNetWorking
 {
@@ -363,21 +360,8 @@
     
     [self setTabBar];
     
-//    [[DeviceDelegateHelper sharedInstance]setDeviceDelegate:self];
-//    NSInteger  imCount = [[IMMsgDBAccess sharedInstance]getUnreadMessageCountFromSession];
-//    if (imCount == 0) {
-//        NSArray *items = self.tabBarController.tabBar.items;
-//        UITabBarItem *chatItem = items[3];
-//        chatItem.badgeValue = nil;
-//        
-//    }else{
-//        NSArray *items = self.tabBarController.tabBar.items;
-//        UITabBarItem *chatItem = items[3];
-//        chatItem.badgeValue = [NSString stringWithFormat:@"%ld",imCount];
-//    }
-
+    
 }
-
 #pragma mark - Search PeiWan
 //弹出玩家搜索页
 - (IBAction)search:(UIBarButtonItem *)sender {
@@ -727,6 +711,26 @@
         pv.playerInfo = sender;
     }
 }
+-(void)didReceiveMessage:(EMMessage *)message{
+    
+    NSArray *items = self.tabBarController.tabBar.items;
+    UITabBarItem *chatItem = items[3];
+    
+    if ([[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase]>0) {
+        chatItem.badgeValue = [NSString stringWithFormat:@"%lu", (unsigned long)[[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase]];
 
+        UILocalNotification *notification = [[UILocalNotification alloc] init];
+        notification.fireDate=[NSDate dateWithTimeIntervalSinceNow:0.1];
+        notification.timeZone=[NSTimeZone defaultTimeZone];
+        notification.applicationIconBadgeNumber = [[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase];
+        notification.soundName= UILocalNotificationDefaultSoundName;
+        notification.alertBody = @"您有新消息";
+        [[UIApplication sharedApplication]  scheduleLocalNotification:notification];
+        
+    }else{
+        chatItem.badgeValue = nil;
+    }
+    
+}
 
 @end
