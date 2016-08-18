@@ -59,68 +59,10 @@
 
     
 }
-
+/**收到消息时调用此方法，环信代理*/
 -(void)didReceiveMessage:(EMMessage *)message
 {
-    [self showNotificationWithMessage:message];
-    
-//    [self playSoundAndVibration];
-}
-
-- (void)showNotificationWithMessage:(EMMessage *)message
-{
-    EMPushNotificationOptions *options = [[EaseMob sharedInstance].chatManager pushNotificationOptions];
-    //发送本地推送
-    UILocalNotification *notification = [[UILocalNotification alloc] init];
-    notification.fireDate = [NSDate date]; //触发通知的时间
-    
-    if (options.displayStyle == ePushNotificationDisplayStyle_messageSummary) {
-        id<IEMMessageBody> messageBody = [message.messageBodies firstObject];
-        NSString *messageStr = nil;
-        switch (messageBody.messageBodyType) {
-            case eMessageBodyType_Text:
-            {
-                messageStr = ((EMTextMessageBody *)messageBody).text;
-            }
-                break;
-            case eMessageBodyType_Image:
-            {
-                messageStr = @"[图片]";
-            }
-                break;
-            case eMessageBodyType_Location:
-            {
-                messageStr = @"[位置]";
-            }
-                break;
-            case eMessageBodyType_Voice:
-            {
-                messageStr = @"[音频]";
-            }
-                break;
-            case eMessageBodyType_Video:{
-                messageStr = @"[视频]";
-            }
-                break;
-            default:
-                break;
-        }
-        
-        NSString *title = message.from;
-        
-        notification.alertBody = [NSString stringWithFormat:@"%@:%@", title, messageStr];
-    }
-    else{
-        notification.alertBody = @"您有一条新消息";
-    }
-    
-#pragma mark 去掉注释会显示[本地]开头, 方便在开发中区分是否为本地推送
-    
-    notification.alertAction = @"打开";
-    notification.timeZone = [NSTimeZone defaultTimeZone];
-    notification.soundName = UILocalNotificationDefaultSoundName;
-    //发送通知
-    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    self.unreadImLab.text = [NSString stringWithFormat:@"%lu",(unsigned long)[[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase]];
 }
 
 - (void)didUnreadMessagesCountChanged{
@@ -157,7 +99,7 @@
     }else{
         self.inviteMe.hidden = YES;
     }
-
+    [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
     
 }
 - (void)didReceiveMemoryWarning {

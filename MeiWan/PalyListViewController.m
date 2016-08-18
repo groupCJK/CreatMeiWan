@@ -711,14 +711,17 @@
         pv.playerInfo = sender;
     }
 }
+/**收到消息时调用此方法，环信代理*/
 -(void)didReceiveMessage:(EMMessage *)message{
     
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     NSArray *items = self.tabBarController.tabBar.items;
     UITabBarItem *chatItem = items[3];
     
     if ([[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase]>0) {
         chatItem.badgeValue = [NSString stringWithFormat:@"%lu", (unsigned long)[[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase]];
 
+        /**本地通知，程序进入后台时调用，彻底死掉时使用的是远程推送*/
         UILocalNotification *notification = [[UILocalNotification alloc] init];
         notification.fireDate=[NSDate dateWithTimeIntervalSinceNow:0.1];
         notification.timeZone=[NSTimeZone defaultTimeZone];

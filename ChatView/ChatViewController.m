@@ -49,10 +49,15 @@
 
 @implementation ChatViewController
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    //app icon badgeNumber
+    UIApplication * app = [UIApplication sharedApplication];
+    //获得未读信息数量
+    NSInteger badgeNumber = [[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase];
+    app.applicationIconBadgeNumber = badgeNumber;
+    //
+    self.tabBarController.tabBar.hidden = YES;
 
     // Do any additional setup after loading the view.
     self.showRefreshHeader = YES;
@@ -527,13 +532,6 @@
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
-    //app icon badgeNumber
-    UIApplication * app = [UIApplication sharedApplication];
-    //获得未读信息数量
-    NSInteger badgeNumber = [[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase];
-    app.applicationIconBadgeNumber = badgeNumber;
-    //
-    self.tabBarController.tabBar.hidden = YES;
     [self hiddenView];
 }
 
@@ -1049,10 +1047,6 @@
         [self removeAppointMessage:removeMessage index:index];
     }
     [self.tableView reloadData];
-}
--(void)didReceiveMessage:(EMMessage *)message
-{
-    NSLog(@"*******************");
 }
 
 @end
