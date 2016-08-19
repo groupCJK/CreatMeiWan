@@ -270,7 +270,7 @@
         //刷新表格
         NSString *session= [PersistenceManager getLoginSession];
         // NSLog(@"%@",session);
-        [UserConnector aroundPeiwan:session gender:[self.searchDic objectForKey:@"gender"] minPrice:[self.searchDic objectForKey:@"minPrice"] maxPrice:[self.searchDic objectForKey:@"maxPrice"] isWin:nil offset:0 limit:self.playerInfoArray.count isRecommend:nil mode:[self.searchDic objectForKey:@"mode"] tagIndex:nil receiver:^(NSData *data,NSError *error){
+        [UserConnector aroundPeiwan:session gender:[self.searchDic objectForKey:@"gender"] minPrice:[self.searchDic objectForKey:@"minPrice"] maxPrice:[self.searchDic objectForKey:@"maxPrice"] isWin:nil offset:0 limit:self.playerInfoArray.count isRecommend:nil mode:[self.searchDic objectForKey:@"mode"] tagIndex:tagIndexNumber receiver:^(NSData *data,NSError *error){
             if (error) {
                 [ShowMessage showMessage:@"服务器未响应"];
                 
