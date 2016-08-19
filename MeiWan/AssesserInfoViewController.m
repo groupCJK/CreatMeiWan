@@ -101,8 +101,7 @@
                 
             }
         }
-        
-        //NSLog(@"%@",self.playerInfo);
+
     }];
 
     self.pi.delegate = self;
@@ -114,13 +113,13 @@
         SBJsonParser*parser=[[SBJsonParser alloc]init];
         NSMutableDictionary *json=[parser objectWithData:data];
         self.playerRoleArray = [json objectForKey:@"entity"];
-         //NSLog(@"%@",self.playerRoleArray);
+
         [self addGameRoleTableview];
         [UserConnector peiwanNetbars:[self.playerInfo objectForKey:@"id"] receiver:^(NSData *data,NSError *error){
             SBJsonParser*parser=[[SBJsonParser alloc]init];
             NSMutableDictionary *json=[parser objectWithData:data];
             self.playerNetBarArray = [json objectForKey:@"entity"];
-            //NSLog(@"%@",self.playerNetBarArray);
+
             if (self.playerNetBarArray.count != 0) {
                 [self addAlwaysNetBar];
             }
@@ -129,24 +128,19 @@
                 SBJsonParser*parser=[[SBJsonParser alloc]init];
                 NSMutableDictionary *json=[parser objectWithData:data];
                 self.playerOrderArray = [json objectForKey:@"entity"];
-                // NSLog(@"%@",self.playerOrderArray);
+
                 [self addUserAssessTableview];
                 [self setupRefresh];
             }];
         }];
     }];
-    // Do any additional setup after loading the view.
+
 }
 - (void)setupRefresh
 {
-    
-    // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
+
     [self.assesserInfoSv addFooterWithTarget:self action:@selector(footerRereshing)];
     
-    // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
-//    self.assesserInfoSv.footerPullToRefreshText = @"上拉可以加载更多数据了";
-//    self.assesserInfoSv.footerReleaseToRefreshText = @"松开马上加载更多数据了";
-//    self.assesserInfoSv.footerRefreshingText = @"正在帮您加载中";
 }
 //上拉刷新
 - (void)footerRereshing
@@ -214,7 +208,7 @@
                 
             }
         }
-        // NSLog(@"%@",myFriendsArray);
+
     }];
 }
 //举报和加为好友；
@@ -267,7 +261,7 @@
                         
                 }
             }
-            // NSLog(@"%@",myFriendsArray);
+
         }];
     }
     UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(taplab2)];
@@ -445,7 +439,7 @@
             }else{
                 SBJsonParser*parser=[[SBJsonParser alloc]init];
                 NSMutableDictionary *json=[parser objectWithData:data];
-                //NSLog(@"%@",json);
+
                 int status = [[json objectForKey:@"status"]intValue];
                 if (status == 0) {
                     self.isFriend = @"no";
@@ -464,7 +458,7 @@
                 }else{
                     SBJsonParser*parser=[[SBJsonParser alloc]init];
                     NSMutableDictionary *json=[parser objectWithData:data];
-                    //NSLog(@"%@",json);
+
                     int status = [[json objectForKey:@"status"]intValue];
                     if (status == 0) {
                         self.isFriend = @"yes";
@@ -571,25 +565,7 @@
     ChatViewController *messageCtr = [[ChatViewController alloc] initWithConversationChatter:@"123" conversationType:eConversationTypeChat];
     messageCtr.title = @"123";
     [self.navigationController pushViewController:messageCtr animated:YES];
-//    NSString *ECuserid = [NSString stringWithFormat:@"%@%ld",
-//                          [setting getRongLianYun],[[self.playerInfo objectForKey:@"id"]longValue]];
-//    NSString *myheadurl = [[PersistenceManager getLoginUser]objectForKey:@"headUrl"];
-//    NSString *otherHeadurl = [self.playerInfo objectForKey:@"headUrl"];
-//    __block BOOL show;
-//    NSDictionary *userInfo = [PersistenceManager getLoginUser];
-//    NSString *thesame = [NSString stringWithFormat:@"%ld",[[userInfo objectForKey:@"id"]longValue]];
-//    if ([thesame isEqualToString:@"100000"] || [thesame isEqualToString:@"100001"]) {
-//        show = NO;
-//        [ECDeviceKit sharedInstance].delegate = self;
-//        [[ECDeviceKit sharedInstance]startConversation:0 andSid:ECuserid andTitle:[self.playerInfo objectForKey:@"nickname"] andmyHeadUrl:myheadurl andOtherHeadUrl:otherHeadurl  andShow:show  andNav:self.navigationController];
-//
-//    }else{
-//        show = [setting canOpen];
-//        [ECDeviceKit sharedInstance].delegate = self;
-//        [[ECDeviceKit sharedInstance]startConversation:0 andSid:ECuserid andTitle:[self.playerInfo objectForKey:@"nickname"] andmyHeadUrl:myheadurl andOtherHeadUrl:otherHeadurl  andShow:show  andNav:self.navigationController];
-//        [setting getOpen];
-//        
-//    }
+
 }
 -(void)onRightavigationBarClick:(NSInteger)type andSId:(NSString *)sid{
     [self performSegueWithIdentifier:@"invite" sender:self.playerInfo];
@@ -612,7 +588,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (tableView == self.userAssess) {
-        //NSLog(@"%ld",self.playerOrderArray.count);
+
         return self.playerOrderArray.count;
     }else{
         return self.playerRoleArray.count;
