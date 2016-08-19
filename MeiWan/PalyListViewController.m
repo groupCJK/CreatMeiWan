@@ -285,8 +285,13 @@
                         [self layoutSubviews];
                         [HUD hide:YES afterDelay:0.5];
                     });
-                    iconlabel.text = [NSString stringWithFormat:@"%@",titlelabel[[tagIndexNumber intValue]-1]];
-                    iconImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageArray[[tagIndexNumber intValue]-1]]];
+                    if (tagIndexNumber == nil) {
+                        iconlabel.text = [NSString stringWithFormat:@"%@",titlelabel[9]];
+                        iconImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageArray[9]]];
+                    }else{
+                        iconlabel.text = [NSString stringWithFormat:@"%@",titlelabel[[tagIndexNumber intValue]-1]];
+                        iconImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageArray[[tagIndexNumber intValue]-1]]];
+                    }
                 }else if (status == 1){
                     [PersistenceManager setLoginSession:@""];
                     
@@ -695,8 +700,13 @@
                                 });
                                 
                                 
-                                iconlabel.text = [NSString stringWithFormat:@"%@",titlelabel[[number intValue]-1]];
-                                iconImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageArray[[number intValue]-1]]];
+                                if (number==nil) {
+                                    iconlabel.text = [NSString stringWithFormat:@"%@",titlelabel[9]];
+                                    iconImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageArray[9]]];
+                                }else{
+                                    iconlabel.text = [NSString stringWithFormat:@"%@",titlelabel[[number intValue]-1]];
+                                    iconImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageArray[[number intValue]-1]]];
+                                }
                                 
                             }else if(status == 1){
                                 [PersistenceManager setLoginSession:@""];
