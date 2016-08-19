@@ -2208,7 +2208,7 @@
 				18824A401B85D5920063EC03 /* SBJsonWriter.m */,
 			);
 			name = SBJSON;
-			path = Classes;
+			path = ../MeiWan/Classes;
 			sourceTree = "<group>";
 		};
 		18841F211B8C390700E2728B /* UpYun */ = {
@@ -2225,7 +2225,8 @@
 				18841F2A1B8C390700E2728B /* UMUUploaderOperation.h */,
 				18841F2B1B8C390700E2728B /* UMUUploaderOperation.m */,
 			);
-			path = UpYun;
+			name = UpYun;
+			path = ../MeiWan/UpYun;
 			sourceTree = "<group>";
 		};
 		18880E4D1B8AEE0A00D9D1BF /* StarRateView */ = {
@@ -2235,7 +2236,7 @@
 				27CA60DB1CEEBAF300CC6956 /* CWStarRateView.m */,
 			);
 			name = StarRateView;
-			path = Classes;
+			path = ../MeiWan/Classes;
 			sourceTree = "<group>";
 		};
 		188EA13B1BC4E8A600D13FEF /* frameWork */ = {
@@ -2432,6 +2433,7 @@
 				18CD04EC1B914E3A00B56288 /* JKCountDownButton.m */,
 			);
 			name = CodeButton;
+			path = ../MeiWan;
 			sourceTree = "<group>";
 		};
 		18CD05061B91538200B56288 /* connector */ = {
@@ -2479,7 +2481,8 @@
 				18E579EE1B7DDDB000771063 /* UIWebView+AFNetworking.h */,
 				18E579EF1B7DDDB000771063 /* UIWebView+AFNetworking.m */,
 			);
-			path = "UIKit+AFNetworking";
+			name = "UIKit+AFNetworking";
+			path = "../MeiWan/UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
 		18E579F81B7DE22700771063 /* AFNetworking */ = {
@@ -2505,7 +2508,8 @@
 				18E57A0A1B7DE22700771063 /* AFURLSessionManager.h */,
 				18E57A0B1B7DE22700771063 /* AFURLSessionManager.m */,
 			);
-			path = AFNetworking;
+			name = AFNetworking;
+			path = ../MeiWan/AFNetworking;
 			sourceTree = "<group>";
 		};
 		18E911B51B7D8E90002BB75F /* subviews */ = {
@@ -2551,13 +2555,7 @@
 			children = (
 				27587C9F1CF5938F00B78F92 /* GifImage */,
 				27587C911CF5932E00B78F92 /* ChatView */,
-				27587B0A1CF5861900B78F92 /* EaseUI */,
-				2758799B1CF5824F00B78F92 /* Resources */,
-				2758745D1CF54FA900B78F92 /* EaseMobSDK */,
-				275874471CF53FB400B78F92 /* SDWebImage */,
-				2BDEE40A1D5B0BF800767F8B /* UMSocial_Sdk_5.2.1 */,
-				2BDEE4321D5B0C1300767F8B /* TencentOpenAPI */,
-				2BDEE43A1D5B0C2100767F8B /* Wechat */,
+				2BDF98B81D66F0D400612F9B /* 第三方库 */,
 				188EA13B1BC4E8A600D13FEF /* frameWork */,
 				18EF7A1F1B74B67F005A4F64 /* MeiWan */,
 				18EF7A391B74B67F005A4F64 /* MeiWanTests */,
@@ -2580,7 +2578,6 @@
 			isa = PBXGroup;
 			children = (
 				27CA5A7A1CEEAD2400CC6956 /* Tool */,
-				2B2D094B1D532BC300139467 /* libqrencode */,
 				27E0A0C61CE1805100D5FE31 /* Helper */,
 				18EF7A241B74B67F005A4F64 /* AppDelegate.h */,
 				18EF7A251B74B67F005A4F64 /* AppDelegate.m */,
@@ -2691,7 +2688,7 @@
 				275874581CF53FB400B78F92 /* UIImageView+WebCache.h */,
 			);
 			name = SDWebImage;
-			path = MeiWan/SDWebImage;
+			path = ../MeiWan/SDWebImage;
 			sourceTree = "<group>";
 		};
 		2758745D1CF54FA900B78F92 /* EaseMobSDK */ = {
@@ -2701,7 +2698,8 @@
 				275874C71CF54FA900B78F92 /* lib */,
 				275874C91CF54FA900B78F92 /* resources */,
 			);
-			path = EaseMobSDK;
+			name = EaseMobSDK;
+			path = ../EaseMobSDK;
 			sourceTree = "<group>";
 		};
 		2758745E1CF54FA900B78F92 /* include */ = {
@@ -2975,7 +2973,8 @@
 				27587A3F1CF5824F00B78F92 /* other */,
 				27587A4A1CF5824F00B78F92 /* tabbar */,
 			);
-			path = Resources;
+			name = Resources;
+			path = ../Resources;
 			sourceTree = "<group>";
 		};
 		2758799C1CF5824F00B78F92 /* appicon */ = {
@@ -3282,7 +3281,7 @@
 				27587B0D1CF5861900B78F92 /* EMUIKit */,
 				27587C1E1CF5861900B78F92 /* resource */,
 			);
-			path = EaseUI;
+			name = EaseUI;
 			sourceTree = "<group>";
 		};
 		27587B0D1CF5861900B78F92 /* EMUIKit */ = {
@@ -3941,22 +3940,7 @@
 		27CA5A7A1CEEAD2400CC6956 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
-				2BDFA94B1D32404400E33681 /* UICollectionViewWaterfallLayout.h */,
-				2BDFA94C1D32404400E33681 /* UICollectionViewWaterfallLayout.m */,
-				2BDFA94E1D3240E200E33681 /* CJKNavigationView.h */,
-				2BDFA94F1D3240E200E33681 /* CJKNavigationView.m */,
-				2BDFA9511D32416900E33681 /* CJKCollectionViewCell.h */,
-				2BDFA9521D32416900E33681 /* CJKCollectionViewCell.m */,
-				2BDFA9531D32416900E33681 /* firstPage_scrollViewCell.h */,
-				2BDFA9541D32416900E33681 /* firstPage_scrollViewCell.m */,
-				27D415FB1CFD839900F4C7BA /* XRCarouselView */,
 				18CC8ECB1BC39CE1000281CE /* alamofire */,
-				18CD04EA1B914DF500B56288 /* CodeButton */,
-				18841F211B8C390700E2728B /* UpYun */,
-				18880E4D1B8AEE0A00D9D1BF /* StarRateView */,
-				18824A161B85D5920063EC03 /* SBJSON */,
-				18E579F81B7DE22700771063 /* AFNetworking */,
-				18E579DE1B7DDDB000771063 /* UIKit+AFNetworking */,
 				1897DAC71BADA060006EC039 /* peiwan_protocol.htm */,
 				182CE9BF1BE357A200D766E8 /* usermy_protocol.htm */,
 				04B138921BA07EAF00AAD93F /* AliOrder.h */,
@@ -3976,6 +3960,7 @@
 				27D415F81CFD821C00F4C7BA /* XRPlaceholder.png */,
 			);
 			name = XRCarouselView;
+			path = ../MeiWan;
 			sourceTree = "<group>";
 		};
 		27E0A0C51CE1759F00D5FE31 /* Control */ = {
@@ -4007,6 +3992,14 @@
 		27E0A0C61CE1805100D5FE31 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				2BDFA94B1D32404400E33681 /* UICollectionViewWaterfallLayout.h */,
+				2BDFA94C1D32404400E33681 /* UICollectionViewWaterfallLayout.m */,
+				2BDFA94E1D3240E200E33681 /* CJKNavigationView.h */,
+				2BDFA94F1D3240E200E33681 /* CJKNavigationView.m */,
+				2BDFA9511D32416900E33681 /* CJKCollectionViewCell.h */,
+				2BDFA9521D32416900E33681 /* CJKCollectionViewCell.m */,
+				2BDFA9531D32416900E33681 /* firstPage_scrollViewCell.h */,
+				2BDFA9541D32416900E33681 /* firstPage_scrollViewCell.m */,
 				2B7E9F811D5DAEC500207CB7 /* sharefenxiang@2x.png */,
 				2BDAF79B1D2271FE008B05EA /* list_icon.png */,
 				27D415FC1CFD845200F4C7BA /* DTDefine.h */,
@@ -4172,7 +4165,8 @@
 				2B2D095A1D532BC300139467 /* split.c */,
 				2B2D095B1D532BC300139467 /* split.h */,
 			);
-			path = libqrencode;
+			name = libqrencode;
+			path = ../MeiWan/libqrencode;
 			sourceTree = "<group>";
 		};
 		2B2D09641D533CE600139467 /* 扫码 */ = {
@@ -4268,7 +4262,8 @@
 				2BDEE41B1D5B0BF800767F8B /* SocialSDKXib */,
 				2BDEE4241D5B0BF800767F8B /* UMSocialSDKResourcesNew.bundle */,
 			);
-			path = UMSocial_Sdk_5.2.1;
+			name = UMSocial_Sdk_5.2.1;
+			path = ../UMSocial_Sdk_5.2.1;
 			sourceTree = "<group>";
 		};
 		2BDEE40D1D5B0BF800767F8B /* Header */ = {
@@ -4312,7 +4307,8 @@
 				2BDEE4351D5B0C1300767F8B /* TencentOpenApi_IOS_Bundle.bundle */,
 				2BDEE4361D5B0C1300767F8B /* UMSocialQQHandler.h */,
 			);
-			path = TencentOpenAPI;
+			name = TencentOpenAPI;
+			path = ../TencentOpenAPI;
 			sourceTree = "<group>";
 		};
 		2BDEE43A1D5B0C2100767F8B /* Wechat */ = {
@@ -4325,7 +4321,31 @@
 				2BDEE43F1D5B0C2100767F8B /* WXApi.h */,
 				2BDEE4401D5B0C2100767F8B /* WXApiObject.h */,
 			);
-			path = Wechat;
+			name = Wechat;
+			path = ../Wechat;
+			sourceTree = "<group>";
+		};
+		2BDF98B81D66F0D400612F9B /* 第三方库 */ = {
+			isa = PBXGroup;
+			children = (
+				18824A161B85D5920063EC03 /* SBJSON */,
+				18E579F81B7DE22700771063 /* AFNetworking */,
+				18E579DE1B7DDDB000771063 /* UIKit+AFNetworking */,
+				2BDEE43A1D5B0C2100767F8B /* Wechat */,
+				2BDEE4321D5B0C1300767F8B /* TencentOpenAPI */,
+				2BDEE40A1D5B0BF800767F8B /* UMSocial_Sdk_5.2.1 */,
+				275874471CF53FB400B78F92 /* SDWebImage */,
+				2758745D1CF54FA900B78F92 /* EaseMobSDK */,
+				27587B0A1CF5861900B78F92 /* EaseUI */,
+				2758799B1CF5824F00B78F92 /* Resources */,
+				27D415FB1CFD839900F4C7BA /* XRCarouselView */,
+				18CD04EA1B914DF500B56288 /* CodeButton */,
+				18880E4D1B8AEE0A00D9D1BF /* StarRateView */,
+				2B2D094B1D532BC300139467 /* libqrencode */,
+				18841F211B8C390700E2728B /* UpYun */,
+			);
+			name = "第三方库";
+			path = EaseUI;
 			sourceTree = "<group>";
 		};
 		2BE236B81D508F2900D7A859 /* 火星坐标转化 */ = {

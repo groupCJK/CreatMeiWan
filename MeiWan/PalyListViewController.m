@@ -173,7 +173,6 @@
                             [ShowMessage showMessage:@"服务器未响应"];
                             [self beginNetWorking];
                         }else{
-                            [HUD hide:YES afterDelay:0];
                             SBJsonParser*parser=[[SBJsonParser alloc]init];
                             NSMutableDictionary *json=[parser objectWithData:data];
                             int status = [[json objectForKey:@"status"]intValue];
@@ -183,6 +182,8 @@
                                 dispatch_async(dispatch_get_main_queue(), ^{
                                     //布局滚动页面子视图
                                     [self layoutSubviews];
+                                    [HUD hide:YES afterDelay:0];
+
                                 });
                             }else if(status == 1){
                                 [PersistenceManager setLoginSession:@""];
@@ -255,6 +256,7 @@
 //下拉刷新
 - (void)headerRereshing
 {
+    [HUD show:YES];
     //self.infoCount += 5;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         //删除旧视图
@@ -281,6 +283,7 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         //布局滚动页面子视图
                         [self layoutSubviews];
+                        [HUD hide:YES afterDelay:0.5];
                     });
                 }else if (status == 1){
                     [PersistenceManager setLoginSession:@""];
@@ -678,7 +681,6 @@
                         if (error) {
                             [ShowMessage showMessage:@"服务器未响应"];
                         }else{
-                            [HUD hide:YES afterDelay:0];
                             SBJsonParser*parser=[[SBJsonParser alloc]init];
                             NSMutableDictionary *json=[parser objectWithData:data];
                             int status = [[json objectForKey:@"status"]intValue];
@@ -687,7 +689,9 @@
                                 dispatch_async(dispatch_get_main_queue(), ^{
                                     //布局滚动页面子视图
                                     [self layoutSubviews];
+                                    [HUD hide:YES afterDelay:0];
                                 });
+                                
                             }else if(status == 1){
                                 [PersistenceManager setLoginSession:@""];
                                 LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];

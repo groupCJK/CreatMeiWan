@@ -65,6 +65,7 @@
 }
 #pragma mark - getData
 -(void)getDataWithNumber:(int)limit{
+    
     [UserConnector findAroundStates:[PersistenceManager getLoginSession] offset:[NSNumber numberWithInt:0] limit:[NSNumber numberWithInt:limit] receiver:^(NSData *data, NSError *error){
         if (error) {
             [ShowMessage showMessage:@"服务器未响应"];
@@ -78,9 +79,10 @@
                 self.myMoveArray = [json objectForKey:@"entity"];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.tableView reloadData];
-                    
+                    [HUD hide:YES afterDelay:0.5];
                 });
             }else if(status == 1){
+                
             }else{
                 
             }
@@ -111,9 +113,10 @@
 {
     self.stateCount = 5;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+
         [self getDataWithNumber:self.stateCount];
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-        [self.tableView  headerEndRefreshing];
+        [self.tableView.header endRefreshing];
 
      });
 }
@@ -121,7 +124,7 @@
     self.stateCount += 5;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self getDataWithNumber:self.stateCount];
-        [self.tableView footerEndRefreshing];
+        [self.tableView.footer endRefreshing];
     });
 }
 

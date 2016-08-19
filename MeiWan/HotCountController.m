@@ -131,18 +131,19 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self getData];
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-        [self.tableView  headerEndRefreshing];
+        [self.tableView.header endRefreshing];
+
     });
 }
 -(void)footerRereshing{
     self.infoCount += 10;
     if (self.infoCount > 20) {
-        [self.tableView footerEndRefreshing];
+        [self.tableView.footer endRefreshing];
         return;
     }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self getData];
-        [self.tableView footerEndRefreshing];
+        [self.tableView.footer endRefreshing];
     });
 }
 
@@ -154,7 +155,7 @@
             SBJsonParser*parser=[[SBJsonParser alloc]init];
             NSMutableDictionary *json=[parser objectWithData:data];
             int status = [[json objectForKey:@"status"]intValue];
-            //NSLog(@"%@",json);
+
             if (status == 0) {
                 [self.headViewDataArray removeAllObjects];
                 [self.tableDataArray removeAllObjects];
@@ -172,9 +173,9 @@
                         self.tableView.tableHeaderView = [self createTableHeadView];
                         [self.tableView reloadData];
                     });
-                    //NSLog(@"%ld",self.headViewDataArray.count);
+
+                    [HUD hide:YES afterDelay:1];
                 }
-                [HUD hide:YES afterDelay:0];
              }else if(status == 1){
                 [PersistenceManager setLoginSession:@""];
                 LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];

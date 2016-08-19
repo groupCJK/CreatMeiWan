@@ -41,6 +41,9 @@
 #import "creatAlbum.h"
 #import "MJRefresh.h"
 @interface PersonTableViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UserInfoDelegate,SettingUserInfoDelegate,MyburseDelegate,MBProgressHUDDelegate,UIGestureRecognizerDelegate>
+{
+    MBProgressHUD * HUD;
+}
 /** 今日收益 */
 @property (weak, nonatomic) IBOutlet UILabel *todayMoneyUnion;
 
@@ -79,7 +82,14 @@
     //获得个人信息，更新界面
     self.userInfoDic = [PersistenceManager getLoginUser];
     self.userinfo = [[UserInfo alloc]initWithDictionary: [PersistenceManager getLoginUser]];
-    [self updateUI];
+    
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.labelText = @"加载中";
+    HUD.delegate = self;
+    [HUD showAnimated:YES whileExecutingBlock:^{
+
+    }];
+
     
 }
 
@@ -313,7 +323,8 @@
                 self.userInfoData = [json objectForKey:@"entity"];
                 
                 [self updateUI];
-                [self.tableView.header endRefreshing];
+                
+                [HUD hide:YES afterDelay:0.5];
             }
         }
     }];
@@ -448,16 +459,16 @@
 
 #pragma mark 图片上传
 -(void)passImage:(UIImage *)image{
-    MBProgressHUD*HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    HUD.delegate = self;
+    MBProgressHUD*HUDImage = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUDImage.delegate = self;
     
     //常用的设置
     //小矩形的背景色
-    HUD.color = [UIColor grayColor];//这儿表示无背景
+    HUDImage.color = [UIColor grayColor];//这儿表示无背景
     //显示的文字
-    HUD.labelText = @"正在上传";
+    HUDImage.labelText = @"正在上传";
     //是否有庶罩
-    HUD.dimBackground = NO;
+    HUDImage.dimBackground = NO;
     
     NSData *data = UIImagePNGRepresentation(image);
     NSDictionary * fileInfo = [UMUUploaderManager fetchFileInfoDictionaryWith:data];
@@ -490,7 +501,7 @@
                     //NSLog(@"%@",json);
                     int status = [[json objectForKey:@"status"]intValue];
                     if (status == 0) {
-                        [HUD hide:YES afterDelay:0];
+                        [HUDImage hide:YES afterDelay:0];
                         self.headimage.image = image;
                         [ShowMessage showMessage:@"头像上传成功"];
                         self.userInfoDic = [json objectForKey:@"entity"];
@@ -508,7 +519,7 @@
             
             //NSLog(@"%@",result);
         }else {
-            [HUD hide:YES afterDelay:0];
+            [HUDImage hide:YES afterDelay:0];
             [ShowMessage showMessage:@"头像上传失败"];
             //NSLog(@"%@",error);
         }
