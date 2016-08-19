@@ -94,7 +94,13 @@
     self.sumPrice.text = @"合计";
 
     self.distance = [[self.playerInfo objectForKey:@"distance"] doubleValue]/1000;
-    self.CarFee.text = [NSString stringWithFormat:@"%.2f元",self.distance*2];
+    
+    if (self.distance*2>=500) {
+        self.CarFee.text = @"500元";
+    }else{
+        self.CarFee.text = [NSString stringWithFormat:@"%.2f元",self.distance*2];
+    }
+    
     NSScanner *scanner = [NSScanner scannerWithString:self.CarFee.text];
     [scanner scanUpToCharactersFromSet:[NSCharacterSet decimalDigitCharacterSet] intoString:nil];
     double number;
@@ -160,7 +166,9 @@
         [scanner scanUpToCharactersFromSet:[NSCharacterSet decimalDigitCharacterSet] intoString:nil];
         int number;
         [scanner scanInt:&number];
+    
         _carFeeNumber = number;
+        
 
     }else{
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"如果你取消车费，请先与达人商议好，不然将是违规行为" preferredStyle:UIAlertControllerStyleAlert];
@@ -213,6 +221,9 @@
             firstLabel.tag = [index integerValue];
             [view addSubview:firstLabel];
             
+            UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(firstlabelTap:)];
+            firstLabel.userInteractionEnabled = YES;
+            [firstLabel addGestureRecognizer:tapGesture];
             
         }else if (usertimeTags.count==2){
             NSDictionary * dic1 = usertimeTags[0];
@@ -235,6 +246,9 @@
             firstLabel.textColor =  [CorlorTransform colorWithHexString:@"#3f90a4"];
             [view addSubview:firstLabel];
             
+            UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(firstlabelTap:)];
+            firstLabel.userInteractionEnabled = YES;
+            [firstLabel addGestureRecognizer:tapGesture];
             
             UILabel * secondLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, view.frame.size.height/2, view.frame.size.width, view.frame.size.height/2)];
             
@@ -249,6 +263,10 @@
             secondLabel.tag = [index2 integerValue];
             [view addSubview:secondLabel];
             
+            UITapGestureRecognizer * tapGesture2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(secondlabelTap:)];
+            secondLabel.userInteractionEnabled = YES;
+            [secondLabel addGestureRecognizer:tapGesture2];
+
         }else if (usertimeTags.count==3){
             
             NSDictionary * dic1 = usertimeTags[0];

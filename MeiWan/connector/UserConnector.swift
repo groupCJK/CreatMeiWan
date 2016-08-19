@@ -20,7 +20,8 @@ import UIKit
     
     
     private static var userUrl=setting.getIp()+"peiwan-server/rest/users/"
-    private static let orderUrl=setting.getIp()+"peiwan-server/rest/orders/"
+    private static var orderUrl=setting.getIp()+"peiwan-server/rest/orders/"
+    
     
     public static func acceptInvalidSSLCerts() {
         let manager = Manager.sharedInstance
@@ -519,7 +520,7 @@ import UIKit
                     
                 }else{
                     setting .adjustIps()
-                    userUrl = setting.getIp()+"peiwan-server/rest/users/"
+                    orderUrl=setting.getIp()+"peiwan-server/rest/orders/"
                 }
                 
                 receiver(data:data, error:error)
@@ -561,7 +562,7 @@ import UIKit
                     
                 }else{
                     setting .adjustIps()
-                    userUrl = setting.getIp()+"peiwan-server/rest/users/"
+                    orderUrl=setting.getIp()+"peiwan-server/rest/orders/"
                 }
                 
                 receiver(data:data, error:error)
@@ -948,7 +949,7 @@ import UIKit
                     
                 }else{
                     setting .adjustIps()
-                    userUrl = setting.getIp()+"peiwan-server/rest/users/"
+                    orderUrl=setting.getIp()+"peiwan-server/rest/orders/"
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -972,7 +973,7 @@ import UIKit
                     
                 }else{
                     setting .adjustIps()
-                    userUrl = setting.getIp()+"peiwan-server/rest/users/"
+                    orderUrl=setting.getIp()+"peiwan-server/rest/orders/"
                 }
                 
                 receiver(data:data, error:error)
@@ -999,7 +1000,7 @@ import UIKit
                     
                 }else{
                     setting .adjustIps()
-                    userUrl = setting.getIp()+"peiwan-server/rest/users/"
+                    orderUrl=setting.getIp()+"peiwan-server/rest/orders/"
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -1022,7 +1023,7 @@ import UIKit
                     
                 }else{
                     setting .adjustIps()
-                    userUrl = setting.getIp()+"peiwan-server/rest/users/"
+                    orderUrl=setting.getIp()+"peiwan-server/rest/orders/"
                 }
                 
                 receiver(data:data, error:error)
@@ -1055,7 +1056,7 @@ import UIKit
                     
                 }else{
                     setting .adjustIps()
-                    userUrl = setting.getIp()+"peiwan-server/rest/users/"
+                    orderUrl=setting.getIp()+"peiwan-server/rest/orders/"
                 }
                 
                 receiver(data:data, error:error)
@@ -1092,7 +1093,7 @@ import UIKit
                     
                 }else{
                     setting .adjustIps()
-                    userUrl = setting.getIp()+"peiwan-server/rest/users/"
+                    orderUrl=setting.getIp()+"peiwan-server/rest/orders/"
                 }
                 
                 receiver(data:data, error:error)
@@ -1248,7 +1249,7 @@ import UIKit
                     
                 }else{
                     setting .adjustIps()
-                    userUrl = setting.getIp()+"peiwan-server/rest/users/"
+                    orderUrl=setting.getIp()+"peiwan-server/rest/orders/"
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
@@ -1293,7 +1294,7 @@ import UIKit
                     
                 }else{
                     setting .adjustIps()
-                    userUrl = setting.getIp()+"peiwan-server/rest/users/"
+                    orderUrl=setting.getIp()+"peiwan-server/rest/orders/"
                 }
                 
                 receiver(data:data, error:error)
@@ -1337,7 +1338,7 @@ import UIKit
                     
                 }else{
                     setting .adjustIps()
-                    userUrl = setting.getIp()+"peiwan-server/rest/users/"
+                    orderUrl=setting.getIp()+"peiwan-server/rest/orders/"
                 }
                 
                 receiver(data:data!, error:error)
@@ -1381,7 +1382,7 @@ import UIKit
                     
                 }else{
                     setting .adjustIps()
-                    userUrl = setting.getIp()+"peiwan-server/rest/users/"
+                    orderUrl=setting.getIp()+"peiwan-server/rest/orders/"
                 }
                 
                 receiver(data:data!.gunzippedData(), error:error)
