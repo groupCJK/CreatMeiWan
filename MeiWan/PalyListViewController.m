@@ -285,6 +285,8 @@
                         [self layoutSubviews];
                         [HUD hide:YES afterDelay:0.5];
                     });
+                    iconlabel.text = [NSString stringWithFormat:@"%@",titlelabel[[tagIndexNumber intValue]-1]];
+                    iconImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageArray[[tagIndexNumber intValue]-1]]];
                 }else if (status == 1){
                     [PersistenceManager setLoginSession:@""];
                     
@@ -691,6 +693,10 @@
                                     [self layoutSubviews];
                                     [HUD hide:YES afterDelay:0];
                                 });
+                                
+                                
+                                iconlabel.text = [NSString stringWithFormat:@"%@",titlelabel[[number intValue]-1]];
+                                iconImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageArray[[number intValue]-1]]];
                                 
                             }else if(status == 1){
                                 [PersistenceManager setLoginSession:@""];
