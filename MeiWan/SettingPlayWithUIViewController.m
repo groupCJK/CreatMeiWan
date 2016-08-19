@@ -234,7 +234,7 @@
                                 for (int i = 0; i<priceArray.count; i++) {
                                     UIButton * jiaoButton = [UIButton buttonWithType:UIButtonTypeCustom];
                                     jiaoButton.frame = CGRectMake(0, i*(Jiaoview.frame.size.height/priceArray.count), Jiaoview.frame.size.width, Jiaoview.frame.size.height/priceArray.count);
-                                    if (i>level+1) {
+                                    if (i>level) {
                                         [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／次 等级不足",priceArray[i]] forState:UIControlStateNormal];
 
                                     }else{
