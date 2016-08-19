@@ -221,7 +221,7 @@
                     if (usertimeTags.count>=3) {
                     
                     }else{
-                        [usertimeTags addObject:[NSString stringWithFormat:@"%d",indexPath.row+1]];
+                        [usertimeTags addObject:[NSString stringWithFormat:@"%ld",indexPath.row+1]];
                         Jiaoview = [[UIView alloc]initWithFrame:self.priceView.frame];
                         Jiaoview.backgroundColor = [UIColor blackColor];
                         [self.view addSubview:Jiaoview];

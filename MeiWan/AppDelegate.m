@@ -34,10 +34,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    NSUserDefaults * userdefau = [NSUserDefaults standardUserDefaults];
-    [userdefau setObject:@"https://web.chuangjk.com:8443/" forKey:@"0"];
-    [userdefau setObject:@"https://chuangjk.com:8443/" forKey:@"1"];
-    [userdefau synchronize];
+
     [setting getOpen];
     
     [UserConnector acceptInvalidSSLCerts];
