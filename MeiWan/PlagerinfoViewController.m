@@ -133,6 +133,14 @@
             }
         }
     }];
+    [UserConnector findOrderEvaluationByUserId:[self.playerInfo objectForKey:@"id"] offset:@0 limit:@10 receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (error) {
+            
+        }else{
+            NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+            NSLog(@"%@",dic);
+        }
+    }];
 }
 #pragma mark 返回分组数
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

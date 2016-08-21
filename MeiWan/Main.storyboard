@@ -2497,7 +2497,7 @@
                             <gestureRecognizers/>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="VJY-4k-TkF">
-                            <rect key="frame" x="0.0" y="546" width="320" height="18"/>
+                            <rect key="frame" x="0.0" y="590" width="320" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
@@ -2690,6 +2690,37 @@
                                         <connections>
                                             <segue destination="f7r-ze-Stv" kind="push" identifier="gonghui" id="aXc-0z-doE"/>
                                         </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="8Ys-j1-4ii">
+                                        <rect key="frame" x="0.0" y="528" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Ys-j1-4ii" id="eU7-1G-gQP">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mall" translatesAutoresizingMaskIntoConstraints="NO" id="OaU-Bj-4a2">
+                                                    <rect key="frame" x="12" y="12" width="20" height="19"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="8oG-XS-pxC"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商城购物" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VjG-c9-oxr">
+                                                    <rect key="frame" x="47" y="13" width="60" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="OaU-Bj-4a2" secondAttribute="bottom" constant="4" id="5gc-nB-w4c"/>
+                                                <constraint firstItem="VjG-c9-oxr" firstAttribute="top" secondItem="eU7-1G-gQP" secondAttribute="topMargin" constant="5" id="6ZH-M4-Czg"/>
+                                                <constraint firstItem="OaU-Bj-4a2" firstAttribute="leading" secondItem="eU7-1G-gQP" secondAttribute="leadingMargin" constant="4" id="QdH-45-Vmc"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="VjG-c9-oxr" secondAttribute="bottom" constant="4" id="f17-EY-F35"/>
+                                                <constraint firstItem="VjG-c9-oxr" firstAttribute="leading" secondItem="OaU-Bj-4a2" secondAttribute="trailing" constant="15" id="ibv-s5-Xid"/>
+                                                <constraint firstItem="VjG-c9-oxr" firstAttribute="leading" secondItem="OaU-Bj-4a2" secondAttribute="trailing" constant="15" id="t2H-NB-VNz"/>
+                                                <constraint firstItem="OaU-Bj-4a2" firstAttribute="top" secondItem="eU7-1G-gQP" secondAttribute="topMargin" constant="4" id="ydl-o8-YgU"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -4378,6 +4409,7 @@
         <image name="list_icon" width="128" height="128"/>
         <image name="lock.png" width="12" height="15"/>
         <image name="login_btn.png" width="228" height="64"/>
+        <image name="mall" width="50" height="50"/>
         <image name="near.png" width="20" height="20"/>
         <image name="near2.png" width="20" height="20"/>
         <image name="order.png" width="64" height="64"/>

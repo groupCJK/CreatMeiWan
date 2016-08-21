@@ -597,6 +597,8 @@
 		2B2D09671D533CFB00139467 /* scanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D09661D533CFB00139467 /* scanViewController.m */; };
 		2B409A761D5C903100408431 /* gonghuiSearch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B409A751D5C903100408431 /* gonghuiSearch@2x.png */; };
 		2B409A791D5C9CCA00408431 /* findFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B409A781D5C9CCA00408431 /* findFriendViewController.m */; };
+		2B4698CC1D69513E0059B140 /* MallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B4698CB1D69513E0059B140 /* MallViewController.m */; };
+		2B4698D01D6984CF0059B140 /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B4698CF1D6984CF0059B140 /* CollectionViewCell.m */; };
 		2B5805B21D2A386800721653 /* label1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805A91D2A386800721653 /* label1.png */; };
 		2B5805B31D2A386800721653 /* label2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805AA1D2A386800721653 /* label2.png */; };
 		2B5805B41D2A386800721653 /* label3.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805AB1D2A386800721653 /* label3.png */; };
@@ -1726,6 +1728,10 @@
 		2B409A751D5C903100408431 /* gonghuiSearch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gonghuiSearch@2x.png"; path = "../gonghuiSearch@2x.png"; sourceTree = "<group>"; };
 		2B409A771D5C9CCA00408431 /* findFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = findFriendViewController.h; sourceTree = "<group>"; };
 		2B409A781D5C9CCA00408431 /* findFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = findFriendViewController.m; sourceTree = "<group>"; };
+		2B4698CA1D69513E0059B140 /* MallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallViewController.h; sourceTree = "<group>"; };
+		2B4698CB1D69513E0059B140 /* MallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MallViewController.m; sourceTree = "<group>"; };
+		2B4698CE1D6984CF0059B140 /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
+		2B4698CF1D6984CF0059B140 /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
 		2B5805A91D2A386800721653 /* label1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label1.png; sourceTree = "<group>"; };
 		2B5805AA1D2A386800721653 /* label2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label2.png; sourceTree = "<group>"; };
 		2B5805AB1D2A386800721653 /* label3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label3.png; sourceTree = "<group>"; };
@@ -3980,6 +3986,7 @@
 				2B2D084E1D519E4D00139467 /* guildCenterViewController.m */,
 				98BB8B7F1D570FCB001C79A4 /* GreatGuildViewController.h */,
 				98BB8B801D570FCB001C79A4 /* GreatGuildViewController.m */,
+				2B4698C91D6950F10059B140 /* 商城 */,
 				2B409A7A1D5C9CD800408431 /* 搜索好友 */,
 				2B2D08531D530C0E00139467 /* 公会中心 */,
 				2B1B0AD11D4AF14B00F193A4 /* 粉丝 */,
@@ -4186,6 +4193,25 @@
 				2B7E9F7D1D5D6F6500207CB7 /* cell */,
 			);
 			name = "搜索好友";
+			sourceTree = "<group>";
+		};
+		2B4698C91D6950F10059B140 /* 商城 */ = {
+			isa = PBXGroup;
+			children = (
+				2B4698CA1D69513E0059B140 /* MallViewController.h */,
+				2B4698CB1D69513E0059B140 /* MallViewController.m */,
+				2B4698CD1D6984950059B140 /* collectionViewCell */,
+			);
+			name = "商城";
+			sourceTree = "<group>";
+		};
+		2B4698CD1D6984950059B140 /* collectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2B4698CE1D6984CF0059B140 /* CollectionViewCell.h */,
+				2B4698CF1D6984CF0059B140 /* CollectionViewCell.m */,
+			);
+			name = collectionViewCell;
 			sourceTree = "<group>";
 		};
 		2B5805BB1D2A508100721653 /* animationVIew */ = {
@@ -4911,6 +4937,7 @@
 				27587C761CF5861A00B78F92 /* EaseConversationListViewController.m in Sources */,
 				27587C631CF5861900B78F92 /* EaseMessageHelper.m in Sources */,
 				27587C301CF5861900B78F92 /* MJRefreshConst.m in Sources */,
+				2B4698D01D6984CF0059B140 /* CollectionViewCell.m in Sources */,
 				18EB4E431B8018B9000AE087 /* ShowMessage.m in Sources */,
 				2BBB51BA1D596F5B007045EC /* newViewController.m in Sources */,
 				27587C7D1CF5861A00B78F92 /* EaseBaseMessageCell.m in Sources */,
@@ -5029,6 +5056,7 @@
 				2B0C70861D5481D1001AB100 /* GuildRankCell.m in Sources */,
 				2BDFA9561D32416900E33681 /* firstPage_scrollViewCell.m in Sources */,
 				18841F2E1B8C390700E2728B /* NSString+NSHash.m in Sources */,
+				2B4698CC1D69513E0059B140 /* MallViewController.m in Sources */,
 				27587C2E1CF5861900B78F92 /* MBProgressHUD.m in Sources */,
 				18C3E26F1B783FED004B02BB /* RandNumber.m in Sources */,
 				27587C9C1CF5932E00B78F92 /* CustomMessageCell.m in Sources */,
@@ -5249,8 +5277,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Liu (A998BHQHS8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Wei Liu (A998BHQHS8)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Wei Liu (8RJ67A2F8R)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Wei Liu (8RJ67A2F8R)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -5273,7 +5301,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "f4c82b9e-abc3-4848-a635-fbfd3a1c716c";
+				PROVISIONING_PROFILE = "6a8020ef-b990-4cb7-9215-fc89299ad68f";
 				SDKROOT = iphoneos9.3;
 				VALID_ARCHS = "armv7 armv7s";
 			};
@@ -5297,8 +5325,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Liu (A998BHQHS8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Wei Liu (A998BHQHS8)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Wei Liu (8RJ67A2F8R)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Wei Liu (8RJ67A2F8R)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -5314,7 +5342,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "f4c82b9e-abc3-4848-a635-fbfd3a1c716c";
+				PROVISIONING_PROFILE = "6a8020ef-b990-4cb7-9215-fc89299ad68f";
 				SDKROOT = iphoneos9.3;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s";

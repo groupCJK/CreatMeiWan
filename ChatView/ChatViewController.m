@@ -178,8 +178,6 @@
 
 - (UITableViewCell *)messageViewController:(UITableView *)tableView cellForMessageModel:(id<IMessageModel>)model
 {
-//    NSString * from =model.message.from;
-//    NSString * to =model.message.to;
     NSString * from = model.message.to;
     
     NSString * to =model.message.from;
@@ -188,35 +186,28 @@
     {
         NSString* userIdStr= [from stringByReplacingOccurrencesOfString:@"product_" withString:@""];
         NSNumber* userId =[NSNumber numberWithLong: [userIdStr integerValue]];
-           NSDictionary* userCache = [userDefaults dictionaryForKey:userIdStr];
-        if (userCache) {
-            model.nickname=[userCache objectForKey:@"nickname"];
-            model.avatarURLPath=[userCache objectForKey:@"headUrl"];
-        }else{
-            NSString *session= [PersistenceManager getLoginSession];
-            [UserConnector findPeiwanById:session userId:userId receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
-                if (!error) {
-                   
-                    SBJsonParser*parser=[[SBJsonParser alloc]init];
-                    NSMutableDictionary *json=[parser objectWithData:data];
-                    int status = [[json objectForKey:@"status"]intValue];
-                    if (status == 0) {
-                        NSMutableDictionary* user  = [json objectForKey:@"entity"];
-                        [user removeObjectForKey:@"userStates"];
-                        [user removeObjectForKey:@"userTags"];
-                        [userDefaults setObject:user forKey:userIdStr];
-                        model.nickname=[user objectForKey:@"nickname"];
-                        model.avatarURLPath=[user objectForKey:@"headUrl"];
-                    }
-
-                    
-                }else{
-                    
+        NSString *session= [PersistenceManager getLoginSession];
+        [UserConnector findPeiwanById:session userId:userId receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+            if (!error) {
+                
+                SBJsonParser*parser=[[SBJsonParser alloc]init];
+                NSMutableDictionary *json=[parser objectWithData:data];
+                int status = [[json objectForKey:@"status"]intValue];
+                if (status == 0) {
+                    NSMutableDictionary* user  = [json objectForKey:@"entity"];
+                    [user removeObjectForKey:@"userStates"];
+                    [user removeObjectForKey:@"userTags"];
+                    [userDefaults setObject:user forKey:userIdStr];
+                    model.nickname=[user objectForKey:@"nickname"];
+                    model.avatarURLPath=[user objectForKey:@"headUrl"];
                 }
                 
-            }];
-                    
-        }
+                
+            }else{
+                
+            }
+            
+        }];
     }
     {
         NSString* userIdStr= [to stringByReplacingOccurrencesOfString:@"product_" withString:@""];

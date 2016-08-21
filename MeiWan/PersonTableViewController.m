@@ -20,7 +20,8 @@
 #import "FocusViewController.h"
 #import "FansViewController.h"
 #import "guildCenterViewController.h"
-
+/**商城*/
+#import "MallViewController.h"
 #import "UserInfo.h"
 #import "CWStarRateView.h"
 #import "Meiwan-Swift.h"
@@ -661,6 +662,12 @@
     }
     if (indexPath.row==3){
         [self showMessageAlert:@"分享" image:self.headimage.image];
+    }
+    if (indexPath.row==6){
+        MallViewController * mallVC = [[MallViewController alloc]init];
+        mallVC.hidesBottomBarWhenPushed = YES;
+        mallVC.title = @"商城";
+        [self.navigationController pushViewController:mallVC animated:YES];
     }
 }
 

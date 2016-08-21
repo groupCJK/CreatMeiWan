@@ -56,6 +56,8 @@ CGFloat const EaseConversationCellPadding = 10;
 - (void)_setupSubview
 {
     _avatarView = [[EaseImageView alloc] init];
+    _avatarView.layer.cornerRadius = 10;
+    _avatarView.clipsToBounds = YES;
     _avatarView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.contentView addSubview:_avatarView];
     
