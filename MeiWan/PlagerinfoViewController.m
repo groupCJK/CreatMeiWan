@@ -133,7 +133,7 @@
             }
         }
     }];
-    [UserConnector findOrderEvaluationByUserId:[self.playerInfo objectForKey:@"id"] offset:@0 limit:@10 receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+    [UserConnector peiwanNetbars:[self.playerInfo objectForKey:@"id"] receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
         if (error) {
             
         }else{

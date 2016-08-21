@@ -50,6 +50,7 @@
     
     UIScrollView * scrollview = [[UIScrollView alloc]initWithFrame:CGRectMake(100, 64, dtScreenWidth-100, dtScreenHeight-64)];
     scrollview.delegate = self;
+    scrollview.showsVerticalScrollIndicator = NO;
     [self.view addSubview:scrollview];
     self.scrollview = scrollview;
     

@@ -509,10 +509,6 @@
 
 - (IBAction)MakeSure:(UIButton *)sender {
     
-    [UserConnector createOrder:nil peiwanId:nil netbarId:nil price:nil type:nil hours:nil isWin:nil promoterId:nil receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
-        
-    }];
-    
     if (self.myRice>0) {
         if ([[self.playerInfo objectForKey:@"isAudit"]intValue] == 0) {
             [ShowMessage showMessage:@"你所邀请的人没有经过资质审核"];
@@ -534,9 +530,6 @@
     
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-//    NSString * string = [NSString stringWithFormat:@"%.3f",self.distance*2];
-//    self.carFeeNumber = [NSNumber numberWithDouble:[string doubleValue]];
-//    NSLog(@"%@",_carFeeNumber);
     if (buttonIndex == 1) {
         
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"如果使用余额支付,系统将会在您的余额中扣除费用。" preferredStyle:UIAlertControllerStyleAlert];

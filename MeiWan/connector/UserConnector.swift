@@ -485,90 +485,6 @@ import UIKit
         }
     }
     
-    //创建订单，废弃的接口，因为要传入时间标签的需要
-    public static func createOrder(session:String!,peiwanId:NSNumber!,netbarId:NSNumber?,price:NSNumber!,type:NSNumber!,hours:NSNumber!,isWin:NSNumber!,promoterId:NSNumber?,receiver:(data:NSData?,error:NSError?)->()){
-        var parameters:Dictionary<String,AnyObject> = [:]
-        if (session != nil) {
-            parameters["session"]=session
-        }
-        if (peiwanId != nil) {
-            parameters["peiwanId"]=peiwanId
-        }
-        if(netbarId != nil){
-            parameters["netbarId"]=netbarId
-        }
-        if(promoterId != nil){
-            parameters["promoterId"]=promoterId
-        }
-        if (price != nil) {
-            parameters["price"]=price
-        }
-        if (type != nil) {
-            parameters["type"]=type
-        }
-        if (hours != nil) {
-            parameters["hours"]=hours
-        }
-        if (isWin != nil) {
-            parameters["isWin"]=isWin
-        }
-        
-        request(.GET, orderUrl+"createOrder", parameters:parameters as? [String : NSObject])
-            .response { request, r, data, error in
-                
-                if (error==nil){
-                    
-                }else{
-                    setting .adjustIps()
-                    orderUrl=setting.getIp()+"peiwan-server/rest/orders/"
-                }
-                
-                receiver(data:data, error:error)
-        }
-    }
-    
-    /**创建订单*/
-    public static func createOrder2(session:String!,peiwanId:NSNumber!,price:NSNumber!,tagIndex:NSNumber!,hours:NSNumber!,carFee:NSNumber!,userUnionId:NSNumber!,peiwanUnionId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
-        var parameters:Dictionary<String,AnyObject> = [:]
-        if(session != nil){
-            parameters["session"]=session
-        }
-        if(peiwanId != nil){
-            parameters["peiwanId"]=peiwanId
-        }
-        if(tagIndex != nil){
-            parameters["tagIndex"]=tagIndex
-        }
-        if(price != nil){
-            parameters["price"]=price
-        }
-        if(hours != nil){
-            parameters["hours"]=hours
-        }
-        if(carFee != nil){
-            parameters["carFee"]=carFee
-        }
-        if(userUnionId != nil){
-            parameters["userUnionId"]=userUnionId
-        }
-        if(peiwanUnionId != nil){
-            parameters["peiwanUnionId"]=peiwanUnionId
-        }
-        
-        request(.GET, orderUrl+"createOrder2", parameters:parameters as? [String : NSObject])
-            .response { request, r, data, error in
-                
-                if (error==nil){
-                    
-                }else{
-                    setting .adjustIps()
-                    orderUrl=setting.getIp()+"peiwan-server/rest/orders/"
-                }
-                
-                receiver(data:data, error:error)
-        }
-    }
-    
     //我的动态
     public static func findStates(session:String!, userId:NSNumber!,offset:NSNumber!,limit:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
@@ -1233,28 +1149,6 @@ import UIKit
         }
     }
     
-    /**充值*/
-    public static func createRecharge(session:String!,money:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
-        var parameters:Dictionary<String,AnyObject> = [:]
-        if(session != nil){
-            parameters["session"]=session
-        }
-        if(money != nil){
-            parameters["money"]=money
-        }
-        request(.GET, orderUrl+"createRecharge", parameters:parameters as? [String : NSObject])
-            .response { request, r, data, error in
-                
-                if (error==nil){
-                    
-                }else{
-                    setting .adjustIps()
-                    orderUrl=setting.getIp()+"peiwan-server/rest/orders/"
-                }
-                
-                receiver(data:data!.gunzippedData(), error:error)
-        }
-    }
     //获取用户动态 粉丝 关注数量
     public static func getLoginedUser(session:String!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
@@ -1302,7 +1196,7 @@ import UIKit
         
         
     }
-    
+    /**余额支付*/
     public static func payWithAccountMoney(session:String!,peiwanId:NSNumber!,price:NSNumber!,hours:NSNumber!,tagIndex:NSNumber!,carFee:NSNumber!,userUnionId:NSNumber!,peiwanUnionId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         
         var parameters:Dictionary<String,AnyObject> = [:]
@@ -1346,7 +1240,7 @@ import UIKit
         
         
     }
-    
+    /**支付宝支付*/
     public static func aliOrderSign(session:String!,peiwanId:NSNumber!,price:NSNumber!,hours:NSNumber!,tagIndex:NSNumber!,carFee:NSNumber!,userUnionId:NSNumber!,peiwanUnionId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         
         var parameters:Dictionary<String,AnyObject> = [:]
