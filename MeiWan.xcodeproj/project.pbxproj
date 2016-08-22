@@ -621,6 +621,8 @@
 		2BA4F75D1D4DCB6700A6F68C /* fansCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA4F75C1D4DCB6700A6F68C /* fansCell.m */; };
 		2BB4D54D1D235B4D0004BFA9 /* blackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BB4D54C1D235B4D0004BFA9 /* blackModel.m */; };
 		2BBB51BA1D596F5B007045EC /* newViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBB51B91D596F5B007045EC /* newViewController.m */; };
+		2BD794EB1D6B05DC00F852E2 /* shopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD794EA1D6B05DC00F852E2 /* shopViewController.m */; };
+		2BD794EF1D6B0BC700F852E2 /* shopTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD794EE1D6B0BC700F852E2 /* shopTableViewCell.m */; };
 		2BDAF7991D226A17008B05EA /* PlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDAF7971D226A17008B05EA /* PlayerView.m */; };
 		2BDAF79C1D2271FE008B05EA /* list_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDAF79B1D2271FE008B05EA /* list_icon.png */; };
 		2BDAF79F1D2272B8008B05EA /* BlacknameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDAF79E1D2272B8008B05EA /* BlacknameController.m */; };
@@ -1764,6 +1766,10 @@
 		2BB4D54C1D235B4D0004BFA9 /* blackModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = blackModel.m; sourceTree = "<group>"; };
 		2BBB51B81D596F5B007045EC /* newViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = newViewController.h; sourceTree = "<group>"; };
 		2BBB51B91D596F5B007045EC /* newViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newViewController.m; sourceTree = "<group>"; };
+		2BD794E91D6B05DC00F852E2 /* shopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shopViewController.h; sourceTree = "<group>"; };
+		2BD794EA1D6B05DC00F852E2 /* shopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shopViewController.m; sourceTree = "<group>"; };
+		2BD794ED1D6B0BC700F852E2 /* shopTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shopTableViewCell.h; sourceTree = "<group>"; };
+		2BD794EE1D6B0BC700F852E2 /* shopTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shopTableViewCell.m; sourceTree = "<group>"; };
 		2BDAF7961D226A17008B05EA /* PlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerView.h; sourceTree = "<group>"; };
 		2BDAF7971D226A17008B05EA /* PlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerView.m; sourceTree = "<group>"; };
 		2BDAF79B1D2271FE008B05EA /* list_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list_icon.png; sourceTree = "<group>"; };
@@ -4200,6 +4206,9 @@
 			children = (
 				2B4698CA1D69513E0059B140 /* MallViewController.h */,
 				2B4698CB1D69513E0059B140 /* MallViewController.m */,
+				2BD794E91D6B05DC00F852E2 /* shopViewController.h */,
+				2BD794EA1D6B05DC00F852E2 /* shopViewController.m */,
+				2BD794EC1D6B0BB100F852E2 /* tableviewcell */,
 				2B4698CD1D6984950059B140 /* collectionViewCell */,
 			);
 			name = "商城";
@@ -4267,6 +4276,15 @@
 				98CCB9201D58369000BC86AA /* LastGuildViewController.m */,
 			);
 			name = subviews;
+			sourceTree = "<group>";
+		};
+		2BD794EC1D6B0BB100F852E2 /* tableviewcell */ = {
+			isa = PBXGroup;
+			children = (
+				2BD794ED1D6B0BC700F852E2 /* shopTableViewCell.h */,
+				2BD794EE1D6B0BC700F852E2 /* shopTableViewCell.m */,
+			);
+			name = tableviewcell;
 			sourceTree = "<group>";
 		};
 		2BDAF7A01D228746008B05EA /* view */ = {
@@ -4997,6 +5015,7 @@
 				27587C801CF5861A00B78F92 /* EaseBubbleView+File.m in Sources */,
 				27587C861CF5861A00B78F92 /* EaseBubbleView.m in Sources */,
 				27587C9D1CF5932E00B78F92 /* EMBubbleView+Gif.m in Sources */,
+				2BD794EF1D6B0BC700F852E2 /* shopTableViewCell.m in Sources */,
 				18E579F11B7DDDB000771063 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				183D533C1B86D66D00500663 /* MD5.m in Sources */,
 				27587C4B1CF5861900B78F92 /* NSData+EMImageContentType.m in Sources */,
@@ -5087,6 +5106,7 @@
 				18E579F01B7DDDB000771063 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				18841F361B8C441A00E2728B /* setting.m in Sources */,
 				18CC8EE41BC39CE1000281CE /* Response.swift in Sources */,
+				2BD794EB1D6B05DC00F852E2 /* shopViewController.m in Sources */,
 				18824A4E1B85D5920063EC03 /* SBJsonStreamParserState.m in Sources */,
 				18CC8EE81BC39CE1000281CE /* Stream.swift in Sources */,
 				2B0C707D1D546F84001AB100 /* OrderLiseCell.m in Sources */,

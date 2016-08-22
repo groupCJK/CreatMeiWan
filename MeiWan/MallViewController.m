@@ -9,6 +9,7 @@
 #import "MallViewController.h"
 #import "UICollectionViewWaterfallLayout.h"
 #import "CollectionViewCell.h"
+#import "shopViewController.h"
 
 @interface MallViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateWaterfallLayout,UICollectionViewDelegate,UICollectionViewDataSource>
 {
@@ -18,9 +19,10 @@
 }
 @property(nonatomic,strong)UITableView * tableview;
 @property(nonatomic,strong)UIScrollView * scrollview;
-//@property(nonatomic,strong)NSString * testone;
-//@property(nonatomic,strong)NSString * testtwo;
 @property(nonatomic,strong)CollectionViewCell * cell;
+@property(nonatomic,strong)NSArray * titleArray;
+@property(nonatomic,strong)NSArray * titleImageArray;
+@property(nonatomic,strong)NSArray * collectionArray;
 
 @end
 
@@ -31,6 +33,9 @@
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor whiteColor];
+    _titleArray = @[@"聚餐",@"线下K歌",@"夜店达人",@"影伴",@"运动健身"];
+    _titleImageArray = @[@"dining",@"sing-expert",@"go-nightclubbing",@"shadow-with",@"sports"];
+    _collectionArray = @[@"",@"",@""];
     countsss = 10;
     [self init_UI];
     
@@ -57,7 +62,7 @@
     _layout.delegate = self;//通过代理设置item的高
     _layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);//设置区和四周边界的距离
     
-    _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, dtScreenWidth-100, dtScreenHeight) collectionViewLayout:_layout];
+    _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 25, dtScreenWidth-100, dtScreenHeight) collectionViewLayout:_layout];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
     _collectionView.backgroundColor = [UIColor whiteColor];
@@ -67,23 +72,34 @@
     
     [_collectionView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
     
+    UILabel * business = [[UILabel alloc]initWithFrame:CGRectMake(15, 10, dtScreenWidth-100, 15)];
+    business.text = @"联合商家";
+    business.textColor = [UIColor grayColor];
+    business.font = [UIFont systemFontOfSize:15.0];
+    [self.scrollview addSubview:business];
 }
 
 #pragma mark 表
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UIImageView * cellImageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 12, 20, 20)];
+    UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(cellImageView.frame.origin.x+cellImageView.frame.size.width+5, 0, 100-(cellImageView.frame.origin.x+cellImageView.frame.size.width+5), 44)];
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        
     }
-    cell.textLabel.text = @"分类";
-    cell.textLabel.font = [UIFont systemFontOfSize:15.0];
-    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    label.font = [UIFont systemFontOfSize:15.0];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = _titleArray[indexPath.row];
+    [cell.contentView addSubview:label];
+    cellImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",_titleImageArray[indexPath.row]]];
+    [cell.contentView addSubview:cellImageView];
     return cell;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 15;
+    return _titleArray.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -95,7 +111,37 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    countsss += indexPath.row;
+    switch (indexPath.row) {
+        case 0:
+        {
+            _collectionArray = @[@"",@"",@""];
+        }
+            break;
+        case 1:
+        {
+            _collectionArray = @[@"",@"",@"",@"",@"",@"",@"",@"",@""];
+        }
+            break;
+        case 2:
+        {
+            _collectionArray = @[@"",@"",@"",@"",@""];
+        }
+            break;
+        case 3:
+        {
+            _collectionArray = @[@"",@"",@"",@"",@"",@""];
+        }
+            break;
+        case 4:
+        {
+            _collectionArray = @[@"",@"",@"",@""];
+        }
+            break;
+            
+        default:
+            break;
+    }
+
     [_collectionView reloadData];
 }
 
@@ -103,11 +149,11 @@
 
 #pragma mark con
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return countsss;
+    return _collectionArray.count;
 }
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewWaterfallLayout *)collectionViewLayout heightForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return (dtScreenWidth-100-30)/2+30;
 }
 - (UICollectionViewCell* )collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -116,7 +162,9 @@
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"瀑布流 选择第%ld个",(long)indexPath.item);
+    shopViewController * shopVC = [[shopViewController alloc]init];
+    shopVC.title = @"商家名称";
+    [self.navigationController pushViewController:shopVC animated:YES];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {

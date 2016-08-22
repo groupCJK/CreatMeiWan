@@ -13,16 +13,16 @@
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        self.backgroundColor = [UIColor clearColor];
-        
-        UIImageView * mallShowImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, (dtScreenWidth-100-30)/2, 70)];
-        mallShowImageView.image = [UIImage imageNamed:@"huangjin"];
+
+        UIImageView * mallShowImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 5, (dtScreenWidth-100-30)/2-10, (dtScreenWidth-100-30)/2-10)];
+        mallShowImageView.image = [UIImage imageNamed:@"baijin"];
         [self addSubview:mallShowImageView];
         
-        UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 70, (dtScreenWidth-100-30)/2, 30)];
+        UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, (dtScreenWidth-100-30)/2-10, (dtScreenWidth-100-30)/2, 40)];
         label.textAlignment = NSTextAlignmentCenter;
-        label.font = [UIFont systemFontOfSize:16.0];
-        label.text = @"渴了饿了喝红牛";
+        label.font = [UIFont systemFontOfSize:15.0];
+        label.numberOfLines = 2;
+        label.text = @"商家名称";
         [self addSubview:label];
         self.label = label;
     }
