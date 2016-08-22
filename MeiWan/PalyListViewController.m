@@ -126,7 +126,6 @@
     
     [super viewDidLoad];
     [self didReceiveMessage:nil];
-    
     [self initializeLocationService];
     
     tagIndexNumber = [[NSNumber alloc]init];

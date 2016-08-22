@@ -18,8 +18,8 @@
 }
 @property(nonatomic,strong)UITableView * tableview;
 @property(nonatomic,strong)UIScrollView * scrollview;
-@property(nonatomic,strong)NSString * testone;
-@property(nonatomic,strong)NSString * testtwo;
+//@property(nonatomic,strong)NSString * testone;
+//@property(nonatomic,strong)NSString * testtwo;
 @property(nonatomic,strong)CollectionViewCell * cell;
 
 @end
@@ -33,9 +33,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     countsss = 10;
     [self init_UI];
-    _testone = @"测试";
-    _testtwo = @"看看";
-    
     
 }
 - (void)init_UI
@@ -99,7 +96,6 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     countsss += indexPath.row;
-    _testone = _testtwo;
     [_collectionView reloadData];
 }
 
@@ -116,11 +112,7 @@
 - (UICollectionViewCell* )collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     self.cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    
-    self.cell.label.text = _testone;
-    
     return self.cell;
-    
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -134,7 +126,6 @@
     CGRect frame = _collectionView.frame;
     frame.size.height = size.height;
     _collectionView.frame = frame;
-    
     self.scrollview.contentSize = CGSizeMake(dtScreenWidth-100, _collectionView.contentSize.height + 1);
 }
 - (void)dealloc

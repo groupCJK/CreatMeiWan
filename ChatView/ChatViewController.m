@@ -56,9 +56,8 @@
     //获得未读信息数量
     NSInteger badgeNumber = [[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase];
     app.applicationIconBadgeNumber = badgeNumber;
-    //
     self.tabBarController.tabBar.hidden = YES;
-
+    
     // Do any additional setup after loading the view.
     self.showRefreshHeader = YES;
     self.delegate = self;

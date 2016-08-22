@@ -13,14 +13,18 @@
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        self.backgroundColor = [UIColor grayColor];
-        UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 40)];
-        label.text = @"这是个瀑布流 Item";
+        self.backgroundColor = [UIColor clearColor];
+        
+        UIImageView * mallShowImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, (dtScreenWidth-100-30)/2, 70)];
+        mallShowImageView.image = [UIImage imageNamed:@"huangjin"];
+        [self addSubview:mallShowImageView];
+        
+        UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 70, (dtScreenWidth-100-30)/2, 30)];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.font = [UIFont systemFontOfSize:16.0];
+        label.text = @"渴了饿了喝红牛";
         [self addSubview:label];
         self.label = label;
-        
-        
-        
     }
     return self;
 }

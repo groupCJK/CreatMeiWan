@@ -91,6 +91,7 @@
         cell.userInfoEdit.hidden = NO;
         cell.userInfoEdit.delegate = self;
         cell.userInfoEdit.tag = 100;
+        cell.userInfoEdit.returnKeyType = UIReturnKeyDone;
     }else if (indexPath.row == 1){
         cell.userInfoDetail.text = [NSString stringWithFormat:@"%ld",self.myuserInfo.userId];
         cell.userInfoDetail.textColor = [CorlorTransform colorWithHexString:@"#CDC5BF"];
@@ -117,6 +118,7 @@
         cell.userInfoEditSign.text = self.myuserInfo.mydescription;
         cell.userInfoEditSign.delegate = self;
         cell.userInfoEditSign.tag = 200;
+        cell.userInfoEditSign.returnKeyType = UIReturnKeyDone;
     }else if (indexPath.row == 5){
         cell.timeImage1.hidden = NO;
         cell.timeDic = self.playerInfo;
@@ -464,7 +466,6 @@
     _userInfoTableView.frame = CGRectMake(0, 0, dtScreenWidth, dtScreenHeight);
     [UIView commitAnimations];
     [textField resignFirstResponder];
-    textField.returnKeyType = UIReturnKeyDone;
     return YES;
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField
@@ -477,7 +478,6 @@
             [alertview show];
         }
         self.name = textField.text;
-
     }
     if (textField.tag==200) {
         
@@ -491,16 +491,11 @@
 }
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"personInfo"]) {
         PlagerinfoViewController * pv = segue.destinationViewController;
         pv.playerInfo = sender;
     }
-}
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    [self.view endEditing:YES];
 }
 
 @end
