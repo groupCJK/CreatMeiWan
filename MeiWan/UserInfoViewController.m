@@ -89,7 +89,8 @@
     if (indexPath.row == 0) {
         cell.userInfoEdit.text = self.myuserInfo.nickname;
         cell.userInfoEdit.hidden = NO;
-        [cell.userInfoEdit addTarget:self action:@selector(userInfoEdit:) forControlEvents:UIControlEventEditingChanged];
+        cell.userInfoEdit.delegate = self;
+        cell.userInfoEdit.tag = 100;
     }else if (indexPath.row == 1){
         cell.userInfoDetail.text = [NSString stringWithFormat:@"%ld",self.myuserInfo.userId];
         cell.userInfoDetail.textColor = [CorlorTransform colorWithHexString:@"#CDC5BF"];
@@ -115,11 +116,11 @@
         cell.userInfoEditSign.hidden = NO;
         cell.userInfoEditSign.text = self.myuserInfo.mydescription;
         cell.userInfoEditSign.delegate = self;
-        [cell.userInfoEditSign addTarget:self action:@selector(userInfoEditSign:) forControlEvents:UIControlEventEditingChanged];
+        cell.userInfoEditSign.tag = 200;
     }else if (indexPath.row == 5){
         cell.timeImage1.hidden = NO;
         cell.timeDic = self.playerInfo;
-    }else{
+    }else if (indexPath.row == 6){
         cell.textLabel.text = @"清除缓存";
         cell.textLabel.font = [UIFont systemFontOfSize:16.0];
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
@@ -140,7 +141,7 @@
         
     }else if(indexPath.row == 5){
 //        NSLog(@"选择标签");
-    }else{
+    }else if(indexPath.row == 6){
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"清除缓存" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -162,32 +163,6 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (void)userInfoEditSign:(UITextField *)textField
-{
-    
-    if (textField.text.length > 30) {
-        textField.text = [textField.text substringToIndex:30];
-        UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"提示" message:@"签名不能多于30个字符串" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-        [alertview show];
-    }
-    self.sigen = textField.text;
-    NSLog(@"%@",textField.text);
-    NSLog(@"%lu",textField.text.length);
-    
-}
-
-
-- (void)userInfoEdit:(UITextField *)textField
-{
-    if (textField.text.length > 8) {
-        textField.text = [textField.text substringToIndex:8];
-        UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"提示" message:@"昵称不能大于8个字符串" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-        [alertview show];
-    }
-    self.name = textField.text;
-    NSLog(@"%@",textField.text);
-    NSLog(@"%lu",textField.text.length);
-}
 
 - (UITableView *)userInfoTableView{
     if (!_userInfoTableView) {
@@ -468,10 +443,18 @@
 //签名开始编辑
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.5];
-    _userInfoTableView.frame = CGRectMake(0, -214, dtScreenWidth, dtScreenHeight);
-    [UIView commitAnimations];
+    if (textField.tag==100) {
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.5];
+        _userInfoTableView.frame = CGRectMake(0, -150, dtScreenWidth, dtScreenHeight);
+        [UIView commitAnimations];
+    }
+    if (textField.tag == 200){
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.5];
+        _userInfoTableView.frame = CGRectMake(0, -214, dtScreenWidth, dtScreenHeight);
+        [UIView commitAnimations];
+    }
 }
 //return键
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -484,7 +467,28 @@
     textField.returnKeyType = UIReturnKeyDone;
     return YES;
 }
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (textField.tag==100) {
+        
+        if (textField.text.length > 8) {
+            textField.text = [textField.text substringToIndex:8];
+            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"提示" message:@"昵称不能大于8个字符串" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            [alertview show];
+        }
+        self.name = textField.text;
 
+    }
+    if (textField.tag==200) {
+        
+        if (textField.text.length > 30) {
+            textField.text = [textField.text substringToIndex:30];
+            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"提示" message:@"签名不能多于30个字符串" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            [alertview show];
+        }
+        self.sigen = textField.text;
+    }
+}
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -494,6 +498,9 @@
         pv.playerInfo = sender;
     }
 }
-
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
 
 @end
