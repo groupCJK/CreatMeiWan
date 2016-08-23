@@ -44,8 +44,8 @@
     UITextField *inputTF = [alertView textFieldAtIndex:0];
     NSString *input = inputTF.text;
     double inputNum = [input doubleValue];
-    if (inputNum < 100) {
-        [ShowMessage showMessage:@"提现金额须大于一百元"];
+    if (inputNum < 500) {
+        [ShowMessage showMessage:@"提现金额须大于五百元"];
         return;
     }
     if (buttonIndex == 1) {

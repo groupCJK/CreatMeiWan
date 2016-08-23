@@ -7,6 +7,7 @@
 //
 
 #import "shopViewController.h"
+#import "shopTableViewCell.h"
 
 @interface shopViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -33,9 +34,9 @@
 #pragma mark----
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    shopTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        cell = [[shopTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
     return cell;
 }
