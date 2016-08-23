@@ -64,6 +64,7 @@
             NSMutableDictionary *json=[parser objectWithData:data];
             NSDictionary * entity  =[json objectForKey:@"entity"];
             level = [[entity objectForKey:@"level"] intValue];
+
             usertimeTags = [entity objectForKey:@"userTimeTags"];
             [self creatTableView];
         }else{

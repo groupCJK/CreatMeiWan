@@ -710,9 +710,9 @@
     
     
     NSString * URLString = [NSString stringWithFormat:@"http://web.chuangjk.com:8083/promoter/index.html"];
-    NSString * contentext = @"我在美玩app出售自己的技能和时间,情人节过去了,你还在单着么？点我哟...";
-    NSString * titleString = @"既能貌美如花又能赚钱养家";
-    image = [UIImage imageNamed:@"icon"];
+    NSString * contentext = @"缘起，我在万千人群中看见你的眼。缘灭，万千人中你却不知什么是美玩APP";
+    NSString * titleString = @"貌美如花也能赚钱养家";
+    image = [UIImage imageNamed:@"headerImage"];
     
     UIAlertAction * shareAction = [UIAlertAction actionWithTitle:@"分享到微信好友" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [UMSocialData defaultData].extConfig.wechatSessionData.title = titleString;

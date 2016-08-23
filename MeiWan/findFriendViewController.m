@@ -129,6 +129,10 @@
 {
     return 0.1;
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 
 #pragma mark--键盘
 - (void)showMessageAlert:(NSString *)message

@@ -25,6 +25,8 @@
 #import "NetBarViewController.h"
 #import "ChatViewController.h"
 
+#import "ShowImageViewController.h"
+
 #import "ShowMessage.h"
 #import "SBJson.h"
 
@@ -187,6 +189,9 @@
             cell = [[playerInfoTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"infoCell"];
             cell.playerInfo = self.playerInfo;
         }
+        cell.playerHeadImage.userInteractionEnabled = YES;
+        UITapGestureRecognizer * tapgesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesture:)];
+        [cell.playerHeadImage addGestureRecognizer:tapgesture];
         return cell;
     }else if (indexPath.section == 1){
         TimeLabelTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"timeCell"];
@@ -680,14 +685,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+/**点击头像展示图片*/
+- (void)tapGesture:(UITapGestureRecognizer *)gesture
+{
+    ShowImageViewController * imageVC = [[ShowImageViewController alloc]init];
+    imageVC.playInfo = self.playerInfo;
+    [self.navigationController pushViewController:imageVC animated:YES];
+    
 }
-*/
-
 @end

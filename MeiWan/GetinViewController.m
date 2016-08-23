@@ -67,9 +67,9 @@
 }
 - (IBAction)getIn:(UIButton *)sender {
     //[self performSegueWithIdentifier:@"players" sender:nil];
-    if (self.phone.text.length != 13) {
+    if (self.phone.text.length != 11) {
         [self showMessage:@"用户名是您的手机号码"];
-    }else if (self.phone.text.length == 13 && (self.password.text.length < 6 || self.password.text.length > 18)){
+    }else if (self.phone.text.length == 11 && (self.password.text.length < 6 || self.password.text.length > 18)){
         [self showMessage:@"密码长度需要大于6位小于18位"];
         
     }else{
