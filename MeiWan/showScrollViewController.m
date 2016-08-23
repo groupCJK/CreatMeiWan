@@ -1,38 +1,27 @@
 //
-//  ShowImageViewController.m
+//  showScrollViewController.m
 //  MeiWan
 //
 //  Created by user_kevin on 16/8/23.
 //  Copyright © 2016年 apple. All rights reserved.
 //
 
-#import "ShowImageViewController.h"
+#import "showScrollViewController.h"
 #import "creatAlbum.h"
-@interface ShowImageViewController ()<UIGestureRecognizerDelegate,UIScrollViewDelegate>
+@interface showScrollViewController ()<UIScrollViewDelegate>
 @property(nonatomic,strong)UIScrollView * scrollerview;
 @property(nonatomic,strong)UIImageView * imageView;
 @end
 
-@implementation ShowImageViewController
+@implementation showScrollViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.title = self.playInfo[@"nickname"];
-    self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, dtScreenWidth, dtScreenHeight)];
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.playInfo[@"headUrl"]] placeholderImage:[UIImage imageNamed:@""]];
-    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    self.imageView.clipsToBounds = YES;
-//    [self.view addSubview:imageView];
-    self.imageView.userInteractionEnabled = YES;
-    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(saveImageView:)];
-    [self.imageView addGestureRecognizer:tap];
-    // Do any additional setup after loading the view.
     
+    NSLog(@"%lu",(unsigned long)_imageArray.count);
     
     self.scrollerview = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     self.scrollerview.backgroundColor = [UIColor blackColor];
-    [self.scrollerview addSubview:self.imageView];
     [self.view addSubview:self.scrollerview];
     //放大倍数
     self.scrollerview.maximumZoomScale=3.0;
@@ -41,8 +30,14 @@
     self.scrollerview. showsHorizontalScrollIndicator=NO;
     self.scrollerview.showsVerticalScrollIndicator=NO;
     self.scrollerview.delegate=self;
+    self.scrollerview.pagingEnabled = YES;
 
-    
+    _imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, dtScreenWidth, dtScreenHeight)];
+    _imageView.image = self.ImageView.image;
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.imageView.clipsToBounds = YES;
+    [self.scrollerview addSubview:_imageView];
+
     //创建双击手势用于放大缩小图片
     UITapGestureRecognizer * suofang = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
     //设置点击数量
@@ -55,7 +50,7 @@
 - (void)saveImageView:(UITapGestureRecognizer *)gesture
 {
     UIImageView * tapImage = (UIImageView *)[gesture view];
-     [self showMessageAlert:@"保存图片" image:tapImage.image];
+    [self showMessageAlert:@"保存图片" image:tapImage.image];
 }
 
 - (void)tapAction:(UITapGestureRecognizer *)tap

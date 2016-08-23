@@ -16,7 +16,7 @@
 -(void)showInvite;
 -(void)showState;
 -(void)showpicture;
--(void)showImageView:(UIImageView *)imageview;
+- (void)showPicture:(UITapGestureRecognizer*)gesture;
 
 @end
 
@@ -37,5 +37,6 @@
 @property (nonatomic, strong)UILabel *errerLabel;
 
 @property (nonatomic, strong)UILabel *imageErrer;
+
 
 @end

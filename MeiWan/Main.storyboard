@@ -2737,6 +2737,7 @@
                         <outlet property="balanceLabel" destination="Te9-uD-iIT" id="sok-s7-1nb"/>
                         <outlet property="guildCenter" destination="dl4-Mo-XJh" id="djT-Nk-eds"/>
                         <outlet property="imgwallet" destination="RNQ-9v-8D1" id="mlM-PW-U4w"/>
+                        <outlet property="mallCell" destination="8Ys-j1-4ii" id="OOX-iR-5jX"/>
                         <outlet property="mywallet" destination="9NV-zh-o4K" id="EI8-ap-dzc"/>
                         <outlet property="recordCenter" destination="15D-oc-hCa" id="d7N-0P-PEz"/>
                         <outlet property="searchFriend" destination="MoJ-Wb-Fxw" id="LOI-X7-xLk"/>
@@ -4435,17 +4436,17 @@
         <image name="yuanjiao-ju-xing.png" width="574" height="176"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="a2L-pk-feb"/>
-        <segue reference="CsZ-Ni-kPZ"/>
-        <segue reference="G1e-fu-sL2"/>
-        <segue reference="Cbe-BK-afe"/>
-        <segue reference="T0n-fg-bJC"/>
-        <segue reference="paO-aE-i4M"/>
-        <segue reference="765-rk-Vfn"/>
-        <segue reference="0pE-Uk-ivr"/>
-        <segue reference="S0y-tW-KPA"/>
+        <segue reference="4Bd-Xl-sEa"/>
         <segue reference="TgU-ON-UTc"/>
+        <segue reference="0pE-Uk-ivr"/>
+        <segue reference="a2L-pk-feb"/>
         <segue reference="GI5-Ug-Nan"/>
         <segue reference="lkr-Fs-pVo"/>
+        <segue reference="G1e-fu-sL2"/>
+        <segue reference="S0y-tW-KPA"/>
+        <segue reference="765-rk-Vfn"/>
+        <segue reference="Cbe-BK-afe"/>
+        <segue reference="paO-aE-i4M"/>
+        <segue reference="T0n-fg-bJC"/>
     </inferredMetricsTieBreakers>
 </document>

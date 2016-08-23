@@ -26,6 +26,7 @@
 #import "ChatViewController.h"
 
 #import "ShowImageViewController.h"
+#import "showScrollViewController.h"
 
 #import "ShowMessage.h"
 #import "SBJson.h"
@@ -205,6 +206,7 @@
         if (!_dynamicCell) {
             _dynamicCell = [[UserDynamicTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"dynamicCell"];
         }
+        _dynamicCell.delegate = self;
         return _dynamicCell;
     }else if (indexPath.section == 3){
         FootprintTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FootprintCell"];
@@ -220,6 +222,15 @@
         return cell;
     }
     return cell;
+}
+/**点击动态图片跳转*/
+-(void)showPicture:(UITapGestureRecognizer *)gesture
+{
+    showScrollViewController * showScrollView = [[showScrollViewController alloc]init];
+    showScrollView.title = @"展示图片";
+    showScrollView.ImageView = (UIImageView *)[gesture view];
+    showScrollView.imageArray = [self.dynamicCell.dynamicDatas objectForKey:@"statePhotos"];
+    [self.navigationController pushViewController:showScrollView animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -691,6 +702,5 @@
     ShowImageViewController * imageVC = [[ShowImageViewController alloc]init];
     imageVC.playInfo = self.playerInfo;
     [self.navigationController pushViewController:imageVC animated:YES];
-    
 }
 @end

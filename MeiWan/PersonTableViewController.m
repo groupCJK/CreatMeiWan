@@ -45,6 +45,7 @@
 {
     MBProgressHUD * HUD;
 }
+@property (weak, nonatomic) IBOutlet UITableViewCell *mallCell;
 /** 今日收益 */
 @property (weak, nonatomic) IBOutlet UILabel *todayMoneyUnion;
 
@@ -90,7 +91,9 @@
     [HUD showAnimated:YES whileExecutingBlock:^{
 
     }];
-
+    
+    //隐藏商城
+    self.mallCell.hidden = YES;
     
 }
 

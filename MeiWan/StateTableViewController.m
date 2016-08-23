@@ -71,15 +71,6 @@
     [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
     [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
     
-    // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
-    
-//    self.tableView.headerPullToRefreshText = @"下拉刷新";
-//    self.tableView.headerReleaseToRefreshText = @"松开马上刷新";
-//    self.tableView.headerRefreshingText = @"刷新中";
-//    self.tableView.footerPullToRefreshText = @"更多";
-//    self.tableView.footerReleaseToRefreshText = @"松开马上加载";
-//    self.tableView.footerRefreshingText = @"正在帮您加载中";
-    
 }
 //上拉刷新
 - (void)headerRereshing

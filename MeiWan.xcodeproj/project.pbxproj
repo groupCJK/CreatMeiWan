@@ -595,6 +595,7 @@
 		2B2D09621D532BC300139467 /* rscode.c in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D09581D532BC300139467 /* rscode.c */; };
 		2B2D09631D532BC300139467 /* split.c in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D095A1D532BC300139467 /* split.c */; };
 		2B2D09671D533CFB00139467 /* scanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D09661D533CFB00139467 /* scanViewController.m */; };
+		2B2F31A01D6C3E84005A6C23 /* showScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2F319F1D6C3E84005A6C23 /* showScrollViewController.m */; };
 		2B409A761D5C903100408431 /* gonghuiSearch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B409A751D5C903100408431 /* gonghuiSearch@2x.png */; };
 		2B409A791D5C9CCA00408431 /* findFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B409A781D5C9CCA00408431 /* findFriendViewController.m */; };
 		2B4698CC1D69513E0059B140 /* MallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B4698CB1D69513E0059B140 /* MallViewController.m */; };
@@ -1728,6 +1729,8 @@
 		2B2D095B1D532BC300139467 /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
 		2B2D09651D533CFB00139467 /* scanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scanViewController.h; sourceTree = "<group>"; };
 		2B2D09661D533CFB00139467 /* scanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = scanViewController.m; sourceTree = "<group>"; };
+		2B2F319E1D6C3E84005A6C23 /* showScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = showScrollViewController.h; sourceTree = "<group>"; };
+		2B2F319F1D6C3E84005A6C23 /* showScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = showScrollViewController.m; sourceTree = "<group>"; };
 		2B409A751D5C903100408431 /* gonghuiSearch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gonghuiSearch@2x.png"; path = "../gonghuiSearch@2x.png"; sourceTree = "<group>"; };
 		2B409A771D5C9CCA00408431 /* findFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = findFriendViewController.h; sourceTree = "<group>"; };
 		2B409A781D5C9CCA00408431 /* findFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = findFriendViewController.m; sourceTree = "<group>"; };
@@ -4258,6 +4261,8 @@
 			children = (
 				2B7D0EA21D6BF973009B4278 /* ShowImageViewController.h */,
 				2B7D0EA31D6BF973009B4278 /* ShowImageViewController.m */,
+				2B2F319E1D6C3E84005A6C23 /* showScrollViewController.h */,
+				2B2F319F1D6C3E84005A6C23 /* showScrollViewController.m */,
 			);
 			name = "展示图片";
 			sourceTree = "<group>";
@@ -5129,6 +5134,7 @@
 				2BE5E2661D1A40790031361C /* HotCountCellChange.m in Sources */,
 				04B138AE1BA07EAF00AAD93F /* RSADataVerifier.m in Sources */,
 				27587C611CF5861900B78F92 /* EaseMessageHelper+RemoveAfterRead.m in Sources */,
+				2B2F31A01D6C3E84005A6C23 /* showScrollViewController.m in Sources */,
 				1820A7001BF47F12000E4C06 /* DiscussView.m in Sources */,
 				27587C5F1CF5861900B78F92 /* PSTGridLayoutSection.m in Sources */,
 				27587C6C1CF5861A00B78F92 /* UIViewController+DismissKeyboard.m in Sources */,

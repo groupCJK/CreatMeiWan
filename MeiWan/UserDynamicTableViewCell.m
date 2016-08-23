@@ -14,9 +14,6 @@
 - (void)setDynamicDatas:(NSDictionary *)dynamicDatas{
     _dynamicDatas = dynamicDatas;
     
-    //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    //    _dynamicDatas = [defaults objectForKey:@"playerinfo"];
-    
     UIImageView *titleImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 6, 10, 14)];
     titleImage.image = [UIImage imageNamed:@"dongtai1"];
     [self addSubview:titleImage];
@@ -58,6 +55,9 @@
             self.imageErrer = imageErrer;
         }else{
             CGFloat kuan = ([UIScreen mainScreen].bounds.size.width-24-10-10)/3;
+            if (imagearrs.count==0) {
+                self.dynamicImage.hidden = YES;
+            }
             for (int i = 0; i < imagearrs.count; i++) {
                 UIImageView *dynamicImage = [[UIImageView alloc] initWithFrame:CGRectMake(24+i * (kuan+5), dynamicLabel.frame.origin.y+dynamicLabel.frame.size.height+8, kuan, kuan)];
                 NSURL *assessurl = imagearrs[i];
@@ -99,9 +99,7 @@
 }
 - (void)showPicture:(UITapGestureRecognizer*)gesture
 {
-    UIImageView * imageview = (UIImageView *)[gesture view];
-    [self.delegate showImageView:imageview];
-    [self.delegate showpicture];
+    [self.delegate showPicture:gesture];
 }
 
 - (void)awakeFromNib {

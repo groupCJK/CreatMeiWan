@@ -17,52 +17,69 @@
 }
 @property(nonatomic) CGRect rectOfInterest;
 @property(nonatomic,assign) UIImage * image;
+@property(nonatomic,strong) UIImage*tempImage;
 @end
 
 @implementation QRCodeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     UIImageView * imageView = [[UIImageView alloc]init];
     imageView.center = self.view.center;
     imageView.userInteractionEnabled = YES;
-    //公会会长名称
-    NSString * string = [NSString stringWithFormat:@"http://web.chuangjk.com:8083/promoter/index.html?unionId=%@",self.guildID];
     
-    CGFloat ImageSize;
-    if (IS_IPHONE_4_OR_LESS) {
-        imageView.bounds = CGRectMake(0, 0, 250, 250);
+    dispatch_queue_t mainQueue = dispatch_get_main_queue();
 
-        ImageSize = 250;
-    }else if (IS_IPHONE_5){
-        imageView.bounds = CGRectMake(0, 0, 250, 250);
+    dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
+    //获得 mianQueue 和 globalQueue。
+    dispatch_async(globalQueue, ^{
+        //去分线程执行某些操作。
+        //公会会长名称
+        NSString * string = [NSString stringWithFormat:@"http://web.chuangjk.com:8083/promoter/index.html?unionId=%@",self.guildID];
+        
+        CGFloat ImageSize;
+        if (IS_IPHONE_4_OR_LESS) {
+            imageView.bounds = CGRectMake(0, 0, 250, 250);
+            
+            ImageSize = 250;
+        }else if (IS_IPHONE_5){
+            imageView.bounds = CGRectMake(0, 0, 250, 250);
+            
+            ImageSize = 250;
+        }else if (IS_IPHONE_6){
+            imageView.bounds = CGRectMake(0, 0, 300, 300);
+            
+            ImageSize = 300;
+        }else{
+            imageView.bounds = CGRectMake(0, 0, 300, 300);
+            
+            ImageSize = 300;
+        }
+        
+        _tempImage=[QRCodeGenerator qrImageForString:string imageSize:ImageSize Topimg:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.headerURL]]]];
 
-        ImageSize = 250;
-    }else if (IS_IPHONE_6){
-        imageView.bounds = CGRectMake(0, 0, 300, 300);
+        dispatch_async(mainQueue, ^{
+            //切换回主线程刷新 UI。
+            imageView.image = _tempImage;
+            [self.view addSubview:imageView];
+            UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, imageView.frame.size.height+imageView.frame.origin.y+20, dtScreenWidth, 20)];
+            label.textAlignment = NSTextAlignmentCenter;
+            label.font = [UIFont systemFontOfSize:14.0];
+            label.text = @"长按分享到微信或QQ";
+            label.textColor = [UIColor grayColor];
+            [self.view addSubview:label];
 
-         ImageSize = 300;
-    }else{
-        imageView.bounds = CGRectMake(0, 0, 300, 300);
 
-        ImageSize = 300;
-    }
-    
-    UIImage*tempImage=[QRCodeGenerator qrImageForString:string imageSize:ImageSize Topimg:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.headerURL]]]];
-    imageView.image=tempImage;
-    [self.view addSubview:imageView];
+        });
+    });
+
     //长按手势
     UILongPressGestureRecognizer * longPressGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPressGesture:)];
     longPressGesture.minimumPressDuration = 0.5;
     [imageView addGestureRecognizer:longPressGesture];
     
 
-    UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, imageView.frame.size.height+imageView.frame.origin.y+20, dtScreenWidth, 20)];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.font = [UIFont systemFontOfSize:14.0];
-    label.text = @"长按分享到微信或QQ";
-    label.textColor = [UIColor grayColor];
-    [self.view addSubview:label];
     
 }
 - (void)longPressGesture:(UILongPressGestureRecognizer *)gesture
