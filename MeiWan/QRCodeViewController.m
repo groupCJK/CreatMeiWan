@@ -27,7 +27,7 @@
     imageView.center = self.view.center;
     imageView.userInteractionEnabled = YES;
     //公会会长名称
-    NSString * string = [NSString stringWithFormat:@"http://web.chuangjk.com/wx/peiwan-server/static/promoter/index.html?unionId=%@",self.guildID];
+    NSString * string = [NSString stringWithFormat:@"http://web.chuangjk.com:8083/promoter/index.html?unionId=%@",self.guildID];
     
     CGFloat ImageSize;
     if (IS_IPHONE_4_OR_LESS) {

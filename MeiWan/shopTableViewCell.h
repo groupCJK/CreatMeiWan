@@ -10,4 +10,9 @@
 
 @interface shopTableViewCell : UITableViewCell
 
+@property(nonatomic,strong)UIImageView * goodsImageView;
+@property(nonatomic,strong)UILabel * goodsTitleLabel;
+@property(nonatomic,strong)UILabel * goodsConnectLabel;
+@property(nonatomic,strong)UILabel * goodsPriceLabel;
+
 @end

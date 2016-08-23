@@ -80,7 +80,7 @@
     /**线上点歌-叫醒服务*/
     changePriceArray = @[@5,@10,@15,@20];
     /**视频聊天*/
-    VideoChatArray = @[@5,@10,@15,@20];
+    VideoChatArray = @[@39,@69,@99,@129,@159,@199];
     /**线下点歌*/
     downLineVoiceArray = @[@39,@69,@99,@129,@159,@199];
     
@@ -259,10 +259,10 @@
                                     UIButton * jiaoButton = [UIButton buttonWithType:UIButtonTypeCustom];
                                     jiaoButton.frame = CGRectMake(0, i*(Jiaoview.frame.size.height/priceArray.count), Jiaoview.frame.size.width, Jiaoview.frame.size.height/priceArray.count);
                                     if (i>level) {
-                                        [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／次 等级不足",priceArray[i]] forState:UIControlStateNormal];
+                                        [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／时 等级不足",priceArray[i]] forState:UIControlStateNormal];
                                         
                                     }else{
-                                        [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／次",priceArray[i]] forState:UIControlStateNormal];
+                                        [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／时",priceArray[i]] forState:UIControlStateNormal];
                                         
                                     }
                                     jiaoButton.backgroundColor = [UIColor colorWithRed:arc4random()%256/255.0 green:arc4random()%256/255.0 blue:arc4random()%256/255.0 alpha:1];
@@ -305,10 +305,10 @@
                                     UIButton * jiaoButton = [UIButton buttonWithType:UIButtonTypeCustom];
                                     jiaoButton.frame = CGRectMake(0, i*(Jiaoview.frame.size.height/priceArray.count), Jiaoview.frame.size.width, Jiaoview.frame.size.height/priceArray.count);
                                     if (i>level) {
-                                        [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／次 等级不足",priceArray[i]] forState:UIControlStateNormal];
+                                        [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／时 等级不足",priceArray[i]] forState:UIControlStateNormal];
                                         
                                     }else{
-                                        [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／次",priceArray[i]] forState:UIControlStateNormal];
+                                        [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／时",priceArray[i]] forState:UIControlStateNormal];
                                         
                                     }
                                     jiaoButton.backgroundColor = [UIColor colorWithRed:arc4random()%256/255.0 green:arc4random()%256/255.0 blue:arc4random()%256/255.0 alpha:1];
