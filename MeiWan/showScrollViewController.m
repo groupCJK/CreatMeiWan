@@ -32,7 +32,7 @@
     self.scrollerview.delegate=self;
     self.scrollerview.pagingEnabled = YES;
 
-    _imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, dtScreenWidth, dtScreenHeight)];
+    _imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, -30, dtScreenWidth, dtScreenHeight)];
     _imageView.image = self.ImageView.image;
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     self.imageView.clipsToBounds = YES;

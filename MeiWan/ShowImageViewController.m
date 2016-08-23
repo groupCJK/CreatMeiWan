@@ -19,7 +19,7 @@
     [super viewDidLoad];
 
     self.title = self.playInfo[@"nickname"];
-    self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, dtScreenWidth, dtScreenHeight)];
+    self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, -30, dtScreenWidth, dtScreenHeight)];
     [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.playInfo[@"headUrl"]] placeholderImage:[UIImage imageNamed:@""]];
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     self.imageView.clipsToBounds = YES;
