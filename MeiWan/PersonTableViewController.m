@@ -76,6 +76,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
     //设置标题 标题颜色 导航栏颜色
     self.title = @"个人";
     [self.navigationController.navigationBar setBarTintColor:[CorlorTransform colorWithHexString:@"#3f90a4"]];

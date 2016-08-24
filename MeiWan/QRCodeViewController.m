@@ -11,8 +11,10 @@
 #import "scanViewController.h"
 #import "creatAlbum.h"
 #import "UMSocial.h"
-@interface QRCodeViewController ()
+#import "MBProgressHUD.h"
+@interface QRCodeViewController ()<MBProgressHUDDelegate>
 {
+    MBProgressHUD * HUD;
     AVCaptureSession * session;//输入输出的中间桥梁
 }
 @property(nonatomic) CGRect rectOfInterest;
@@ -24,6 +26,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.delegate = self;
+    HUD.labelText = @"加载中";
     
     UIImageView * imageView = [[UIImageView alloc]init];
     imageView.center = self.view.center;
@@ -70,7 +76,7 @@
             label.textColor = [UIColor grayColor];
             [self.view addSubview:label];
 
-
+            [HUD hide:YES afterDelay:0.1];
         });
     });
 

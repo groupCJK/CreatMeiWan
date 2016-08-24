@@ -64,7 +64,6 @@
             NSMutableDictionary *json=[parser objectWithData:data];
             NSDictionary * entity  =[json objectForKey:@"entity"];
             level = [[entity objectForKey:@"level"] intValue];
-
             usertimeTags = [entity objectForKey:@"userTimeTags"];
             [self creatTableView];
         }else{
@@ -172,7 +171,7 @@
         if (!cell1) {
             cell1 = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         }
-        if (level+1<indexPath.row+1) {
+        if (level<indexPath.row) {
             cell1.textLabel.text = [NSString stringWithFormat:@"%@ 元／时 等级不足",priceArray[indexPath.row]];
             cell1.userInteractionEnabled = NO;
         }else{
@@ -354,7 +353,7 @@
     switch (indexpath.row) {
         case 0:
         {
-            if (sender.tag>1) {
+            if (sender.tag>level) {
                 [self showMessageAlert:@"级别不够"];
             }else{
                 Jiaoview.hidden = YES;
@@ -375,7 +374,7 @@
             break;
         case 1:
         {
-            if (sender.tag>0) {
+            if (sender.tag>level) {
                 [self showMessageAlert:@"级别不够"];
             }else{
                 Jiaoview.hidden = YES;
@@ -397,7 +396,7 @@
             break;
         case 3:
         {
-            if (sender.tag>0) {
+            if (sender.tag>level) {
                 [self showMessageAlert:@"级别不够"];
             }else{
                 Jiaoview.hidden = YES;
@@ -419,7 +418,7 @@
             break;
         case 5:
         {
-            if (sender.tag>1) {
+            if (sender.tag>level) {
                 [self showMessageAlert:@"级别不够"];
             }else{
                 Jiaoview.hidden = YES;

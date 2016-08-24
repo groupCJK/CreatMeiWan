@@ -20,6 +20,7 @@
 #import "SBJson.h"
 #import <MAMapKit/MAMapKit.h>
 
+
 @interface SaveUserInfoViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate,MBProgressHUDDelegate,MAMapViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *headImage;
 @property (weak, nonatomic) IBOutlet UITextField *nickName;
@@ -298,9 +299,10 @@ updatingLocation:(BOOL)updatingLocation
     MBProgressHUD * HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     HUD.delegate = self;
     self.mapview = nil;
+ 
     if (self.nickName.text.length > 0 && self.sex.text.length == 1 && self.birthday.text.length == 11 && self.isloadPicture) {
         self.myregistInfo.nickname = self.nickName.text;
-        [UserConnector register:self.myregistInfo.username password:self.myregistInfo.password verifyCode:self.myregistInfo.verifyCode nickname:self.myregistInfo.nickname gender:[[NSNumber alloc] initWithInt:self.myregistInfo.gender] year:[[NSNumber alloc] initWithInt:self.myregistInfo.year] month:[[NSNumber alloc] initWithInt:self.myregistInfo.month] day:[[NSNumber alloc] initWithInt:self.myregistInfo.day] headUrl:self.myregistInfo.headUrl city:self.city     district:self.sublocality receiver:^(NSData *data,NSError *error){
+        [UserConnector register:self.myregistInfo.username password:self.myregistInfo.password verifyCode:self.myregistInfo.verifyCode nickname:self.myregistInfo.nickname gender:[[NSNumber alloc] initWithInt:self.myregistInfo.gender] year:[[NSNumber alloc] initWithInt:self.myregistInfo.year] month:[[NSNumber alloc] initWithInt:self.myregistInfo.month] day:[[NSNumber alloc] initWithInt:self.myregistInfo.day] headUrl:self.myregistInfo.headUrl city:self.city     district:self.sublocality deviceType:@2 receiver:^(NSData *data,NSError *error){
             
             HUD.labelText = @"注册中";
             if (error) {
