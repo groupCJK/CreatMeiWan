@@ -40,13 +40,19 @@
     tableview.delegate = self;
     tableview.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:tableview];
+    [tableview addHeaderWithTarget:self action:@selector(headRefresh:)];
     [tableview addFooterWithTarget:self action:@selector(footRefresh:)];
     
     self.tableview = tableview;
 }
+- (void)headRefresh:(int)type
+{
+    _counts = 0;
+    [self findUnionsRank:_counts];
+}
 - (void)footRefresh:(int)type
 {
-    _counts+=3;
+    _counts+=10;
     [self findUnionsRank:_counts];
 }
 #pragma marl----
@@ -91,7 +97,8 @@
 {
     
     if (type==0) {
-        [UserConnector findUnionsRank:type limit:3 receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        [self.rankArray removeAllObjects];
+        [UserConnector findUnionsRank:type limit:10 receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
             if (error) {
                 [ShowMessage showMessage:@"服务器无法响应"];
             }else{
@@ -104,6 +111,7 @@
                     if ( self.rankArray.count == testArray.count) {
                         [self.tableview reloadData];
                     }
+                    [self.tableview.header endRefreshing];
                 }else if (status==1) {
                     [PersistenceManager setLoginSession:@""];
                     LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
@@ -117,7 +125,7 @@
         }];
 
     }else{
-        [UserConnector findUnionsRank:type limit:3 receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        [UserConnector findUnionsRank:type limit:10 receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
             if (error) {
                 [ShowMessage showMessage:@"服务器无法响应"];
             }else{
