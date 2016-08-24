@@ -14,10 +14,12 @@
 #import "ChatViewController.h"
 #import "ShowMessage.h"
 #import "LoginViewController.h"
+#import "MBProgressHUD.h"
 
-@interface findFriendViewController ()<UITableViewDelegate,UITableViewDataSource,findPeiWanDelegate>
+@interface findFriendViewController ()<UITableViewDelegate,UITableViewDataSource,findPeiWanDelegate,MBProgressHUDDelegate>
 {
     findPeiWanCell * findcell;
+    MBProgressHUD * HUD;
 }
 
 @property(nonatomic,strong)UITextField * tf;
@@ -54,6 +56,11 @@
 - (void)searchbuttonClick:(UIButton *)sender
 {
     [self.tf resignFirstResponder];
+    
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.delegate = self;
+    HUD.labelText = @"加载中";
+    
     if (self.tf.text.length>0) {
         NSString *session = [PersistenceManager getLoginSession];
         [UserConnector findPeiwanById:session userId:[NSNumber numberWithInteger:[self.tf.text integerValue]] receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
@@ -75,7 +82,7 @@
                         [self findMyFriendList];
                         [self creatTableView];
                     }
-                    
+                    [HUD hide:YES afterDelay:0.1];
                 }else if (status==1){
                     
                 }else{

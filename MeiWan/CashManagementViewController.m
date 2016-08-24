@@ -12,10 +12,12 @@
 #import "ShowMessage.h"
 #import "SBJsonParser.h"
 #import "OrderLiseCell.h"
+#import "MBProgressHUD.h"
 
-@interface CashManagementViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface CashManagementViewController ()<UITableViewDelegate,UITableViewDataSource,MBProgressHUDDelegate>
 {
     UITableView * tableview;
+    MBProgressHUD * HUD;
 }
 @property(nonatomic,strong)UITextField * tf;
 @property(nonatomic,strong)NSArray * listArray;
@@ -26,7 +28,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.delegate = self;
+    HUD.labelText = @"加载中";
+    
     [self init_UI];
     [self findMyUnionEarnNetWorking];
     // Do any additional setup after loading the view.
@@ -74,6 +80,8 @@
     UIView * line1 = [[UIView alloc]initWithFrame:CGRectMake(0, tableview.frame.origin.y-1, dtScreenWidth, 1)];
     line1.backgroundColor = [UIColor grayColor];
     [self.view addSubview:line1];
+    [HUD hide:YES afterDelay:1];
+
     
 }
 
@@ -196,7 +204,6 @@
             NSDictionary * json = [parser objectWithData:data];
             int status = [json[@"status"] intValue];
             if (status == 0) {
-
                 self.listArray = json[@"entity"];
                 [tableview reloadData];
             }else if (status == 1){

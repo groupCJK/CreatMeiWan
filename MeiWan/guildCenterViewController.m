@@ -26,9 +26,12 @@
 #import "ShowMessage.h"
 #import "LoginViewController.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "MBProgressHUD.h"
 
-
-@interface guildCenterViewController ()<UITableViewDelegate,UITableViewDataSource,greatGuildDelegate>
+@interface guildCenterViewController ()<UITableViewDelegate,UITableViewDataSource,greatGuildDelegate,MBProgressHUDDelegate>
+{
+    MBProgressHUD * HUD;
+}
 
 @property (nonatomic, strong)UIView *createGuild;
 
@@ -59,6 +62,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.delegate = self;
+    HUD.labelText = @"加载中";
     
     _dataUnionImage = @[@"pw_qr",@"pw_group",@"pw_rank",@"qianbao"];
     
@@ -158,6 +164,7 @@
             self.guildArray = json[@"entity"];
             self.guildCenterTableView.tableHeaderView = self.guildCenter;
             [self.guildCenterTableView reloadData];
+            [HUD hide:YES afterDelay:0.1];
         }
     }];
 }
@@ -166,7 +173,7 @@
 
 - (UITableView *)guildCenterTableView{
     if (!_guildCenterTableView) {
-        _guildCenterTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, dtScreenWidth, dtScreenHeight) style:UITableViewStylePlain];
+        _guildCenterTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, dtScreenWidth, dtScreenHeight) style:UITableViewStylePlain];
         _guildCenterTableView.dataSource = self;
         _guildCenterTableView.delegate = self;
         _guildCenterTableView.tableFooterView = [[UIView alloc] init];
@@ -417,6 +424,7 @@
         textview.frame = CGRectMake(20, createGuildButton.frame.origin.y+createGuildButton.frame.size.height+20, dtScreenWidth-40, dtScreenHeight-(createGuildButton.frame.origin.y+createGuildButton.frame.size.height+20));
         [_createGuild addSubview:textview];
     }
+    [HUD hide:YES afterDelay:0.1];
     return _createGuild;
 }
 

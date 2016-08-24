@@ -12,11 +12,13 @@
 #import "ShowMessage.h"
 #import "SBJsonParser.h"
 #import "LoginViewController.h"
+#import "MJRefresh.h"
 
 @interface GuildRankListViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)NSMutableArray * rankArray;
 @property(nonatomic,strong)UITableView * tableview;
+@property(nonatomic,assign)int counts;
 
 @end
 
@@ -27,7 +29,8 @@
 
     // Do any additional setup after loading the view.
     [self init_UI];
-    [self findUnionsRank];
+    _counts = 0;
+    [self findUnionsRank:_counts];
 }
 
 -(void)init_UI
@@ -37,8 +40,14 @@
     tableview.delegate = self;
     tableview.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:tableview];
+    [tableview addFooterWithTarget:self action:@selector(footRefresh:)];
     
     self.tableview = tableview;
+}
+- (void)footRefresh:(int)type
+{
+    _counts+=3;
+    [self findUnionsRank:_counts];
 }
 #pragma marl----
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -78,31 +87,64 @@
 {
     
 }
-- (void)findUnionsRank
+- (void)findUnionsRank:(int )type
 {
-    [UserConnector findUnionsRank:0 limit:50 receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
-        if (error) {
-            [ShowMessage showMessage:@"服务器无法响应"];
-        }else{
-            SBJsonParser*parser=[[SBJsonParser alloc]init];
-            NSDictionary * json = [parser objectWithData:data];
-            NSArray * testArray = json[@"entity"];
-            int status = [json[@"status"] intValue];
-            if (status==0) {
-                self.rankArray = json[@"entity"];
-                if ( self.rankArray.count == testArray.count) {
-                    [self.tableview reloadData];
-                }
-            }else if (status==1) {
-                [PersistenceManager setLoginSession:@""];
-                LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
-                lv.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:lv animated:YES];
-
+    
+    if (type==0) {
+        [UserConnector findUnionsRank:type limit:3 receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+            if (error) {
+                [ShowMessage showMessage:@"服务器无法响应"];
             }else{
-                
+                SBJsonParser*parser=[[SBJsonParser alloc]init];
+                NSDictionary * json = [parser objectWithData:data];
+                NSArray * testArray = json[@"entity"];
+                int status = [json[@"status"] intValue];
+                if (status==0) {
+                    self.rankArray = json[@"entity"];
+                    if ( self.rankArray.count == testArray.count) {
+                        [self.tableview reloadData];
+                    }
+                }else if (status==1) {
+                    [PersistenceManager setLoginSession:@""];
+                    LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
+                    lv.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:lv animated:YES];
+                    
+                }else{
+                    
+                }
             }
-        }
-    }];
+        }];
+
+    }else{
+        [UserConnector findUnionsRank:type limit:3 receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+            if (error) {
+                [ShowMessage showMessage:@"服务器无法响应"];
+            }else{
+                SBJsonParser*parser=[[SBJsonParser alloc]init];
+                NSDictionary * json = [parser objectWithData:data];
+
+                int status = [json[@"status"] intValue];
+                if (status==0) {
+
+                    [json[@"entity"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        [self.rankArray addObject:obj];
+                        [self.tableview reloadData];
+                    }];
+                    [self.tableview.footer endRefreshing];
+                    
+                }else if (status==1) {
+                    [PersistenceManager setLoginSession:@""];
+                    LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
+                    lv.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:lv animated:YES];
+                    
+                }else{
+                    
+                }
+            }
+        }];
+
+    }
 }
 @end

@@ -29,7 +29,7 @@
     
     HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     HUD.delegate = self;
-    HUD.labelText = @"加载中";
+    HUD.labelText = @"本地加载,不消耗流量";
     
     UIImageView * imageView = [[UIImageView alloc]init];
     imageView.center = self.view.center;
@@ -65,6 +65,10 @@
         
         _tempImage=[QRCodeGenerator qrImageForString:string imageSize:ImageSize Topimg:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.headerURL]]]];
 
+        NSUserDefaults * userdefauts = [NSUserDefaults standardUserDefaults];
+        [userdefauts setObject:_tempImage forKey:@"erweimaImage"];
+        [userdefauts synchronize];
+        
         dispatch_async(mainQueue, ^{
             //切换回主线程刷新 UI。
             imageView.image = _tempImage;
