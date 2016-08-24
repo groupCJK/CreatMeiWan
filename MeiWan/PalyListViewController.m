@@ -26,7 +26,7 @@
 
 #define width_screen [UIScreen mainScreen].bounds.size.width
 
-@interface PalyListViewController ()<playerviewdelegate,superviewdelegate,MAMapViewDelegate,MBProgressHUDDelegate,CLLocationManagerDelegate,EaseMessageViewControllerDelegate,IChatManagerDelegate>
+@interface PalyListViewController ()<playerviewdelegate,superviewdelegate,MBProgressHUDDelegate,CLLocationManagerDelegate,EaseMessageViewControllerDelegate,IChatManagerDelegate>
 {
     MBProgressHUD * HUD;
     NSArray * titlelabel;
@@ -51,7 +51,6 @@
 @property (nonatomic,assign) float heightFeven;
 @property (nonatomic,strong) NSMutableDictionary *searchDic;
 @property (nonatomic,assign) int infoCount;
-@property (nonatomic,strong) MAMapView *mapview;
 
 
 @end
@@ -59,38 +58,35 @@
 @implementation PalyListViewController
 
 #pragma mark - mapView Delegate
--(void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    if(updatingLocation) {
-        
-        //取出当前位置的坐标
-        NSMutableDictionary *userInfoDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:userLocation.coordinate.latitude],@"latitude",[NSNumber numberWithDouble:userLocation.coordinate.longitude],@"longitude",nil];
-        NSString *session = [PersistenceManager getLoginSession];
-        [UserConnector update:session parameters:userInfoDic receiver:^(NSData *data, NSError *error){
-            if (error) {
-                if(!isTest){
-                    [ShowMessage showMessage:@"服务器未响应"];
-                }
+    //取出当前位置的坐标
+    
+    NSMutableDictionary *userInfoDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:newLocation.coordinate.latitude],@"latitude",[NSNumber numberWithDouble:newLocation.coordinate.longitude],@"longitude",nil];
+    NSString *session = [PersistenceManager getLoginSession];
+    [UserConnector update:session parameters:userInfoDic receiver:^(NSData *data, NSError *error){
+        if (error) {
+            if(!isTest){
+                [ShowMessage showMessage:@"服务器未响应"];
+            }
+        }else{
+            SBJsonParser*parser=[[SBJsonParser alloc]init];
+            NSMutableDictionary *json=[parser objectWithData:data];
+            //                NSLog(@"%@",json);
+            int status = [[json objectForKey:@"status"]intValue];
+            if (status == 0) {
+            }else if(status == 1){
+                
             }else{
-                SBJsonParser*parser=[[SBJsonParser alloc]init];
-                NSMutableDictionary *json=[parser objectWithData:data];
-                //                NSLog(@"%@",json);
-                int status = [[json objectForKey:@"status"]intValue];
-                if (status == 0) {
-                    
-                }else if(status == 1){
-                    
-                }else{
-                    
-                }
                 
             }
             
-        }];
-        //系统会一直更新数据，直到选择停止更新，因为我们只需要获得一次经纬度即可，所以获取之后就停止更新
+        }
         
-    }
-    
+    }];
+    [manager stopUpdatingLocation];
+
 }
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
@@ -117,15 +113,23 @@
     }
 }
 - (void)initializeLocationService {
-    //创建地图视图
-    self.mapview = [[MAMapView alloc]init];
-    self.mapview.delegate = self;
-    self.mapview.showsUserLocation = YES;
+    // 初始化定位管理器
+    _locationManager = [[CLLocationManager alloc] init];
+    // 设置代理
+    _locationManager.delegate = self;
+    // 设置定位精确度到米
+    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    // 设置过滤器为无
+    _locationManager.distanceFilter = kCLDistanceFilterNone;
+    // 开始定位
+    [_locationManager startUpdatingLocation];
 }
 - (void)viewDidLoad {
     
     [super viewDidLoad];
     [self didReceiveMessage:nil];
+
+    
     [self initializeLocationService];
     
     tagIndexNumber = [[NSNumber alloc]init];
