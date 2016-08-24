@@ -15,11 +15,12 @@
 #import "setting.h"
 #import "CorlorTransform.h"
 #import "animationCell.h"
+#import "MBProgressHUD.h"
 
 #define Width [UIScreen mainScreen].bounds.size.width
 #define Height [UIScreen mainScreen].bounds.size.height
 
-@interface SettingPlayWithUIViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface SettingPlayWithUIViewController ()<UITableViewDelegate,UITableViewDataSource,MBProgressHUDDelegate>
 {
     NSArray * priceArray;
     /**线上点歌-叫醒服务*/
@@ -46,6 +47,9 @@
     NSMutableArray * usertimeTags;
     int level;
     UIView * Jiaoview;
+    
+    MBProgressHUD * HUD;
+    
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *showText;
@@ -55,7 +59,13 @@
 @implementation SettingPlayWithUIViewController
 -(void)viewDidLoad
 {
+    
     [super viewDidLoad];
+    
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.delegate = self;
+    HUD.labelText = @"加载中";
+    
     usertimeTags = [[NSMutableArray alloc]initWithCapacity:0];
     NSString *session = [PersistenceManager getLoginSession];
     [UserConnector findPeiwanById:session userId:[NSNumber numberWithInteger:self.userInfo.userId]receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
@@ -66,6 +76,7 @@
             level = [[entity objectForKey:@"level"] intValue];
             usertimeTags = [entity objectForKey:@"userTimeTags"];
             [self creatTableView];
+            [HUD hide:YES afterDelay:0.1];
         }else{
             
             [self.navigationController popViewControllerAnimated:YES];
