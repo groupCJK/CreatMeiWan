@@ -18,12 +18,15 @@
 #import "PlagerinfoViewController.h"
 #import "ButtonLable.h"
 #import "LoginViewController.h"
+#import "EMMessage.h"
+
 @interface DiscussTableViewController ()<UITextFieldDelegate,DiscussViewDelegate,DiscussCellDelegate>
 @property (nonatomic,strong) NSArray *tableData;
 @property (nonatomic,strong) UITableViewCell *prototypeCell;
 @property (nonatomic,strong) UIView * contentView;
 @property (nonatomic,strong) UITextField *inputField;
 @property (nonatomic,strong) UITapGestureRecognizer *tap;
+@property (nonatomic,strong) NSDictionary * LZDictionary;
 //@property (nonatomic,strong) DiscussView * discussView;
 @end
 
@@ -151,6 +154,8 @@
 #pragma mark - TextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [self.inputField resignFirstResponder];
+    _LZDictionary = [NSDictionary dictionaryWithDictionary:self.maf.moveActionModel.userInfo];
+
     if (self.inputField.text.length == 0) {
         [ShowMessage showMessage:@"输入不能为空"];
     }else{
@@ -171,6 +176,22 @@
                         int count = discussView.discuss.lyTitleLable.text.intValue;
                         discussView.discuss.lyTitleLable.text = [NSString stringWithFormat:@"%d",count + 1];
                         [self.delegate countDidChange:count+1 atIndexPathRow:self.indexPathrow];
+                        
+                        /**
+                         
+                         发送评论成功。要向被评论者，发送消息通知动态中被评论了
+                         
+                         */
+                        EMChatText *txtChat = [[EMChatText alloc] initWithText:[NSString stringWithFormat:@"评论了您:'%@'",content]];
+                        EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithChatObject:txtChat];
+                        EMMessage *message = [[EMMessage alloc] initWithReceiver:[NSString stringWithFormat:@"product_%@",_LZDictionary[@"id"]] bodies:@[body]];
+                        message.messageType = eMessageTypeChat; // 设置为单聊消息
+                        
+                        [[EaseMob sharedInstance].chatManager asyncSendMessage:message
+                                                                      progress:nil];
+
+                        
+                        
                     }else if(status == 1){
                         [PersistenceManager setLoginSession:@""];
                         LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
@@ -202,6 +223,34 @@
                         int count = discussView.discuss.lyTitleLable.text.intValue;
                         discussView.discuss.lyTitleLable.text = [NSString stringWithFormat:@"%d",count + 1];
                         [self.delegate countDidChange:count+1 atIndexPathRow:self.indexPathrow];
+                        
+                        
+                        /**
+                         
+                         回复评论同上进行通知。
+                         发送给楼主一条信息，发送给评论者一条信息
+                         
+                         */
+                        NSDictionary * fromUserDic = [self.tableData[self.inputField.tag]objectForKey:@"fromUser"];
+
+                        EMChatText *txtChat = [[EMChatText alloc] initWithText:[NSString stringWithFormat:@"回复了%@:'%@'",fromUserDic[@"nickname"],content]];
+                        EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithChatObject:txtChat];
+                        EMMessage *message = [[EMMessage alloc] initWithReceiver:[NSString stringWithFormat:@"product_%@",_LZDictionary[@"id"]] bodies:@[body]];
+                        message.messageType = eMessageTypeChat; // 设置为单聊消息
+                        
+                        [[EaseMob sharedInstance].chatManager asyncSendMessage:message
+                                                                      progress:nil];
+                        
+                
+
+                        EMChatText *txtChat2 = [[EMChatText alloc] initWithText:[NSString stringWithFormat:@"回复:'%@'",content]];
+                        EMTextMessageBody *body2 = [[EMTextMessageBody alloc] initWithChatObject:txtChat2];
+                        EMMessage *message2 = [[EMMessage alloc] initWithReceiver:[NSString stringWithFormat:@"product_%@",fromUserDic[@"id"]] bodies:@[body2]];
+                        message2.messageType = eMessageTypeChat; // 设置为单聊消息
+                        
+                        [[EaseMob sharedInstance].chatManager asyncSendMessage:message2
+                                                                      progress:nil];
+                        
                     }else if(status == 1){
                         [PersistenceManager setLoginSession:@""];
                         LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
