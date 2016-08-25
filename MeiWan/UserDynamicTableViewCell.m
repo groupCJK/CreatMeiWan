@@ -60,7 +60,7 @@
             }
             for (int i = 0; i < imagearrs.count; i++) {
                 UIImageView *dynamicImage = [[UIImageView alloc] initWithFrame:CGRectMake(24+i * (kuan+5), dynamicLabel.frame.origin.y+dynamicLabel.frame.size.height+8, kuan, kuan)];
-                NSURL *assessurl = imagearrs[i];
+                NSURL *assessurl = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",imagearrs[i]]];
                 [dynamicImage setImageWithURL:assessurl];
                 dynamicImage.contentMode = UIViewContentModeScaleAspectFill;
                 dynamicImage.clipsToBounds = YES;

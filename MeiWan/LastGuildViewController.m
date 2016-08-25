@@ -99,7 +99,7 @@
         [_guildCenter addSubview:guildInfo];
         
         UIImageView *guildHeadImage = [[UIImageView alloc]initWithFrame:CGRectMake((100-60)/2, 20, 60, 60)];
-        NSURL *url = [NSURL URLWithString:[self.dictionary objectForKey:@"headUrl"]];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",[self.dictionary objectForKey:@"headUrl"]]];
         [guildHeadImage setImageWithURL:url];
         guildHeadImage.layer.masksToBounds = YES;
         guildHeadImage.layer.cornerRadius = 30.0f;

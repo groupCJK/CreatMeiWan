@@ -113,6 +113,8 @@
             [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
         } onQueue:nil];
     }
+
+    
 }
 - (void)initializeLocationService {
     // 初始化定位管理器
@@ -134,13 +136,19 @@
     
     [self initializeLocationService];
     
+    UIApplication * app = [UIApplication sharedApplication];
+    //获得未读信息数量
+    NSInteger badgeNumber = [[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase];
+    app.applicationIconBadgeNumber = badgeNumber;
+
+    
     tagIndexNumber = [[NSNumber alloc]init];
     tagIndexNumber = nil;
     titlelabel = @[@"线上点歌",@"视屏聊天",@"聚餐",@"线下K歌",@"夜店达人",@"叫醒服务",@"影伴",@"运动健身",@"LOL",@"全部"];
     imageArray =  @[@"sing",@"video-chat",@"dining",@"sing-expert",@"go-nightclubbing",@"clock",@"shadow-with",@"sports",@"lol",@"all"];
     [self loginHuanxin];
     
-    self.infoCount = 10;
+    self.infoCount = 6;
     self.playerviews = [NSMutableArray array];
     self.myRandNumber = [[RandNumber alloc]init];
     self.searchDic = [NSMutableDictionary dictionary];
@@ -368,7 +376,6 @@
     [super viewWillAppear:YES];
     
     self.tabBarController.tabBar.hidden = NO;
-    
     NSArray *items = self.tabBarController.tabBar.items;
     UITabBarItem *chatItem = items[3];
     
@@ -634,7 +641,6 @@
     if (i==1) {
         iconlabel.text = [NSString stringWithFormat:@"%@",titlelabel[i-1]];
         iconImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageArray[i-1]]];
-        
     }else if (i==2){
         iconlabel.text = [NSString stringWithFormat:@"%@",titlelabel[i-1]];
         iconImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageArray[i-1]]];
@@ -748,7 +754,6 @@
         chatItem.badgeValue = [NSString stringWithFormat:@"%lu", (unsigned long)[[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase]];
         /**震动提示,当收到消息时震动*/
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-
         /**本地通知，程序进入后台时调用，彻底死掉时使用的是远程推送*/
         UILocalNotification *notification = [[UILocalNotification alloc] init];
         notification.fireDate=[NSDate dateWithTimeIntervalSinceNow:0.1];

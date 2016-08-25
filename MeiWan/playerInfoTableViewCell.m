@@ -16,7 +16,7 @@
     _playerInfo = playerInfo;
     
     UIImageView *head = [[UIImageView alloc] initWithFrame:CGRectMake(15, 10, 50, 50)];
-    NSURL *headUrl = [NSURL URLWithString:[_playerInfo objectForKey:@"headUrl"]];
+    NSURL *headUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",[_playerInfo objectForKey:@"headUrl"]]];
     [head setImageWithURL:headUrl placeholderImage:nil];
     head.layer.masksToBounds = YES;
     head.layer.cornerRadius = 25.f;

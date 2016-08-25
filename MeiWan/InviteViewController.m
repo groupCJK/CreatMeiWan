@@ -79,7 +79,7 @@
     
     NSLog(@"---------------------------%@",_playerInfo);
     self.title = [NSString stringWithFormat:@"邀请%@",[self.playerInfo objectForKey:@"nickname"]];
-    NSString * urlstr = [self.playerInfo objectForKey:@"headUrl"];
+    NSString * urlstr = [NSString stringWithFormat:@"%@!1",[self.playerInfo objectForKey:@"headUrl"]];
     NSURL *headUrl = [NSURL URLWithString:urlstr];
     [self.headig setImageWithURL:headUrl];
     self.playTime = 1;

@@ -15,7 +15,7 @@
 
 -(void)setPlayerInfoDic:(NSDictionary *)playerInfoDic{
     _playerInfoDic = playerInfoDic;
-    NSURL *headUrl = [NSURL URLWithString:[playerInfoDic objectForKey:@"headUrl"]];
+    NSURL *headUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",[playerInfoDic objectForKey:@"headUrl"]]];
     [self.head setImageWithURL:headUrl placeholderImage:nil];
     
     long myid = [[playerInfoDic objectForKey:@"id"]longValue];
@@ -34,27 +34,27 @@
     
     if (assess.count == 1) {
         NSDictionary *assess1Dic = assess[0];
-        NSURL *assess1url = [NSURL URLWithString:[assess1Dic objectForKey:@"url"]];
+        NSURL *assess1url = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",[assess1Dic objectForKey:@"url"]]];
         //NSLog(@"%@",[assess1Dic objectForKey:@"url"]);
         [self.labImage3 setImageWithURL:assess1url];
     }else if(assess.count == 2){
         NSDictionary *assess1Dic = assess[0];
-        NSURL *assess1url = [NSURL URLWithString:[assess1Dic objectForKey:@"url"]];
+        NSURL *assess1url = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",[assess1Dic objectForKey:@"url"]]];
         // NSLog(@"%@",[assess1Dic objectForKey:@"url"]);
         [self.labImage3 setImageWithURL:assess1url];
         NSDictionary *assess2Dic = assess[1];
-        NSURL *assess2url = [NSURL URLWithString:[assess2Dic objectForKey:@"url"]];
+        NSURL *assess2url = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",[assess2Dic objectForKey:@"url"]]];
         [self.labImage1 setImageWithURL:assess2url];
     }else if(assess.count >= 3){
         NSDictionary *assess1Dic = assess[0];
-        NSURL *assess1url = [NSURL URLWithString:[assess1Dic objectForKey:@"url"]];
+        NSURL *assess1url = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",[assess1Dic objectForKey:@"url"]]];
         // NSLog(@"%@",[assess1Dic objectForKey:@"url"]);
         [self.labImage3 setImageWithURL:assess1url];
         NSDictionary *assess2Dic = assess[1];
-        NSURL *assess2url = [NSURL URLWithString:[assess2Dic objectForKey:@"url"]];
+        NSURL *assess2url = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",[assess2Dic objectForKey:@"url"]]];
         [self.labImage1 setImageWithURL:assess2url];
         NSDictionary *assess3Dic = assess[2];
-        NSURL *assess3url = [NSURL URLWithString:[assess3Dic objectForKey:@"url"]];
+        NSURL *assess3url = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",[assess3Dic objectForKey:@"url"]]];
         [self.labImage2 setImageWithURL:assess3url];
     }else{
         
@@ -107,26 +107,29 @@
             if ([images[0] isKindOfClass:[NSNull class]] && [images[1] isKindOfClass:[NSNull class]] && [images[2] isKindOfClass:[NSNull class]]){
                 self.noticeUser.text = @"未发布图片";
             }else if (![images[0] isKindOfClass:[NSNull class]] && [images[1] isKindOfClass:[NSNull class]] && [images[2] isKindOfClass:[NSNull class]]){
-                NSURL *url1 = images[0];
+                
+                NSURL *url1 = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",images[0]]];
                 [self.stateImage1 setImageWithURL:url1];
             }else if (![images[0] isKindOfClass:[NSNull class]] && ![images[1] isKindOfClass:[NSNull class]] && [images[2] isKindOfClass:[NSNull class]]){
-                NSURL *url1 = images[0];
+                
+                NSURL *url1 = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",images[0]]];
                 [self.stateImage1 setImageWithURL:url1];
-                NSURL *url2 = images[1];
+                NSURL *url2 = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",images[1]]];
                 [self.stateImage2 setImageWithURL:url2];
             }else if (![images[0] isKindOfClass:[NSNull class]] && ![images[0] isKindOfClass:[NSNull class]] && ![images[0] isKindOfClass:[NSNull class]]){
-                NSURL *url1 = images[0];
+                
+                NSURL *url1 = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",images[0]]];
                 [self.stateImage1 setImageWithURL:url1];
-                NSURL *url2 = images[1];
+                NSURL *url2 = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",images[1]]];
                 [self.stateImage2 setImageWithURL:url2];
-                NSURL *url3 = images[2];
+                NSURL *url3 = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",images[2]]];
                 [self.stateImage3 setImageWithURL:url3];
                 
             }else{
                 
             }
         }else if (images.count == 1){
-            NSURL *url1 = images[0];
+            NSURL *url1 = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",images[0]]];
             [self.stateImage1 setImageWithURL:url1];
         }
         

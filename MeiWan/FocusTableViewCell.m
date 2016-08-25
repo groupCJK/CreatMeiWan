@@ -17,7 +17,7 @@
     _focusDic = focusDic;
     
     UIImageView *headImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 50, 50)];
-    NSURL *headUrl = [NSURL URLWithString:[focusDic objectForKey:@"headUrl"]];
+    NSURL *headUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",[focusDic objectForKey:@"headUrl"]]];
     [headImage setImageWithURL:headUrl placeholderImage:nil];
     headImage.layer.masksToBounds = YES;
     headImage.layer.cornerRadius = 25.0f;

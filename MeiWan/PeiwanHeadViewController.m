@@ -26,7 +26,7 @@
     [self.scrollerview addSubview:self.imageView];
     [self.view addSubview:self.scrollerview];
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    NSURL *headUrl = [NSURL URLWithString:[self.peiwanInfoDic objectForKey:@"headUrl"]];
+    NSURL *headUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",[self.peiwanInfoDic objectForKey:@"headUrl"]]];
     [self.imageView setImageWithURL:headUrl placeholderImage:nil];
     self.imageView.userInteractionEnabled = YES;
     //放大倍数

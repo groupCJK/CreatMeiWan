@@ -3033,7 +3033,7 @@
                                     <action selector="phoneBeginEditing:" destination="L3Y-GO-ZP2" eventType="editingDidBegin" id="wed-Nu-Xh9"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="素颜照" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t6D-5k-Jzb">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="全身照" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t6D-5k-Jzb">
                                 <rect key="frame" x="27" y="349" width="56" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="4EE-WV-TgS"/>

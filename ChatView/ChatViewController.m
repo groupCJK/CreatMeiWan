@@ -28,7 +28,6 @@
     UIMenuItem *_transpondMenuItem;
     
     UIMenuItem *_revokeMenuItem;
-    
     NSRunLoop *_runLoop;
     NSTimer *_timer;
     UIAlertView *_textReadAlert;
@@ -56,6 +55,7 @@
     //获得未读信息数量
     NSInteger badgeNumber = [[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase];
     app.applicationIconBadgeNumber = badgeNumber;
+    
     self.tabBarController.tabBar.hidden = YES;
     
     // Do any additional setup after loading the view.

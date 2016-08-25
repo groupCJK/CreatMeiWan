@@ -75,6 +75,9 @@
             NSMutableDictionary *json=[parser objectWithData:data];
             NSDictionary * entity  =[json objectForKey:@"entity"];
             level = [[entity objectForKey:@"level"] intValue];
+            if (level==0) {
+                level = 1;
+            }
             usertimeTags = [entity objectForKey:@"userTimeTags"];
             [self creatTableView];
             [HUD hide:YES afterDelay:0.1];
@@ -191,7 +194,7 @@
         if (!cell1) {
             cell1 = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         }
-        if (level<indexPath.row) {
+        if (level<indexPath.row+1) {
             cell1.textLabel.text = [NSString stringWithFormat:@"%@ 元／时 等级不足",priceArray[indexPath.row]];
             cell1.userInteractionEnabled = NO;
         }else{
@@ -238,6 +241,7 @@
                     [self animationView:cell index:indexPath];
                     [usertimeTags removeLastObject];
                 }else{
+                    
                     self.backGroundView.hidden = NO;
                     
                     if (usertimeTags.count>=3) {
@@ -256,7 +260,7 @@
                                 for (int i = 0; i<priceArray.count; i++) {
                                     UIButton * jiaoButton = [UIButton buttonWithType:UIButtonTypeCustom];
                                     jiaoButton.frame = CGRectMake(0, i*(Jiaoview.frame.size.height/priceArray.count), Jiaoview.frame.size.width, Jiaoview.frame.size.height/priceArray.count);
-                                    if (i>level) {
+                                    if (i+1>level) {
                                         [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／次 等级不足",priceArray[i]] forState:UIControlStateNormal];
 
                                     }else{
@@ -280,7 +284,7 @@
                                 for (int i = 0; i<VideoChatArray.count; i++) {
                                     UIButton * jiaoButton = [UIButton buttonWithType:UIButtonTypeCustom];
                                     jiaoButton.frame = CGRectMake(0, i*(Jiaoview.frame.size.height/priceArray.count), Jiaoview.frame.size.width, Jiaoview.frame.size.height/priceArray.count);
-                                    if (i>level) {
+                                    if (i+1>level) {
                                         [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／时 等级不足",priceArray[i]] forState:UIControlStateNormal];
                                         
                                     }else{
@@ -303,7 +307,7 @@
                                 for (int i = 0; i<4; i++) {
                                     UIButton * jiaoButton = [UIButton buttonWithType:UIButtonTypeCustom];
                                     jiaoButton.frame = CGRectMake(0, i*(Jiaoview.frame.size.height/4), Jiaoview.frame.size.width, Jiaoview.frame.size.height/4);
-                                    if (i>level) {
+                                    if (i+1>level) {
                                         [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／次 等级不足",priceArray[i]] forState:UIControlStateNormal];
                                         
                                     }else{
@@ -326,7 +330,7 @@
                                 for (int i = 0; i<downLineVoiceArray.count; i++) {
                                     UIButton * jiaoButton = [UIButton buttonWithType:UIButtonTypeCustom];
                                     jiaoButton.frame = CGRectMake(0, i*(Jiaoview.frame.size.height/priceArray.count), Jiaoview.frame.size.width, Jiaoview.frame.size.height/priceArray.count);
-                                    if (i>level) {
+                                    if (i+1>level) {
                                         [jiaoButton setTitle:[NSString stringWithFormat:@"%@元／时 等级不足",priceArray[i]] forState:UIControlStateNormal];
                                         
                                     }else{
@@ -378,7 +382,7 @@
     switch (indexpath.row) {
         case 0:
         {
-            if (sender.tag>level) {
+            if (sender.tag+1>level) {
                 [self showMessageAlert:@"级别不够"];
             }else{
                 Jiaoview.hidden = YES;
@@ -401,7 +405,7 @@
             break;
         case 1:
         {
-            if (sender.tag>level) {
+            if (sender.tag+1>level) {
                 [self showMessageAlert:@"级别不够"];
             }else{
                 Jiaoview.hidden = YES;
@@ -425,7 +429,7 @@
             break;
         case 3:
         {
-            if (sender.tag>level) {
+            if (sender.tag+1>level) {
                 [self showMessageAlert:@"级别不够"];
             }else{
                 Jiaoview.hidden = YES;
@@ -449,7 +453,7 @@
             break;
         case 5:
         {
-            if (sender.tag>level) {
+            if (sender.tag+1>level) {
                 [self showMessageAlert:@"级别不够"];
             }else{
                 Jiaoview.hidden = YES;

@@ -42,7 +42,7 @@
 }
 -(void)setDictionary:(NSDictionary *)dictionary
 {
-    [_headerImage sd_setImageWithURL:[NSURL URLWithString:dictionary[@"headUrl"]]];
+    [_headerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@!1",dictionary[@"headUrl"]]]];
     _headerImage.frame = CGRectMake(20, 20, 60, 60);
     _headerImage.layer.cornerRadius = 30;
     _headerImage.clipsToBounds = YES;

@@ -20,7 +20,7 @@
 - (void)setPersonInfo:(NSDictionary *)personInfo{
     _personInfo = personInfo;
     self.hotCount.text = [NSString stringWithFormat:@"%d",[[personInfo objectForKey:@"hot"]intValue]];
-    NSURL *headUrl = [NSURL URLWithString:[personInfo objectForKey:@"headUrl"]];
+    NSURL *headUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",[personInfo objectForKey:@"headUrl"]]];
     //NSLog(@"%@",headUrl);
     [self.headImage setImageWithURL:headUrl placeholderImage:nil];
     //self.Head.backgroundColor = [UIColor clearColor];

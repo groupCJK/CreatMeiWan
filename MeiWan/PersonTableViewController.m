@@ -93,7 +93,7 @@
     [HUD showAnimated:YES whileExecutingBlock:^{
 
     }];
-        
+    self.mallCell.hidden = YES;
 }
 
 -(void)pushToLogin{
@@ -139,7 +139,7 @@
     self.headimage = [[UIImageView alloc] initWithFrame:CGRectMake((dtScreenWidth-90)/2, 10, 90, 90)];
     self.headimage.layer.masksToBounds = YES;
     self.headimage.layer.cornerRadius = 45.0f;
-    NSURL *url = [NSURL URLWithString:self.userinfo.headUrl];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",self.userinfo.headUrl]];
     [self.headimage setImageWithURL:url placeholderImage:[UIImage imageNamed:@"headerImage"]];
     [self.userInfoHeaderView addSubview:self.headimage];
     

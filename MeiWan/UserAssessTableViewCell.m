@@ -15,7 +15,7 @@
     _assessDic = assessDic;
     
     NSDictionary *user = [assessDic objectForKey:@"user"];
-    NSURL *headUrl = [NSURL URLWithString:[user objectForKey:@"headUrl"]];
+    NSURL *headUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",[user objectForKey:@"headUrl"]]];
     [self.headIg setImageWithURL:headUrl placeholderImage:nil];
     
     self.nicename.text = [user objectForKey:@"nickname"];

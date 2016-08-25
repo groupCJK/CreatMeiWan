@@ -175,7 +175,6 @@
         if (!_dynamicCell) {
             _dynamicCell = [[UserDynamicTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"dynamicCell"];
         }
-        _dynamicCell.delegate = self;
         return _dynamicCell;
     }else if (indexPath.section == 3){
         FootprintTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FootprintCell"];
@@ -200,7 +199,6 @@
     }else if (indexPath.row == 1){
         NSLog(@"标签");
     } else if (indexPath.section == 2){
-        [self showState];
         NSLog(@"动态");
     }else if (indexPath.section == 3){
         NSLog(@"足迹");
@@ -295,15 +293,7 @@
 }
 
 #pragma did Tip segu传参跳转判断
--(void)showInvite{
 
-}
--(void)showState{
-
-}
-- (void)showpicture{
-
-}
 -(void)showImageView:(UIImageView *)imageview
 {
     UIImageView * showImageView = [[UIImageView alloc]init];
@@ -397,36 +387,6 @@
             }
         }
     }];
-}
-
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([segue.identifier isEqualToString:@"userAssess"]) {
-        AssesserInfoViewController *av = segue.destinationViewController;
-        av.playerInfo = sender;
-    }
-    if ([segue.identifier isEqualToString:@"netBar"]) {
-        NetBarViewController *nv = segue.destinationViewController;
-        nv.barInfo = sender;
-    }
-    if ([segue.identifier isEqualToString:@"exploits"]) {
-        ExploitsTableViewController *ev = segue.destinationViewController;
-        ev.hidesBottomBarWhenPushed = YES;
-        ev.exploitsInfo = sender;
-    }
-    if ([segue.identifier isEqualToString:@"invite"]) {
-        InviteViewController *iv = segue.destinationViewController;
-        iv.playerInfo = sender;
-    }
-    if ([segue.identifier isEqualToString:@"peiwanstate"]) {
-        StateTableViewController *mv = segue.destinationViewController;
-        mv.hidesBottomBarWhenPushed = YES;
-        mv.myUserInfo = sender;
-    }
-    if ([segue.identifier isEqualToString:@"picture"]) {
-        PeiwanHeadViewController *cv = segue.destinationViewController;
-        cv.hidesBottomBarWhenPushed = YES;
-        cv.peiwanInfoDic = sender;
-    }
 }
 
 //重加载网络请求

@@ -35,7 +35,7 @@
     }
     NSDictionary * fromUserDic = [discussDic objectForKey:@"fromUser"];
     self.nickName.text = [fromUserDic objectForKey:@"nickname"];
-    NSURL *headUrl = [NSURL URLWithString:[fromUserDic objectForKey:@"headUrl"]];
+    NSURL *headUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",[fromUserDic objectForKey:@"headUrl"]]];
     [self.headImg setImageWithURL:headUrl];
     double lastActiveTime = [[discussDic objectForKey:@"createTime"]doubleValue];
     //NSLog(@"%f",lastActiveTime) ;

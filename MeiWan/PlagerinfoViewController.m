@@ -524,7 +524,6 @@
         
         EMError *error = [[EaseMob sharedInstance].chatManager blockBuddy:[NSString stringWithFormat:@"product_%@",self.playerInfo[@"id"]] 	relationship:eRelationshipBoth];
         if (!error) {
-            NSLog(@"发送成功");
             NSLog(@"%@",self.playerInfo);
         }else {
             NSLog(@"%@",error);

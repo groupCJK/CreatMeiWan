@@ -73,6 +73,7 @@
 #else
     apnsCerName = @"MeiWanDirs";
 #endif
+    
     [[EaseMob sharedInstance] registerSDKWithAppKey:@"chuangjike#peiwan" apnsCertName:apnsCerName];
     
     // 需要在注册sdk后写上该方法
@@ -118,7 +119,6 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     [[EaseMob sharedInstance] applicationDidEnterBackground:application];
-
     /**设置当程序进入后台时，小红点的个数*/
     application.applicationIconBadgeNumber = [[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase];
 }

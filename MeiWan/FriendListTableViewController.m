@@ -164,7 +164,7 @@
 
 
                     if ([peiwanInfoDic objectForKey:@"headUrl"]) {
-                        NSURL *url = [[NSURL alloc]initWithString:[peiwanInfoDic objectForKey:@"headUrl"]];
+                        NSURL *url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"%@!1",[peiwanInfoDic objectForKey:@"headUrl"]]];
                         [_head setImageWithURL:url];
 
                     }

@@ -14,7 +14,6 @@
 #import "UMSocial.h"
 #import "creatAlbum.h"
 
-
 #define RGB(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 
 @implementation PlayerView
@@ -23,7 +22,7 @@
     _playerInfo = playerInfo;
     //NSLog(@"%@",playerInfo);
     self.hot.text = [NSString stringWithFormat:@"%d",[[playerInfo objectForKey:@"hot"]intValue]];
-    NSURL *headUrl = [NSURL URLWithString:[playerInfo objectForKey:@"headUrl"]];
+    NSURL *headUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",[playerInfo objectForKey:@"headUrl"]]];
     //NSLog(@"%@",headUrl);
     [self.Head setImageWithURL:headUrl placeholderImage:nil];
     self.Head.userInteractionEnabled = YES;
@@ -203,46 +202,7 @@
     }else{
         
     }
-    NSArray *assess = [playerInfo objectForKey:@"userTags"];
-    
-    self.assess1 = [[UIImageView alloc]initWithFrame:CGRectMake(self.Head.frame.size.width-25, 10, 25, 10)];
-    self.assess2 = [[UIImageView alloc]initWithFrame:CGRectMake(self.Head.frame.size.width-25-27, 10, 50/2, 20/2)];
-    self.assess3 = [[UIImageView alloc]initWithFrame:CGRectMake(self.Head.frame.size.width-25-54, 10, 50/2, 20/2)];
-    if (assess.count == 1) {
-        
-        NSDictionary *assess1Dic = assess[0];
-        NSURL *assess1url = [NSURL URLWithString:[assess1Dic objectForKey:@"url"]];
-        [self.assess1 setImageWithURL:assess1url];
-    
-    }else if(assess.count == 2){
-        
-        NSDictionary *assess1Dic = assess[0];
-        NSURL *assess1url = [NSURL URLWithString:[assess1Dic objectForKey:@"url"]];
-        [self.assess1 setImageWithURL:assess1url];
-
-        NSDictionary *assess2Dic = assess[1];
-        NSURL *assess2url = [NSURL URLWithString:[assess2Dic objectForKey:@"url"]];
-        [self.assess2 setImageWithURL:assess2url];
-        
-    }else if(assess.count >= 3){
-        NSDictionary *assess1Dic = assess[0];
-        NSURL *assess1url = [NSURL URLWithString:[assess1Dic objectForKey:@"url"]];
-        [self.assess1 setImageWithURL:assess1url];
-  
-        NSDictionary *assess2Dic = assess[1];
-        NSURL *assess2url = [NSURL URLWithString:[assess2Dic objectForKey:@"url"]];
-        [self.assess2 setImageWithURL:assess2url];
-        
-        NSDictionary *assess3Dic = assess[2];
-        NSURL *assess3url = [NSURL URLWithString:[assess3Dic objectForKey:@"url"]];
-        [self.assess3 setImageWithURL:assess3url];
-    }else{
-        
-    }
-//    [self addSubview:self.assess1];
-//    [self addSubview:self.assess2];
-//    [self addSubview:self.assess3];
-//时间金钱
+    //时间金钱
     self.offlinePrice = [[UILabel alloc]init];
     NSDictionary *userInfo = [PersistenceManager getLoginUser];
     NSString *thesame = [NSString stringWithFormat:@"%ld",[[userInfo objectForKey:@"id"]longValue]];

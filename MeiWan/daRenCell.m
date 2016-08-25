@@ -42,7 +42,7 @@
 -(void)setDictionary:(NSDictionary *)dictionary
 {
     
-    [self.darenHeader sd_setImageWithURL:[NSURL URLWithString:dictionary[@"headUrl"]] placeholderImage:[UIImage imageNamed:@"gonghui"]];
+    [self.darenHeader sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@!1",dictionary[@"headUrl"]]] placeholderImage:[UIImage imageNamed:@"gonghui"]];
     
     self.nickName.text = dictionary[@"nickname"];
     self.nickName.font  = [UIFont systemFontOfSize:16.0];

@@ -19,7 +19,7 @@
 }
 -(void)setFriendInfoDic:(NSDictionary *)friendInfoDic{
     _friendInfoDic = friendInfoDic;
-    NSURL *headUrl = [NSURL URLWithString:[friendInfoDic objectForKey:@"headUrl"]];
+    NSURL *headUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",[friendInfoDic objectForKey:@"headUrl"]]];
     [self.headIg setImageWithURL:headUrl placeholderImage:nil];
     
     self.nickname.text = [friendInfoDic objectForKey:@"nickname"];

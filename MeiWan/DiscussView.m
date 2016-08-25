@@ -243,26 +243,26 @@
     }
     self.age.text = moveActionModel.age;
     
-    NSURL *url = [NSURL URLWithString:moveActionModel.headImage];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",moveActionModel.headImage]];
     [self.icon setImageWithURL:url];
     //正文
     self.textview.text = moveActionModel.text;
     //配图
     if(![moveActionModel.image1 isKindOfClass:[NSNull class]] && [moveActionModel.image2 isKindOfClass:[NSNull class]] && [moveActionModel.image3 isKindOfClass:[NSNull class]]){
-        NSURL *url = [NSURL URLWithString:moveActionModel.image1];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",moveActionModel.image1]];
         [self.image1 setImageWithURL:url];
     }else if(![moveActionModel.image1 isKindOfClass:[NSNull class]] && ![moveActionModel.image2 isKindOfClass:[NSNull class]] && [moveActionModel.image3 isKindOfClass:[NSNull class]]){
-        NSURL *url = [NSURL URLWithString:moveActionModel.image1];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",moveActionModel.image1]];
         [self.image1 setImageWithURL:url];
-        NSURL *url2 = [NSURL URLWithString:moveActionModel.image2];
+        NSURL *url2 = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",moveActionModel.image2]];
         [self.image2 setImageWithURL:url2];
         
     }else if(![moveActionModel.image1 isKindOfClass:[NSNull class]] && ![moveActionModel.image2 isKindOfClass:[NSNull class]] && ![moveActionModel.image3 isKindOfClass:[NSNull class]]){
-        NSURL *url = [NSURL URLWithString:moveActionModel.image1];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",moveActionModel.image1]];
         [self.image1 setImageWithURL:url];
-        NSURL *url2 = [NSURL URLWithString:moveActionModel.image2];
+        NSURL *url2 = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",moveActionModel.image2]];
         [self.image2 setImageWithURL:url2];
-        NSURL *url3 = [NSURL URLWithString:moveActionModel.image3];
+        NSURL *url3 = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",moveActionModel.image3]];
         [self.image3 setImageWithURL:url3];
     }else{
         

@@ -62,6 +62,7 @@
 /**收到消息时调用此方法，环信代理*/
 -(void)didReceiveMessage:(EMMessage *)message
 {
+    NSLog(@"差评差评");
     self.unreadImLab.text = [NSString stringWithFormat:@"%lu",(unsigned long)[[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase]];
 }
 

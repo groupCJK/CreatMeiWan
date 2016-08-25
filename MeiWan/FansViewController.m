@@ -57,7 +57,7 @@
     }
     
     fansDic = self.fansArray[indexPath.row];
-    [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:[fansDic objectForKey:@"headUrl"]]];
+    [cell.headerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@!1",[fansDic objectForKey:@"headUrl"]]]];
     cell.nickname .text = fansDic[@"nickname"];
     cell.nickname.font = [UIFont systemFontOfSize:15.0];
     CGSize size = [cell.nickname.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:cell.nickname.font,NSFontAttributeName, nil]];

@@ -44,7 +44,7 @@
  公会等级 公会会长 累积收益
  
  */
-    [self.guildLogo sd_setImageWithURL:[NSURL URLWithString:dictionary[@"headUrl"]] placeholderImage:[UIImage imageNamed:@"gonghui"]];
+    [self.guildLogo sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@!1",dictionary[@"headUrl"]]] placeholderImage:[UIImage imageNamed:@"gonghui"]];
   
     _guidName.font = [UIFont systemFontOfSize:14.0];
     int people;

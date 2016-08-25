@@ -17,7 +17,7 @@
     _playerInfo = playerInfo;
     //NSLog(@"%@",playerInfo);
     self.hot.text = [NSString stringWithFormat:@"%d",[[playerInfo objectForKey:@"hot"]intValue]];
-    NSURL *headUrl = [NSURL URLWithString:[playerInfo objectForKey:@"headUrl"]];
+    NSURL *headUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",[playerInfo objectForKey:@"headUrl"]]];
     //NSLog(@"%@",headUrl);
     [self.Head setImageWithURL:headUrl placeholderImage:nil];
     //self.Head.backgroundColor = [UIColor clearColor];

@@ -185,7 +185,7 @@
         [_userInfoHeadView addSubview:image];
         
         _userInfoHead = [[UIImageView alloc]initWithFrame:CGRectMake((dtScreenWidth-80)/2, (180-80)/2, 80, 80)];
-        NSURL *url = [NSURL URLWithString:self.myuserInfo.headUrl];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",self.myuserInfo.headUrl]];
         [_userInfoHead setImageWithURL:url];
         _userInfoHead.userInteractionEnabled = YES;
         _userInfoHead.layer.masksToBounds = YES;

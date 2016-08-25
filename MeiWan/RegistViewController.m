@@ -78,8 +78,6 @@
 }
 
 - (IBAction)regist:(UIBarButtonItem *)sender {
-//    [[EaseMob sharedInstance].chatManager setApnsNickname:userModel.nickname];
-//    [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:userModel.vid
 
     if (!(self.phone.text.length == 11)) {
         [ShowMessage showMessage:@"用户名是您的手机号"];
