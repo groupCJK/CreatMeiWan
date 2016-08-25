@@ -28,6 +28,7 @@
     UIView * backgroundview;
     UIView * view;
 }
+@property (weak, nonatomic) IBOutlet UISwitch *carFeeChoose;
 //选择时间
 @property (weak, nonatomic) IBOutlet UILabel *chooseTimeForHour;
 /**车费*/
@@ -76,8 +77,6 @@
     [super viewDidLoad];
     self.orderInfoDic = [[NSDictionary alloc]init];
     titlelabel = @[@"线上点歌",@"视屏聊天",@"聚餐",@"线下K歌",@"夜店达人",@"叫醒服务",@"影伴",@"运动健身",@"LOL",@"全部"];
-    
-    NSLog(@"---------------------------%@",_playerInfo);
     self.title = [NSString stringWithFormat:@"邀请%@",[self.playerInfo objectForKey:@"nickname"]];
     NSString * urlstr = [NSString stringWithFormat:@"%@!1",[self.playerInfo objectForKey:@"headUrl"]];
     NSURL *headUrl = [NSURL URLWithString:urlstr];
@@ -348,8 +347,21 @@
     }else{
         self.time.text = @"1小时";
     }
+    
     view.hidden = YES;
     [self.choosebutton setTitle:[NSString stringWithFormat:@"%@",label.text] forState:UIControlStateNormal];
+    NSString * jiequString = [label.text substringWithRange:NSMakeRange(0, 4)];
+    if ([jiequString isEqualToString:@"线上点歌"]||[jiequString isEqualToString:@"视频聊天"]||[jiequString isEqualToString:@"叫醒服务"]) {
+        
+        self.carFeeChoose.on = NO;
+        self.CarFee.hidden = YES;
+        self.carFeeNumber = 0;
+        
+    }else{
+        self.CarFee.hidden = NO;
+        self.carFeeChoose.on = YES;
+        
+    }
     NSArray * stringarray = [label.text componentsSeparatedByString:@"-"];
     self.rice.text = stringarray[1];
     NSScanner *scanner = [NSScanner scannerWithString:label.text];
@@ -378,6 +390,20 @@
     backgroundview.hidden = YES;
     view.hidden = YES;
     [self.choosebutton setTitle:[NSString stringWithFormat:@"%@",label.text] forState:UIControlStateNormal];
+    
+    NSString * jiequString = [label.text substringWithRange:NSMakeRange(0, 4)];
+    if ([jiequString isEqualToString:@"线上点歌"]||[jiequString isEqualToString:@"视频聊天"]||[jiequString isEqualToString:@"叫醒服务"]) {
+        
+        self.carFeeChoose.on = NO;
+        self.CarFee.hidden = YES;
+        self.carFeeNumber = 0;
+    }else{
+        
+        self.carFeeChoose.on = YES;
+        self.CarFee.hidden = NO;
+        
+    }
+    
     NSArray * stringarray = [label.text componentsSeparatedByString:@"-"];
     self.rice.text = stringarray[1];
     NSScanner *scanner = [NSScanner scannerWithString:label.text];
@@ -413,6 +439,21 @@
     backgroundview.hidden = YES;
     view.hidden = YES;
     [self.choosebutton setTitle:[NSString stringWithFormat:@"%@",label.text] forState:UIControlStateNormal];
+    
+    NSString * jiequString = [label.text substringWithRange:NSMakeRange(0, 4)];
+    if ([jiequString isEqualToString:@"线上点歌"]||[jiequString isEqualToString:@"视频聊天"]||[jiequString isEqualToString:@"叫醒服务"]) {
+        
+        self.carFeeChoose.on = NO;
+        self.CarFee.hidden = YES;
+        self.carFeeNumber = 0;
+        
+    }else{
+        
+        self.carFeeChoose.on = YES;
+        self.CarFee.hidden = NO;
+        
+    }
+    
     NSArray * stringarray = [label.text componentsSeparatedByString:@"-"];
     self.rice.text = stringarray[1];
     NSScanner *scanner = [NSScanner scannerWithString:label.text];

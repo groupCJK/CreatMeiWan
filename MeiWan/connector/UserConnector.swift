@@ -233,7 +233,7 @@ import UIKit
         if (limit != nil) {
             parameters["limit"]=limit
         }
-        request(.GET, userUrl+"findOrderEvaluationByUserId", parameters:parameters as? [String : NSObject])
+        request(.GET, userUrl+"findOrderEvaluationByUserId2", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 
                 if (error==nil){
@@ -243,7 +243,7 @@ import UIKit
                     userUrl = setting.getIp()+"peiwan-server/rest/users/"
                 }
                 
-                receiver(data:data, error:error)
+                receiver(data:data!.gunzippedData(), error:error)
         }
     }
     

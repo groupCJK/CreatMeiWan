@@ -850,6 +850,7 @@
                         <outlet property="addtime" destination="CSp-Ab-XVN" id="K5N-HP-blS"/>
                         <outlet property="allRice" destination="mbU-VA-qfI" id="NWA-mP-AA6"/>
                         <outlet property="biaoqianForDaRen" destination="NtD-rD-304" id="m9i-ar-mW3"/>
+                        <outlet property="carFeeChoose" destination="TJv-Fx-0lr" id="LV8-ow-Q7Z"/>
                         <outlet property="chooseTimeForHour" destination="7wi-ba-wK3" id="GEc-eA-wmP"/>
                         <outlet property="choosebutton" destination="s6u-3W-nBc" id="mxb-SZ-ziw"/>
                         <outlet property="feiYong" destination="015-nV-e3o" id="xR9-Wp-IkC"/>
@@ -4436,17 +4437,17 @@
         <image name="yuanjiao-ju-xing.png" width="574" height="176"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4Bd-Xl-sEa"/>
-        <segue reference="TgU-ON-UTc"/>
-        <segue reference="0pE-Uk-ivr"/>
         <segue reference="a2L-pk-feb"/>
-        <segue reference="GI5-Ug-Nan"/>
         <segue reference="lkr-Fs-pVo"/>
+        <segue reference="GI5-Ug-Nan"/>
         <segue reference="G1e-fu-sL2"/>
-        <segue reference="S0y-tW-KPA"/>
-        <segue reference="765-rk-Vfn"/>
+        <segue reference="ZP7-VI-zsD"/>
+        <segue reference="TgU-ON-UTc"/>
+        <segue reference="4Bd-Xl-sEa"/>
+        <segue reference="T0n-fg-bJC"/>
         <segue reference="Cbe-BK-afe"/>
         <segue reference="paO-aE-i4M"/>
-        <segue reference="T0n-fg-bJC"/>
+        <segue reference="765-rk-Vfn"/>
+        <segue reference="S0y-tW-KPA"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -10,9 +10,10 @@
 
 @interface CommentTableViewCell : UITableViewCell
 
+@property (nonatomic,strong)NSDictionary * evaluateDictionary;
+
 @property (nonatomic, strong)UIImageView *titleImage;
 @property (nonatomic, strong)UILabel *commentTitleLabel;
-
 @property (nonatomic, strong)UILabel *commentLabel;
 
 @end

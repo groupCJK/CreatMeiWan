@@ -127,7 +127,7 @@
 //上拉刷新
 - (void)headerRereshing
 {
-    self.infoCount = 10;
+    self.infoCount = 0;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self getData];
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
@@ -148,7 +148,7 @@
 }
 
 - (void)getData{
-     [UserConnector rankUsers:[PersistenceManager getLoginSession] offset:[NSNumber numberWithInt:0] limit:[NSNumber numberWithInt:self.infoCount] receiver:^(NSData *data,NSError *error){
+     [UserConnector rankUsers:[PersistenceManager getLoginSession] offset:[NSNumber numberWithInt:self.infoCount] limit:[NSNumber numberWithInt:10] receiver:^(NSData *data,NSError *error){
         if (error) {
             [ShowMessage showMessage:@"服务器未响应"];
         }else{
@@ -157,26 +157,43 @@
             int status = [[json objectForKey:@"status"]intValue];
 
             if (status == 0) {
-                [self.headViewDataArray removeAllObjects];
-                [self.tableDataArray removeAllObjects];
+                
                 NSArray * infoArray = [json objectForKey:@"entity"];
-                if (infoArray.count > 3) {
-                    for (int i = 0; i<infoArray.count; i++) {
-                        if (i < 3) {
-                            [self.headViewDataArray addObject:infoArray[i]];
-                        }else{
-                            [self.tableDataArray addObject:infoArray[i]];
-                        }
-                    }
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        //设置tableHeadView
-                        self.tableView.tableHeaderView = [self createTableHeadView];
-                        [self.tableView reloadData];
-                    });
 
-                    [HUD hide:YES afterDelay:1];
+                if (_infoCount==0) {
+                    
+                    [self.headViewDataArray removeAllObjects];
+                    [self.tableDataArray removeAllObjects];
+                    if (infoArray.count > 3) {
+                        for (int i = 0; i<infoArray.count; i++) {
+                            if (i < 3) {
+                                [self.headViewDataArray addObject:infoArray[i]];
+                            }else{
+                                [self.tableDataArray addObject:infoArray[i]];
+                            }
+                        }
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            //设置tableHeadView
+                            self.tableView.tableHeaderView = [self createTableHeadView];
+                            [self.tableView reloadData];
+                        });
+                        
+                        [HUD hide:YES afterDelay:1];
+                    }
+
+                }else{
+                
+                    [infoArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                       
+                        [self.tableDataArray addObject:obj];
+                        [self.tableView reloadData];
+                        [HUD hide:YES afterDelay:0.1];
+
+                        
+                    }];
+                    
                 }
-             }else if(status == 1){
+            }else if(status == 1){
                 [PersistenceManager setLoginSession:@""];
                 LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
                 lv.hidesBottomBarWhenPushed = YES;

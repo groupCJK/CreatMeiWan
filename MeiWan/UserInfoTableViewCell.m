@@ -334,10 +334,6 @@
         self.timeImage3.hidden = YES;
     }
     
-    
-//    NSDictionary *userInfo = [PersistenceManager getLoginUser];
-//    NSString *thesame = [NSString stringWithFormat:@"%ld",[[userInfo objectForKey:@"id"]longValue]];
-    
 }
 
 

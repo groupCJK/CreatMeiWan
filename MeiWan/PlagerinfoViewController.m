@@ -50,6 +50,7 @@
 @property (nonatomic, strong) UserDynamicTableViewCell *dynamicCell;
 @property (nonatomic, strong) NSArray *arr1;
 @property (nonatomic, strong) NSMutableArray * MyfriendArray;
+@property (nonatomic, strong) NSDictionary * evaluateDictionary;
 
 @end
 
@@ -136,12 +137,19 @@
             }
         }
     }];
-    [UserConnector peiwanNetbars:[self.playerInfo objectForKey:@"id"] receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+    [UserConnector findOrderEvaluationByUserId:[NSNumber numberWithFloat:[self.playerInfo[@"id"] floatValue]] offset:@0 limit:@1 receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
         if (error) {
             
         }else{
-            NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-            NSLog(@"%@",dic);
+            SBJsonParser*parser=[[SBJsonParser alloc]init];
+            NSDictionary *json=[parser objectWithData:data];
+            int status = [json[@"status"] intValue];
+            if (status==0) {
+                NSArray * array = json[@"entity"];
+                [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    self.evaluateDictionary = obj;
+                }];
+            }
         }
     }];
 }
@@ -218,6 +226,9 @@
         CommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"commentCell"];
         if (!cell) {
             cell = [[CommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"commentCell"];
+        }
+        if (self.evaluateDictionary != nil) {
+            cell.evaluateDictionary = self.evaluateDictionary;
         }
         return cell;
     }

@@ -712,14 +712,13 @@
     
     
     NSString * URLString = [NSString stringWithFormat:@"http://web.chuangjk.com:8083/promoter/index.html"];
-    NSString * contentext = @"缘起，我在万千人群中看见你的眼。缘灭，万千人中你却不知什么是美玩APP";
+    NSString * contentext = @"一首歌告诉我你对我的感觉";
     NSString * titleString = @"貌美如花也能赚钱养家";
-    image = [UIImage imageNamed:@"headerImage"];
     
     UIAlertAction * shareAction = [UIAlertAction actionWithTitle:@"分享到微信好友" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [UMSocialData defaultData].extConfig.wechatSessionData.title = titleString;
         [UMSocialData defaultData].extConfig.wechatSessionData.url = URLString;
-        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:contentext image:image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:[NSString stringWithFormat:@"%@。你选歌词，我给你唱",contentext] image:image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
             if (response.responseCode == UMSResponseCodeSuccess) {
                 NSLog(@"分享成功！");
             }
@@ -727,9 +726,9 @@
     }];
     
     UIAlertAction * share2Action = [UIAlertAction actionWithTitle:@"分享到微信朋友圈" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [UMSocialData defaultData].extConfig.wechatTimelineData.title = titleString;
+        [UMSocialData defaultData].extConfig.wechatTimelineData.title = contentext;
         [UMSocialData defaultData].extConfig.wechatTimelineData.url = URLString;
-        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:contentext image:image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:[NSString stringWithFormat:@"%@。你选歌词，我给你唱",contentext] image:image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
             if (response.responseCode == UMSResponseCodeSuccess) {
                 NSLog(@"分享成功！");
             }
@@ -740,7 +739,7 @@
     UIAlertAction * share3Action = [UIAlertAction actionWithTitle:@"分享到QQ好友" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [UMSocialData defaultData].extConfig.qqData.title = titleString;
         [UMSocialData defaultData].extConfig.qqData.url = URLString;
-        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:contentext image:image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:[NSString stringWithFormat:@"%@。你选歌词，我给你唱",contentext] image:image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
             if (response.responseCode == UMSResponseCodeSuccess) {
                 NSLog(@"分享成功！");
             }
@@ -748,10 +747,10 @@
     }];
     
     UIAlertAction * share4Action = [UIAlertAction actionWithTitle:@"分享到QQ空间" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [UMSocialData defaultData].extConfig.qzoneData.title = titleString;
+        [UMSocialData defaultData].extConfig.qzoneData.title = contentext;
         [UMSocialData defaultData].extConfig.qzoneData.url = URLString;
         
-        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:contentext image:image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:@"你选歌词，我给你唱" image:image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
             if (response.responseCode == UMSResponseCodeSuccess) {
                 NSLog(@"分享成功！");
             }
