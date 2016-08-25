@@ -54,6 +54,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *showText;
 @property (retain, nonatomic)UIView * priceView;
+@property (retain, nonatomic)UIView * backGroundView;
 @end
 
 @implementation SettingPlayWithUIViewController
@@ -110,12 +111,20 @@
     tableview.scrollEnabled = NO;
     [self.view addSubview:tableview];
     
+    UIView * backGroundView = [[UIView alloc]initWithFrame:self.view.bounds];
+    backGroundView.backgroundColor = [UIColor blackColor];
+    backGroundView.alpha = 0.5;
+    [self.view addSubview:backGroundView];
+    self.backGroundView = backGroundView;
+    self.backGroundView.hidden = YES;
+    
     UIView * showView = [[UIView alloc]init];
     showView.center = self.view.center;
     showView.bounds = CGRectMake(0, 0, 250, 200);
     showView.backgroundColor = [UIColor whiteColor];
     showView.hidden = YES;
     [self.view addSubview:showView];
+    
     
     priceTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 250, 240)];
     priceTableview.delegate = self;
@@ -225,9 +234,11 @@
             if (indexPath.row==5||indexPath.row==0||indexPath.row==1||indexPath.row==3) {
                 
                 if (cell.shanchu.hidden==NO) {
+                    self.backGroundView.hidden = YES;
                     [self animationView:cell index:indexPath];
                     [usertimeTags removeLastObject];
                 }else{
+                    self.backGroundView.hidden = NO;
                     
                     if (usertimeTags.count>=3) {
                     
@@ -345,6 +356,7 @@
                     }else{
                         [usertimeTags addObject:[NSString stringWithFormat:@"%ld",indexPath.row+1]];
                         self.priceView.hidden = NO;
+                        self.backGroundView.hidden = NO;
                     }
                 }
             }
@@ -352,6 +364,7 @@
         }else{
 
             self.priceView.hidden = YES;
+            self.backGroundView.hidden = YES;
             indexpathother = indexPath.row;
             [self animationView:cell index:indexpath];
         }
@@ -361,6 +374,7 @@
 }
 - (void)jiaoChuangButtonClick:(UIButton *)sender
 {
+    
     switch (indexpath.row) {
         case 0:
         {
@@ -368,6 +382,8 @@
                 [self showMessageAlert:@"级别不够"];
             }else{
                 Jiaoview.hidden = YES;
+                self.backGroundView.hidden = YES;
+
                 NSUserDefaults * jiaoPrice = [NSUserDefaults standardUserDefaults];
                 [jiaoPrice setObject:[NSNumber numberWithInteger:sender.tag] forKey:@"senderID"];
                 [jiaoPrice synchronize];
@@ -389,6 +405,8 @@
                 [self showMessageAlert:@"级别不够"];
             }else{
                 Jiaoview.hidden = YES;
+                self.backGroundView.hidden = YES;
+
                 NSUserDefaults * jiaoPrice = [NSUserDefaults standardUserDefaults];
                 [jiaoPrice setObject:[NSNumber numberWithInteger:sender.tag] forKey:@"senderID"];
                 [jiaoPrice synchronize];
@@ -411,6 +429,8 @@
                 [self showMessageAlert:@"级别不够"];
             }else{
                 Jiaoview.hidden = YES;
+                self.backGroundView.hidden = YES;
+
                 NSUserDefaults * jiaoPrice = [NSUserDefaults standardUserDefaults];
                 [jiaoPrice setObject:[NSNumber numberWithInteger:sender.tag] forKey:@"senderID"];
                 [jiaoPrice synchronize];
@@ -433,6 +453,8 @@
                 [self showMessageAlert:@"级别不够"];
             }else{
                 Jiaoview.hidden = YES;
+                self.backGroundView.hidden = YES;
+
                 NSUserDefaults * jiaoPrice = [NSUserDefaults standardUserDefaults];
                 [jiaoPrice setObject:[NSNumber numberWithInteger:sender.tag] forKey:@"senderID"];
                 [jiaoPrice synchronize];

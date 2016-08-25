@@ -256,7 +256,10 @@
 {
     [self.playersScollview addHeaderWithTarget:self action:@selector(headerRereshing)];
     [self.playersScollview addFooterWithTarget:self action:@selector(footerRereshing)];
-    self.playersScollview.footer.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 100);
+    self.playersScollview.header.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 40);
+    self.playersScollview.footer.frame = CGRectMake(0, self.playersScollview.frame.size.height, [UIScreen mainScreen].bounds.size.width, 20);
+    /**隐藏刷新的状态和文字*/
+//    self.playersScollview.footer.hidden = YES;
 }
 //下拉刷新
 - (void)headerRereshing

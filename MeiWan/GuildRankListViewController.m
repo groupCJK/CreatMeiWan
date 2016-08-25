@@ -43,6 +43,9 @@
     [tableview addHeaderWithTarget:self action:@selector(headRefresh:)];
     [tableview addFooterWithTarget:self action:@selector(footRefresh:)];
     
+    
+    
+    
     self.tableview = tableview;
 }
 - (void)headRefresh:(int)type

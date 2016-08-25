@@ -93,10 +93,7 @@
     [HUD showAnimated:YES whileExecutingBlock:^{
 
     }];
-    
-    //隐藏商城
-    self.mallCell.hidden = YES;
-    
+        
 }
 
 -(void)pushToLogin{
