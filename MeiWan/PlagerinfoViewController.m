@@ -50,44 +50,45 @@
 @property (nonatomic, strong) UserDynamicTableViewCell *dynamicCell;
 @property (nonatomic, strong) NSArray *arr1;
 @property (nonatomic, strong) NSMutableArray * MyfriendArray;
-@property (nonatomic, strong) NSDictionary * evaluateDictionary;
+@property (nonatomic,strong)NSMutableArray * myEvaluateArray;
+@property (nonatomic,assign)int page;
 
 @end
 
 @implementation PlagerinfoViewController
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSString * session = [PersistenceManager getLoginSession];
-    [UserConnector findMyFriends:session receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
-        if (error) {
-            [ShowMessage showMessage:@"服务器未响应"];
-        }else{
-            SBJsonParser*parser=[[SBJsonParser alloc]init];
-            NSMutableDictionary *json=[parser objectWithData:data];
-            int status = [json[@"status"] intValue];
-            if (status == 0) {
-                
-                self.MyfriendArray = json[@"entity"];
-
-                NSDictionary *userInfo = [PersistenceManager getLoginUser];
-                NSString *thesame = [NSString stringWithFormat:@"%ld",[[userInfo objectForKey:@"id"]longValue]];
-                if ([thesame isEqualToString:@"100000"] || [thesame isEqualToString:@"100001"])
-                {
-                    [self orderButtonView];
-                }else{
-                    [self buttonView];
-                }
-
-            }else{}
-            
-        }
-    }];
-   
-
+//    NSString * session = [PersistenceManager getLoginSession];
+//    [UserConnector findMyFriends:session receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+//        if (error) {
+//            [ShowMessage showMessage:@"服务器未响应"];
+//        }else{
+//            SBJsonParser*parser=[[SBJsonParser alloc]init];
+//            NSMutableDictionary *json=[parser objectWithData:data];
+//            int status = [json[@"status"] intValue];
+//            if (status == 0) {
+//                
+//                self.MyfriendArray = json[@"entity"];
+//
+//                NSDictionary *userInfo = [PersistenceManager getLoginUser];
+//                NSString *thesame = [NSString stringWithFormat:@"%ld",[[userInfo objectForKey:@"id"]longValue]];
+//                if ([thesame isEqualToString:@"100000"] || [thesame isEqualToString:@"100001"])
+//                {
+//                    [self orderButtonView];
+//                }else{
+//                    [self buttonView];
+//                }
+//
+//            }else{}
+//            
+//        }
+//    }];
+//   
+//
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.page = 0;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"更多" style:UIBarButtonItemStylePlain target:self action:@selector(more)];
 
     self.title = [self.playerInfo objectForKey:@"nickname"];
@@ -133,25 +134,72 @@
                 }
             }else if (status == 1){
             }else{
+               
+            }
+        }
+    }];
+    
+    [UserConnector findShopsByUser:[NSNumber numberWithDouble:[self.playerInfo[@"id"] doubleValue]] offset:0 limit:@3 receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (error) {
+            [ShowMessage showMessage:@"服务器未响应"];
+        }else{
+            SBJsonParser*parser=[[SBJsonParser alloc]init];
+            NSMutableDictionary *json=[parser objectWithData:data];
+            int status = [[json objectForKey:@"status"]intValue];
+            if (status==0) {
+                NSLog(@"json= %@",json);
+            }else if (status==1){
+                
+            }else{
                 
             }
         }
     }];
-    [UserConnector findOrderEvaluationByUserId:[NSNumber numberWithFloat:[self.playerInfo[@"id"] floatValue]] offset:@0 limit:@1 receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+    /***/
+    [self pinglunAFNetworking:self.page];
+    [self.playerTableView addHeaderWithTarget:self action:@selector(headerRereshing)];
+    [self.playerTableView addFooterWithTarget:self action:@selector(footerRereshing)];
+    
+    
+    
+    [UserConnector findMyFriends:session receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
         if (error) {
-            
+            [ShowMessage showMessage:@"服务器未响应"];
         }else{
             SBJsonParser*parser=[[SBJsonParser alloc]init];
-            NSDictionary *json=[parser objectWithData:data];
+            NSMutableDictionary *json=[parser objectWithData:data];
             int status = [json[@"status"] intValue];
-            if (status==0) {
-                NSArray * array = json[@"entity"];
-                [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    self.evaluateDictionary = obj;
-                }];
-            }
+            if (status == 0) {
+                
+                self.MyfriendArray = json[@"entity"];
+                
+                NSDictionary *userInfo = [PersistenceManager getLoginUser];
+                NSString *thesame = [NSString stringWithFormat:@"%ld",[[userInfo objectForKey:@"id"]longValue]];
+                if ([thesame isEqualToString:@"100000"] || [thesame isEqualToString:@"100001"])
+                {
+                    [self orderButtonView];
+                }else{
+                    [self buttonView];
+                }
+                
+            }else{}
+            
         }
     }];
+
+    
+}
+/** 下拉刷新 */
+- (void)headerRereshing
+{
+    self.page = 0;
+    [self pinglunAFNetworking:self.page];
+}
+/** 上拉加载 */
+- (void)footerRereshing
+{
+    self.page+=6;
+    [self pinglunAFNetworking:self.page];
 }
 #pragma mark 返回分组数
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -159,7 +207,15 @@
 }
 #pragma mark 返回每组行数
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
+    if (section==4) {
+        if (self.myEvaluateArray.count==0) {
+            return 1;
+        }else{
+            return self.myEvaluateArray.count;
+        }
+    }else{
+        return 1;
+    }
 }
 //section头部间距
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -191,24 +247,23 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell;
     if (indexPath.section == 0) {
-        playerInfoTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"infoCell"];
-        if (!cell) {
-            cell = [[playerInfoTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"infoCell"];
-            cell.playerInfo = self.playerInfo;
+        playerInfoTableViewCell * infoCell = [tableView dequeueReusableCellWithIdentifier:@"infoCell"];
+        if (!infoCell) {
+            infoCell = [[playerInfoTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"infoCell"];
+            infoCell.playerInfo = self.playerInfo;
         }
-        cell.playerHeadImage.userInteractionEnabled = YES;
+        infoCell.playerHeadImage.userInteractionEnabled = YES;
         UITapGestureRecognizer * tapgesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesture:)];
-        [cell.playerHeadImage addGestureRecognizer:tapgesture];
-        return cell;
+        [infoCell.playerHeadImage addGestureRecognizer:tapgesture];
+        return infoCell;
     }else if (indexPath.section == 1){
-        TimeLabelTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"timeCell"];
-        if (!cell) {
-            cell = [[TimeLabelTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"timeCell"];
+        TimeLabelTableViewCell * timeCell = [tableView dequeueReusableCellWithIdentifier:@"timeCell"];
+        if (!timeCell) {
+            timeCell = [[TimeLabelTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"timeCell"];
         }
-        cell.playerInfo = self.playerInfo;
-        return cell;
+        timeCell.playerInfo = self.playerInfo;
+        return timeCell;
     }else if (indexPath.section == 2){
          _dynamicCell = [tableView dequeueReusableCellWithIdentifier:@"dynamicCell"];
         if (!_dynamicCell) {
@@ -217,22 +272,29 @@
         _dynamicCell.delegate = self;
         return _dynamicCell;
     }else if (indexPath.section == 3){
-        FootprintTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FootprintCell"];
-        if (!cell) {
-            cell = [[FootprintTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"FootprintCell"];
+        FootprintTableViewCell *FootprintCell = [tableView dequeueReusableCellWithIdentifier:@"FootprintCell"];
+        if (!FootprintCell) {
+            FootprintCell = [[FootprintTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"FootprintCell"];
         }
-        return cell;
-    }else if (indexPath.section == 4){
-        CommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"commentCell"];
-        if (!cell) {
-            cell = [[CommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"commentCell"];
+        return FootprintCell;
+    }else{
+        CommentTableViewCell * Commentcell = [tableView dequeueReusableCellWithIdentifier:@"commentCell"];
+        if (!Commentcell) {
+            Commentcell = [[CommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"commentCell"];
         }
-        if (self.evaluateDictionary != nil) {
-            cell.evaluateDictionary = self.evaluateDictionary;
+        if (self.myEvaluateArray.count>0) {
+            Commentcell.evaluateDictionary = self.myEvaluateArray[indexPath.row];
+            Commentcell.commentLabel.hidden = YES;
+            if (indexPath.row>0) {
+                Commentcell.titleImage.hidden = YES;
+                Commentcell.commentTitleLabel.hidden = YES;
+            }
+        }else{
+            Commentcell.commentLabel.hidden = NO;
+
         }
-        return cell;
+        return Commentcell;
     }
-    return cell;
 }
 /**点击动态图片跳转*/
 -(void)showPicture:(UITapGestureRecognizer *)gesture
@@ -292,19 +354,19 @@
         [_buttonView addSubview:invitButton];
         
         UIButton *focusButton = [[UIButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width-90)/2, 20, 90, 30)];
+        [focusButton setTitle:@"关注" forState:UIControlStateNormal];
+        focusButton.backgroundColor = [CorlorTransform colorWithHexString:@"#FF69B4"];
         if (self.playerInfo != nil) {
-            [_MyfriendArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+
+            
+            [self.MyfriendArray enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                
                 if ([obj isEqualToDictionary:self.playerInfo]) {
                     [focusButton setTitle:@"取消关注" forState:UIControlStateNormal];
                     focusButton.backgroundColor = [CorlorTransform colorWithHexString:@"3366cc"];
-
-                }else{
-                     [focusButton setTitle:@"关注" forState:UIControlStateNormal];
-                    focusButton.backgroundColor = [CorlorTransform colorWithHexString:@"#FF69B4"];
-
                 }
-
             }];
+
         }
         [focusButton setTintColor:[UIColor whiteColor]];
         focusButton.layer.masksToBounds = YES;
@@ -402,6 +464,7 @@
     if ([sender.titleLabel.text isEqualToString:@"取消关注"]) {
         NSLog(@"删除好友");
         
+    
         [UserConnector deleteFriend:sesstion friendId:[self.playerInfo objectForKey:@"id"] receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
             if (error) {
                 [ShowMessage showMessage:@"服务器未响应"];
@@ -712,5 +775,34 @@
     ShowImageViewController * imageVC = [[ShowImageViewController alloc]init];
     imageVC.playInfo = self.playerInfo;
     [self.navigationController pushViewController:imageVC animated:YES];
+}
+- (void)pinglunAFNetworking:(int)page
+{
+    NSNumber * pageNumber = [NSNumber numberWithInt:page];
+    [UserConnector findOrderEvaluationByUserId:[NSNumber numberWithFloat:[self.playerInfo[@"id"] floatValue]] offset:pageNumber limit:@6 receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (error) {
+            
+        }else{
+            SBJsonParser*parser=[[SBJsonParser alloc]init];
+            NSDictionary *json=[parser objectWithData:data];
+            int status = [json[@"status"] intValue];
+            if (status==0) {
+                if (page==0) {
+                    [self.myEvaluateArray removeAllObjects];
+                    self.myEvaluateArray = json[@"entity"];
+                }else{
+                    NSArray * array = json[@"entity"];
+                    [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        [self.myEvaluateArray addObject:obj];
+                    }];
+                }
+                [self.playerTableView.header endRefreshing];
+                [self.playerTableView.footer endRefreshing];
+                [self.playerTableView reloadData];
+
+            }
+        }
+    }];
+
 }
 @end

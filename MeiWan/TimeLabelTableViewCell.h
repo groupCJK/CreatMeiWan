@@ -12,6 +12,8 @@
 
 @property(nonatomic, strong)NSDictionary *playerInfo;
 
+@property (nonatomic, strong)UILabel * noneLabel;
+
 @property (nonatomic, strong)UIImageView *titleImage;
 @property (nonatomic, strong)UILabel *timeTitleLabel;
 

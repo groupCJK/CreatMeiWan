@@ -38,7 +38,8 @@
 }
 -(void)setDictionary:(NSDictionary *)dictionary
 {
-    [self.guildmemberHeader sd_setImageWithURL:[NSURL URLWithString:dictionary[@"headUrl"]] placeholderImage:[UIImage imageNamed:@"gonghui"]];
+    self.guildmemberHeader.backgroundColor = [UIColor grayColor];
+    [self.guildmemberHeader sd_setImageWithURL:[NSURL URLWithString:dictionary[@"headUrl"]]];
     self.nickName.text = dictionary[@"nickname"];
     self.nickName.font  = [UIFont systemFontOfSize:16.0];
     CGSize nicksize = [self.nickName.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:self.nickName.font,NSFontAttributeName, nil]];

@@ -1546,6 +1546,38 @@ import UIKit
         }
         
     }
+    
+    public static func findShopsByUser(userId:NSNumber!,offset:NSNumber!,limit:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
+        
+        var parameters:Dictionary<String,AnyObject> = [:]
+        if (userId != nil) {
+            parameters["userId"] = userId
+        }
+        if (userId != nil) {
+            parameters["offset"] = offset
+        }
+        if (userId != nil) {
+            parameters["limit"] = limit
+        }
+        request(.GET, userUrl+"findShopsByUser", parameters:parameters as? [String : NSObject])
+            .response { request, r, data, error in
+                
+                if (error==nil){
+                    
+                }else{
+                    setting .adjustIps()
+                    userUrl = setting.getIp()+"peiwan-server/rest/users/"
+                }
+                
+                receiver(data:data!, error:error)
+                
+                
+        }
+
+        
+        
+    }
+    
 }
 
 

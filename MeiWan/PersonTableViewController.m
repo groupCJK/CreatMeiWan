@@ -711,7 +711,7 @@
     }];
     
     
-    NSString * URLString = [NSString stringWithFormat:@"http://web.chuangjk.com:8083/promoter/index.html"];
+    NSString * URLString = [NSString stringWithFormat:@"http://web.chuangjk.com:8083/promoter/sing.html?userId=%@",self.userInfoDic[@"id"]];
     NSString * contentext = @"一首歌告诉我你对我的感觉";
     NSString * titleString = @"貌美如花也能赚钱养家";
     
@@ -745,7 +745,7 @@
             }
         }];
     }];
-    
+    /***/
     UIAlertAction * share4Action = [UIAlertAction actionWithTitle:@"分享到QQ空间" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [UMSocialData defaultData].extConfig.qzoneData.title = contentext;
         [UMSocialData defaultData].extConfig.qzoneData.url = URLString;

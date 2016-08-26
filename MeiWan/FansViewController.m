@@ -108,9 +108,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
         
-    self.hidesBottomBarWhenPushed = YES;
     [self performSegueWithIdentifier:@"fansDetail" sender:self.fansArray[indexPath.row]];
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
