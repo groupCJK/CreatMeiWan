@@ -75,7 +75,7 @@
     _qianMing.textColor = [UIColor grayColor];
     _qianMing.font = [UIFont systemFontOfSize:15.0];
     CGSize size_qianMing = [_qianMing.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_qianMing.font,NSFontAttributeName, nil]];
-    _qianMing.frame = CGRectMake(_nickname.frame.origin.x, _nickname.frame.origin.y+_nickname.frame.size.height+10, size_qianMing.width, size_qianMing.height);
+    _qianMing.frame = CGRectMake(_nickname.frame.origin.x, _nickname.frame.origin.y+_nickname.frame.size.height+10, size_qianMing.width-60, size_qianMing.height);
     
     [_chatButton setTitle:@"聊天" forState:UIControlStateNormal];
     _chatButton.titleLabel.font = [UIFont systemFontOfSize:16.0];
