@@ -209,7 +209,7 @@
     if ([thesame isEqualToString:@"100000"] || [thesame isEqualToString:@"100001"]) {
         self.offlinePrice.hidden = YES;
     }else{
-        self.offlinePrice.text = [NSString stringWithFormat:@"%@ 元/时",[playerInfo objectForKey:@"offlinePrice"]];
+        self.offlinePrice.text = [NSString stringWithFormat:@"成功订单数:%@",[playerInfo objectForKey:@"orderAmount"]];
     }
     self.offlinePrice.font = [UIFont systemFontOfSize:10.0];
     self.offlinePrice.textColor = RGB(110, 110, 110);

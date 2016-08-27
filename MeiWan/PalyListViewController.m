@@ -51,14 +51,17 @@
 @property (nonatomic,assign) float heightFeven;
 @property (nonatomic,strong) NSMutableDictionary *searchDic;
 @property (nonatomic,assign) int infoCount;
-
+@property (nonatomic,strong) CLLocationManager * locationManager;
 
 @end
 
 @implementation PalyListViewController
 
 #pragma mark - mapView Delegate
-
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+{
+    NSLog(@"%@",locations);
+}
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     //取出当前位置的坐标
@@ -119,6 +122,8 @@
 - (void)initializeLocationService {
     // 初始化定位管理器
     _locationManager = [[CLLocationManager alloc] init];
+    // 请求访问使用地理位置
+    [_locationManager requestWhenInUseAuthorization];
     // 设置代理
     _locationManager.delegate = self;
     // 设置定位精确度到米

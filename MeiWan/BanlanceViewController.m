@@ -27,8 +27,7 @@
     self.userinfo = [[UserInfo alloc]initWithDictionary:self.infoDic];
     self.getMoney.backgroundColor = [CorlorTransform colorWithHexString:@"#36C8FF"];
     self.getMoney.layer.cornerRadius = 5;
-    self.listMoney.text = [NSString stringWithFormat:@"%.1f",
-                           self.userinfo.money];
+    self.listMoney.text = [NSString stringWithFormat:@"%.1f",self.userinfo.money];
 
     // Do any additional setup after loading the view.
 }
@@ -43,16 +42,16 @@
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     UITextField *inputTF = [alertView textFieldAtIndex:0];
     NSString *input = inputTF.text;
-    double inputNum = [input doubleValue];
-    if (inputNum < 500) {
-        [ShowMessage showMessage:@"提现金额须大于五百元"];
+    int inputNum = [input intValue];
+    if (inputNum < 300) {
+        [ShowMessage showMessage:@"提现金额最低金额为300元"];
         return;
     }
     if (buttonIndex == 1) {
         if (input.length == 0) {
             [ShowMessage showMessage:@"输入不能为空"];
             return;
-        }else{
+        }else if (inputNum%100==0){
             NSString *session = [PersistenceManager getLoginSession];
             [UserConnector createCashRequest:session money:[NSNumber numberWithDouble:inputNum] receiver:^(NSData *data, NSError *error){
                 if (error) {
@@ -87,6 +86,8 @@
                 
             }];
             
+        }else{
+            [ShowMessage showMessage:@"提现金额需要是100的整值"];
         }
     }
     
