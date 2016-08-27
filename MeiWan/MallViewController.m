@@ -77,6 +77,7 @@
     business.textColor = [UIColor grayColor];
     business.font = [UIFont systemFontOfSize:15.0];
     [self.scrollview addSubview:business];
+    
 }
 
 #pragma mark 表

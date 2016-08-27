@@ -93,9 +93,14 @@
     [HUD showAnimated:YES whileExecutingBlock:^{
 
     }];
-    self.mallCell.hidden = YES;
+    
+    [self.tableView addHeaderWithTarget:self action:@selector(headRefresh)];
+    
 }
-
+- (void)headRefresh
+{
+    [self loadUserData];
+}
 -(void)pushToLogin{
     [self pushToLoginController];
 }
@@ -314,20 +319,33 @@
 }
 
 - (void)loadUserData{
+    
     NSString *sesstion = [PersistenceManager getLoginSession];
+    
     [UserConnector getLoginedUser:sesstion receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        
         if (error) {
+        
             [ShowMessage showMessage:@"服务器未响应"];
+       
         }else{
+            
             SBJsonParser*parser=[[SBJsonParser alloc]init];
+            
             NSMutableDictionary *json = [parser objectWithData:data];
+            
             int status = [[json objectForKey:@"status"]intValue];
+            
             if (status == 0) {
+                
                 self.userInfoData = [json objectForKey:@"entity"];
                 
                 [self updateUI];
                 
                 [HUD hide:YES afterDelay:0.5];
+                
+                [self.tableView.header endRefreshing];
+            
             }
         }
     }];

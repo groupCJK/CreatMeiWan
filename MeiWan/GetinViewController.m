@@ -66,54 +66,64 @@
     [self.password resignFirstResponder];
 }
 - (IBAction)getIn:(UIButton *)sender {
-    //[self performSegueWithIdentifier:@"players" sender:nil];
-    if (self.phone.text.length != 11) {
-        [self showMessage:@"用户名是您的手机号码"];
-    }else if (self.phone.text.length == 11 && (self.password.text.length < 6 || self.password.text.length > 18)){
-        [self showMessage:@"密码长度需要大于6位小于18位"];
-        
-    }else{
-        NSString *password = [NSString stringWithString:[MD5 md5:self.password.text]];
-        [UserConnector login:self.phone.text password:password receiver:^(NSData *data,NSError *error){
-            if (error) {
-                [ShowMessage showMessage:@"服务器未响应"];
+    
+//    [self performSegueWithIdentifier:@"players" sender:nil];
+//    if (self.phone.text.length != 11) {
+//        [self showMessage:@"用户名是您的手机号码"];
+//    }else if (self.phone.text.length == 11 && (self.password.text.length < 6 || self.password.text.length > 18)){
+//        [self showMessage:@"密码长度需要大于6位小于18位"];
+//        
+//    }else{
+//       
+//    }
+
+    /**
+     
+     限制手机号码位数更改 目前不限制手机号码
+     
+     */
+    
+    NSString *password = [NSString stringWithString:[MD5 md5:self.password.text]];
+    [UserConnector login:self.phone.text password:password receiver:^(NSData *data,NSError *error){
+        if (error) {
+            [ShowMessage showMessage:@"服务器未响应"];
+        }else{
+            SBJsonParser *parser=[[SBJsonParser alloc]init];
+            NSMutableDictionary *json=[parser objectWithData:data];
+            int status = [[json objectForKey:@"status"] intValue];
+            if (status==1) {
+                [self showMessage:@"账号或密码错误"];
             }else{
-                SBJsonParser *parser=[[SBJsonParser alloc]init];
-                NSMutableDictionary *json=[parser objectWithData:data];
-                int status = [[json objectForKey:@"status"] intValue]; 
-                if (status==1) {
-                    [self showMessage:@"账号或密码错误"];
-                }else{
+                
+                MBProgressHUD * HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                HUD.delegate = self;
+                HUD.labelText = @"登录中";
+                
+                NSDictionary *userDict = [json objectForKey:@"entity"];
+                NSString *session=[json objectForKey:@"extra"];
+                [PersistenceManager setLoginUser:userDict];
+                [PersistenceManager setLoginSession:session];
+                [[NSUserDefaults standardUserDefaults]setObject:self.phone.text forKey:@"username"];
+                [[NSUserDefaults standardUserDefaults]synchronize];
+                
+                NSString * product = [NSString stringWithFormat:@"product_%@",userDict[@"id"]];
+                NSString * passMD5 = [NSString stringWithString:[MD5 md5:product]];
+                
+                //环信用户组
+                [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:product password:passMD5 completion:^(NSDictionary *loginInfo, EMError *error) {
+                    NSLog(@"***登录成功");
+                    [self performSegueWithIdentifier:@"players" sender:nil];
+                    [HUD hide:YES afterDelay:0];
                     
-                    MBProgressHUD * HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                    HUD.delegate = self;
-                    HUD.labelText = @"登录中";
-                   
-                    NSDictionary *userDict = [json objectForKey:@"entity"];
-                    NSString *session=[json objectForKey:@"extra"];
-                    [PersistenceManager setLoginUser:userDict];
-                    [PersistenceManager setLoginSession:session];
-                    [[NSUserDefaults standardUserDefaults]setObject:self.phone.text forKey:@"username"];
-                    [[NSUserDefaults standardUserDefaults]synchronize];
-
-                    NSString * product = [NSString stringWithFormat:@"product_%@",userDict[@"id"]];
-                    NSString * passMD5 = [NSString stringWithString:[MD5 md5:product]];
+                    //获取数据库中的数据
+                    [[EaseMob sharedInstance].chatManager loadDataFromDatabase];
                     
-                    //环信用户组
-                    [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:product password:passMD5 completion:^(NSDictionary *loginInfo, EMError *error) {
-                        NSLog(@"***登录成功");
-                        [self performSegueWithIdentifier:@"players" sender:nil];
-                        [HUD hide:YES afterDelay:0];
-
-                        //获取数据库中的数据
-                        [[EaseMob sharedInstance].chatManager loadDataFromDatabase];
-                        
-                    } onQueue:nil];
-
-                }
+                } onQueue:nil];
+                
             }
-        }];
-    }
+        }
+    }];
+
     
 }
 - (void)showMessage:(NSString *)string
@@ -129,10 +139,6 @@
     [alertController addAction:cancelAction];
     [alertController addAction:sureAction];
     [self presentViewController:alertController animated:YES completion:nil];
-}
-- (void)loginEsay
-{
-    
 }
 
 
