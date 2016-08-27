@@ -13,7 +13,7 @@
 -(void)setDictionary:(NSDictionary *)dictionary
 {
     NSLog(@"%@",dictionary);
-    [_guildImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@!1",dictionary[@"headUrl"]]] placeholderImage:[UIImage imageNamed:@"gonghui"]];
+    [_guildImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@!1",dictionary[@"headUrl"]]]];
     _guildImage.frame = CGRectMake(10, 10, 40, 40);
     _guildImage.layer.cornerRadius = 20;
     _guildImage.clipsToBounds = YES;
@@ -45,6 +45,7 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         _guildImage = [[UIImageView alloc]init];
+        _guildImage.backgroundColor = [UIColor grayColor];
         [self addSubview:_guildImage];
         _guildName = [[UILabel alloc]init];
         [self addSubview:_guildName];

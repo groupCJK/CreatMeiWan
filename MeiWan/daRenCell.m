@@ -16,7 +16,7 @@
     if ( self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         UIImageView * memberHeader = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 40, 40)];
-        memberHeader.image = [UIImage imageNamed:@"gonghui"];
+        memberHeader.backgroundColor = [UIColor grayColor];
         memberHeader.layer.cornerRadius = 20;
         memberHeader.clipsToBounds = YES;
         [self addSubview:memberHeader];
@@ -42,7 +42,7 @@
 -(void)setDictionary:(NSDictionary *)dictionary
 {
     
-    [self.darenHeader sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@!1",dictionary[@"headUrl"]]] placeholderImage:[UIImage imageNamed:@"gonghui"]];
+    [self.darenHeader sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@!1",dictionary[@"headUrl"]]]];
     
     self.nickName.text = dictionary[@"nickname"];
     self.nickName.font  = [UIFont systemFontOfSize:16.0];
