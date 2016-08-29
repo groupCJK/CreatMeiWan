@@ -269,7 +269,10 @@
 }
 - (void)setupRefresh
 {
-    [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
+    self.tableView.mj_header = [MJRefreshHeader headerWithRefreshingBlock:^{
+        [self headerRereshing];
+    }];
+
 }
 //上拉刷新
 - (void)headerRereshing
@@ -307,7 +310,7 @@
             }
         }];
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-        [self.tableView  headerEndRefreshing];
+        [self.tableView.mj_header endRefreshing];
     });
 }
 

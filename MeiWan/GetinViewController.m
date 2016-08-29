@@ -110,15 +110,13 @@
                 NSString * passMD5 = [NSString stringWithString:[MD5 md5:product]];
                 
                 //环信用户组
-                [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:product password:passMD5 completion:^(NSDictionary *loginInfo, EMError *error) {
-                    NSLog(@"***登录成功");
+                EMError *error = [[EMClient sharedClient] loginWithUsername:product password:passMD5];
+                if (!error) {
+                    NSLog(@"登录成功");
                     [self performSegueWithIdentifier:@"players" sender:nil];
                     [HUD hide:YES afterDelay:0];
-                    
-                    //获取数据库中的数据
-                    [[EaseMob sharedInstance].chatManager loadDataFromDatabase];
-                    
-                } onQueue:nil];
+                    [[EMClient sharedClient].chatManager getAllConversations];
+                }
                 
             }
         }

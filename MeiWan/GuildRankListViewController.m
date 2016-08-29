@@ -40,11 +40,12 @@
     tableview.delegate = self;
     tableview.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:tableview];
-    [tableview addHeaderWithTarget:self action:@selector(headRefresh:)];
-    [tableview addFooterWithTarget:self action:@selector(footRefresh:)];
-    
-    
-    
+    tableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self headRefresh:0];
+    }];
+    tableview.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self footRefresh:0];
+    }];
     
     self.tableview = tableview;
 }

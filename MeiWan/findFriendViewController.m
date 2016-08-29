@@ -165,7 +165,7 @@
     NSString *product = [NSString stringWithFormat:@"%@%ld",
                          [setting getRongLianYun],[[self.findDic objectForKey:@"id"]longValue]];
     
-    ChatViewController *messageCtr = [[ChatViewController alloc] initWithConversationChatter:product conversationType:eConversationTypeChat];
+    ChatViewController *messageCtr = [[ChatViewController alloc] initWithConversationChatter:product conversationType:EMConversationTypeChat];
     messageCtr.title = [NSString stringWithFormat:@"%@",
                         [self.findDic objectForKey:@"nickname"]];
     [self.navigationController pushViewController:messageCtr animated:YES];
