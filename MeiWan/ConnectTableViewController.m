@@ -7,8 +7,6 @@
 //
 
 #import "ConnectTableViewController.h"
-//#import "DeviceDBHelper.h"
-//#import "ECDeviceKit.h"
 #import "Meiwan-Swift.h"
 #import "setting.h"
 #import "ShowMessage.h"
@@ -20,15 +18,14 @@
 #import "EaseConversationListViewController.h"
 #import "MBProgressHUD.h"
 
-//#import "IMMsgDBAccess.h"
-//#import "DeviceDelegateHelper.h"
 
-@interface ConnectTableViewController ()<EMChatManagerDelegate,IChatManagerDelegate>
+@interface ConnectTableViewController ()<EMChatManagerDelegate,EMGroupManagerDelegate>
 @property (strong, nonatomic) IBOutlet UITableViewCell *inviteMe;
 @property (strong, nonatomic) IBOutlet UILabel *unreadImLab;
 @property (strong, nonatomic) NSDictionary *playerInfo;
 @property (strong, nonatomic) IBOutlet UITableView *messageTableView;
 @property (strong, nonatomic) NSDate *lastPlaySoundDate;
+@property (strong, nonatomic) NSDictionary * sendPlayerDic;
 
 @end
 
@@ -37,38 +34,50 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    EMPushNotificationOptions *options = [[EaseMob sharedInstance].chatManager pushNotificationOptions];
-    options.nickname = @"你有一条新消息";
+    /**
+     *未读消息数量
+     */
+    NSArray *conversations = [[EMClient sharedClient].chatManager getAllConversations];
+    NSInteger unreadCount = 0;
+    for (EMConversation *conversation in conversations) {
+        unreadCount += conversation.unreadMessagesCount;
+    }
+    NSArray *items = self.tabBarController.tabBar.items;
+    UITabBarItem *chatItem = items[3];
+    if (unreadCount > 0) {
+        chatItem.badgeValue = [NSString stringWithFormat:@"%i",(int)unreadCount];
+    }else{
+        chatItem.badgeValue = nil;
+    }
     
-    if ([[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase]==0) {
+    if (unreadCount==0) {
         self.unreadImLab.hidden = YES;
     }else{
         [self didUnreadMessagesCountChanged];
     }
     self.tabBarController.tabBar.hidden = NO;
     
-    
-    NSArray *items = self.tabBarController.tabBar.items;
-    UITabBarItem *chatItem = items[3];
-    
-    if ([[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase]>0) {
-        chatItem.badgeValue = [NSString stringWithFormat:@"%lu", (unsigned long)[[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase]];
-    }else{
-        chatItem.badgeValue = nil;
-    }
-
-    
 }
 /**收到消息时调用此方法，环信代理*/
--(void)didReceiveMessage:(EMMessage *)message
+-(void)didReceiveMessages:(NSArray *)aMessages
 {
-    NSLog(@"差评差评");
-    self.unreadImLab.text = [NSString stringWithFormat:@"%lu",(unsigned long)[[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase]];
+    NSArray *conversations = [[EMClient sharedClient].chatManager getAllConversations];
+    NSInteger unreadCount = 0;
+    for (EMConversation *conversation in conversations) {
+        unreadCount += conversation.unreadMessagesCount;
+    }
+    self.unreadImLab.text = [NSString stringWithFormat:@"%i",(int)unreadCount];
 }
 
 - (void)didUnreadMessagesCountChanged{
     
-    self.unreadImLab.text = [NSString stringWithFormat:@"%lu",(unsigned long)[[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase]];
+    NSArray *conversations = [[EMClient sharedClient].chatManager getAllConversations];
+    NSInteger unreadCount = 0;
+    for (EMConversation *conversation in conversations) {
+        unreadCount += conversation.unreadMessagesCount;
+    }
+
+    self.unreadImLab.text = [NSString stringWithFormat:@"%d",unreadCount];
     self.unreadImLab.hidden = NO;
     [self.messageTableView reloadData];
 }
@@ -100,7 +109,7 @@
     }else{
         self.inviteMe.hidden = YES;
     }
-    [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
+    [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
     
 }
 - (void)didReceiveMemoryWarning {
@@ -110,19 +119,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
-//        NSMutableDictionary *sessionHeadUrls = [NSMutableDictionary dictionary];
-//        NSMutableDictionary *ecnicknames = [NSMutableDictionary dictionary];
-//        NSString *myurl = [[PersistenceManager getLoginUser]objectForKey:@"headUrl"];
+
         __block BOOL show;
-//        NSDictionary *userInfo = [PersistenceManager getLoginUser];
-//        NSString *thesame = [NSString stringWithFormat:@"%ld",[[userInfo objectForKey:@"id"]longValue]];
+        
         EaseConversationListViewController *conversationList = [[EaseConversationListViewController alloc] init];
         conversationList.title = @"消息";
+        conversationList.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:conversationList animated:YES];
             show = [setting canOpen];
-
             [setting getOpen];
-
     }
 }
 
@@ -240,6 +245,5 @@
     }
 
 }
-
 
 @end

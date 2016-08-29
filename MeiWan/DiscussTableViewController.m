@@ -182,15 +182,16 @@
                          发送评论成功。要向被评论者，发送消息通知动态中被评论了
                          
                          */
-                        EMChatText *txtChat = [[EMChatText alloc] initWithText:[NSString stringWithFormat:@"评论了您:'%@'",content]];
-                        EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithChatObject:txtChat];
-                        EMMessage *message = [[EMMessage alloc] initWithReceiver:[NSString stringWithFormat:@"product_%@",_LZDictionary[@"id"]] bodies:@[body]];
-                        message.messageType = eMessageTypeChat; // 设置为单聊消息
                         
-                        [[EaseMob sharedInstance].chatManager asyncSendMessage:message
-                                                                      progress:nil];
-
+                        EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:[NSString stringWithFormat:@"评论了您:'%@'",content]];
+                        NSString *from = [[EMClient sharedClient] currentUsername];
                         
+                        EMMessage * Sendmessage = [[EMMessage alloc]initWithConversationID:[NSString stringWithFormat:@"product_%@",_LZDictionary[@"id"]] from:from to:[NSString stringWithFormat:@"product_%@",_LZDictionary[@"id"]] body:body ext:@{@"动态评论":@"动态回复"}];
+                        [[EMClient sharedClient].chatManager sendMessage:Sendmessage progress:^(int progress) {
+                            NSLog(@"%d",progress);
+                        } completion:^(EMMessage *message, EMError *error) {
+                            NSLog(@"发送信息de %@\n%@",message,error);
+                        }];
                         
                     }else if(status == 1){
                         [PersistenceManager setLoginSession:@""];
@@ -231,25 +232,33 @@
                          发送给楼主一条信息，发送给评论者一条信息
                          
                          */
+                        
                         NSDictionary * fromUserDic = [self.tableData[self.inputField.tag]objectForKey:@"fromUser"];
 
-                        EMChatText *txtChat = [[EMChatText alloc] initWithText:[NSString stringWithFormat:@"回复了%@:'%@'",fromUserDic[@"nickname"],content]];
-                        EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithChatObject:txtChat];
-                        EMMessage *message = [[EMMessage alloc] initWithReceiver:[NSString stringWithFormat:@"product_%@",_LZDictionary[@"id"]] bodies:@[body]];
-                        message.messageType = eMessageTypeChat; // 设置为单聊消息
                         
-                        [[EaseMob sharedInstance].chatManager asyncSendMessage:message
-                                                                      progress:nil];
+                        EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:[NSString stringWithFormat:@"评论了您:'%@'",content]];
+                        NSString *from = [[EMClient sharedClient] currentUsername];
                         
-                
+                        //生成Message
+                        EMMessage * Sendmessage = [[EMMessage alloc]initWithConversationID:[NSString stringWithFormat:@"product_%@",_LZDictionary[@"id"]] from:from to:[NSString stringWithFormat:@"product_%@",_LZDictionary[@"id"]] body:body ext:@{@"动态评论":@"动态回复"}];
+                        [[EMClient sharedClient].chatManager sendMessage:Sendmessage progress:^(int progress) {
+                            NSLog(@"%d",progress);
+                        } completion:^(EMMessage *message, EMError *error) {
+                            NSLog(@"发送信息de %@\n%@",message,error);
+                        }];
+                        
+                        
+                        EMTextMessageBody *body2 = [[EMTextMessageBody alloc] initWithText:[NSString stringWithFormat:@"回复:'%@'",content]];
+                        NSString *from2 = [[EMClient sharedClient] currentUsername];
+                        
+                        EMMessage * Sendmessage2 = [[EMMessage alloc]initWithConversationID:[NSString stringWithFormat:@"product_%@",fromUserDic[@"id"]] from:from2 to:[NSString stringWithFormat:@"product_%@",fromUserDic[@"id"]] body:body2 ext:@{@"动态评论":@"动态回复"}];
+                        [[EMClient sharedClient].chatManager sendMessage:Sendmessage2 progress:^(int progress) {
+                            NSLog(@"%d",progress);
+                        } completion:^(EMMessage *message, EMError *error) {
+                            NSLog(@"发送信息de %@\n%@",message,error);
+                        }];
 
-                        EMChatText *txtChat2 = [[EMChatText alloc] initWithText:[NSString stringWithFormat:@"回复:'%@'",content]];
-                        EMTextMessageBody *body2 = [[EMTextMessageBody alloc] initWithChatObject:txtChat2];
-                        EMMessage *message2 = [[EMMessage alloc] initWithReceiver:[NSString stringWithFormat:@"product_%@",fromUserDic[@"id"]] bodies:@[body2]];
-                        message2.messageType = eMessageTypeChat; // 设置为单聊消息
-                        
-                        [[EaseMob sharedInstance].chatManager asyncSendMessage:message2
-                                                                      progress:nil];
+
                         
                     }else if(status == 1){
                         [PersistenceManager setLoginSession:@""];
