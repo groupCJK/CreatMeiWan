@@ -1,35 +1,39 @@
-//
-//  EaseConversationListViewController.m
-//  ChatDemo-UI3.0
-//
-//  Created by dhc on 15/6/25.
-//  Copyright (c) 2015年 easemob.com. All rights reserved.
-//
+/************************************************************
+ *  * Hyphenate CONFIDENTIAL
+ * __________________
+ * Copyright (C) 2016 Hyphenate Inc. All rights reserved.
+ *
+ * NOTICE: All information contained herein is, and remains
+ * the property of Hyphenate Inc.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Hyphenate Inc.
+ */
 
 #import "EaseConversationListViewController.h"
 
-#import "EaseMob.h"
-#import "EaseSDKHelper.h"
 #import "EaseEmotionEscape.h"
 #import "EaseConversationCell.h"
 #import "EaseConvertToCommonEmoticonsHelper.h"
+#import "EaseMessageViewController.h"
 #import "NSDate+Category.h"
-#import "EaseMessageHelper.h"
+#import "EaseLocalDefine.h"
+#import "MBProgressHUD.h"
+
 #import "UserInfo.h"
 #import "setting.h"
-#import "Meiwan-Swift.h"
+#import "MeiWan-Swift.h"
 #import "ChatViewController.h"
 #import "CorlorTransform.h"
 #import "SBJson.h"
 #import "ShowMessage.h"
+#import "ShowMessage.h"
+#import "UIImageView+EMWebCache.h"
 #import "EMCDDeviceManagerDelegate.h"
 
-#import "UIImageView+EMWebCache.h"
-#import "MBProgressHUD.h"
-
-@interface EaseConversationListViewController () <IChatManagerDelegate,MBProgressHUDDelegate>
+@interface EaseConversationListViewController ()<MBProgressHUDDelegate,EMChatManagerDelegate>
 {
-    MBProgressHUD* HUD;
+    MBProgressHUD * HUD;
 }
 @end
 
@@ -38,9 +42,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    self.tabBarController.tabBar.hidden = YES;
-    
     [self tableViewDidTriggerHeaderRefresh];
     [self registerNotifications];
 }
@@ -53,21 +54,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Do any additional setup after loading the view.
     HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     HUD.delegate = self;
     
-//    [self loadUserInfoDatas];
+    //    [self loadUserInfoDatas];
     
-    //获取好友消息列表
-    [[EaseMob sharedInstance].chatManager loadAllConversationsFromDatabaseWithAppend2Chat:YES];
+    //获取消息列表
+    NSArray *conversations =  [[EMClient sharedClient].chatManager getAllConversations];
+    
+    self.dataArray = [NSMutableArray arrayWithArray:conversations];
     [HUD hide:YES afterDelay:0];
     self.view.frame = CGRectMake(0, 0, dtScreenWidth, dtScreenHeight);
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self.navigationController.navigationBar setBarTintColor:[CorlorTransform colorWithHexString:@"#3f90a4"]];
-
-    // Do any additional setup after loading the view.
-    [self configEaseMessageHelper];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -102,12 +104,17 @@
     }
     
     if ([self.dataArray count] <= indexPath.row) {
-        
         return cell;
     }
     
     id<IConversationModel> model = [self.dataArray objectAtIndex:indexPath.row];
-    NSString * chatId =  model.conversation.chatter;
+    cell.model = model;
+    /**
+     头像设置圆角
+     */
+    cell.avatarView.imageView.layer.cornerRadius = 20;
+    cell.avatarView.imageView.clipsToBounds = YES;
+    NSString * chatId =  model.conversation.conversationId;
     NSString* userIdStr= [chatId stringByReplacingOccurrencesOfString:@"product_" withString:@""];
     NSNumber* userId =[NSNumber numberWithLong: [userIdStr integerValue]];
     NSDictionary* userCache = [userDefaults dictionaryForKey:userIdStr];
@@ -115,6 +122,7 @@
         model.title=[userCache objectForKey:@"nickname"];
         model.avatarURLPath=[userCache objectForKey:@"headUrl"];
     }else{
+        
         
         NSString *session= [PersistenceManager getLoginSession];
         [UserConnector findPeiwanById:session userId:userId receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
@@ -137,27 +145,19 @@
             }
             
         }];
-
+        
+        
+    }
+    cell.model = model;
+    
+    if (_dataSource && [_dataSource respondsToSelector:@selector(conversationListViewController:latestMessageTitleForConversationModel:)]) {
+        NSMutableAttributedString *attributedText = [[_dataSource conversationListViewController:self latestMessageTitleForConversationModel:model] mutableCopy];
+        [attributedText addAttributes:@{NSFontAttributeName : cell.detailLabel.font} range:NSMakeRange(0, attributedText.length)];
+        cell.detailLabel.attributedText =  attributedText;
+    } else {
+        cell.detailLabel.attributedText =  [[EaseEmotionEscape sharedInstance] attStringFromTextForChatting:[self _latestMessageTitleForConversationModel:model]textFont:cell.detailLabel.font];
     }
     
-    cell.model = model;
-    if (_dataSource && [_dataSource respondsToSelector:@selector(conversationListViewController:latestMessageTitleForConversationModel:)]) {
-        cell.detailLabel.text = [_dataSource conversationListViewController:self latestMessageTitleForConversationModel:model];
-//        cell.titleLabel.text = product;
-        
-//        cell.avatarView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",[self.playerInfo objectForKey:@"nickname"]]];
-//        NSURL *url = [NSURL URLWithString:[self.playerInfo objectForKey:@"headUrl"]];
-//        NSString *urlStr = url.absoluteString;
-        
-//        [cell.avatarView setImageWithURL:urlStr];
-//        [cell.avatarView setImageWithURL:urlStr];
-//        cell.avatarView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",[self.playerInfo objectForKey:@"headUrl"]]];
-//        cell.titleLabel.text = [NSString stringWithFormat:@"%@",[self.playerInfo objectForKey:@"nickname"]];
-    } else {
-        cell.detailLabel.text = [self _latestMessageTitleForConversationModel:model];
-
-    }
-
     if (_dataSource && [_dataSource respondsToSelector:@selector(conversationListViewController:latestMessageTimeForConversationModel:)]) {
         cell.timeLabel.text = [_dataSource conversationListViewController:self latestMessageTimeForConversationModel:model];
     } else {
@@ -176,46 +176,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
+    
     EaseConversationModel *model = [self.dataArray objectAtIndex:indexPath.row];
-    [_delegate conversationListViewController:self didSelectConversationModel:model];
-    
-    NSString *easeMobChatId = model.conversation.chatter;
-    
-    ChatViewController *messageCtr = [[ChatViewController alloc] initWithConversationChatter:easeMobChatId conversationType:eConversationTypeChat];
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString* userIdStr= [easeMobChatId stringByReplacingOccurrencesOfString:@"product_" withString:@""];
-    NSNumber* userId =[NSNumber numberWithLong: [userIdStr integerValue]];
-    NSDictionary* userCache = [userDefaults dictionaryForKey:userIdStr];
-    if (userCache) {
-        messageCtr.title=[userCache objectForKey:@"nickname"];
-    }else{
-        
-        NSString *session= [PersistenceManager getLoginSession];
-        [UserConnector findPeiwanById:session userId:userId receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
-            if (!error) {
-                SBJsonParser*parser=[[SBJsonParser alloc]init];
-                NSMutableDictionary *json=[parser objectWithData:data];
-                int status = [[json objectForKey:@"status"]intValue];
-                if (status == 0) {
-                    NSMutableDictionary* user  = [json objectForKey:@"entity"];
-                    [user removeObjectForKey:@"userStates"];
-                    [user removeObjectForKey:@"userTags"];
-                    [userDefaults setObject:user forKey:userIdStr];
-                    messageCtr.title=[user objectForKey:@"nickname"];
-                }
-                
-            }else{
-                
-            }
-            
-        }];
-
-    }
-    self.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:messageCtr animated:YES];
+    ChatViewController *viewController = [[ChatViewController alloc] initWithConversationChatter:model.conversation.conversationId conversationType:model.conversation.type];
+    viewController.title = [NSString stringWithFormat:@"与%@会话",model.title];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -226,7 +192,7 @@
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         EaseConversationModel *model = [self.dataArray objectAtIndex:indexPath.row];
-        [[EaseMob sharedInstance].chatManager removeConversationByChatter:model.conversation.chatter deleteMessages:YES append2Chat:YES];
+        [[EMClient sharedClient].chatManager deleteConversation:model.conversation.conversationId isDeleteMessages:YES completion:nil];
         [self.dataArray removeObjectAtIndex:indexPath.row];
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
@@ -234,9 +200,30 @@
 
 #pragma mark - data
 
+-(void)refreshAndSortView
+{
+    if ([self.dataArray count] > 1) {
+        if ([[self.dataArray objectAtIndex:0] isKindOfClass:[EaseConversationModel class]]) {
+            NSArray* sorted = [self.dataArray sortedArrayUsingComparator:
+                               ^(EaseConversationModel *obj1, EaseConversationModel* obj2){
+                                   EMMessage *message1 = [obj1.conversation latestMessage];
+                                   EMMessage *message2 = [obj2.conversation latestMessage];
+                                   if(message1.timestamp > message2.timestamp) {
+                                       return(NSComparisonResult)NSOrderedAscending;
+                                   }else {
+                                       return(NSComparisonResult)NSOrderedDescending;
+                                   }
+                               }];
+            [self.dataArray removeAllObjects];
+            [self.dataArray addObjectsFromArray:sorted];
+        }
+    }
+    [self.tableView reloadData];
+}
+
 - (void)tableViewDidTriggerHeaderRefresh
 {
-    NSArray *conversations = [[EaseMob sharedInstance].chatManager conversations];
+    NSArray *conversations = [[EMClient sharedClient].chatManager getAllConversations];
     NSArray* sorted = [conversations sortedArrayUsingComparator:
                        ^(EMConversation *obj1, EMConversation* obj2){
                            EMMessage *message1 = [obj1 latestMessage];
@@ -255,7 +242,7 @@
         EaseConversationModel *model = nil;
         if (self.dataSource && [self.dataSource respondsToSelector:@selector(conversationListViewController:modelForConversation:)]) {
             model = [self.dataSource conversationListViewController:self
-                                                   modelForConversation:converstion];
+                                               modelForConversation:converstion];
         }
         else{
             model = [[EaseConversationModel alloc] initWithConversation:converstion];
@@ -270,14 +257,9 @@
     [self tableViewDidFinishTriggerHeader:YES reload:NO];
 }
 
-#pragma mark - IChatMangerDelegate
+#pragma mark - EMGroupManagerDelegate
 
--(void)didUnreadMessagesCountChanged
-{
-    [self tableViewDidTriggerHeaderRefresh];
-}
-
-- (void)didUpdateGroupList:(NSArray *)allGroups error:(EMError *)error
+- (void)didUpdateGroupList:(NSArray *)groupList
 {
     [self tableViewDidTriggerHeaderRefresh];
 }
@@ -285,16 +267,17 @@
 #pragma mark - registerNotifications
 -(void)registerNotifications{
     [self unregisterNotifications];
-    [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
+    [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
+    [[EMClient sharedClient].groupManager addDelegate:self delegateQueue:nil];
 }
 
 -(void)unregisterNotifications{
-    [[EaseMob sharedInstance].chatManager removeDelegate:self];
+    [[EMClient sharedClient].chatManager removeDelegate:self];
+    [[EMClient sharedClient].groupManager removeDelegate:self];
 }
 
 - (void)dealloc{
     [self unregisterNotifications];
-    [self removeEaseMessageHelper];
 }
 
 #pragma mark - private
@@ -303,27 +286,27 @@
     NSString *latestMessageTitle = @"";
     EMMessage *lastMessage = [conversationModel.conversation latestMessage];
     if (lastMessage) {
-        id<IEMMessageBody> messageBody = lastMessage.messageBodies.lastObject;
-        switch (messageBody.messageBodyType) {
-            case eMessageBodyType_Image:{
-                latestMessageTitle = NSLocalizedString(@"message.image1", @"[image]");
+        EMMessageBody *messageBody = lastMessage.body;
+        switch (messageBody.type) {
+            case EMMessageBodyTypeImage:{
+                latestMessageTitle = NSEaseLocalizedString(@"message.image1", @"[image]");
             } break;
-            case eMessageBodyType_Text:{
+            case EMMessageBodyTypeText:{
                 NSString *didReceiveText = [EaseConvertToCommonEmoticonsHelper
                                             convertToSystemEmoticons:((EMTextMessageBody *)messageBody).text];
                 latestMessageTitle = didReceiveText;
             } break;
-            case eMessageBodyType_Voice:{
-                latestMessageTitle = NSLocalizedString(@"message.voice1", @"[voice]");
+            case EMMessageBodyTypeVoice:{
+                latestMessageTitle = NSEaseLocalizedString(@"message.voice1", @"[voice]");
             } break;
-            case eMessageBodyType_Location: {
-                latestMessageTitle = NSLocalizedString(@"message.location1", @"[location]");
+            case EMMessageBodyTypeLocation: {
+                latestMessageTitle = NSEaseLocalizedString(@"message.location1", @"[location]");
             } break;
-            case eMessageBodyType_Video: {
-                latestMessageTitle = NSLocalizedString(@"message.video1", @"[video]");
+            case EMMessageBodyTypeVideo: {
+                latestMessageTitle = NSEaseLocalizedString(@"message.video1", @"[video]");
             } break;
-            case eMessageBodyType_File: {
-                latestMessageTitle = NSLocalizedString(@"message.file1", @"[file]");
+            case EMMessageBodyTypeFile: {
+                latestMessageTitle = NSEaseLocalizedString(@"message.file1", @"[file]");
             } break;
             default: {
             } break;
@@ -346,22 +329,6 @@
         latestMessageTime = [formatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:timeInterval]];
     }
     return latestMessageTime;
-}
-
-//[UserConnector aroundPeiwan:session gender:[self.searchDic objectForKey:@"gender"] minPrice:[self.searchDic objectForKey:@"minPrice"] maxPrice:[self.searchDic objectForKey:@"maxPrice"] isWin:nil offset:0 limit:self.infoCount
-
-
-#pragma mark - Helper
-
-// 注册 EaseMessageHelperProtocal
-- (void)configEaseMessageHelper
-{
-    [[EaseMessageHelper sharedInstance] addDelegate:self];
-}
-//取消 EaseMessageHelperProtocal
-- (void)removeEaseMessageHelper
-{
-    [[EaseMessageHelper sharedInstance] removeDelegate:self];
 }
 
 
