@@ -1,17 +1,18 @@
 /************************************************************
- *  * EaseMob CONFIDENTIAL
+ *  * Hyphenate CONFIDENTIAL
  * __________________
- * Copyright (C) 2013-2014 EaseMob Technologies. All rights reserved.
+ * Copyright (C) 2016 Hyphenate Inc. All rights reserved.
  *
  * NOTICE: All information contained herein is, and remains
- * the property of EaseMob Technologies.
+ * the property of Hyphenate Inc.
  * Dissemination of this information or reproduction of this material
  * is strictly forbidden unless prior written permission is obtained
- * from EaseMob Technologies.
+ * from Hyphenate Inc.
  */
 
 #import "EMAudioPlayerUtil.h"
 #import <AVFoundation/AVFoundation.h>
+#import "EaseLocalDefine.h"
 
 static EMAudioPlayerUtil *audioPlayerUtil = nil;
 
@@ -54,13 +55,12 @@ static EMAudioPlayerUtil *audioPlayerUtil = nil;
     return audioPlayerUtil;
 }
 
-// 当前是否正在播放
 - (BOOL)isPlaying
 {
     return !!_player;
 }
 
-// 得到当前播放音频路径
+// Get the path of what is currently being played
 - (NSString *)playingFilePath
 {
     NSString *path = nil;
@@ -77,7 +77,7 @@ static EMAudioPlayerUtil *audioPlayerUtil = nil;
     NSError *error = nil;
     NSFileManager *fm = [NSFileManager defaultManager];
     if (![fm fileExistsAtPath:aFilePath]) {
-        error = [NSError errorWithDomain:NSLocalizedString(@"error.notFound", @"File path not exist")
+        error = [NSError errorWithDomain:NSEaseLocalizedString(@"error.notFound", @"File path not exist")
                                     code:-1
                                 userInfo:nil];
         if (playFinish) {
@@ -92,7 +92,7 @@ static EMAudioPlayerUtil *audioPlayerUtil = nil;
     _player = [[AVAudioPlayer alloc] initWithContentsOfURL:wavUrl error:&error];
     if (error || !_player) {
         _player = nil;
-        error = [NSError errorWithDomain:NSLocalizedString(@"error.initPlayerFail", @"Failed to initialize AVAudioPlayer")
+        error = [NSError errorWithDomain:NSEaseLocalizedString(@"error.initPlayerFail", @"Failed to initialize AVAudioPlayer")
                                     code:-1
                                 userInfo:nil];
         if (playFinish) {
@@ -107,7 +107,6 @@ static EMAudioPlayerUtil *audioPlayerUtil = nil;
     [_player play];
 }
 
-// 停止当前播放
 - (void)stopCurrentPlaying{
     if(_player){
         _player.delegate = nil;
@@ -144,7 +143,7 @@ static EMAudioPlayerUtil *audioPlayerUtil = nil;
 - (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player
                                  error:(NSError *)error{
     if (playFinish) {
-        NSError *error = [NSError errorWithDomain:NSLocalizedString(@"error.palyFail", @"Play failure")
+        NSError *error = [NSError errorWithDomain:NSEaseLocalizedString(@"error.palyFail", @"Play failure")
                                              code:-1
                                          userInfo:nil];
         playFinish(error);
