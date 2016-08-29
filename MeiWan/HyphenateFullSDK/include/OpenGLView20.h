@@ -1,14 +1,23 @@
-//
-//  IOpenGLView.h
-//  EaseMobClientSDK
-//
-//  Created by dhc on 15/5/5.
-//  Copyright (c) 2015年 EaseMob. All rights reserved.
-//
+/*!
+ *  \~chinese
+ *  @header OpenGLView20.h
+ *  @abstract 视频显示页面
+ *  @author Hyphenate
+ *  @version 3.00
+ *
+ *  \~english
+ *  @header OpenGLView20.h
+ *  @abstract Video display view
+ *  @author Hyphenate
+ *  @version 3.00
+ */
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <CoreMedia/CoreMedia.h>
 
-@protocol IOpenGLView <NSObject>
+@interface OpenGLView20 : UIView
+
+@property (nonatomic) BOOL isRunning;
 
 /*!
  @method
