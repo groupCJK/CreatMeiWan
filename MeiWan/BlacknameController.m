@@ -7,7 +7,7 @@
 //
 
 #import "BlacknameController.h"
-#import "EaseMob.h"
+#import "EMSDK.h"
 #import "Meiwan-Swift.h"
 #import "SBJson.h"
 #import "ShowMessage.h"
@@ -48,42 +48,8 @@
     //获取黑名单
     _blackFriend = [[NSMutableArray alloc]initWithCapacity:0];
     
-    [[EaseMob sharedInstance].chatManager asyncFetchBlockedListWithCompletion:^(NSArray *blockedList, EMError *error) {
-        if (!error) {
-//            NSLog(@"获取成功 -- %@",blockedList);
-            if (blockedList!=nil) {
-                [blockedList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    NSString * str = blockedList[idx];
-                    NSString * newStr = [str substringFromIndex:8];
-                    
-                    NSString *session= [PersistenceManager getLoginSession];
-                    [UserConnector findPeiwanById:session userId:[NSNumber numberWithInteger:[newStr integerValue]] receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
-                        
-                        if (error) {
-                            [ShowMessage showMessage:@"服务器未响应"];
-                        }else{
-                            SBJsonParser*parser=[[SBJsonParser alloc]init];
-                            NSMutableDictionary *json=[parser objectWithData:data];
-//                            NSLog(@"------%@",json);
-                            NSDictionary * playerMessage = [json objectForKey:@"entity"];
-                            
-                            [_blackFriend addObject:playerMessage];
-                            
-                            /**黑名单用户*/
-                        }
-                        [_tableView reloadData];
-                    }];
-                    
-                }];
-                
-               
-            }else{
-                
-            }
-        }else{
-            NSLog(@"获取失败 -- %@",error);
-        }
-    } onQueue:nil];
+    _blackFriend = [[EMClient sharedClient].contactManager getBlackListFromDB];
+    
 }
 #pragma mark--- mark----tableview delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -118,12 +84,12 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"%@",[NSString stringWithFormat:@"product_%@",[_blackFriend objectAtIndex:indexPath.row][@"id"]]);
-    EMError *error = [[EaseMob sharedInstance].chatManager unblockBuddy:[NSString stringWithFormat:@"product_%@",[_blackFriend objectAtIndex:indexPath.row][@"id"]]];
+    
+    EMError *error = [[EMClient sharedClient].contactManager removeUserFromBlackList:[NSString stringWithFormat:@"product_%@",[_blackFriend objectAtIndex:indexPath.row][@"id"]]];
     if (!error) {
         NSLog(@"发送成功");
-    }else{
-        NSLog(@"%@",error);
     }
+    
     [_blackFriend removeObjectAtIndex:indexPath.row];
     [_tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
     

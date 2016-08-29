@@ -13,7 +13,7 @@
 #import <MAMapKit/MAMapKit.h>
 //#import "ECDeviceKit.h"
 #import "setting.h"
-#import "EaseMob.h"
+#import "EMSDK.h"
 #import "UserInfo.h"
 #import "MD5.h"
 #import "CorlorTransform.h"
@@ -74,10 +74,11 @@
     apnsCerName = @"MeiWanDirs";
 #endif
     
-    [[EaseMob sharedInstance] registerSDKWithAppKey:@"chuangjike#peiwan" apnsCertName:apnsCerName];
     
-    // 需要在注册sdk后写上该方法
-    [[EaseMob sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+    EMOptions *options = [EMOptions optionsWithAppkey:@"chuangjike#peiwan"];
+    options.apnsCertName = apnsCerName;
+    [[EMClient sharedClient] initializeSDKWithOptions:options];
+    
     [self _registerRemoteNotification];
     
     /**友盟分享*/
@@ -96,56 +97,39 @@
     UIApplication *application = [UIApplication sharedApplication];
     application.applicationIconBadgeNumber = 0;
     
-    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-        //        [application registerForRemoteNotifications];
-        UIUserNotificationType notificationTypes = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    //iOS8 注册APNS
+    if ([application respondsToSelector:@selector(registerForRemoteNotifications)]) {
+        [application registerForRemoteNotifications];
+        UIUserNotificationType notificationTypes = UIUserNotificationTypeBadge |
+        UIUserNotificationTypeSound |
+        UIUserNotificationTypeAlert;
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories:nil];
         [application registerUserNotificationSettings:settings];
     }
-    if ([application respondsToSelector:@selector(registerForRemoteNotifications)]){
-        [application registerForRemoteNotifications];
-    }else{
+    else{
         UIRemoteNotificationType notificationTypes = UIRemoteNotificationTypeBadge |
         UIRemoteNotificationTypeSound |
         UIRemoteNotificationTypeAlert;
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:notificationTypes];
-    }   
+    }
 }
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
     [application registerForRemoteNotifications];
 }
 
-// App进入后台
+// APP进入后台
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    [[EaseMob sharedInstance] applicationDidEnterBackground:application];
-    /**设置当程序进入后台时，小红点的个数*/
-    application.applicationIconBadgeNumber = [[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase];
+    [[EMClient sharedClient] applicationDidEnterBackground:application];
+//    application.applicationIconBadgeNumber = [EMConversation unreadMessagesCount];
 }
 
-// App将要从后台返回
+// APP将要从后台返回
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    [[EaseMob sharedInstance] applicationWillEnterForeground:application];
+    [[EMClient sharedClient] applicationWillEnterForeground:application];
 }
 
-// 申请处理时间
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    [[EaseMob sharedInstance] applicationWillTerminate:application];
-}
-
-//注册远程通知成功回调
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
-        [[EaseMob sharedInstance] application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
-    });
-}
-//注册远程通知失败回调
-- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
-    [[EaseMob sharedInstance] application:application didFailToRegisterForRemoteNotificationsWithError:error];
-    NSLog(@"注册远程通知失败回调error -- %@",error);
-}
 + (BOOL)allowsAnyHTTPSCertificateForHost:(NSString *)host
 {
     return YES;
@@ -172,6 +156,14 @@
     return YES;
 }
 
+// 将得到的deviceToken传给SDK
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
+    [[EMClient sharedClient] bindDeviceToken:deviceToken];
+}
+// 注册deviceToken失败
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
+    NSLog(@"error -- %@",error);
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

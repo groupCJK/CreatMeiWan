@@ -24,6 +24,7 @@
 #import "setting.h"
 #import "EaseMessageViewController.h"
 #import "ChatViewController.h"
+#import "MJRefresh.h"
 
 @interface AssesserInfoViewController ()<UITableViewDataSource,UITableViewDelegate,pageJumpDelegate,userAssessTapdelegate>
 
@@ -139,7 +140,12 @@
 - (void)setupRefresh
 {
 
-    [self.assesserInfoSv addFooterWithTarget:self action:@selector(footerRereshing)];
+//    [self.assesserInfoSv addFooterWithTarget:self action:@selector(footerRereshing)];
+    self.assesserInfoSv.mj_footer =  [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        // 进入刷新状态后会自动调用这个block
+        [self footerRereshing];
+    }];
+    
     
 }
 //上拉刷新
@@ -180,7 +186,7 @@
 
         }];
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-        [self.assesserInfoSv footerEndRefreshing];
+        [self.assesserInfoSv.mj_footer endRefreshing];
     });
 }
 - (void)judgeisFriend{
@@ -562,7 +568,7 @@
     self.assesserInfoSv.contentSize = CGSizeMake(self.view.bounds.size.width, height);
 }
 -(void)showChat{
-    ChatViewController *messageCtr = [[ChatViewController alloc] initWithConversationChatter:@"123" conversationType:eConversationTypeChat];
+    ChatViewController *messageCtr = [[ChatViewController alloc] initWithConversationChatter:@"123" conversationType:EMConversationTypeChat];
     messageCtr.title = @"123";
     [self.navigationController pushViewController:messageCtr animated:YES];
 
