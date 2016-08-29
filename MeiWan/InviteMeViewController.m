@@ -68,8 +68,15 @@
 - (void)setupRefresh
 {
     // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
-    [self.inSv addHeaderWithTarget:self action:@selector(inSvHeaderRereshing)];
-    [self.inSv addFooterWithTarget:self action:@selector(inSvFooterRereshing)];
+    self.inSv.mj_header = [MJRefreshHeader headerWithRefreshingBlock:^{
+        [self inSvHeaderRereshing];
+    }];
+    self.inSv.mj_footer = [MJRefreshFooter footerWithRefreshingBlock:^{
+        [self inSvFooterRereshing];
+    }];
+
+//    [self.inSv addHeaderWithTarget:self action:@selector(inSvHeaderRereshing)];
+//    [self.inSv addFooterWithTarget:self action:@selector(inSvFooterRereshing)];
     
     // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
     
@@ -115,7 +122,7 @@
         }];
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-        [self.inSv  headerEndRefreshing];
+        [self.inSv.mj_header endRefreshing];
     });
 }
 -(void)inSvFooterRereshing{
@@ -149,7 +156,7 @@
         }];
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-        [self.inSv  footerEndRefreshing];
+        [self.inSv.mj_footer endRefreshing];
     });
 }
 

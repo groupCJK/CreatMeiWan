@@ -24,9 +24,10 @@
 #import "WGS84TOGCJ02.h"
 #import "creatAlbum.h"
 
+
 #define width_screen [UIScreen mainScreen].bounds.size.width
 
-@interface PalyListViewController ()<playerviewdelegate,superviewdelegate,MBProgressHUDDelegate,CLLocationManagerDelegate,EaseMessageViewControllerDelegate,IChatManagerDelegate>
+@interface PalyListViewController ()<playerviewdelegate,superviewdelegate,MBProgressHUDDelegate,CLLocationManagerDelegate,EaseMessageViewControllerDelegate,EMChatManagerDelegate,EMClientDelegate>
 {
     MBProgressHUD * HUD;
     NSArray * titlelabel;
@@ -36,6 +37,7 @@
     NSNumber * tagIndexNumber;
     CLLocationManager *_locationManager;
 }
+@property (strong, nonatomic) NSDictionary * sendPlayerDic;
 @property (strong, nonatomic)  UIScrollView *playersScollview;
 @property (nonatomic,strong) RandNumber *myRandNumber;
 @property (nonatomic,strong) NSMutableArray *playerviews;
@@ -60,15 +62,12 @@
 #pragma mark - mapView Delegate
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
 {
-    NSLog(@"%@",locations);
-}
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
-{
+    //    NSLog(@"%@",locations);
     //取出当前位置的坐标
     static int i = 0;
     i++;
     NSLog(@"**************************************定位开始*****************************************%d",i);
-    NSMutableDictionary *userInfoDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:newLocation.coordinate.latitude],@"latitude",[NSNumber numberWithDouble:newLocation.coordinate.longitude],@"longitude",nil];
+    NSMutableDictionary *userInfoDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:locations.lastObject.coordinate.latitude],@"latitude",[NSNumber numberWithDouble:locations.lastObject.coordinate.longitude],@"longitude",nil];
     NSString *session = [PersistenceManager getLoginSession];
     [UserConnector update:session parameters:userInfoDic receiver:^(NSData *data, NSError *error){
         if (error) {
@@ -86,14 +85,10 @@
             }else{
                 
             }
-            
         }
-        
     }];
     [manager stopUpdatingLocation];
-
 }
-
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
     return YES;
 }
@@ -102,22 +97,25 @@
     NSString *product = [NSString stringWithFormat:@"product_%@",[[PersistenceManager getLoginUser] objectForKey:@"id"]];
     NSString *password = [NSString stringWithString:[MD5 md5:product]];
     //　　测试AppKey
+    
+    
     if (!product){
         //环信用户组
-        [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:product password:password completion:^(NSDictionary *loginInfo, EMError *error) {
-            NSLog(@"登录成功");
-            //获取数据库中的数据
-            [[EaseMob sharedInstance].chatManager loadDataFromDatabase];
-        } onQueue:nil];
-    }else {
-        [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:product password:password completion:^(NSDictionary *loginInfo, EMError *error) {
-            //设置自动登录
-            [[EaseMob sharedInstance].chatManager setIsAutoLoginEnabled:YES];
-            [[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
-        } onQueue:nil];
-    }
+        
+        EMError *error = [[EMClient sharedClient] loginWithUsername:product password:password];
+        if (!error) {
 
-    
+            NSLog(@"环信登录成功");
+            [[EMClient sharedClient].options setIsAutoLogin:YES];
+        }
+    }else{
+        EMError *error = [[EMClient sharedClient] loginWithUsername:product password:password];
+        if (!error) {
+            NSLog(@"设置的环信自动登录");
+            [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
+            [[EMClient sharedClient].options setIsAutoLogin:YES];
+        }
+    }
 }
 - (void)initializeLocationService {
     // 初始化定位管理器
@@ -136,16 +134,10 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    [self didReceiveMessage:nil];
-
     
     [self initializeLocationService];
     
-    UIApplication * app = [UIApplication sharedApplication];
-    //获得未读信息数量
-    NSInteger badgeNumber = [[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase];
-    app.applicationIconBadgeNumber = badgeNumber;
-
+    
     
     tagIndexNumber = [[NSNumber alloc]init];
     tagIndexNumber = nil;
@@ -267,12 +259,15 @@
 //集成刷新控件
 - (void)setupRefresh
 {
-    [self.playersScollview addHeaderWithTarget:self action:@selector(headerRereshing)];
-    [self.playersScollview addFooterWithTarget:self action:@selector(footerRereshing)];
-    self.playersScollview.header.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 40);
-    self.playersScollview.footer.frame = CGRectMake(0, self.playersScollview.frame.size.height, [UIScreen mainScreen].bounds.size.width, 20);
-    /**隐藏刷新的状态和文字*/
-//    self.playersScollview.footer.hidden = YES;
+    
+    self.playersScollview.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self.playersScollview.mj_header beginRefreshing];
+        [self headerRereshing];
+    }];
+    self.playersScollview.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self.playersScollview.mj_footer beginRefreshing];
+        [self footerRereshing];
+    }];
 }
 //下拉刷新
 - (void)headerRereshing
@@ -327,7 +322,7 @@
         }];
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-        [self.playersScollview.header endRefreshing];
+        [self.playersScollview.mj_header endRefreshing];
     });
     
     iconlabel.text = @"全部";
@@ -337,10 +332,10 @@
 //上拉刷新
 - (void)footerRereshing
 {
-    //self.infoCount += 5;
+    self.infoCount += 6;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         NSString *session= [PersistenceManager getLoginSession];
-        [UserConnector aroundPeiwan:session gender:[self.searchDic objectForKey:@"gender"] minPrice:[self.searchDic objectForKey:@"minPrice"] maxPrice:[self.searchDic objectForKey:@"maxPrice"] isWin:nil offset:self.playerInfoArray.count limit:self.infoCount isRecommend:nil mode:[self.searchDic objectForKey:@"mode"] tagIndex:tagIndexNumber receiver:^(NSData *data,NSError *error){
+        [UserConnector aroundPeiwan:session gender:[self.searchDic objectForKey:@"gender"] minPrice:[self.searchDic objectForKey:@"minPrice"] maxPrice:[self.searchDic objectForKey:@"maxPrice"] isWin:nil offset:self.infoCount limit:6 isRecommend:nil mode:[self.searchDic objectForKey:@"mode"] tagIndex:tagIndexNumber receiver:^(NSData *data,NSError *error){
             if (error) {
                 [ShowMessage showMessage:@"服务器未响应"];
             }else{
@@ -373,26 +368,28 @@
         }];
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-        [self.playersScollview.footer endRefreshing];
+        [self.playersScollview.mj_footer endRefreshing];
     });
 }
 //从跳转页面返回时显示隐藏的tabbar
 - (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:YES];
     
+    [super viewWillAppear:YES];
     self.tabBarController.tabBar.hidden = NO;
     NSArray *items = self.tabBarController.tabBar.items;
     UITabBarItem *chatItem = items[3];
     
-    if ([[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase]>0) {
-        chatItem.badgeValue = [NSString stringWithFormat:@"%lu", (unsigned long)[[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase]];
+    NSArray *conversations = [[EMClient sharedClient].chatManager getAllConversations];
+    NSInteger unreadCount = 0;
+    for (EMConversation *conversation in conversations) {
+        unreadCount += conversation.unreadMessagesCount;
+    }
+    if (unreadCount > 0) {
+        chatItem.badgeValue = [NSString stringWithFormat:@"%i",(int)unreadCount];
     }else{
         chatItem.badgeValue = nil;
     }
-    
     [self setTabBar];
-    
-    
 }
 #pragma mark - Search PeiWan
 //弹出玩家搜索页
@@ -748,30 +745,118 @@
         pv.hidesBottomBarWhenPushed = YES;
         pv.playerInfo = sender;
     }
-}
-/**收到消息时调用此方法，环信代理*/
--(void)didReceiveMessage:(EMMessage *)message{
-    
+}-(void)didReceiveMessages:(NSArray *)aMessages
+{
+    [ShowMessage showMessage:@"收到新信息"];
+
+    EMPushOptions *options = [[EMClient sharedClient] pushOptions];
+    options.displayName = @"亲爱的,有人在美玩中呼叫您呢。我是您的美玩小助手";/**然而并没有什么用*/
     NSArray *items = self.tabBarController.tabBar.items;
     UITabBarItem *chatItem = items[3];
     
-    if ([[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase]>0) {
-        chatItem.badgeValue = [NSString stringWithFormat:@"%lu", (unsigned long)[[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase]];
+    NSArray *conversations = [[EMClient sharedClient].chatManager getAllConversations];
+    NSInteger unreadCount = 0;
+    for (EMConversation *conversation in conversations) {
+        unreadCount += conversation.unreadMessagesCount;
+    }
+    
+    
+    if (unreadCount>0) {
+        chatItem.badgeValue = [NSString stringWithFormat:@"%d",unreadCount];
         /**震动提示,当收到消息时震动*/
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        /**本地通知，程序进入后台时调用，彻底死掉时使用的是远程推送*/
-        UILocalNotification *notification = [[UILocalNotification alloc] init];
-        notification.fireDate=[NSDate dateWithTimeIntervalSinceNow:0.1];
-        notification.timeZone=[NSTimeZone defaultTimeZone];
-        notification.applicationIconBadgeNumber = [[EaseMob sharedInstance].chatManager loadTotalUnreadMessagesCountFromDatabase];
-        notification.soundName= UILocalNotificationDefaultSoundName;
-        notification.alertBody = @"您有新消息";
-        [[UIApplication sharedApplication]  scheduleLocalNotification:notification];
+        
+        for (EMMessage *message in aMessages) {
+            
+            NSString * numberstring = [message.conversationId substringFromIndex:8];
+            NSNumber * userID = [NSNumber numberWithInteger:[numberstring integerValue]];
+            NSString * session = [PersistenceManager getLoginSession];
+            [UserConnector findPeiwanById:session userId:userID receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+                if (error) {
+                    
+                }else{
+                    SBJsonParser * json = [[SBJsonParser alloc]init];
+                    NSDictionary * jsonDictionary = [json objectWithData:data];
+                    self.sendPlayerDic = jsonDictionary[@"entity"];
+                }
+            }];
+            /**本地通知，程序进入后台时调用，彻底死掉时使用的是远程推送*/
+            UILocalNotification *notification = [[UILocalNotification alloc] init];
+            notification.fireDate=[NSDate dateWithTimeIntervalSinceNow:0.1];
+            notification.timeZone=[NSTimeZone defaultTimeZone];
+            notification.applicationIconBadgeNumber = unreadCount;
+            notification.soundName= UILocalNotificationDefaultSoundName;
+            
+            EMMessageBody *msgBody = message.body;
+            switch (msgBody.type) {
+                case EMMessageBodyTypeText:
+                {
+                    NSLog(@"%@",message.conversationId);
+                    
+                    // 收到的文字消息
+                    EMTextMessageBody *textBody = (EMTextMessageBody *)msgBody;
+                    NSString *txt = textBody.text;
+                    
+                    notification.alertBody = [NSString stringWithFormat:@"%@:%@",_sendPlayerDic[@"nickname"],txt];
+                    [[UIApplication sharedApplication]  scheduleLocalNotification:notification];
+                    
+                    
+                }
+                    break;
+                case EMMessageBodyTypeImage:
+                {
+                    // 得到一个图片消息body
+                    notification.alertBody = [NSString stringWithFormat:@"%@发来一张图片",_sendPlayerDic[@"nickname"]];
+                    [[UIApplication sharedApplication]  scheduleLocalNotification:notification];
+                    
+                    
+                }
+                    break;
+                case EMMessageBodyTypeLocation:
+                {
+                    notification.alertBody = [NSString stringWithFormat:@"%@发来一个地理位置",_sendPlayerDic[@"nickname"]];
+                    [[UIApplication sharedApplication]  scheduleLocalNotification:notification];
+                    
+                }
+                    break;
+                case EMMessageBodyTypeVoice:
+                {
+                    // 音频sdk会自动下载
+                    notification.alertBody = [NSString stringWithFormat:@"%@发来一段语音",_sendPlayerDic[@"nickname"]];
+                    [[UIApplication sharedApplication]  scheduleLocalNotification:notification];
+                    
+                    
+                }
+                    break;
+                case EMMessageBodyTypeVideo:
+                {
+                    notification.alertBody = [NSString stringWithFormat:@"%@发来一段视频",_sendPlayerDic[@"nickname"]];
+                    [[UIApplication sharedApplication]  scheduleLocalNotification:notification];
+                    
+                }
+                    break;
+                case EMMessageBodyTypeFile:
+                {
+                    notification.alertBody = [NSString stringWithFormat:@"%@发来一份文件",_sendPlayerDic[@"nickname"]];
+                    [[UIApplication sharedApplication]  scheduleLocalNotification:notification];
+                    
+                    
+                }
+                    break;
+                    
+                default:
+                    break;
+                    
+                    
+            }
+        }
+        
         
     }else{
         chatItem.badgeValue = nil;
     }
     
+   
 }
 
 @end

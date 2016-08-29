@@ -94,8 +94,9 @@
 
     }];
     
-    [self.tableView addHeaderWithTarget:self action:@selector(headRefresh)];
-    
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self headRefresh];
+    }];    
 }
 - (void)headRefresh
 {
@@ -287,7 +288,7 @@
     fansSingleRecognizer.numberOfTapsRequired = 1; // 单击
     [fansView addGestureRecognizer:fansSingleRecognizer];
     
-    [[EaseMob sharedInstance].chatManager setApnsNickname:self.userinfo.nickname];
+//    [[EMClient sharedClient].chatManager setApnsNickname:self.userinfo.nickname];
     self.balanceLabel.text = [NSString stringWithFormat:@"余额:%.2f",[self.userInfoData[@"money2"]doubleValue]];
     self.balanceLabel.textColor = [UIColor grayColor];
     //公会管理今日收益
@@ -344,7 +345,7 @@
                 
                 [HUD hide:YES afterDelay:0.5];
                 
-                [self.tableView.header endRefreshing];
+                [self.tableView.mj_header endRefreshing];
             
             }
         }
@@ -693,21 +694,19 @@
 
 -(void)touchOpinitonBtn{
     //注销环信登录
-    [[EaseMob sharedInstance].chatManager asyncLogoffWithUnbindDeviceToken:YES completion:^(NSDictionary *info, EMError *error) {
-        if (error && error.errorCode != EMErrorServerNotLogin) {
-            NSLog(@"%@",error);
-        }else {
-            [self.clearView removeFromSuperview];
-            [self.reloginView removeFromSuperview];
-            ////    [[ECDeviceKit sharedInstance] logout:^(ECError *error) {
-            ////        //NSLog(@"断开sdk与服务器连接");
-            ////    }];
-            [PersistenceManager setLoginSession:@""];
-            LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
-            lv.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:lv animated:YES];
-        }
-    } onQueue:nil];
+    EMError *error = [[EMClient sharedClient] logout:YES];
+    if (!error) {
+        NSLog(@"退出成功");
+        [self.clearView removeFromSuperview];
+        [self.reloginView removeFromSuperview];
+        ////    [[ECDeviceKit sharedInstance] logout:^(ECError *error) {
+        ////        //NSLog(@"断开sdk与服务器连接");
+        ////    }];
+        [PersistenceManager setLoginSession:@""];
+        LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
+        lv.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:lv animated:YES];
+    }
 }
 
 

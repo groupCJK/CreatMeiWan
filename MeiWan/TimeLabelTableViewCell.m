@@ -33,6 +33,8 @@
         self.noneLabel.font = [UIFont systemFontOfSize:13.0f];
         
     }else if (labelTitle.count == 1){
+        self.noneLabel.hidden = YES;
+        
         NSDictionary *label1Dic = labelTitle[0];
         //三个标签label
         NSString *indexstr = [NSString stringWithFormat:@"%@",[label1Dic objectForKey:@"index"]];
@@ -80,6 +82,8 @@
         self.priseLabel1.font = [UIFont systemFontOfSize:12.0f];
 
     }else if (labelTitle.count == 2){
+        self.noneLabel.hidden = YES;
+        
         NSDictionary *label1Dic = labelTitle[0];
         //三个标签label
         NSString *indexstr = [NSString stringWithFormat:@"%@",[label1Dic objectForKey:@"index"]];
@@ -180,6 +184,8 @@
         self.timeImage2.image = newImage;
 
     }else if (labelTitle.count == 3){
+        self.noneLabel.hidden = YES;
+        
         NSDictionary *label1Dic = labelTitle[0];
         //三个标签label
         NSString *indexstr = [NSString stringWithFormat:@"%@",[label1Dic objectForKey:@"index"]];

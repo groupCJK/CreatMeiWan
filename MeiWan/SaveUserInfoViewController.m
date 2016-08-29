@@ -324,7 +324,7 @@ updatingLocation:(BOOL)updatingLocation
                 [PersistenceManager setLoginUser:userDict];
                 [PersistenceManager setLoginSession:session];
                 
-                [[EaseMob sharedInstance].chatManager setApnsNickname:self.nickName.text];
+                [[EMClient sharedClient] setApnsNickname:self.nickName.text];
                 
                 [HUD hide:YES afterDelay:0];
                 [self performSegueWithIdentifier:@"players" sender:nil];

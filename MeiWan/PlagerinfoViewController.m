@@ -56,36 +56,7 @@
 @end
 
 @implementation PlagerinfoViewController
-- (void)viewWillAppear:(BOOL)animated
-{
-//    NSString * session = [PersistenceManager getLoginSession];
-//    [UserConnector findMyFriends:session receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
-//        if (error) {
-//            [ShowMessage showMessage:@"服务器未响应"];
-//        }else{
-//            SBJsonParser*parser=[[SBJsonParser alloc]init];
-//            NSMutableDictionary *json=[parser objectWithData:data];
-//            int status = [json[@"status"] intValue];
-//            if (status == 0) {
-//                
-//                self.MyfriendArray = json[@"entity"];
-//
-//                NSDictionary *userInfo = [PersistenceManager getLoginUser];
-//                NSString *thesame = [NSString stringWithFormat:@"%ld",[[userInfo objectForKey:@"id"]longValue]];
-//                if ([thesame isEqualToString:@"100000"] || [thesame isEqualToString:@"100001"])
-//                {
-//                    [self orderButtonView];
-//                }else{
-//                    [self buttonView];
-//                }
-//
-//            }else{}
-//            
-//        }
-//    }];
-//   
-//
-}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.page = 0;
@@ -157,9 +128,14 @@
     }];
     /***/
     [self pinglunAFNetworking:self.page];
-    [self.playerTableView addHeaderWithTarget:self action:@selector(headerRereshing)];
-    [self.playerTableView addFooterWithTarget:self action:@selector(footerRereshing)];
-    
+    self.playerTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self.playerTableView.mj_header beginRefreshing];
+        [self headerRereshing];
+    }];
+    self.playerTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self.playerTableView.mj_footer beginRefreshing];
+        [self footerRereshing];
+    }];
     
     
     [UserConnector findMyFriends:session receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
@@ -440,7 +416,7 @@
     NSString *product = [NSString stringWithFormat:@"%@%ld",
                          [setting getRongLianYun],[[self.playerInfo objectForKey:@"id"]longValue]];
     
-    ChatViewController *messageCtr = [[ChatViewController alloc] initWithConversationChatter:product conversationType:eConversationTypeChat];
+    ChatViewController *messageCtr = [[ChatViewController alloc] initWithConversationChatter:product conversationType:EMConversationTypeChat];
     messageCtr.title = [NSString stringWithFormat:@"%@",
                         [self.playerInfo objectForKey:@"nickname"]];
     [self.navigationController pushViewController:messageCtr animated:YES];
@@ -596,13 +572,11 @@
     }];
     UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
-        EMError *error = [[EaseMob sharedInstance].chatManager blockBuddy:[NSString stringWithFormat:@"product_%@",self.playerInfo[@"id"]] 	relationship:eRelationshipBoth];
-        if (!error) {
-            NSLog(@"%@",self.playerInfo);
-        }else {
-            NSLog(@"%@",error);
-        }
         
+        EMError *error = [[EMClient sharedClient].contactManager addUserToBlackList:[NSString stringWithFormat:@"product_%@",self.playerInfo[@"id"]] relationshipBoth:YES];
+        if (!error) {
+            NSLog(@"发送成功");
+        }
     }];
     alertController.message = @"确定拉黑？拉黑之后可以在聊天界面黑名单中设置";
     [alertController addAction:cancelAction];

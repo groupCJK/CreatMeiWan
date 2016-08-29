@@ -172,28 +172,18 @@
 - (void)setupRefresh
 {
     // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
-    [self.reSv addHeaderWithTarget:self action:@selector(reSvHeaderRereshing)];
-    [self.inSv addHeaderWithTarget:self action:@selector(inSvHeaderRereshing)];
-    [self.reSv addFooterWithTarget:self action:@selector(reSvFooterRereshing)];
-    [self.inSv addFooterWithTarget:self action:@selector(inSvFooterRereshing)];
-
-    // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
-//    self.reSv.headerPullToRefreshText = @"上拉刷新";
-//    self.reSv.headerReleaseToRefreshText = @"松开马上刷新";
-//    self.reSv.headerRefreshingText = @"刷新中";
-//    
-//    self.inSv.headerPullToRefreshText = @"上拉刷新";
-//    self.inSv.headerReleaseToRefreshText = @"松开马上刷新";
-//    self.inSv.headerRefreshingText = @"刷新中";
-//
-//    self.reSv.footerPullToRefreshText = @"更多";
-//    self.reSv.footerReleaseToRefreshText = @"松开马上加载";
-//    self.reSv.footerRefreshingText = @"正在帮您加载中";
-//
-//    self.inSv.footerPullToRefreshText = @"更多";
-//    self.inSv.footerReleaseToRefreshText = @"松开马上加载";
-//    self.inSv.footerRefreshingText = @"正在帮您加载中";
-
+    self.reSv.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self reSvHeaderRereshing];
+    }];
+    self.reSv.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self reSvFooterRereshing];
+    }];
+    self.inSv.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self inSvHeaderRereshing];
+    }];
+    self.inSv.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self inSvFooterRereshing];
+    }];
 }
 //上拉刷新
 - (void)reSvHeaderRereshing
@@ -227,7 +217,7 @@
         }];
 
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-        [self.reSv  headerEndRefreshing];
+        [self.reSv.mj_header endRefreshing];
     });
 }
 - (void)inSvHeaderRereshing
@@ -262,7 +252,7 @@
         }];
 
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-        [self.inSv  headerEndRefreshing];
+        [self.inSv.mj_header endRefreshing];
     });
 }
 -(void)reSvFooterRereshing{
@@ -296,7 +286,7 @@
         }];
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-        [self.reSv footerEndRefreshing];
+        [self.reSv.mj_footer endRefreshing];
     });
 }
 -(void)inSvFooterRereshing{
@@ -330,7 +320,7 @@
         }];
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-        [self.inSv  footerEndRefreshing];
+        [self.inSv.mj_footer endRefreshing];
     });
 }
 

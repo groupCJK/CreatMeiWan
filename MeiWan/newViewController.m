@@ -351,7 +351,7 @@
     NSString *product = [NSString stringWithFormat:@"%@%ld",
                          [setting getRongLianYun],[[self.dictionary objectForKey:@"id"]longValue]];
     
-    ChatViewController *messageCtr = [[ChatViewController alloc] initWithConversationChatter:product conversationType:eConversationTypeChat];
+    ChatViewController *messageCtr = [[ChatViewController alloc] initWithConversationChatter:product conversationType:EMConversationTypeChat];
     messageCtr.title = [NSString stringWithFormat:@"%@",
                         [self.dictionary objectForKey:@"nickname"]];
     [self.navigationController pushViewController:messageCtr animated:YES];
@@ -445,12 +445,10 @@
     }];
     UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
-        EMError *error = [[EaseMob sharedInstance].chatManager blockBuddy:[NSString stringWithFormat:@"product_%@",self.dictionary[@"id"]] 	relationship:eRelationshipBoth];
+        
+        EMError *error = [[EMClient sharedClient].contactManager addUserToBlackList:[NSString stringWithFormat:@"product_%@",self.dictionary[@"id"]] relationshipBoth:YES];
         if (!error) {
             NSLog(@"发送成功");
-            NSLog(@"%@",self.dictionary);
-        }else {
-            NSLog(@"%@",error);
         }
         
     }];

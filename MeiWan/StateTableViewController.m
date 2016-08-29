@@ -68,8 +68,12 @@
 - (void)setupRefresh
 {
     // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
-    [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
-    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
+    self.tableView.mj_header = [MJRefreshHeader headerWithRefreshingBlock:^{
+        [self headerRereshing];
+    }];
+    self.tableView.mj_footer = [MJRefreshFooter footerWithRefreshingBlock:^{
+        [self footerRereshing];
+    }];
     
 }
 //上拉刷新
@@ -100,7 +104,7 @@
         }];
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-        [self.tableView  headerEndRefreshing];
+        [self.tableView.mj_header endRefreshing];
     });
 }
 -(void)footerRereshing{
@@ -127,7 +131,7 @@
             }
             
         }];
-        [self.tableView footerEndRefreshing];
+        [self.tableView.mj_footer endRefreshing];
     });
 }
 
