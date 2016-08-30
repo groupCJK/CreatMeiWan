@@ -1541,8 +1541,6 @@ import UIKit
                 }
                 
                 receiver(data:data!, error:error)
-                
-                
         }
         
     }
@@ -1553,10 +1551,10 @@ import UIKit
         if (userId != nil) {
             parameters["userId"] = userId
         }
-        if (userId != nil) {
+        if (offset != nil) {
             parameters["offset"] = offset
         }
-        if (userId != nil) {
+        if (limit != nil) {
             parameters["limit"] = limit
         }
         request(.GET, userUrl+"findShopsByUser", parameters:parameters as? [String : NSObject])
@@ -1577,7 +1575,32 @@ import UIKit
         
         
     }
-    
+    /**
+     检查聊天对象和自己de订单联系
+     */
+    public static func findOrderRelateUser(session:NSString!,userId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
+        
+        var parameters:Dictionary<String,AnyObject> = [:]
+        if (session != nil) {
+            parameters["session"] = session
+        }
+        if (userId != nil) {
+            parameters["userId"] = userId
+        }
+        
+        request(.GET, orderUrl+"findOrderRelateUser", parameters:parameters as? [String : NSObject])
+            .response { request, r, data, error in
+                
+                if (error==nil){
+                    
+                }else{
+                    setting .adjustIps()
+                    orderUrl = setting.getIp()+"peiwan-server/rest/users/"
+                }
+                receiver(data:data!, error:error)
+        }
+
+    }
 }
 
 

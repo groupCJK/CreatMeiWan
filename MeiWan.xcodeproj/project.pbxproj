@@ -286,6 +286,8 @@
 		2B0C707D1D546F84001AB100 /* OrderLiseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B0C707C1D546F84001AB100 /* OrderLiseCell.m */; };
 		2B0C70821D547394001AB100 /* creatAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B0C70811D547394001AB100 /* creatAlbum.m */; };
 		2B0C70861D5481D1001AB100 /* GuildRankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B0C70851D5481D1001AB100 /* GuildRankCell.m */; };
+		2B1C111E1D751B0100184BD3 /* ChatTOPView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C111D1D751B0100184BD3 /* ChatTOPView.m */; };
+		2B1C11221D752DE000184BD3 /* chatOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C11211D752DE000184BD3 /* chatOrderView.m */; };
 		2B2B56C71D473D170048AA20 /* PrepaidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B56C61D473D170048AA20 /* PrepaidViewController.m */; };
 		2B2D084F1D519E4D00139467 /* guildCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D084E1D519E4D00139467 /* guildCenterViewController.m */; };
 		2B2D08521D51F98E00139467 /* changeArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D08511D51F98E00139467 /* changeArray.m */; };
@@ -1066,6 +1068,10 @@
 		2B0C70811D547394001AB100 /* creatAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = creatAlbum.m; sourceTree = "<group>"; };
 		2B0C70841D5481D1001AB100 /* GuildRankCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuildRankCell.h; sourceTree = "<group>"; };
 		2B0C70851D5481D1001AB100 /* GuildRankCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuildRankCell.m; sourceTree = "<group>"; };
+		2B1C111C1D751B0100184BD3 /* ChatTOPView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTOPView.h; sourceTree = "<group>"; };
+		2B1C111D1D751B0100184BD3 /* ChatTOPView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTOPView.m; sourceTree = "<group>"; };
+		2B1C11201D752DE000184BD3 /* chatOrderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chatOrderView.h; sourceTree = "<group>"; };
+		2B1C11211D752DE000184BD3 /* chatOrderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = chatOrderView.m; sourceTree = "<group>"; };
 		2B2B56C51D473D170048AA20 /* PrepaidViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrepaidViewController.h; sourceTree = "<group>"; };
 		2B2B56C61D473D170048AA20 /* PrepaidViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrepaidViewController.m; sourceTree = "<group>"; };
 		2B2D084D1D519E4D00139467 /* guildCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = guildCenterViewController.h; sourceTree = "<group>"; };
@@ -2371,20 +2377,7 @@
 		18EF7A1F1B74B67F005A4F64 /* MeiWan */ = {
 			isa = PBXGroup;
 			children = (
-				2BD3C4A61D73D799008CFE23 /* Robot */,
-				2BE39EF61D72A47100CC3F0F /* 3rdpartyOne */,
-				2BE39EEC1D72A04000CC3F0F /* Category */,
-				2BE39ECE1D729F4A00CC3F0F /* Custom */,
-				2BE39EB71D729EEB00CC3F0F /* Contacts */,
-				2BE39E921D729E0D00CC3F0F /* ChatGroup */,
-				2BE39E8C1D72986B00CC3F0F /* ChatDemoHelper.h */,
-				2BE39E8D1D72986B00CC3F0F /* ChatDemoHelper.m */,
-				2BE39E881D72984500CC3F0F /* Profile */,
-				2BE39E6A1D72981D00CC3F0F /* Core Data */,
-				2BE39E601D7297F100CC3F0F /* Chatroom */,
-				2BB14BFF1D728B0D00F6425D /* Chat */,
-				2BD3C4B61D73DCBF008CFE23 /* EaseUI */,
-				2BB14A391D72891E00F6425D /* HyphenateFullSDK */,
+				2B1C111A1D75188A00184BD3 /* 环信 */,
 				27CA5A7A1CEEAD2400CC6956 /* Tool */,
 				27E0A0C61CE1805100D5FE31 /* Helper */,
 				18EF7A241B74B67F005A4F64 /* AppDelegate.h */,
@@ -2757,6 +2750,45 @@
 			name = "我的关注";
 			sourceTree = "<group>";
 		};
+		2B1C111A1D75188A00184BD3 /* 环信 */ = {
+			isa = PBXGroup;
+			children = (
+				2BD3C4A61D73D799008CFE23 /* Robot */,
+				2BE39EF61D72A47100CC3F0F /* 3rdpartyOne */,
+				2BE39EEC1D72A04000CC3F0F /* Category */,
+				2BE39ECE1D729F4A00CC3F0F /* Custom */,
+				2BE39EB71D729EEB00CC3F0F /* Contacts */,
+				2BE39E921D729E0D00CC3F0F /* ChatGroup */,
+				2BE39E8C1D72986B00CC3F0F /* ChatDemoHelper.h */,
+				2BE39E8D1D72986B00CC3F0F /* ChatDemoHelper.m */,
+				2BE39E881D72984500CC3F0F /* Profile */,
+				2BE39E6A1D72981D00CC3F0F /* Core Data */,
+				2BE39E601D7297F100CC3F0F /* Chatroom */,
+				2BB14BFF1D728B0D00F6425D /* Chat */,
+				2BD3C4B61D73DCBF008CFE23 /* EaseUI */,
+				2BB14A391D72891E00F6425D /* HyphenateFullSDK */,
+			);
+			name = "环信";
+			sourceTree = "<group>";
+		};
+		2B1C111B1D751AA500184BD3 /* 订单状态 */ = {
+			isa = PBXGroup;
+			children = (
+				2B1C111C1D751B0100184BD3 /* ChatTOPView.h */,
+				2B1C111D1D751B0100184BD3 /* ChatTOPView.m */,
+			);
+			name = "订单状态";
+			sourceTree = "<group>";
+		};
+		2B1C111F1D752DC000184BD3 /* 下单View */ = {
+			isa = PBXGroup;
+			children = (
+				2B1C11201D752DE000184BD3 /* chatOrderView.h */,
+				2B1C11211D752DE000184BD3 /* chatOrderView.m */,
+			);
+			name = "下单View";
+			sourceTree = "<group>";
+		};
 		2B2B56C41D473CC70048AA20 /* 充值 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3023,6 +3055,8 @@
 			children = (
 				2BB14C041D728B0D00F6425D /* ChatViewController.h */,
 				2BB14C051D728B0D00F6425D /* ChatViewController.m */,
+				2B1C111F1D752DC000184BD3 /* 下单View */,
+				2B1C111B1D751AA500184BD3 /* 订单状态 */,
 			);
 			path = ChatView;
 			sourceTree = "<group>";
@@ -4362,6 +4396,7 @@
 				2BD3C6291D73DCC0008CFE23 /* NSString+Valid.m in Sources */,
 				2BE39EB21D729E0D00CC3F0F /* GroupSubjectChangingViewController.m in Sources */,
 				2B4698D01D6984CF0059B140 /* CollectionViewCell.m in Sources */,
+				2B1C111E1D751B0100184BD3 /* ChatTOPView.m in Sources */,
 				2BD3C6351D73DCC0008CFE23 /* EaseLocationViewController.m in Sources */,
 				18EB4E431B8018B9000AE087 /* ShowMessage.m in Sources */,
 				2BBB51BA1D596F5B007045EC /* newViewController.m in Sources */,
@@ -4398,6 +4433,7 @@
 				279B86ED1CED93DF00EA2737 /* MYIntroductionView.m in Sources */,
 				2BD3C6201D73DCC0008CFE23 /* PSTGridLayoutRow.m in Sources */,
 				2BD3C6011D73DCC0008CFE23 /* MWTapDetectingImageView.m in Sources */,
+				2B1C11221D752DE000184BD3 /* chatOrderView.m in Sources */,
 				18824A511B85D5920063EC03 /* SBJsonStreamWriterState.m in Sources */,
 				2BD3C6101D73DCC0008CFE23 /* UIImage+EMMultiFormat.m in Sources */,
 				2B5B7D2B1D3893C700CF5354 /* FootprintTableViewCell.m in Sources */,

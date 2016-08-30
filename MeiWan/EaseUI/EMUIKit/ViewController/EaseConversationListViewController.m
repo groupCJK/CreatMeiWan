@@ -35,6 +35,8 @@
 {
     MBProgressHUD * HUD;
 }
+@property (nonatomic,strong)NSMutableArray * ChatArray;
+
 @end
 
 @implementation EaseConversationListViewController
@@ -55,6 +57,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.ChatArray = [NSMutableArray arrayWithCapacity:0];
     HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     HUD.delegate = self;
     
@@ -137,7 +140,7 @@
                     [userDefaults setObject:user forKey:userIdStr];
                     model.title=[user objectForKey:@"nickname"];
                     model.avatarURLPath=[user objectForKey:@"headUrl"];
-                    
+
                 }
                 
             }else{
@@ -180,6 +183,7 @@
     
     EaseConversationModel *model = [self.dataArray objectAtIndex:indexPath.row];
     ChatViewController *viewController = [[ChatViewController alloc] initWithConversationChatter:model.conversation.conversationId conversationType:model.conversation.type];
+
     viewController.title = [NSString stringWithFormat:@"与%@会话",model.title];
     [self.navigationController pushViewController:viewController animated:YES];
 }

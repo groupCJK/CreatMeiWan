@@ -14,7 +14,7 @@
 
 @interface ChatViewController : EaseMessageViewController <EaseMessageViewControllerDelegate, EaseMessageViewControllerDataSource>
 
-
+@property (nonatomic,strong)NSDictionary * chatDic;
 - (void)showMenuViewController:(UIView *)showInView
                   andIndexPath:(NSIndexPath *)indexPath
                    messageType:(EMMessageBodyType)messageType;

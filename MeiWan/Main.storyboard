@@ -584,7 +584,7 @@
         <!--Invite View Controller-->
         <scene sceneID="X8g-dz-IHe">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="zo7-Pb-zAt" customClass="InviteViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="inviteSomeOne" hidesBottomBarWhenPushed="YES" id="zo7-Pb-zAt" customClass="InviteViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BDd-QA-RAL"/>
                         <viewControllerLayoutGuide type="bottom" id="Sr8-dW-Zpz"/>
@@ -3933,7 +3933,7 @@
         <!--评价-->
         <scene sceneID="HsX-e6-6PL">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="C3h-Th-9fu" customClass="AssessViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pingjia" hidesBottomBarWhenPushed="YES" id="C3h-Th-9fu" customClass="AssessViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Lid-hG-c8m"/>
                         <viewControllerLayoutGuide type="bottom" id="DrD-hD-F3x"/>
@@ -4437,17 +4437,17 @@
         <image name="yuanjiao-ju-xing.png" width="574" height="176"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="a2L-pk-feb"/>
-        <segue reference="lkr-Fs-pVo"/>
+        <segue reference="noY-g9-Nco"/>
         <segue reference="GI5-Ug-Nan"/>
-        <segue reference="G1e-fu-sL2"/>
-        <segue reference="ZP7-VI-zsD"/>
-        <segue reference="TgU-ON-UTc"/>
-        <segue reference="4Bd-Xl-sEa"/>
+        <segue reference="lkr-Fs-pVo"/>
+        <segue reference="S0y-tW-KPA"/>
+        <segue reference="TE0-cN-cJS"/>
+        <segue reference="gVc-J6-Zb3"/>
         <segue reference="T0n-fg-bJC"/>
         <segue reference="Cbe-BK-afe"/>
         <segue reference="paO-aE-i4M"/>
+        <segue reference="XWm-D2-zfT"/>
         <segue reference="765-rk-Vfn"/>
-        <segue reference="S0y-tW-KPA"/>
+        <segue reference="ZP7-VI-zsD"/>
     </inferredMetricsTieBreakers>
 </document>
