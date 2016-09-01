@@ -13,15 +13,19 @@
 #import "SBJson.h"
 #import "LoginViewController.h"
 #import "AliHelper.h"
+#import "WXApi.h"
+#import "MD5.h"
 
 @interface PrepaidViewController()<MBProgressHUDDelegate>
 {
     NSArray *  array;
     NSArray * littleArray;
     MBProgressHUD * HUD;
+    NSNumber * _newMoney;
 }
 @property(nonatomic,strong)UITextField * textfiled;
 @property(nonatomic,strong)NSDictionary * userInfoDic;
+
 @end
 
 @implementation PrepaidViewController
@@ -72,39 +76,105 @@
     UILabel * label = (UILabel *)[gesture view];
     double money = [array[label.tag] doubleValue];
     NSNumber * newMoney = [NSNumber numberWithDouble:money];
+    _newMoney = newMoney;
+    
+    UIAlertView *payAlertView = [[UIAlertView alloc]initWithTitle:@"选择充值方式" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"微信",@"支付宝",nil];
+    
+    [payAlertView show];
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+  
     NSString *session = [PersistenceManager getLoginSession];
     
-    /*创建充值订单*/
-    [UserConnector aliRechargeSigh:session price:newMoney receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
-        
-        if (error) {
-            [self showMessageAlert:@"服务器未响应"];
-        }else{
-            SBJsonParser*parser=[[SBJsonParser alloc]init];
-            NSMutableDictionary *json=[parser objectWithData:data];
-            int status = [json[@"status"] intValue];
-            if (status==0) {
-                NSString * sign = json[@"entity"];
-                [[AlipaySDK defaultService] payOrder:sign fromScheme:@"meiwan" callback:^(NSDictionary *resultDic) {
-                    
-                    NSInteger  resultNum= [[resultDic objectForKey:@"resultStatus"]integerValue];
-                    if (resultNum == 9000) {
-                        [self showMessageAlert:@"支付成功"];
-                        [self.navigationController popViewControllerAnimated:YES];
-                        
-                    }else{
-                        [self showMessageAlert:@"支付失败"];
-                        
-                    }
-
-                }];
+    if (buttonIndex==1) {
+        /** 微信 */
+        [UserConnector wxRechargeSigh:session price:_newMoney receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+            
+            if (error) {
+                [self showMessageAlert:@"服务器未响应"];
             }else{
-                /** status=1 没有登录 */
-                [self pushLoginPage];
+                SBJsonParser*parser=[[SBJsonParser alloc]init];
+                NSMutableDictionary *json=[parser objectWithData:data];
+                int status = [json[@"status"] intValue];
+                if (status==0) {
+                    NSString * sign = json[@"entity"];
+                    
+                    //发起微信支付，设置参数
+                    PayReq *request = [[PayReq alloc] init];
+                    request.openID = @"wx4555cf92f3ab6550";
+                    request.partnerId = @"1383665402";
+                    request.prepayId= sign;
+                    request.package = @"Sign=WXPay";
+                    //将当前事件转化成时间戳
+                    NSDate *datenow = [NSDate date];
+                    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[datenow timeIntervalSince1970]];
+                    UInt32 timeStamp =[timeSp intValue];
+                    request.timeStamp= timeStamp;
+                    
+                    /** 随机字符串 */
+                    ;
+                    NSString * str = [NSString stringWithFormat:@"appid=%@&package=Sign=WXPay&partnerid=%@&prepayid=%@&timestamp=%u",request.openID,request.partnerId,request.prepayId,(unsigned int)request.timeStamp];
+                    NSString * str2 = [NSString stringWithFormat:@"%@&key=IJR4681LYNZD1QHZOC3MOHL3KGW42W96",str];
+                    request.nonceStr= [[MD5 md5:str2] uppercaseString];
+                    // 签名加密
+                    
+                    
+                    NSString * string = [NSString stringWithFormat:@"appid=%@&noncestr=%@&package=Sign=WXPay&partnerid=%@&prepayid=%@&timestamp=%u",request.openID,request.nonceStr,request.partnerId,request.prepayId,(unsigned int)request.timeStamp];
+                    NSString * string2 = [NSString stringWithFormat:@"%@&key=IJR4681LYNZD1QHZOC3MOHL3KGW42W96",string];
+                    request.sign = [[MD5 md5:string2] uppercaseString];
+                
+                    NSLog(@"%@",request.sign);
+                    [WXApi sendReq:request];
+
+                    
+                }else{
+                    /** status=1 没有登录 */
+                    [self pushLoginPage];
+                }
             }
-        }
+            
+            
+        }];
+
+    }
+    if (buttonIndex==2) {
+        /** 支付宝 */
         
-    }];
+        /*创建充值订单*/
+        [UserConnector aliRechargeSigh:session price:_newMoney receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+            
+            if (error) {
+                [self showMessageAlert:@"服务器未响应"];
+            }else{
+                SBJsonParser*parser=[[SBJsonParser alloc]init];
+                NSMutableDictionary *json=[parser objectWithData:data];
+                int status = [json[@"status"] intValue];
+                if (status==0) {
+                    NSString * sign = json[@"entity"];
+                    [[AlipaySDK defaultService] payOrder:sign fromScheme:@"meiwan" callback:^(NSDictionary *resultDic) {
+                        
+                        NSInteger  resultNum= [[resultDic objectForKey:@"resultStatus"]integerValue];
+                        if (resultNum == 9000) {
+                            [self showMessageAlert:@"支付成功"];
+                            [self.navigationController popViewControllerAnimated:YES];
+                            
+                        }else{
+                            [self showMessageAlert:@"支付失败"];
+                            
+                        }
+                        
+                    }];
+                }else{
+                    /** status=1 没有登录 */
+                    [self pushLoginPage];
+                }
+            }
+            
+        }];
+
+    }
 
 }
 - (void)showMessageAlert:(NSString *)message
@@ -128,4 +198,19 @@
 
 }
 
+
+#pragma mark - 产生随机订单号
+- (NSString *)generateTradeNO {
+    static int kNumber = 15;
+    
+    NSString *sourceStr = @"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    NSMutableString *resultStr = [[NSMutableString alloc] init];
+    srand(time(0)); // 此行代码有警告:
+    for (int i = 0; i < kNumber; i++) {
+        unsigned index = rand() % [sourceStr length];
+        NSString *oneStr = [sourceStr substringWithRange:NSMakeRange(index, 1)];
+        [resultStr appendString:oneStr];
+    }
+    return resultStr;
+}
 @end

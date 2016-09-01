@@ -36,6 +36,8 @@
     UILabel * iconlabel;
     NSNumber * tagIndexNumber;
     CLLocationManager *_locationManager;
+    
+    PalyListViewController * mainViewController;
 }
 @property (strong, nonatomic) NSDictionary * sendPlayerDic;
 @property (strong, nonatomic)  UIScrollView *playersScollview;
@@ -173,7 +175,13 @@
         [self beginNetWorking];
         
     }];
+    
+    
+    
+    
+    
 }
+
 - (void)beginNetWorking
 {
     NSString *session= [PersistenceManager getLoginSession];

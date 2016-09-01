@@ -1196,6 +1196,35 @@ import UIKit
         
         
     }
+    
+    /** 微信充值 */
+    public static func wxRechargeSigh(session:String!,price:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
+        
+        var parameters:Dictionary<String,AnyObject> = [:]
+        
+        if(session != nil){
+            parameters["session"]=session
+        }
+        if(price != nil){
+            parameters["price"]=price
+        }
+        
+        request(.GET, orderUrl+"wxRechargeSigh", parameters:parameters as? [String : NSObject])
+            .response { request, r, data, error in
+                
+                if (error==nil){
+                    
+                }else{
+                    setting .adjustIps()
+                    orderUrl=setting.getIp()+"peiwan-server/rest/orders/"
+                }
+                
+                receiver(data:data, error:error)
+        }
+        
+        
+    }
+
     /**余额支付*/
     public static func payWithAccountMoney(session:String!,peiwanId:NSNumber!,price:NSNumber!,hours:NSNumber!,tagIndex:NSNumber!,carFee:NSNumber!,userUnionId:NSNumber!,peiwanUnionId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         
@@ -1284,6 +1313,7 @@ import UIKit
         
         
     }
+    
     
     //查找关注列表
     public static func findMyFocus(session:String!,offset:Int,limit:Int,receiver:(data:NSData?,error:NSError?)->()){
