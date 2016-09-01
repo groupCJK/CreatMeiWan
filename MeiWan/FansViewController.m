@@ -94,7 +94,7 @@
     [UserConnector deleteFriend:session friendId:number receiver:^(NSData *data,NSError *error){
         if (error!=nil) {
             
-            [ShowMessage showMessage:@"删除失败"];
+            [ShowMessage showMessage:@"服务器未响应"];
             
         }else{
             [self.fansArray removeObject:userMessage];

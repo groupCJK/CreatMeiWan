@@ -235,8 +235,6 @@
                     [userDefaults setObject:user forKey:userIdStr];
                     model.nickname=[user objectForKey:@"nickname"];
                     model.avatarURLPath=[user objectForKey:@"headUrl"];
-                    
-                    
                 }
                 
                 

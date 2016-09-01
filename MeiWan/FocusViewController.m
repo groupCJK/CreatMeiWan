@@ -23,6 +23,7 @@
 @property (nonatomic, strong) NSMutableArray * focusArray;
 @property (nonatomic, strong) NSNumber *peiwanId;
 @property (nonatomic, strong) NSMutableArray * MyfriendArray;
+@property (nonatomic, assign) int offset;
 
 @end
 
@@ -34,10 +35,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.offset = 0;
     self.title = @"我的粉丝";
 
-    [self focusFollowersBy];
+    [self focusFollowersBy:self.offset];
     [self findMyFriendList];
     [self CreatTableView];
     
@@ -143,9 +144,9 @@
 }
 
 /**获取粉丝列表*/
-- (void)focusFollowersBy{
+- (void)focusFollowersBy:(int)offset{
     NSString *sesstion = [PersistenceManager getLoginSession];
-    [UserConnector findMyFocus:sesstion offset:0 limit:1 receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+    [UserConnector findMyFocus:sesstion offset:offset limit:10 receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
         if (error) {
             [ShowMessage showMessage:@"服务器未响应"];
         }else{
@@ -153,13 +154,23 @@
             NSMutableDictionary *json=[parser objectWithData:data];
             int status = [[json objectForKey:@"status"]intValue];
             if (status == 0) {
-                self.focusArray = [json objectForKey:@"entity"];
-                for (int i = 0;  i < self.focusArray.count; i++) {
-                    if ([self.focusArray[i] isKindOfClass:[NSNull class]]) {
-                        [self.focusArray removeObjectAtIndex:i];
+                
+                if (offset==0) {
+                    [self.focusArray removeAllObjects];
+                    self.focusArray = [json objectForKey:@"entity"];
+                    for (int i = 0;  i < self.focusArray.count; i++) {
+                        if ([self.focusArray[i] isKindOfClass:[NSNull class]]) {
+                            [self.focusArray removeObjectAtIndex:i];
+                        }
                     }
+                    [_focusTableView reloadData];
+                    [_focusTableView.mj_header endRefreshing];
+
+                }else{
+                    [self.focusArray addObjectsFromArray:json[@"entity"]];
+                    [_focusTableView reloadData];
+                    [_focusTableView.mj_footer endRefreshing];
                 }
-                [_focusTableView reloadData];
             }else if (status == 1){
                 [PersistenceManager setLoginSession:@""];
                 
@@ -212,6 +223,20 @@
     _focusTableView.dataSource = self;
     _focusTableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:_focusTableView];
+    _focusTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+       
+        self.offset = 0;
+        [self focusFollowersBy:self.offset];
+        [_focusTableView.mj_header beginRefreshing];
+        
+    }];
+    _focusTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+       
+        self.offset+=10;
+        [self focusFollowersBy:self.offset];
+        [_focusTableView.mj_footer beginRefreshing];
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

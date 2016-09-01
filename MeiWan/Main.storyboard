@@ -230,13 +230,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="EA1-yB-y1T">
-                            <rect key="frame" x="0.0" y="130" width="320" height="0.0"/>
+                            <rect key="frame" x="0.0" y="66" width="320" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="mycell" id="G0q-Hk-5kp" customClass="MoveActionViewCell">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="G0q-Hk-5kp" id="tla-Ru-1Tp">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -997,7 +997,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="sT0-Ph-tcY">
-                            <rect key="frame" x="0.0" y="64" width="320" height="247"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="247"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YmF-CB-5Tm">
@@ -1174,13 +1174,13 @@
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="JAE-Ry-iNg">
-                            <rect key="frame" x="0.0" y="377" width="320" height="0.0"/>
+                            <rect key="frame" x="0.0" y="313" width="320" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="News Cell" rowHeight="44" id="P9p-1b-kR4" customClass="ExploitsTableViewCell">
-                                <rect key="frame" x="0.0" y="333" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="269" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="P9p-1b-kR4" id="til-An-Bth">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -4437,17 +4437,17 @@
         <image name="yuanjiao-ju-xing.png" width="574" height="176"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lkr-Fs-pVo"/>
         <segue reference="noY-g9-Nco"/>
-        <segue reference="TE0-cN-cJS"/>
-        <segue reference="4Bd-Xl-sEa"/>
-        <segue reference="paO-aE-i4M"/>
-        <segue reference="XWm-D2-zfT"/>
-        <segue reference="765-rk-Vfn"/>
-        <segue reference="Cbe-BK-afe"/>
-        <segue reference="T0n-fg-bJC"/>
-        <segue reference="ZP7-VI-zsD"/>
         <segue reference="S0y-tW-KPA"/>
+        <segue reference="TE0-cN-cJS"/>
         <segue reference="GI5-Ug-Nan"/>
+        <segue reference="lkr-Fs-pVo"/>
+        <segue reference="K8s-qa-AVX"/>
+        <segue reference="242-PS-7T9"/>
+        <segue reference="XeE-mS-zzC"/>
+        <segue reference="fYG-u1-gw1"/>
+        <segue reference="rWl-jU-Qxh"/>
+        <segue reference="yXb-h0-wbb"/>
+        <segue reference="ZP7-VI-zsD"/>
     </inferredMetricsTieBreakers>
 </document>
