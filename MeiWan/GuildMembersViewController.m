@@ -173,19 +173,23 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    PlagerinfoViewController *playerInfoCtr = [mainStoryboard instantiateViewControllerWithIdentifier:@"secondStory"];
+
     if (tableView == guildMemberTableView) {
-        newViewController * newVC = [[newViewController alloc]init];
-        newVC.dictionary = _memberArray[indexPath.row];
-        [self.navigationController pushViewController:newVC animated:YES];
+
+        playerInfoCtr.playerInfo= _memberArray[indexPath.row];
+        
     }else if (tableView == DaRenTableView){
-        newViewController * newVC2 = [[newViewController alloc]init];
-        newVC2.dictionary = _darenArray[indexPath.row];
-        [self.navigationController pushViewController:newVC2 animated:YES];
+        
+        playerInfoCtr.playerInfo= _darenArray[indexPath.row];
+
     }else{
-//        LastGuildViewController *lastVC = [[LastGuildViewController alloc]init];
-//        lastVC.dictionary = _subGuildArray[indexPath.row];
-//        [self.navigationController pushViewController:lastVC animated:YES];
+        NSDictionary * playerInfo = _subGuildArray[indexPath.row];
+        playerInfoCtr.playerInfo= playerInfo[@"user"];
     }
+    
+    [self.navigationController pushViewController:playerInfoCtr animated:YES];
 }
 
 #pragma mark----netWorking

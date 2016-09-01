@@ -13,6 +13,7 @@
 #import "SBJsonParser.h"
 #import "LoginViewController.h"
 #import "MJRefresh.h"
+#import "PlagerinfoViewController.h"
 
 @interface GuildRankListViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -96,6 +97,12 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    NSDictionary * dictionary = self.rankArray[indexPath.row];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    PlagerinfoViewController *playerInfoCtr = [mainStoryboard instantiateViewControllerWithIdentifier:@"secondStory"];
+    playerInfoCtr.playerInfo= dictionary[@"user"];
+    [self.navigationController pushViewController:playerInfoCtr animated:YES];
+
 }
 - (void)findUnionsRank:(int )type
 {
@@ -115,7 +122,7 @@
                     if ( self.rankArray.count == testArray.count) {
                         [self.tableview reloadData];
                     }
-                    [self.tableview.header endRefreshing];
+                    [self.tableview.mj_header endRefreshing];
                 }else if (status==1) {
                     [PersistenceManager setLoginSession:@""];
                     LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
@@ -143,7 +150,7 @@
                         [self.rankArray addObject:obj];
                         [self.tableview reloadData];
                     }];
-                    [self.tableview.footer endRefreshing];
+                    [self.tableview.mj_footer endRefreshing];
                     
                 }else if (status==1) {
                     [PersistenceManager setLoginSession:@""];

@@ -45,7 +45,7 @@
         case 1:
         {
             invitImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageArray[tagindex]]];
-            contentText.text = [NSString stringWithFormat:@"%@/%@小时",titlelabel[tagindex],orderMessage[@"hours"]];
+            contentText.text = [NSString stringWithFormat:@"%@/%@首",titlelabel[tagindex],orderMessage[@"hours"]];
         }
             break;
         case 2:
@@ -76,7 +76,7 @@
         case 6:
         {
             invitImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageArray[tagindex]]];
-            contentText.text = [NSString stringWithFormat:@"%@/%@小时",titlelabel[tagindex],orderMessage[@"hours"]];
+            contentText.text = [NSString stringWithFormat:@"%@/%@次",titlelabel[tagindex],orderMessage[@"hours"]];
         }
             break;
         case 7:
@@ -104,79 +104,30 @@
     
     //
     UIButton * rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightButton.frame = CGRectMake(dtScreenWidth-10-50, invitImage.center.y-15, 50, 30);
+    rightButton.frame = CGRectMake(dtScreenWidth-10-70, invitImage.center.y-15, 70, 30);
     [rightButton setTitle:@"完成" forState:UIControlStateNormal];
     [rightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     rightButton.titleLabel.font = [UIFont  systemFontOfSize:15.0];
-    rightButton.backgroundColor = [CorlorTransform colorWithHexString:@"66ff66"];
+    rightButton.backgroundColor = [CorlorTransform colorWithHexString:@"33cc66"];
     rightButton.layer.cornerRadius = 5;
     rightButton.clipsToBounds = YES;
-    rightButton.hidden = YES;
     [rightButton addTarget:self action:@selector(rightButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:rightButton];
     self.DoneButton = rightButton;
-    //
-    UIButton * RejectButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    RejectButton.frame = CGRectMake(rightButton.frame.origin.x-10-50, rightButton.frame.origin.y, 50, 30);
-    [RejectButton setTitle:@"拒绝" forState:UIControlStateNormal];
-    [RejectButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    RejectButton.titleLabel.font = [UIFont  systemFontOfSize:15.0];
-    RejectButton.backgroundColor = [CorlorTransform colorWithHexString:@"3366cc"];
-    RejectButton.layer.cornerRadius = 5;
-    RejectButton.clipsToBounds = YES;
-    RejectButton.hidden = YES;
-    [RejectButton addTarget:self action:@selector(RejectButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:RejectButton];
-
-
     
-    UIButton * evaluate = [UIButton buttonWithType:UIButtonTypeCustom];
-    evaluate.frame = CGRectMake(dtScreenWidth-10-70, invitImage.center.y-15, 70, 30);
-    [evaluate setTitle:@"去评价" forState:UIControlStateNormal];
-    [evaluate setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    evaluate.titleLabel.font = [UIFont  systemFontOfSize:15.0];
-    evaluate.backgroundColor = [CorlorTransform colorWithHexString:@"66ff66"];
-    evaluate.layer.cornerRadius = 5;
-    evaluate.clipsToBounds = YES;
-    evaluate.hidden = YES;
-    [evaluate addTarget:self action:@selector(evaluateButton:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:evaluate];
-    self.evaluate = evaluate;
-    /** 刚开始的时候 -- 待确定*/
-    if (status==0) {
-        rightButton.hidden = YES;
-        evaluate.hidden = YES;
-        RejectButton.hidden = YES;
-    }
-    /** 玩家已支付 -- 进行中 */
-    if (status==100) {
-        
-        rightButton.hidden = NO;
-        RejectButton.hidden = NO;
-    }
-    if (status==200) {
-        
-        RejectButton.hidden = YES;
-        rightButton.hidden = NO;
-        rightButton.backgroundColor = [UIColor grayColor];
-        rightButton.userInteractionEnabled = YES;
-        
-    }
-    /** 交易完成或者是陪玩胜诉 -- 已完成 */
-    if (status==400||status==600) {
-        
-        rightButton.hidden = YES;
-        evaluate.hidden = NO;
-        RejectButton.hidden = YES;
-    }
-    if (status==800) {
-        
-        rightButton.hidden = YES;
-        evaluate.hidden = YES;
-        RejectButton.hidden = YES;
-    }
+    UIButton * TouSuButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    TouSuButton.frame = CGRectMake(rightButton.frame.origin.x-10-80, rightButton.frame.origin.y, 80, 30);
+    [TouSuButton setTitle:@"申请退款" forState:UIControlStateNormal];
+    [TouSuButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    TouSuButton.titleLabel.font = [UIFont  systemFontOfSize:15.0];
+    TouSuButton.backgroundColor = [CorlorTransform colorWithHexString:@"3366cc"];
+    TouSuButton.layer.cornerRadius = 5;
+    TouSuButton.clipsToBounds = YES;
+    TouSuButton.hidden = YES;
+    [TouSuButton addTarget:self action:@selector(TouSuButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:TouSuButton];
     
-    /**  */
+        /**  */
 
     /**
      标签图片直接通过循环创建
@@ -219,31 +170,33 @@
         }
         
         /** 刚开始的时候 -- 待确定*/
-        if (status==0) {
+        if (status==0||status==100) {
             if (i==0) {
                 pointImage.image = [UIImage imageNamed:@"pw_dot"];
             }
         }
         /** 玩家已支付或者是陪玩已经同意接单 -- 进行中 */
-        if (status==100||status==200) {
+        if (status==200) {
             if (i==1) {
                 pointImage.image = [UIImage imageNamed:@"pw_dot"];
             }
         }
-        /** 交易完成或者是陪玩胜诉 -- 已完成 */
-        if (status==400||status==600) {
+        
+        if (status==500) {
             if (i==2) {
+                Statuslabel.text = @"仲裁中";
                 pointImage.image = [UIImage imageNamed:@"pw_dot"];
             }
         }
-        if (status==800) {
+        /** 交易完成或者是陪玩胜诉 -- 已完成 */
+        if (status==400||status==600||status==700) {
             if (i==3) {
+                
                 pointImage.image = [UIImage imageNamed:@"pw_dot"];
-                Statuslabel.text = @"已评价";
             }
+            
         }
         /**  */
-        
         [ColorLine addSubview:pointImage];
         
     }
@@ -251,15 +204,59 @@
     NSDictionary * userDic = [PersistenceManager getLoginUser];
     NSString * userId = [NSString stringWithFormat:@"%@",userDic[@"id"]];
     NSString * peiwanID = [NSString stringWithFormat:@"%@",orderMessage[@"peiwanId"]];
+    
     if ([userId isEqualToString:peiwanID]) {
         NSLog(@"陪玩");
-        [rightButton setTitle:@"接受" forState:UIControlStateNormal];
-        [evaluate setTitle:@"求评价" forState:UIControlStateNormal];
-        
+        /** 玩家已支付 -- 进行中 */
+        if (status==100) {
+            rightButton.hidden = NO;
+            [rightButton setTitle:@"接受" forState:UIControlStateNormal];
+            TouSuButton.hidden = NO;
+            [TouSuButton setTitle:@"拒绝" forState:UIControlStateNormal];
+        }
+        /** 陪玩已接受 */
+        if (status==200||status==500) {
+            rightButton.hidden = NO;
+            [rightButton setTitle:@"进行中" forState:UIControlStateNormal];
+            rightButton.backgroundColor = [UIColor grayColor];
+        }
+        /** 交易完成或者是陪玩胜诉 -- 已完成 */
+        if (status==400||status==600||status==500||status==700) {
+            
+            [rightButton setTitle:@"求评价" forState:UIControlStateNormal];
+            
+            if (status==500) {
+                [rightButton setTitle:@"仲裁中" forState:UIControlStateNormal];
+                rightButton.backgroundColor = [UIColor grayColor];
+            }
+            
+            
+        }
+
     }else{
         NSLog(@"玩家");
-        RejectButton.hidden = YES;
+        
         rightButton.backgroundColor = [CorlorTransform colorWithHexString:@"3399ff"];
+        /** 玩家已支付 -- 进行中 */
+        if (status==100) {
+            rightButton.hidden = YES;
+        }
+        /** 陪玩已接受 */
+        if (status==200) {
+            TouSuButton.hidden = NO;
+            
+            [TouSuButton setTitle:@"申请退款" forState:UIControlStateNormal];
+            
+            [rightButton setTitle:@"完成" forState:UIControlStateNormal];
+        }
+        /** 交易完成或者是陪玩胜诉 -- 已完成 */
+        if (status==400||status==500||status==600||status==700) {
+            [rightButton setTitle:@"去评价" forState:UIControlStateNormal];
+            if (status==500) {
+                TouSuButton.hidden = YES;
+                [rightButton setTitle:@"仲裁中" forState:UIControlStateNormal];
+            }
+        }
 
     }
 
@@ -279,21 +276,23 @@
     }else{
         
     }
-}
-/** 评价 */
-- (void)evaluateButton:(UIButton *)sender
-{
-    if ([sender.titleLabel.text isEqualToString:@"求评价"]) {
-        
-        [self.delegate pleaseEvaluateButtonClick:sender];
-    }
-    else{
+    
+    if ([sender.titleLabel.text isEqualToString:@"去评价"]) {
         [self.delegate evaluateButtonClick:sender];
     }
+    if ([sender.titleLabel.text isEqualToString:@"求评价"]) {
+        [self.delegate pleaseEvaluateButtonClick:sender];
+    }
 }
-/** 拒绝 */
-- (void)RejectButtonClick:(UIButton *)sender
+
+/** 拒绝、申请退款 */
+- (void)TouSuButtonClick:(UIButton *)sender
 {
-    
+    if ([sender.titleLabel.text isEqualToString:@"拒绝"]) {
+        [self.delegate RejectButtonClick:sender];
+    }
+    if ([sender.titleLabel.text isEqualToString:@"申请退款"]) {
+        [self.delegate applyRequestButtonClick:sender];
+    }
 }
 @end

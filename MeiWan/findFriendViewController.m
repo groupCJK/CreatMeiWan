@@ -15,6 +15,7 @@
 #import "ShowMessage.h"
 #import "LoginViewController.h"
 #import "MBProgressHUD.h"
+#import "PlagerinfoViewController.h"
 
 @interface findFriendViewController ()<UITableViewDelegate,UITableViewDataSource,findPeiWanDelegate,MBProgressHUDDelegate>
 {
@@ -139,6 +140,11 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    PlagerinfoViewController *playerInfoCtr = [mainStoryboard instantiateViewControllerWithIdentifier:@"secondStory"];
+    playerInfoCtr.playerInfo= self.findDic;
+    [self.navigationController pushViewController:playerInfoCtr animated:YES];
 }
 
 #pragma mark--键盘

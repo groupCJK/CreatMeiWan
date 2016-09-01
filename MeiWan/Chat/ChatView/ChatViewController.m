@@ -29,6 +29,7 @@
 #import "ShowMessage.h"
 #import "InviteViewController.h"
 #import "AssessViewController.h"
+#import "AccusationViewController.h"
 
 
 @interface ChatViewController ()<UIAlertViewDelegate,EMClientDelegate,chatInviteDelegate,ChatOrderViewDelegate>
@@ -94,74 +95,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCallNotification:) name:@"callControllerClose" object:nil];
     
     
-    NSInteger conversationID = [[self.conversation.conversationId substringFromIndex:8] integerValue];
-    NSString * session = [PersistenceManager getLoginSession];
-    [UserConnector findPeiwanById:session userId:[NSNumber numberWithInteger:conversationID] receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
-       
-        if (error) {
-            
-        }else{
-            
-            SBJsonParser * parser = [[SBJsonParser alloc]init];
-            NSDictionary * json = [parser objectWithData:data];
-            int status = [json[@"status"] intValue];
-            if (status==0) {
-                
-                NSDictionary * UserDictionary = json[@"entity"];
-                self.PeiWanDic = UserDictionary;
-                NSArray * userTimetags = UserDictionary[@"userTimeTags"];
-                if (userTimetags.count>0) {
-                    
-                    /***/
-                    [UserConnector findOrderRelateUser:session userId:[NSNumber numberWithInteger:conversationID] receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
-                        if (error) {
-                            
-                        }else{
-                            SBJsonParser * parser = [[SBJsonParser alloc]init];
-                            NSDictionary * json = [parser objectWithData:data];
-                            int status = [json[@"status"] intValue];
-                            if (status==0) {
-                                NSDictionary * dic = json[@"entity"];
-                                if (dic != nil) {
-                                    int stat = [dic[@"status"] intValue];
-                                    if (stat == 0 || stat == 100 ||stat == 200 ||stat == 300 ||stat == 400 ||stat == 500 ||stat == 600 ||stat == 700) {
-                                        chatOrderView * chatOrder = [[chatOrderView alloc]initWithFrame:CGRectMake(0, 0, dtScreenWidth, 60)];
-                                        chatOrder.orderMessage = dic;
-                                        self.OrderDic = dic;
-                                        chatOrder.delegate = self;
-                                        [self.view addSubview:chatOrder];
-                                    }else{
-                                        ChatTOPView * topView = [[ChatTOPView alloc]initWithFrame:CGRectMake(0, 0, dtScreenWidth, 60)];
-                                        topView.userTimeTags = userTimetags;
-                                        topView.delegate = self;
-                                        [self.view addSubview:topView];
-                                    }
-                                    
-                                }else{
-                                    ChatTOPView * topView = [[ChatTOPView alloc]initWithFrame:CGRectMake(0, 0, dtScreenWidth, 60)];
-                                    topView.userTimeTags = userTimetags;
-                                    topView.delegate = self;
-                                    [self.view addSubview:topView];
-                                }
-                            }
-                        }
-                    }];
-
-                   
-                }else{
-                    
-                }
-                
-            }else{
-                [ShowMessage showMessage:@"登录状态异常"];
-            }
-            
-        }
-        
-    }];
-    
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -211,6 +144,7 @@
             self.conversation.ext = newExt;
         }
     }
+    [self creatView];
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -722,6 +656,77 @@
 }
 
 #pragma mark----按钮点击
+
+- (void)creatView{
+
+    NSInteger conversationID = [[self.conversation.conversationId substringFromIndex:8] integerValue];
+    NSString * session = [PersistenceManager getLoginSession];
+    [UserConnector findPeiwanById:session userId:[NSNumber numberWithInteger:conversationID] receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        
+        if (error) {
+            
+        }else{
+            
+            SBJsonParser * parser = [[SBJsonParser alloc]init];
+            NSDictionary * json = [parser objectWithData:data];
+            int status = [json[@"status"] intValue];
+            if (status==0) {
+                
+                NSDictionary * UserDictionary = json[@"entity"];
+                self.PeiWanDic = UserDictionary;
+                NSArray * userTimetags = UserDictionary[@"userTimeTags"];
+                    /***/
+                    [UserConnector findOrderRelateUser:session userId:[NSNumber numberWithInteger:conversationID] receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+                        if (error) {
+                            
+                        }else{
+                            SBJsonParser * parser = [[SBJsonParser alloc]init];
+                            NSDictionary * json = [parser objectWithData:data];
+                            int status = [json[@"status"] intValue];
+                            if (status==0) {
+                                NSDictionary * dic = json[@"entity"];
+                                if (dic != nil) {
+                                    int stat = [dic[@"status"] intValue];
+                                    if (stat == 100 ||stat == 200 ||stat == 400 ||stat == 500 ||stat == 600 ||stat == 700) {
+                                        chatOrderView * chatOrder = [[chatOrderView alloc]initWithFrame:CGRectMake(0, 0, dtScreenWidth, 60)];
+                                        chatOrder.orderMessage = dic;
+                                        self.OrderDic = dic;
+                                        chatOrder.delegate = self;
+                                        [self.view addSubview:chatOrder];
+                                        self.tableView.frame = CGRectMake(0, 60, dtScreenWidth, dtScreenHeight-180);
+                                    }else{
+                                        ChatTOPView * topView = [[ChatTOPView alloc]initWithFrame:CGRectMake(0, 0, dtScreenWidth, 60)];
+                                        if (userTimetags.count>0) {
+                                            topView.userTimeTags = userTimetags;
+                                        }
+                                        topView.delegate = self;
+                                        [self.view addSubview:topView];
+                                        self.tableView.frame = CGRectMake(0, 60, dtScreenWidth, dtScreenHeight-180);
+                                    }
+                                    
+                                }else{
+                                    ChatTOPView * topView = [[ChatTOPView alloc]initWithFrame:CGRectMake(0, 0, dtScreenWidth, 60)];
+                                    if (userTimetags.count>0) {
+                                        topView.userTimeTags = userTimetags;
+                                    }
+                                    topView.delegate = self;
+                                    [self.view addSubview:topView];
+                                    self.tableView.frame = CGRectMake(0, 60, dtScreenWidth, dtScreenHeight-180);
+                                }
+                            }
+                        }
+                    }];
+            }else{
+                [ShowMessage showMessage:@"登录状态异常"];
+            }
+            
+        }
+        
+    }];
+    
+}
+
+/** 邀请 */
 -(void)inviteButtonClick:(UIButton *)sender
 {
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -729,7 +734,7 @@
     playerInfoCtr.playerInfo= self.PeiWanDic;
     [self.navigationController pushViewController:playerInfoCtr animated:YES];
 }
-
+/** 去评价 */
 -(void)evaluateButtonClick:(UIButton *)sender
 {
     
@@ -752,7 +757,7 @@
             int status = [[json objectForKey:@"status"]intValue];
             if (status == 0) {
                 [ShowMessage showMessage:@"接受成功"];
-                [self.navigationController popViewControllerAnimated:YES];
+                [self creatView];
             }else if (status == 1){
                                 
             }else{
@@ -763,6 +768,7 @@
     }];
 
 }
+/** 完成 */
 - (void)doneOrderButtonClick:(UIButton *)sender
 {
     //是(是否确认交易)
@@ -776,9 +782,9 @@
             int status = [[json objectForKey:@"status"]intValue];
             if (status == 0) {
                 [ShowMessage showMessage:@"完成"];
-                [self.navigationController popViewControllerAnimated:YES];
+                [self creatView];
             }else if (status == 1){
-               
+                
             }else{
                 
             }
@@ -792,7 +798,7 @@
 {
     NSLog(@"%@",self.OrderDic[@"userId"]);
     NSString * sendSomeID = [NSString stringWithFormat:@"product_%@",self.OrderDic[@"userId"]];
-    EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:[NSString stringWithFormat:@"行行好，给个五星好评吧。"]];
+    EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:[NSString stringWithFormat:@"帮我评价一下好么？谢谢啦！"]];
     NSString *from = [[EMClient sharedClient] currentUsername];
     
     EMMessage * message = [[EMMessage alloc]initWithConversationID:sendSomeID from:from to:sendSomeID body:body ext:@{@"jiedan":@"接单"}];
@@ -805,10 +811,46 @@
         if (error) {
             
         }else{
+            sender.backgroundColor = [UIColor grayColor];
             sender.userInteractionEnabled = NO;
+            [self creatView];
         }
     }];
     
 }
-
+/** 拒绝 */
+-(void)RejectButtonClick:(UIButton *)sender
+{
+    NSLog(@"%@",[NSNumber numberWithInteger:[self.OrderDic[@"id"] longLongValue]]);
+    NSString * session = [PersistenceManager getLoginSession];
+    [UserConnector rejectOrder:session orderId:self.OrderDic[@"id"] receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+       
+        if (error) {
+            
+        }else{
+            SBJsonParser * parser = [[SBJsonParser alloc]init];
+            NSDictionary * json = [parser objectWithData:data];
+            int status = [json[@"status"] intValue];
+            if (status==0) {
+                
+                [ShowMessage showMessage:@"订单取消成功"];
+                [self creatView];
+                
+            }else{
+                
+                NSLog(@"拒绝订单 status = %d",status);
+            }
+        }
+        
+    }];
+}
+/** 申请退款 */
+- (void)applyRequestButtonClick:(UIButton *)sender
+{
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    AccusationViewController *playerInfoCtr = [mainStoryboard instantiateViewControllerWithIdentifier:@"applyRequest"];
+    playerInfoCtr.orderDic= self.OrderDic;
+    [self.navigationController pushViewController:playerInfoCtr animated:YES];
+    
+}
 @end

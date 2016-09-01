@@ -13,14 +13,16 @@
 #import "SBJsonParser.h"
 #import "OrderLiseCell.h"
 #import "MBProgressHUD.h"
+#import "MJRefresh.h"
 
 @interface CashManagementViewController ()<UITableViewDelegate,UITableViewDataSource,MBProgressHUDDelegate>
 {
     UITableView * tableview;
     MBProgressHUD * HUD;
+    int pages;
 }
 @property(nonatomic,strong)UITextField * tf;
-@property(nonatomic,strong)NSArray * listArray;
+@property(nonatomic,strong)NSMutableArray * listArray;
 
 @end
 
@@ -28,13 +30,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    pages = 0;
     HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     HUD.delegate = self;
     HUD.labelText = @"加载中";
     
     [self init_UI];
-    [self findMyUnionEarnNetWorking];
+    [self findMyUnionEarnNetWorking:pages];
     // Do any additional setup after loading the view.
 }
 - (void)init_UI
@@ -77,11 +79,23 @@
     tableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     [self.view addSubview:tableview];
     
+    tableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    
+        [self findMyUnionEarnNetWorking:pages];
+        
+    }];
+    
+    tableview.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        
+        pages+=10;
+        [self findMyUnionEarnNetWorking:pages];
+    
+    }];
+    
     UIView * line1 = [[UIView alloc]initWithFrame:CGRectMake(0, tableview.frame.origin.y-1, dtScreenWidth, 1)];
     line1.backgroundColor = [UIColor grayColor];
     [self.view addSubview:line1];
     [HUD hide:YES afterDelay:1];
-
     
 }
 
@@ -191,11 +205,11 @@
     return self.listArray.count;
 }
 #pragma mark----订单网络请求
-- (void)findMyUnionEarnNetWorking
+- (void)findMyUnionEarnNetWorking:(int)page
 {
     NSString * session = [PersistenceManager getLoginSession];
-
-    [UserConnector findMyUnionEarn:session offset:0 limit:10 receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+    
+    [UserConnector findMyUnionEarn:session offset:page limit:10 receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
     
         if (error) {
             [ShowMessage showMessage:@"服务器未响应"];
@@ -204,8 +218,27 @@
             NSDictionary * json = [parser objectWithData:data];
             int status = [json[@"status"] intValue];
             if (status == 0) {
-                self.listArray = json[@"entity"];
-                [tableview reloadData];
+               
+                if (page==0) {
+                    
+                    pages = 0;
+                    [self.listArray removeAllObjects];
+                    self.listArray = json[@"entity"];
+                    [tableview.mj_header endRefreshing];
+                    [tableview reloadData];
+                    
+                }else{
+                    
+                    [json[@"entity"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        [self.listArray addObject:obj];
+                        [tableview.mj_footer endRefreshing];
+                        [tableview reloadData];
+                    }];
+                    
+                }
+                if (json==nil) {
+                    [tableview.mj_footer endRefreshing];
+                }
             }else if (status == 1){
                 
             }else{

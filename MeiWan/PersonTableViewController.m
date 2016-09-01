@@ -77,7 +77,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    _mallCell.hidden = YES;
     //设置标题 标题颜色 导航栏颜色
     self.title = @"个人";
     [self.navigationController.navigationBar setBarTintColor:[CorlorTransform colorWithHexString:@"#3f90a4"]];
@@ -146,7 +146,10 @@
     self.headimage.layer.masksToBounds = YES;
     self.headimage.layer.cornerRadius = 45.0f;
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",self.userinfo.headUrl]];
-    [self.headimage setImageWithURL:url placeholderImage:[UIImage imageNamed:@"headerImage"]];
+    if (url==nil) {
+        [self showMessage:@"系统监测到您还没有上传头像，请您尽快完成。友情提示:真实头像更能约到朋友呢"];
+    }
+    [self.headimage setImageWithURL:url];
     [self.userInfoHeaderView addSubview:self.headimage];
     
     UIButton *eaditButton = [[UIButton alloc] initWithFrame:CGRectMake(dtScreenWidth-98, 200-70, 96, 20)];
@@ -390,6 +393,7 @@
     [alertController addAction:sureAction];
     [self presentViewController:alertController animated:YES completion:nil];
 }
+
 
 -(void)SingleDynamicTap:(UITapGestureRecognizer*)recognizer
 {
@@ -783,4 +787,17 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
+- (void)showMessage:(NSString *)message
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示信息" message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action){
+        
+    }];
+    UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+
+    }];
+    [alertController addAction:cancelAction];
+    [alertController addAction:sureAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
 @end

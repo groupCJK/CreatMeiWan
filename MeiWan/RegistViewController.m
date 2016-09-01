@@ -19,8 +19,11 @@
 #import "UserInfo.h"
 
 @interface RegistViewController ()<UIWebViewDelegate,UITextFieldDelegate>
+/** 手机号码 */
 @property (weak, nonatomic) IBOutlet UITextField *phone;
+/**  */
 @property (weak, nonatomic) IBOutlet UITextField *code;
+/**  */
 @property (weak, nonatomic) IBOutlet UITextField *passWord;
 @property (nonatomic, strong) UIWebView *wb;
 @property (weak, nonatomic) IBOutlet UILabel *userProtocol;
@@ -180,14 +183,14 @@
     [[ShowMessage mainWindow] addSubview:self.wb];
 }
 
-void TTAlertNoTitle(NSString* message) {
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
-                                                    message:message
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-}
+//void TTAlertNoTitle(NSString* message) {
+//    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+//                                                    message:message
+//                                                   delegate:nil
+//                                          cancelButtonTitle:@"OK"
+//                                          otherButtonTitles:nil];
+//    [alert show];
+//}
 
 - (void)setUpLoaduserInfo{
     self.userInfoDic = [PersistenceManager getLoginUser];

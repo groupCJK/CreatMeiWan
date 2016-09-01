@@ -40,7 +40,8 @@
 -(void)setDictionary:(NSDictionary *)dictionary
 {
     NSDictionary * formUser = dictionary[@"fromUser"];
-    [self.userHeaderImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@!1",formUser[@"headUrl"]]] placeholderImage:[UIImage imageNamed:@"gonghui"]];
+    [self.userHeaderImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@!1",formUser[@"headUrl"]]]];
+    self.userHeaderImageView.backgroundColor = [UIColor grayColor];
     self.nickName.text = formUser[@"nickname"];
     self.nickName.font  = [UIFont systemFontOfSize:16.0];
     CGSize nicksize = [self.nickName.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:self.nickName.font,NSFontAttributeName, nil]];

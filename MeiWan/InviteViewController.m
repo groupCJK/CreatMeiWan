@@ -109,8 +109,8 @@
     NSDictionary * userInfo = [PersistenceManager getLoginUser];
     NSLog(@"%@",userInfo);
 
-    self.userUnionID = userInfo[@"Unionid"];
-    self.peiwanUnionID = self.playerInfo[@"Unionid"];
+    self.userUnionID = [NSNumber numberWithInteger:[userInfo[@"unionId"] integerValue]];
+    self.peiwanUnionID = [NSNumber numberWithInteger:[self.playerInfo[@"unionId"] integerValue]];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(WillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
     UILabel * showtext = [[UILabel alloc]init];
@@ -600,6 +600,12 @@
     NSLog(@"车费%@",[NSNumber numberWithFloat:_carFeeNumber]);
     NSLog(@"用户公会%@",_userUnionID);
     NSLog(@"陪玩公会%@",_peiwanUnionID);
+    if (_userUnionID==nil) {
+        _userUnionID = 0;
+    }
+    if (_peiwanUnionID == nil) {
+        _peiwanUnionID = 0;
+    }
     [UserConnector payWithAccountMoney:session peiwanId:[self.playerInfo objectForKey:@"id"] price:[NSNumber numberWithFloat:_riceDownline] hours:[NSNumber numberWithInt:_playTime] tagIndex:[NSNumber numberWithInteger:self.tagIndex] carFee:[NSNumber numberWithFloat:_carFeeNumber] userUnionId:_userUnionID peiwanUnionId:_peiwanUnionID receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
         
         if (error) {

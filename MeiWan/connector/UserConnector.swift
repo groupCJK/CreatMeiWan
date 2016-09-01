@@ -1286,11 +1286,14 @@ import UIKit
     }
     
     //查找关注列表
-    public static func findMyFocus(session:String!,receiver:(data:NSData?,error:NSError?)->()){
+    public static func findMyFocus(session:String!,offset:Int,limit:Int,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
         if (session != nil) {
             parameters["session"]=session
         }
+        parameters["offset"]=offset
+        parameters["limit"]=limit
+        
         request(.GET, userUrl+"findFollowersByUserId", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 if (error==nil){
@@ -1595,12 +1598,39 @@ import UIKit
                     
                 }else{
                     setting .adjustIps()
-                    orderUrl = setting.getIp()+"peiwan-server/rest/users/"
+                    orderUrl = setting.getIp()+"peiwan-server/rest/orders/"
                 }
                 receiver(data:data!, error:error)
         }
 
     }
+    
+    /** 拒绝订单 */
+
+    
+    public static func rejectOrder(session:String!,orderId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
+        var parameters:Dictionary<String,AnyObject> = [:]
+        if (session != nil) {
+            parameters["session"] = session
+        }
+        if (orderId != nil) {
+            parameters["orderId"]=orderId
+        }
+        
+        request(.GET, orderUrl+"rejectOrder", parameters:parameters as? [String : NSObject])
+            .response { request, r, data, error in
+                
+                if (error==nil){
+                    
+                }else{
+                    setting .adjustIps()
+                    orderUrl=setting.getIp()+"peiwan-server/rest/orders/"
+                }
+                
+                receiver(data:data, error:error)
+        }
+    }
+
 }
 
 

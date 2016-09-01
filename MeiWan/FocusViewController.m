@@ -145,7 +145,7 @@
 /**获取粉丝列表*/
 - (void)focusFollowersBy{
     NSString *sesstion = [PersistenceManager getLoginSession];
-    [UserConnector findMyFocus:sesstion receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+    [UserConnector findMyFocus:sesstion offset:0 limit:1 receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
         if (error) {
             [ShowMessage showMessage:@"服务器未响应"];
         }else{
