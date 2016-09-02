@@ -9,6 +9,7 @@
 #import "PreviewImageView.h"
 #import <QuartzCore/QuartzCore.h>
 #import <CoreGraphics/CoreGraphics.h>
+#import "creatAlbum.h"
 
 @interface PreviewImageView ()<UIActionSheetDelegate>
 
@@ -144,7 +145,7 @@
     {
         if (self.photoImageView.image)
         {
-            UIImageWriteToSavedPhotosAlbum(self.photoImageView.image,self,@selector(image:didFinishSavingWithError:contextInfo:),nil);
+            [creatAlbum createAlbumSaveImage:self.photoImageView.image];
         }
         else
         {
