@@ -239,7 +239,8 @@
         rightButton.backgroundColor = [CorlorTransform colorWithHexString:@"3399ff"];
         /** 玩家已支付 -- 进行中 */
         if (status==100) {
-            rightButton.hidden = YES;
+            rightButton.hidden = NO;
+            [rightButton setTitle:@"撤回" forState:UIControlStateNormal];
         }
         /** 陪玩已接受 */
         if (status==200) {
@@ -282,6 +283,9 @@
     }
     if ([sender.titleLabel.text isEqualToString:@"求评价"]) {
         [self.delegate pleaseEvaluateButtonClick:sender];
+    }
+    if ([sender.titleLabel.text isEqualToString:@"撤回"]) {
+        [self.delegate revokeRequestButtonClick:sender];
     }
 }
 

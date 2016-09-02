@@ -27,7 +27,8 @@
         self.commentTitleLabel = comment;
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((dtScreenWidth-90)/2, (80-40)/2, 90, 40)];
-        label.text = @"用户暂无数据";
+        label.text = @"快来围观抢沙发";
+        label.textColor = [UIColor grayColor];
         label.font = [UIFont systemFontOfSize:13.0f];
         [self addSubview:label];
         self.commentLabel = label;

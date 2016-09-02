@@ -24,12 +24,11 @@
 #import "ExploitsTableViewController.h"
 #import "NetBarViewController.h"
 #import "ChatViewController.h"
-
-#import "ShowImageViewController.h"
-#import "showScrollViewController.h"
-
 #import "ShowMessage.h"
 #import "SBJson.h"
+//#import "EaseMessageReadManager.h"
+#import "ImageViewController.h"
+#import "PreviewImageView.h"
 
 @interface PlagerinfoViewController ()<UITableViewDataSource,UITableViewDelegate,UserDynamicDelegate>
 
@@ -51,6 +50,7 @@
 @property (nonatomic, strong) NSArray *arr1;
 @property (nonatomic, strong) NSMutableArray * MyfriendArray;
 @property (nonatomic,strong)NSMutableArray * myEvaluateArray;
+@property (nonatomic,strong)NSMutableArray * userTimetagArray;
 @property (nonatomic,assign)int page;
 
 @end
@@ -77,7 +77,7 @@
             int status = [[json objectForKey:@"status"]intValue];
             if (status == 0) {
                 self.playerInfo = [json objectForKey:@"entity"];
-
+                self.userTimetagArray = self.playerInfo[@"userTimeTags"];
             }else if (status == 1){
                 
             }else{
@@ -132,11 +132,11 @@
         [self.playerTableView.mj_header beginRefreshing];
         [self headerRereshing];
     }];
-    self.playerTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        [self.playerTableView.mj_footer beginRefreshing];
-        [self footerRereshing];
-    }];
-    
+
+    MJRefreshAutoGifFooter *footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRereshing)];
+    self.playerTableView.mj_footer = footer;
+    footer.refreshingTitleHidden = YES;
+    footer.stateLabel.hidden = YES;
     
     [UserConnector findMyFriends:session receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
         if (error) {
@@ -204,7 +204,11 @@
     if (indexPath.section == 0) {
         return 66;
     }else if (indexPath.section == 1){
-        return 85;
+        if (self.userTimetagArray.count>0) {
+            return 85;
+        }else{
+            return 0;
+        }
     }else if (indexPath.section == 2){
         if (IS_IPHONE_6P) {
             return 180;
@@ -214,7 +218,8 @@
             return 155;
         }
     }else if (indexPath.section == 3){
-        return 130;
+//        return 130;
+        return 0;
     }else if (indexPath.section == 4){
         return 80;
     }
@@ -238,8 +243,15 @@
         if (!timeCell) {
             timeCell = [[TimeLabelTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"timeCell"];
         }
-        timeCell.playerInfo = self.playerInfo;
-        return timeCell;
+
+        if (self.userTimetagArray.count>0) {
+            timeCell.playerInfo = self.playerInfo;
+            return timeCell;
+        }else{
+            timeCell.hidden = YES;
+            return timeCell;
+        }
+        
     }else if (indexPath.section == 2){
          _dynamicCell = [tableView dequeueReusableCellWithIdentifier:@"dynamicCell"];
         if (!_dynamicCell) {
@@ -252,6 +264,7 @@
         if (!FootprintCell) {
             FootprintCell = [[FootprintTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"FootprintCell"];
         }
+        FootprintCell.hidden = YES;
         return FootprintCell;
     }else{
         CommentTableViewCell * Commentcell = [tableView dequeueReusableCellWithIdentifier:@"commentCell"];
@@ -266,20 +279,21 @@
                 Commentcell.commentTitleLabel.hidden = YES;
             }
         }else{
+
             Commentcell.commentLabel.hidden = NO;
 
         }
+        
         return Commentcell;
     }
 }
 /**点击动态图片跳转*/
 -(void)showPicture:(UITapGestureRecognizer *)gesture
 {
-    showScrollViewController * showScrollView = [[showScrollViewController alloc]init];
-    showScrollView.title = @"展示图片";
-    showScrollView.ImageView = (UIImageView *)[gesture view];
-    showScrollView.imageArray = [self.dynamicCell.dynamicDatas objectForKey:@"statePhotos"];
-    [self.navigationController pushViewController:showScrollView animated:YES];
+    UIImageView * imageview = (UIImageView *)[gesture view];
+    UIWindow *windows = [UIApplication sharedApplication].keyWindow;
+    CGRect startRect = [imageview convertRect:imageview.bounds toView:windows];
+    [PreviewImageView showPreviewImage:imageview.image startImageFrame:startRect inView:windows viewFrame:self.view.bounds];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -294,7 +308,13 @@
     }else if (indexPath.section == 3){
         NSLog(@"足迹");
     }else if (indexPath.section == 4){
-        NSLog(@"评价");
+
+        NSDictionary * CommentPerson = self.myEvaluateArray[indexPath.row];
+        /** 跳转评价用户详情页 */
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        PlagerinfoViewController *playerInfoCtr = [mainStoryboard instantiateViewControllerWithIdentifier:@"secondStory"];
+        playerInfoCtr.playerInfo= CommentPerson[@"user"];
+        [self.navigationController pushViewController:playerInfoCtr animated:YES];
     }
 }
 
@@ -304,6 +324,7 @@
         _playerTableView.delegate = self;
         _playerTableView.dataSource = self;
         _playerTableView.backgroundColor = [UIColor whiteColor];
+        _playerTableView.separatorStyle = UITableViewCellSelectionStyleNone;
         [self.view addSubview:_playerTableView];
     }
     return _playerTableView;
@@ -746,9 +767,10 @@
 /**点击头像展示图片*/
 - (void)tapGesture:(UITapGestureRecognizer *)gesture
 {
-    ShowImageViewController * imageVC = [[ShowImageViewController alloc]init];
-    imageVC.playInfo = self.playerInfo;
-    [self.navigationController pushViewController:imageVC animated:YES];
+    UIImageView * imageview = (UIImageView *)[gesture view];
+    UIWindow *windows = [UIApplication sharedApplication].keyWindow;
+    CGRect startRect = [imageview convertRect:imageview.bounds toView:windows];
+    [PreviewImageView showPreviewImage:imageview.image startImageFrame:startRect inView:windows viewFrame:self.view.bounds];
 }
 - (void)pinglunAFNetworking:(int)page
 {
@@ -770,8 +792,8 @@
                         [self.myEvaluateArray addObject:obj];
                     }];
                 }
-                [self.playerTableView.header endRefreshing];
-                [self.playerTableView.footer endRefreshing];
+                [self.playerTableView.mj_header endRefreshing];
+                [self.playerTableView.mj_footer endRefreshing];
                 [self.playerTableView reloadData];
 
             }

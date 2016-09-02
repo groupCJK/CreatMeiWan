@@ -15,6 +15,7 @@
 - (void)doneOrderButtonClick:(UIButton *)sender;
 - (void)RejectButtonClick:(UIButton *)sender;
 - (void)applyRequestButtonClick:(UIButton *)sender;
+- (void)revokeRequestButtonClick:(UIButton *)sender;
 
 @end
 @interface chatOrderView : UIView

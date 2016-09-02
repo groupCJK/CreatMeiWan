@@ -305,7 +305,6 @@
 		2B2D09621D532BC300139467 /* rscode.c in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D09581D532BC300139467 /* rscode.c */; };
 		2B2D09631D532BC300139467 /* split.c in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D095A1D532BC300139467 /* split.c */; };
 		2B2D09671D533CFB00139467 /* scanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D09661D533CFB00139467 /* scanViewController.m */; };
-		2B2F31A01D6C3E84005A6C23 /* showScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2F319F1D6C3E84005A6C23 /* showScrollViewController.m */; };
 		2B409A761D5C903100408431 /* gonghuiSearch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B409A751D5C903100408431 /* gonghuiSearch@2x.png */; };
 		2B409A791D5C9CCA00408431 /* findFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B409A781D5C9CCA00408431 /* findFriendViewController.m */; };
 		2B4698CC1D69513E0059B140 /* MallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B4698CB1D69513E0059B140 /* MallViewController.m */; };
@@ -327,7 +326,7 @@
 		2B5B7D2E1D3893C700CF5354 /* UserDynamicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5B7D291D3893C700CF5354 /* UserDynamicTableViewCell.m */; };
 		2B6D634B1D6043EF00B3E3BC /* pw_visible.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B6D63491D6043EF00B3E3BC /* pw_visible.png */; };
 		2B6D634D1D6045E600B3E3BC /* pw_hide.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B6D634C1D6045E600B3E3BC /* pw_hide.png */; };
-		2B7D0EA41D6BF973009B4278 /* ShowImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7D0EA31D6BF973009B4278 /* ShowImageViewController.m */; };
+		2B7A8DC51D797012001DABA2 /* PreviewImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7A8DC41D797012001DABA2 /* PreviewImageView.m */; };
 		2B7E9F801D5D6F9100207CB7 /* findPeiWanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7E9F7F1D5D6F9100207CB7 /* findPeiWanCell.m */; };
 		2B7E9F821D5DAEC500207CB7 /* sharefenxiang@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B7E9F811D5DAEC500207CB7 /* sharefenxiang@2x.png */; };
 		2BA4F75D1D4DCB6700A6F68C /* fansCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA4F75C1D4DCB6700A6F68C /* fansCell.m */; };
@@ -1109,8 +1108,6 @@
 		2B2D095B1D532BC300139467 /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
 		2B2D09651D533CFB00139467 /* scanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scanViewController.h; sourceTree = "<group>"; };
 		2B2D09661D533CFB00139467 /* scanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = scanViewController.m; sourceTree = "<group>"; };
-		2B2F319E1D6C3E84005A6C23 /* showScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = showScrollViewController.h; sourceTree = "<group>"; };
-		2B2F319F1D6C3E84005A6C23 /* showScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = showScrollViewController.m; sourceTree = "<group>"; };
 		2B409A751D5C903100408431 /* gonghuiSearch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gonghuiSearch@2x.png"; path = "../gonghuiSearch@2x.png"; sourceTree = "<group>"; };
 		2B409A771D5C9CCA00408431 /* findFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = findFriendViewController.h; sourceTree = "<group>"; };
 		2B409A781D5C9CCA00408431 /* findFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = findFriendViewController.m; sourceTree = "<group>"; };
@@ -1141,8 +1138,8 @@
 		2B5B7D291D3893C700CF5354 /* UserDynamicTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDynamicTableViewCell.m; sourceTree = "<group>"; };
 		2B6D63491D6043EF00B3E3BC /* pw_visible.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pw_visible.png; path = ../pw_visible.png; sourceTree = "<group>"; };
 		2B6D634C1D6045E600B3E3BC /* pw_hide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pw_hide.png; path = ../pw_hide.png; sourceTree = "<group>"; };
-		2B7D0EA21D6BF973009B4278 /* ShowImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowImageViewController.h; sourceTree = "<group>"; };
-		2B7D0EA31D6BF973009B4278 /* ShowImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowImageViewController.m; sourceTree = "<group>"; };
+		2B7A8DC31D797012001DABA2 /* PreviewImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewImageView.h; sourceTree = "<group>"; };
+		2B7A8DC41D797012001DABA2 /* PreviewImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewImageView.m; sourceTree = "<group>"; };
 		2B7E9F7E1D5D6F9100207CB7 /* findPeiWanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = findPeiWanCell.h; sourceTree = "<group>"; };
 		2B7E9F7F1D5D6F9100207CB7 /* findPeiWanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = findPeiWanCell.m; sourceTree = "<group>"; };
 		2B7E9F811D5DAEC500207CB7 /* sharefenxiang@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sharefenxiang@2x.png"; sourceTree = "<group>"; };
@@ -2968,10 +2965,8 @@
 		2B7D0EA11D6BF942009B4278 /* 展示图片 */ = {
 			isa = PBXGroup;
 			children = (
-				2B7D0EA21D6BF973009B4278 /* ShowImageViewController.h */,
-				2B7D0EA31D6BF973009B4278 /* ShowImageViewController.m */,
-				2B2F319E1D6C3E84005A6C23 /* showScrollViewController.h */,
-				2B2F319F1D6C3E84005A6C23 /* showScrollViewController.m */,
+				2B7A8DC31D797012001DABA2 /* PreviewImageView.h */,
+				2B7A8DC41D797012001DABA2 /* PreviewImageView.m */,
 			);
 			name = "展示图片";
 			sourceTree = "<group>";
@@ -4606,6 +4601,7 @@
 				2BE39EE71D729F4A00CC3F0F /* BaseViewController.m in Sources */,
 				18824A4E1B85D5920063EC03 /* SBJsonStreamParserState.m in Sources */,
 				18CC8EE81BC39CE1000281CE /* Stream.swift in Sources */,
+				2B7A8DC51D797012001DABA2 /* PreviewImageView.m in Sources */,
 				2BD3C6251D73DCC0008CFE23 /* EaseMessageModel.m in Sources */,
 				2B0C707D1D546F84001AB100 /* OrderLiseCell.m in Sources */,
 				18824A121B85CBC80063EC03 /* FriendListTableViewController.m in Sources */,
@@ -4614,7 +4610,6 @@
 				2BD3C61A1D73DCC0008CFE23 /* PSTCollectionViewFlowLayout.m in Sources */,
 				04B138AE1BA07EAF00AAD93F /* RSADataVerifier.m in Sources */,
 				2BD3C64C1D73DCC0008CFE23 /* EaseFacialView.m in Sources */,
-				2B2F31A01D6C3E84005A6C23 /* showScrollViewController.m in Sources */,
 				2BD3C6391D73DCC0008CFE23 /* EaseViewController.m in Sources */,
 				1820A7001BF47F12000E4C06 /* DiscussView.m in Sources */,
 				2BD3C6071D73DCC0008CFE23 /* EMSDWebImageDecoder.m in Sources */,
@@ -4662,7 +4657,6 @@
 				18A319641C02A266005E9010 /* HotCountCell.m in Sources */,
 				18841F301B8C390700E2728B /* UMUUploaderOperation.m in Sources */,
 				2BD3C5F31D73DCC0008CFE23 /* MJRefreshBackStateFooter.m in Sources */,
-				2B7D0EA41D6BF973009B4278 /* ShowImageViewController.m in Sources */,
 				18E579F71B7DDDB000771063 /* UIWebView+AFNetworking.m in Sources */,
 				18F6D2C81B8FF47300B1F0C3 /* MyMoveActionTableViewController.m in Sources */,
 				18841F2D1B8C390700E2728B /* NSString+Base64Encode.m in Sources */,

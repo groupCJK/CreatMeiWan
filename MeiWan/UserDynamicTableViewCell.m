@@ -39,8 +39,9 @@
     [self addSubview:dynamicLabel];
     
     if (imagearrs == nil) {
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((self.frame.size.width-90)/2, (130-40)/2, 90, 40)];
-        label.text = @"用户暂无动态";
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((self.frame.size.width-100)/2, (130-40)/2, 100, 40)];
+        label.text = @"TA还没有发布动态";
+        label.textColor = [UIColor grayColor];
         label.font = [UIFont systemFontOfSize:13.0f];
         [self addSubview:label];
         self.errerLabel = label;
@@ -48,28 +49,32 @@
     }else{
         NSString *str = imagearrs[0];
         if ([str isKindOfClass:[NSNull class]]) {
-            UILabel *imageErrer = [[UILabel alloc] initWithFrame:CGRectMake((self.frame.size.width-100)/2, (130-40)/2+20, 100, 40)];
-            imageErrer.text = @"用户未发布图片";
-            imageErrer.font = [UIFont systemFontOfSize:13.0f];
-            [self addSubview:imageErrer];
-            self.imageErrer = imageErrer;
+//            UILabel *imageErrer = [[UILabel alloc] initWithFrame:CGRectMake((self.frame.size.width-100)/2, (130-40)/2+20, 100, 40)];
+//            imageErrer.text = @"用户未发布图片";
+//            imageErrer.font = [UIFont systemFontOfSize:13.0f];
+//            [self addSubview:imageErrer];
+//            self.imageErrer = imageErrer;
         }else{
             CGFloat kuan = ([UIScreen mainScreen].bounds.size.width-24-10-10)/3;
             if (imagearrs.count==0) {
                 self.dynamicImage.hidden = YES;
             }
-            for (int i = 0; i < imagearrs.count; i++) {
-                UIImageView *dynamicImage = [[UIImageView alloc] initWithFrame:CGRectMake(24+i * (kuan+5), dynamicLabel.frame.origin.y+dynamicLabel.frame.size.height+8, kuan, kuan)];
-                NSURL *assessurl = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",imagearrs[i]]];
-                [dynamicImage setImageWithURL:assessurl];
-                dynamicImage.contentMode = UIViewContentModeScaleAspectFill;
-                dynamicImage.clipsToBounds = YES;
-                [self addSubview:dynamicImage];
-                self.dynamicImage = dynamicImage;
-                self.dynamicImage.userInteractionEnabled = YES;
-                UITapGestureRecognizer * gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showPicture:)];
-                [self.dynamicImage addGestureRecognizer:gesture];
-            }
+            [imagearrs enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if (obj==[NSNull null]) {
+                    
+                }else{
+                    UIImageView *dynamicImage = [[UIImageView alloc] initWithFrame:CGRectMake(24+idx * (kuan+5), dynamicLabel.frame.origin.y+dynamicLabel.frame.size.height+8, kuan, kuan)];
+                    [dynamicImage setImageWithURL:obj];
+                    dynamicImage.contentMode = UIViewContentModeScaleAspectFill;
+                    dynamicImage.clipsToBounds = YES;
+                    [self addSubview:dynamicImage];
+                    self.dynamicImage = dynamicImage;
+                    self.dynamicImage.userInteractionEnabled = YES;
+                    UITapGestureRecognizer * gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showPicture:)];
+                    [self.dynamicImage addGestureRecognizer:gesture];
+                }
+                
+            }];
         }
         
     }

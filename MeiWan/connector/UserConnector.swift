@@ -1708,6 +1708,30 @@ import UIKit
                 receiver(data:data, error:error)
         }
     }
+    
+    /** 撤回订单 */
+    public static func backOrder(session:String!,orderId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
+        var parameters:Dictionary<String,AnyObject> = [:]
+        if (session != nil) {
+            parameters["session"] = session
+        }
+        if (orderId != nil) {
+            parameters["orderId"]=orderId
+        }
+        
+        request(.GET, orderUrl+"backOrder", parameters:parameters as? [String : NSObject])
+            .response { request, r, data, error in
+                
+                if (error==nil){
+                    
+                }else{
+                    setting .adjustIps()
+                    orderUrl=setting.getIp()+"peiwan-server/rest/orders/"
+                }
+                
+                receiver(data:data, error:error)
+        }
+    }
 
 }
 

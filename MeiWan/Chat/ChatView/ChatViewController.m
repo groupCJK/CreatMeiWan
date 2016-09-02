@@ -80,6 +80,13 @@
     app.applicationIconBadgeNumber = unreadCount;
     self.tabBarController.tabBar.hidden = YES;
     
+    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(0, 0, 40, 40);
+    [button setTitle:@"举报" forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(reportButton:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * right = [[UIBarButtonItem alloc]initWithCustomView:button];
+    self.navigationItem.rightBarButtonItem = right;
+    
     // Do any additional setup after loading the view.
     self.showRefreshHeader = YES;
     self.delegate = self;
@@ -485,7 +492,6 @@
         [alertView show];
     }
 }
-
 /** 撤销动作 */
 - (void)revokeMenuAction:(id)sender
 {
@@ -819,10 +825,42 @@
 /** 拒绝 */
 -(void)RejectButtonClick:(UIButton *)sender
 {
-    NSLog(@"%@",[NSNumber numberWithInteger:[self.OrderDic[@"id"] longLongValue]]);
     NSString * session = [PersistenceManager getLoginSession];
     [UserConnector rejectOrder:session orderId:self.OrderDic[@"id"] receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
        
+        if (error) {
+            
+        }else{
+            SBJsonParser * parser = [[SBJsonParser alloc]init];
+            NSDictionary * json = [parser objectWithData:data];
+            int status = [json[@"status"] intValue];
+            if (status==0) {
+                
+                [ShowMessage showMessage:@"订单取消成功"];
+                
+            }else{
+                
+                NSLog(@"拒绝订单 status = %d",status);
+            }
+        }
+        
+    }];
+}
+/** 申请退款 */
+- (void)applyRequestButtonClick:(UIButton *)sender
+{
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    AccusationViewController *playerInfoCtr = [mainStoryboard instantiateViewControllerWithIdentifier:@"applyRequest"];
+    playerInfoCtr.orderDic= self.OrderDic;
+    [self.navigationController pushViewController:playerInfoCtr animated:YES];
+    
+}
+/** 撤回资金 */
+-(void)revokeRequestButtonClick:(UIButton *)sender
+{
+    NSString * session = [PersistenceManager getLoginSession];
+    [UserConnector backOrder:session orderId:self.OrderDic[@"id"] receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        
         if (error) {
             
         }else{
@@ -841,14 +879,11 @@
         }
         
     }];
+
 }
-/** 申请退款 */
-- (void)applyRequestButtonClick:(UIButton *)sender
+#pragma mark----举报
+- (void)reportButton:(UIButton *)sender
 {
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    AccusationViewController *playerInfoCtr = [mainStoryboard instantiateViewControllerWithIdentifier:@"applyRequest"];
-    playerInfoCtr.orderDic= self.OrderDic;
-    [self.navigationController pushViewController:playerInfoCtr animated:YES];
     
 }
 @end
