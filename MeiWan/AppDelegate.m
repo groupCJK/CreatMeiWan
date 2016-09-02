@@ -205,31 +205,38 @@
             case WXSuccess:
             {// 支付成功，向后台发送消息
                 NSLog(@"支付成功");
-//                [[NSNotificationCenter defaultCenter] postNotificationName:@"WX_PaySuccess" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"wx_paysuccess" object:nil];
             }
                 break;
             case WXErrCodeCommon:
             { //签名错误、未注册APPID、项目设置APPID不正确、注册的APPID与设置的不匹配、其他异常等
+                
+                
                 NSLog(@"支付失败");
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"wx_payfail" object:nil];
             }
                 break;
             case WXErrCodeUserCancel:
             { //用户点击取消并返回
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"wx_paycancel" object:nil];
                 NSLog(@"取消支付");
             }
                 break;
             case WXErrCodeSentFail:
             { //发送失败
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"wx_paysendFail" object:nil];
                 NSLog(@"发送失败");
             }
                 break;
             case WXErrCodeUnsupport:
             { //微信不支持
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"wx_paynotsupport" object:nil];
                 NSLog(@"微信不支持");
             }
                 break;
             case WXErrCodeAuthDeny:
             { //授权失败
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"wx_payauthorizedfail" object:nil];
                 NSLog(@"授权失败");
             }
                 break;

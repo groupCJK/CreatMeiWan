@@ -1315,6 +1315,54 @@ import UIKit
     }
     
     
+    
+    /**微信支付*/
+    public static func wxOrderSign(session:String!,peiwanId:NSNumber!,price:NSNumber!,hours:NSNumber!,tagIndex:NSNumber!,carFee:NSNumber!,userUnionId:NSNumber!,peiwanUnionId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
+        
+        var parameters:Dictionary<String,AnyObject> = [:]
+        
+        if(session != nil){
+            parameters["session"]=session
+        }
+        if(peiwanId != nil){
+            parameters["peiwanId"]=peiwanId
+        }
+        if(price != nil){
+            parameters["price"]=price
+        }
+        if(hours != nil){
+            parameters["hours"]=hours
+        }
+        if(tagIndex != nil){
+            parameters["tagIndex"]=tagIndex
+        }
+        if(carFee != nil){
+            parameters["carFee"]=carFee
+        }
+        if(userUnionId != nil){
+            parameters["userUnionId"]=userUnionId
+        }
+        if(peiwanUnionId != nil){
+            parameters["peiwanUnionId"]=peiwanUnionId
+        }
+        request(.GET, orderUrl+"wxOrderSign", parameters:parameters as? [String : NSObject])
+            .response { request, r, data, error in
+                
+                if (error==nil){
+                    
+                }else{
+                    setting .adjustIps()
+                    orderUrl=setting.getIp()+"peiwan-server/rest/orders/"
+                }
+                
+                receiver(data:data!.gunzippedData(), error:error)
+        }
+        
+        
+    }
+
+    
+    
     //查找关注列表
     public static func findMyFocus(session:String!,offset:Int,limit:Int,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]

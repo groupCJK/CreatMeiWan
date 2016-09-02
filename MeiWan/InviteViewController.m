@@ -19,7 +19,8 @@
 #import "PrepaidViewController.h"
 #import "InviteRecordViewController.h"
 #import <AlipaySDK/AlipaySDK.h>
-
+#import "WXApi.h"
+#import "MD5.h"
 
 @interface InviteViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,MBProgressHUDDelegate>
 {
@@ -67,8 +68,8 @@
 /**距离*/
 @property (nonatomic,assign) CGFloat distance;
 @property (nonatomic,assign) float carFeeNumber;
-@property (nonatomic,assign) NSNumber * userUnionID;
-@property (nonatomic,assign) NSNumber * peiwanUnionID;
+@property (nonatomic,retain) NSNumber * userUnionID;
+@property (nonatomic,retain) NSNumber * peiwanUnionID;
 @end
 
 @implementation InviteViewController
@@ -152,7 +153,20 @@
     imageView.backgroundColor = [UIColor blackColor];
     [self.view addSubview:imageView];
     
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paysuccess:) name:@"wx_paysuccess" object:nil];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(payfail:) name:@"wx_payfail" object:nil];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paycancel:) name:@"wx_paycancel" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paysendFail:) name:@"wx_paysendFail" object:nil];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paynotsupport:) name:@"wx_paynotsupport" object:nil];
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(payauthorizedfail:) name:@"wx_payauthorizedfail" object:nil];
+    
 }
+
 - (void)labelPush:(UIButton *)sender
 {
     [self performSegueWithIdentifier:@"labelPush" sender:nil];
@@ -555,7 +569,7 @@
             [ShowMessage showMessage:@"你所邀请的人没有经过资质审核"];
         }else{
             
-            UIAlertView *payAlertView = [[UIAlertView alloc]initWithTitle:@"选择支付方式" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"余额支付",@"支付宝",nil];
+            UIAlertView *payAlertView = [[UIAlertView alloc]initWithTitle:@"选择支付方式" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"余额支付",@"支付宝",@"微信",nil];
             
             [payAlertView show];
         }
@@ -586,6 +600,8 @@
     }else if(buttonIndex == 2){
         //支付宝支付
         [self aliPay];
+    }else if (buttonIndex == 3){
+        [self WxChatPay];
     }
 }
 #pragma mark---余额支付
@@ -667,6 +683,19 @@
 - (void)aliPay
 {
     NSString *session = [PersistenceManager getLoginSession];
+    NSLog(@"陪玩ID%@",[self.playerInfo objectForKey:@"id"]);
+    NSLog(@"时间%@",[NSNumber numberWithInt:_playTime]);
+    NSLog(@"索引%@",[NSNumber numberWithInteger:self.tagIndex]);
+    NSLog(@"车费%@",[NSNumber numberWithFloat:_carFeeNumber]);
+//    NSLog(@"用户公会%@",_userUnionID);
+//    NSLog(@"陪玩公会%@",_peiwanUnionID);
+    if (_userUnionID==nil) {
+        _userUnionID = 0;
+    }
+    if (_peiwanUnionID == nil) {
+        _peiwanUnionID = 0;
+    }
+
     [UserConnector aliOrderSign:session peiwanId:[self.playerInfo objectForKey:@"id"] price:[NSNumber numberWithFloat:_riceDownline] hours:[NSNumber numberWithInt:_playTime] tagIndex:[NSNumber numberWithInteger:self.tagIndex] carFee:[NSNumber numberWithFloat:_carFeeNumber] userUnionId:_userUnionID peiwanUnionId:_peiwanUnionID receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
         if (error) {
             
@@ -693,6 +722,91 @@
                         }
 
                     }];
+                }
+                    break;
+                case 1:
+                {
+                    /**没有登录*/
+                    [self loginAgain];
+                }
+                    break;
+                    
+                case 2:
+                {
+                    [self showMessageAlert:@"你邀请的人没有完成达人认证"];
+                }
+                    break;
+                    
+                case 3:
+                {
+                    [self showMessageAlert:@"不能自己对自己下单"];
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+    }];
+    
+}
+/**微信支付*/
+- (void)WxChatPay
+{
+    NSString *session = [PersistenceManager getLoginSession];
+    
+    NSLog(@"陪玩ID%@",[self.playerInfo objectForKey:@"id"]);
+    NSLog(@"时间%@",[NSNumber numberWithInt:_playTime]);
+    NSLog(@"索引%@",[NSNumber numberWithInteger:self.tagIndex]);
+    NSLog(@"车费%@",[NSNumber numberWithFloat:_carFeeNumber]);
+    NSLog(@"用户公会%@",_userUnionID);
+    NSLog(@"陪玩公会%@",_peiwanUnionID);
+    if (_userUnionID==nil) {
+        _userUnionID = 0;
+    }
+    if (_peiwanUnionID == nil) {
+        _peiwanUnionID = 0;
+    }
+    
+    [UserConnector wxOrderSign:session peiwanId:[self.playerInfo objectForKey:@"id"] price:[NSNumber numberWithFloat:_riceDownline] hours:[NSNumber numberWithInt:_playTime] tagIndex:[NSNumber numberWithInteger:self.tagIndex] carFee:[NSNumber numberWithFloat:_carFeeNumber] userUnionId:_userUnionID peiwanUnionId:_peiwanUnionID receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (error) {
+            
+        }else{
+            SBJsonParser*parser=[[SBJsonParser alloc]init];
+            NSMutableDictionary *json=[parser objectWithData:data];
+            int status = [[json objectForKey:@"status"]intValue];
+            switch (status) {
+                case 0:
+                {
+                    NSString * sign = json[@"entity"];
+                    
+                    //发起微信支付，设置参数
+                    PayReq *request = [[PayReq alloc] init];
+                    request.openID = @"wx4555cf92f3ab6550";
+                    request.partnerId = @"1383665402";
+                    request.prepayId= sign;
+                    request.package = @"Sign=WXPay";
+                    //将当前事件转化成时间戳
+                    NSDate *datenow = [NSDate date];
+                    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[datenow timeIntervalSince1970]];
+                    UInt32 timeStamp =[timeSp intValue];
+                    request.timeStamp= timeStamp;
+                    
+                    /** 随机字符串 */
+                    ;
+                    NSString * str = [NSString stringWithFormat:@"appid=%@&package=Sign=WXPay&partnerid=%@&prepayid=%@&timestamp=%u",request.openID,request.partnerId,request.prepayId,(unsigned int)request.timeStamp];
+                    NSString * str2 = [NSString stringWithFormat:@"%@&key=IJR4681LYNZD1QHZOC3MOHL3KGW42W96",str];
+                    request.nonceStr= [[MD5 md5:str2] uppercaseString];
+                    // 签名加密
+                    
+                    
+                    NSString * string = [NSString stringWithFormat:@"appid=%@&noncestr=%@&package=Sign=WXPay&partnerid=%@&prepayid=%@&timestamp=%u",request.openID,request.nonceStr,request.partnerId,request.prepayId,(unsigned int)request.timeStamp];
+                    NSString * string2 = [NSString stringWithFormat:@"%@&key=IJR4681LYNZD1QHZOC3MOHL3KGW42W96",string];
+                    request.sign = [[MD5 md5:string2] uppercaseString];
+                    
+                    NSLog(@"%@",request.sign);
+                    [WXApi sendReq:request];
+
                 }
                     break;
                 case 1:
@@ -775,5 +889,38 @@
 //        pv.playerInfo = sender;
     }
 }
+
+#pragma mark----Notification
+- (void)paysuccess:(NSNotification *)text{
+    
+    [self showMessageAlert:@"支付成功"];
+    
+}
+- (void)payfail:(NSNotification *)text{
+    
+    [self showMessageAlert:@"支付失败"];
+    
+}
+- (void)paycancel:(NSNotification *)text{
+    
+    [self showMessageAlert:@"取消支付"];
+    
+}
+- (void)paysendFail:(NSNotification *)text{
+    
+    [self showMessageAlert:@"发送信息失败"];
+    
+}
+- (void)paynotsupport:(NSNotification *)text{
+    
+    [self showMessageAlert:@"微信不支持"];
+    
+}
+- (void)payauthorizedfail:(NSNotification *)text{
+    
+    [self showMessageAlert:@"授权失败"];
+    
+}
+
 
 @end
