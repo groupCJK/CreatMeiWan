@@ -30,6 +30,7 @@
 #import "InviteViewController.h"
 #import "AssessViewController.h"
 #import "AccusationViewController.h"
+#import "LoginViewController.h"
 
 
 @interface ChatViewController ()<UIAlertViewDelegate,EMClientDelegate,chatInviteDelegate,ChatOrderViewDelegate>
@@ -62,6 +63,7 @@
 @property (strong, nonatomic) NSString *isFriend;
 @property (strong, nonatomic) NSDictionary * PeiWanDic;
 @property (strong, nonatomic) NSDictionary * OrderDic;
+@property (strong, nonatomic) UIView *moreVi;
 
 @end
 
@@ -82,7 +84,7 @@
     
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0, 0, 40, 40);
-    [button setTitle:@"举报" forState:UIControlStateNormal];
+    [button setTitle:@"更多" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(reportButton:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem * right = [[UIBarButtonItem alloc]initWithCustomView:button];
     self.navigationItem.rightBarButtonItem = right;
@@ -884,6 +886,209 @@
 #pragma mark----举报
 - (void)reportButton:(UIButton *)sender
 {
+    self.moreVi = [[UIView alloc]initWithFrame:CGRectMake(self.view.bounds.size.width-100, 64, 100, 61)];
+    self.moreVi.backgroundColor = [UIColor whiteColor];
+    self.moreVi.layer.cornerRadius = 5;
+    self.moreVi.layer.masksToBounds = YES;
     
+    UILabel *lab1 = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 30)];
+    lab1.text = @"举报";
+    lab1.font = [UIFont systemFontOfSize:15.0];
+    lab1.textColor = [UIColor whiteColor];
+    lab1.userInteractionEnabled = YES;
+    lab1.textAlignment = NSTextAlignmentCenter;;
+    lab1.backgroundColor = [CorlorTransform colorWithHexString:@"#3f90a4"];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(taplab1)];
+    tap.numberOfTapsRequired = 1;
+    [lab1 addGestureRecognizer:tap];
+    [self.moreVi addSubview:lab1];
+    
+    UILabel * label2 = [[UILabel alloc]initWithFrame:CGRectMake(0, 31, 100, 30)];
+    label2.text = @"拉黑";
+    label2.textColor = [UIColor whiteColor];
+    label2.font = [UIFont systemFontOfSize:15.0];
+    label2.textAlignment = NSTextAlignmentCenter;
+    label2.userInteractionEnabled = YES;
+    label2.backgroundColor = [CorlorTransform colorWithHexString:@"#3f90a4"];
+    UITapGestureRecognizer *touch1= [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addBlackTableView)];
+    [label2 addGestureRecognizer:touch1];
+    
+    [self.moreVi addSubview:label2];
+    
+    UITapGestureRecognizer *remove = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(remove)];
+    //[self.view addGestureRecognizer:remove];
+    self.btn = [[UIView alloc]initWithFrame:self.view.bounds];
+    [self.btn addGestureRecognizer:remove];
+    self.btn.backgroundColor = [UIColor clearColor];
+    [[ShowMessage mainWindow]addSubview:self.btn];
+    [[ShowMessage mainWindow] addSubview:self.moreVi];
+
+}
+-(void)remove{
+    [self.btn removeFromSuperview];
+    [self.moreVi removeFromSuperview];
+}
+//加入黑名单
+-(void)addBlackTableView
+{
+    [self remove];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action){
+        
+    }];
+    UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+        EMError *error = [[EMClient sharedClient].contactManager addUserToBlackList:[NSString stringWithFormat:@"product_%@",self.OrderDic[@"id"]] relationshipBoth:YES];
+        if (!error) {
+            NSLog(@"发送成功");
+        }
+    }];
+    alertController.message = @"确定拉黑？拉黑之后可以在聊天界面黑名单中设置";
+    [alertController addAction:cancelAction];
+    [alertController addAction:sureAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+}
+//举报
+-(void)taplab1{
+    [self.btn removeFromSuperview];
+    [self.moreVi removeFromSuperview];
+    self.tip = [[UIView alloc]initWithFrame:CGRectMake(20,self.view.bounds.size.height/5, self.view.bounds.size.width-40, self.view.bounds.size.height/5*3)];
+    self.tip.backgroundColor = [UIColor grayColor];
+    
+    UILabel *tiplab1 = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.tip.bounds.size.width, (self.tip.bounds.size.height-5)/6)];
+    tiplab1.text = @"  色情低俗";
+    tiplab1.userInteractionEnabled = YES;
+    tiplab1.backgroundColor = [UIColor whiteColor];
+    UITapGestureRecognizer *tiptap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tiplab1action)];
+    tiptap1.numberOfTapsRequired = 1;
+    [tiplab1 addGestureRecognizer:tiptap1];
+    [self.tip addSubview:tiplab1];
+    
+    UILabel *tiplab2 = [[UILabel alloc]initWithFrame:CGRectMake(0, (self.tip.bounds.size.height-5)/6+1, self.tip.bounds.size.width, (self.tip.bounds.size.height-5)/6)];
+    tiplab2.text = @"  广告骚扰";
+    tiplab2.userInteractionEnabled = YES;
+    tiplab2.backgroundColor = [UIColor whiteColor];
+    UITapGestureRecognizer *tiptap2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tiplab2action)];
+    tiptap2.numberOfTapsRequired = 1;
+    [tiplab2 addGestureRecognizer:tiptap2];
+    [self.tip addSubview:tiplab2];
+    
+    UILabel *tiplab3 = [[UILabel alloc]initWithFrame:CGRectMake(0, (self.tip.bounds.size.height-5)/6*2+2, self.tip.bounds.size.width, (self.tip.bounds.size.height-5)/6)];
+    tiplab3.text = @"  政治敏感";
+    tiplab3.userInteractionEnabled = YES;
+    tiplab3.backgroundColor = [UIColor whiteColor];
+    UITapGestureRecognizer *tiptap3 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tiplab3action)];
+    tiptap3.numberOfTapsRequired = 1;
+    [tiplab3 addGestureRecognizer:tiptap3];
+    [self.tip addSubview:tiplab3];
+    
+    UILabel *tiplab4 = [[UILabel alloc]initWithFrame:CGRectMake(0, (self.tip.bounds.size.height-5)/6*3+3, self.tip.bounds.size.width, (self.tip.bounds.size.height-5)/6)];
+    tiplab4.text = @"  欺诈骗钱";
+    tiplab4.userInteractionEnabled = YES;
+    tiplab4.backgroundColor = [UIColor whiteColor];
+    UITapGestureRecognizer *tiptap4 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tiplab4action)];
+    tiptap4.numberOfTapsRequired = 1;
+    [tiplab4 addGestureRecognizer:tiptap4];
+    [self.tip addSubview:tiplab4];
+    
+    UILabel *tiplab5 = [[UILabel alloc]initWithFrame:CGRectMake(0, (self.tip.bounds.size.height-5)/6*4+4, self.tip.bounds.size.width, (self.tip.bounds.size.height-5)/6)];
+    tiplab5.text = @"  个人资料不符";
+    tiplab5.userInteractionEnabled = YES;
+    tiplab5.backgroundColor = [UIColor whiteColor];
+    UITapGestureRecognizer *tiptap5 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tiplab5action)];
+    tiptap5.numberOfTapsRequired = 1;
+    [tiplab5 addGestureRecognizer:tiptap5];
+    [self.tip addSubview:tiplab5];
+    
+    UILabel *tiplab6 = [[UILabel alloc]initWithFrame:CGRectMake(0, (self.tip.bounds.size.height-5)/6*5+5, self.tip.bounds.size.width, (self.tip.bounds.size.height-5)/6)];
+    tiplab6.text = @"  其他";
+    tiplab6.userInteractionEnabled = YES;
+    tiplab6.backgroundColor = [UIColor whiteColor];
+    UITapGestureRecognizer *tiptap6 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tiplab6action)];
+    tiptap6.numberOfTapsRequired = 1;
+    [tiplab6 addGestureRecognizer:tiptap6];
+    [self.tip addSubview:tiplab6];
+    
+    self.tipclear = [[UIView alloc]initWithFrame:self.view.bounds];
+    self.tipclear.backgroundColor = [UIColor blackColor];
+    self.tipclear.alpha = 0.5;
+    UITapGestureRecognizer *tipcleartap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tipcleartap)];
+    [self.tipclear addGestureRecognizer:tipcleartap];
+    
+    [[ShowMessage mainWindow]addSubview:self.tipclear];
+    [[ShowMessage mainWindow]addSubview:self.tip];
+}
+
+//取消举报
+-(void)tipcleartap{
+    [self.tip removeFromSuperview];
+    [self.tipclear removeFromSuperview];
+}
+
+//举报信息
+-(void)tiplab1action{
+    //色情低俗
+    [self.tip removeFromSuperview];
+    [self.tipclear removeFromSuperview];
+    [self accusation:[NSNumber numberWithInt:0]];
+}
+-(void)tiplab2action{
+    // 广告骚扰
+    [self.tip removeFromSuperview];
+    [self.tipclear removeFromSuperview];
+    [self accusation:[NSNumber numberWithInt:1]];
+}
+-(void)tiplab3action{
+    //政治敏感
+    [self.tip removeFromSuperview];
+    [self.tipclear removeFromSuperview];
+    [self accusation:[NSNumber numberWithInt:2]];
+}
+-(void)tiplab4action{
+    //其诈骗钱
+    [self.tip removeFromSuperview];
+    [self.tipclear removeFromSuperview];
+    [self accusation:[NSNumber numberWithInt:3]];
+}
+-(void)tiplab5action{
+    //个人资料不符
+    [self.tip removeFromSuperview];
+    [self.tipclear removeFromSuperview];
+    [self accusation:[NSNumber numberWithInt:4]];
+    
+}
+-(void)tiplab6action{
+    //其他
+    [self.tip removeFromSuperview];
+    [self.tipclear removeFromSuperview];
+    [self accusation:[NSNumber numberWithInt:5]];
+}
+- (void)accusation:(NSNumber*)num{
+    NSString *session= [PersistenceManager getLoginSession];
+    [UserConnector accusation:session peiwanId:[self.OrderDic objectForKey:@"id"] contentIndex:num receiver:^(NSData *data,NSError *error){
+        if (error) {
+            [ShowMessage showMessage:@"服务器未响应"];
+        }else{
+            SBJsonParser*parser=[[SBJsonParser alloc]init];
+            NSMutableDictionary *json=[parser objectWithData:data];
+            //NSLog(@"%@",json);
+            int status = [[json objectForKey:@"status"]intValue];
+            if (status == 0) {
+                [ShowMessage showMessage:@"举报成功"];
+            }else if (status == 1){
+                [self jumpout];
+            }else{
+                
+            }
+        }
+    }];
+}
+- (void)jumpout{
+    [PersistenceManager setLoginSession:@""];
+    LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
+    lv.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:lv animated:YES];
 }
 @end

@@ -163,7 +163,6 @@
         }
     }];
 
-    
 }
 /** 下拉刷新 */
 - (void)headerRereshing
