@@ -193,9 +193,18 @@
         [_userInfoHead.layer setBorderColor:[UIColor blackColor].CGColor];
         [_userInfoHead.layer setBorderWidth:0.2];
         [_userInfoHeadView addSubview:_userInfoHead];
+        
+        /**添加照片的位置*/
+        
+        UIImageView * sendImage = [[UIImageView alloc]initWithFrame:CGRectMake(dtScreenWidth-80, 80, 80, 100)];
+        sendImage.backgroundColor = [UIColor blackColor];
+        sendImage.image = [UIImage imageNamed:@""];
+        sendImage.userInteractionEnabled = YES;
+        [_userInfoHeadView addSubview:sendImage];
+        
         UITapGestureRecognizer* headImageSingleRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(SingleHeadImageTap:)];
         headImageSingleRecognizer.numberOfTapsRequired = 1; // 单击
-        [_userInfoHead addGestureRecognizer:headImageSingleRecognizer];
+        [sendImage addGestureRecognizer:headImageSingleRecognizer];
         
         UILabel *prompt = [[UILabel alloc] initWithFrame:CGRectMake(5,160, 100, 10)];
         prompt.text = @"返回自动保存资料";
@@ -208,7 +217,7 @@
 }
 
 - (void)SingleHeadImageTap:(UITapGestureRecognizer*)recognizer{
-    NSLog(@"点击头像");
+
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"选择图片" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从相册选取", nil];
     [alert show];
 }
@@ -216,7 +225,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     UIImagePickerController *ipc = [[UIImagePickerController alloc]init];
     ipc.delegate = self;
-    //    ipc.navigationBar.backgroundColor = [CorlorTransform colorWithHexString:@"#3f90a4"];//系统导航栏透明未解决
+
     [[ipc navigationBar] setTintColor:[CorlorTransform colorWithHexString:@"#3f90a4"]];
     if (buttonIndex == 1) {
         //NSLog(@"1");

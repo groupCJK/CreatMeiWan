@@ -103,7 +103,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCallNotification:) name:@"callOutWithChatter" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCallNotification:) name:@"callControllerClose" object:nil];
     
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -699,7 +698,7 @@
                                         self.OrderDic = dic;
                                         chatOrder.delegate = self;
                                         [self.view addSubview:chatOrder];
-                                        self.tableView.frame = CGRectMake(0, 60, dtScreenWidth, dtScreenHeight-180);
+                                        self.tableView.frame = CGRectMake(0, 64, dtScreenWidth, dtScreenHeight-180);
                                     }else{
                                         ChatTOPView * topView = [[ChatTOPView alloc]initWithFrame:CGRectMake(0, 0, dtScreenWidth, 60)];
                                         if (userTimetags.count>0) {
@@ -707,7 +706,7 @@
                                         }
                                         topView.delegate = self;
                                         [self.view addSubview:topView];
-                                        self.tableView.frame = CGRectMake(0, 60, dtScreenWidth, dtScreenHeight-180);
+                                        self.tableView.frame = CGRectMake(0, 64, dtScreenWidth, dtScreenHeight-180);
                                     }
                                     
                                 }else{
@@ -717,8 +716,11 @@
                                     }
                                     topView.delegate = self;
                                     [self.view addSubview:topView];
-                                    self.tableView.frame = CGRectMake(0, 60, dtScreenWidth, dtScreenHeight-180);
+                                    self.tableView.frame = CGRectMake(0, 64, dtScreenWidth, dtScreenHeight-180);
                                 }
+                            }else{
+                                self.tableView.frame = CGRectMake(0, 0, dtScreenWidth, dtScreenHeight-180);
+                                self.tableView.backgroundColor = [UIColor greenColor];
                             }
                         }
                     }];

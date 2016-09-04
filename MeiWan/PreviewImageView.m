@@ -20,6 +20,7 @@
 @property (nonatomic,strong) NSValue *starRectValue;
 @property (nonatomic,strong) NSValue *imageRectValue;
 @property (nonatomic,strong) UIImage* imageview_image;
+@property (nonatomic,strong) NSString * imageUrl;
 
 @end
 
@@ -59,8 +60,9 @@
         self.photoImageView.backgroundColor = [UIColor clearColor];
         self.photoImageView.userInteractionEnabled = YES;
         [self.contentView addSubview:self.photoImageView];
-        
-        [self addTapPressGestureRecognizer];
+        UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTapView:)];
+        [self.photoImageView addGestureRecognizer:tapGesture];
+
         [self addLongPressGestureRecognizer];
         [self addPinchGestureRecognizer];
         
@@ -72,9 +74,31 @@
         
         [self startShowAnimation];
         self.imageview_image = image;
+        
+       
+        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setTitle:@"查看原图" forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont systemFontOfSize:15.0];
+        button.frame = CGRectMake(dtScreenWidth/2-50, dtScreenHeight-80, 100, 40);
+        [button addTarget:self action:@selector(chaKan:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:button];
+        
+        //注册通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageUrl:) name:@"image_url" object:nil];
+        
     }
     return self;
 }
+- (void)chaKan:(UIButton *)sender
+{
+    [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:self.imageUrl]];
+    sender.hidden = YES;
+}
+- (void)imageUrl:(NSNotification *)text
+{
+    self.imageUrl = text.object;
+}
+
 - (void)handleTapView:(UIGestureRecognizer *)gestureRecognizer
 {
     [self startHideAnimation];
@@ -104,19 +128,6 @@
     self.contentView.frame = [self.starRectValue CGRectValue];
     self.backgroundColor = [UIColor clearColor];
     [UIView commitAnimations];
-}
-- (void)addTapPressGestureRecognizer
-{
-    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] init];
-    
-    tapGR.cancelsTouchesInView = NO;
-	tapGR.delaysTouchesBegan = NO;
-	tapGR.delaysTouchesEnded = NO;
-	tapGR.numberOfTapsRequired = 1;
-	tapGR.numberOfTouchesRequired = 1;
-    
-    [tapGR addTarget:self action:@selector(handleTapView:)];
-    [self addGestureRecognizer:tapGR];
 }
 
 - (void)addPinchGestureRecognizer
@@ -220,4 +231,6 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 //    self.frame=CGRectMake(self.frame.origin.x-kuan/2.0f, self.frame.origin.y-kuan/2.0f, self.frame.size.width, self.frame.size.height);
 //    
 //}
+
+
 @end

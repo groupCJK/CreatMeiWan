@@ -64,7 +64,7 @@
                     
                 }else{
                     UIImageView *dynamicImage = [[UIImageView alloc] initWithFrame:CGRectMake(24+idx * (kuan+5), dynamicLabel.frame.origin.y+dynamicLabel.frame.size.height+8, kuan, kuan)];
-                    [dynamicImage setImageWithURL:obj];
+                    [dynamicImage setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@!1",obj]]];
                     dynamicImage.contentMode = UIViewContentModeScaleAspectFill;
                     dynamicImage.clipsToBounds = YES;
                     [self addSubview:dynamicImage];
