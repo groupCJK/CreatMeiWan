@@ -10,6 +10,7 @@
 
 @interface PreviewImageView : UIView
 
+
 + (void)showPreviewImage:(UIImage *)image startImageFrame:(CGRect)startImageFrame inView:(UIView *)inView viewFrame:(CGRect)viewFrame;
 
 @end

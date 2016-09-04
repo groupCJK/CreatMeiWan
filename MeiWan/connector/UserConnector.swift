@@ -163,6 +163,9 @@ import UIKit
         if(district != nil){
             parameters["district"]=district
         }
+        if (deviceType != nil) {
+            parameters["deviceType"] = deviceType
+        }
         request(.GET, userUrl+"register", parameters:parameters as? [String : NSObject])
             .response { request, r, data, error in
                 

@@ -11,12 +11,15 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import "creatAlbum.h"
 
-@interface PreviewImageView ()<UIActionSheetDelegate>
-
+@interface PreviewImageView ()<UIActionSheetDelegate,UIGestureRecognizerDelegate>
+{
+    CGFloat lastScale;
+}
 @property (nonatomic,strong) UIView *contentView;
 @property (nonatomic,strong) UIImageView *photoImageView;
 @property (nonatomic,strong) NSValue *starRectValue;
 @property (nonatomic,strong) NSValue *imageRectValue;
+@property (nonatomic,strong) UIImage* imageview_image;
 
 @end
 
@@ -59,6 +62,7 @@
         
         [self addTapPressGestureRecognizer];
         [self addLongPressGestureRecognizer];
+        [self addPinchGestureRecognizer];
         
         [UIView beginAnimations:@"backgroundcolor" context:nil];
         [UIView setAnimationDuration:0.1];
@@ -67,6 +71,7 @@
         [UIView commitAnimations];
         
         [self startShowAnimation];
+        self.imageview_image = image;
     }
     return self;
 }
@@ -112,6 +117,13 @@
     
     [tapGR addTarget:self action:@selector(handleTapView:)];
     [self addGestureRecognizer:tapGR];
+}
+
+- (void)addPinchGestureRecognizer
+{
+    UIPinchGestureRecognizer *pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(scaGesture:)];
+    [pinchRecognizer setDelegate:self];
+    [self addGestureRecognizer:pinchRecognizer];
 }
 - (void)addLongPressGestureRecognizer
 {
@@ -164,4 +176,48 @@
         NSLog(@"save success!");
     }
 }
+- (void)scaGesture:(UIPinchGestureRecognizer *)sender
+{
+    
+//    [self bringSubviewToFront:[(UIPinchGestureRecognizer*)sender view]];
+//    //当手指离开屏幕时,将lastscale设置为1.0
+//    if([(UIPinchGestureRecognizer*)sender state] == UIGestureRecognizerStateEnded) {
+//        lastScale = 1.0;
+//        return;
+//    }
+//    
+//    CGFloat scale = 1.0 - (lastScale - [(UIPinchGestureRecognizer*)sender scale]);
+//    CGAffineTransform currentTransform = [(UIPinchGestureRecognizer*)sender view].transform;
+//    CGAffineTransform newTransform = CGAffineTransformScale(currentTransform, scale, scale);
+//    [[(UIPinchGestureRecognizer*)sender view]setTransform:newTransform];
+//    lastScale = [(UIPinchGestureRecognizer*)sender scale];
+    
+}
+
+//4. 加入手势的代理方法
+#pragma mark - UIGestureRecognizerDelegate
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    
+    return ![gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]];
+}
+//#pragma mark - 放大动画
+//-(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+//{
+//    
+////    1.检测手指的个数
+//    NSArray * touchesArr=[[event allTouches] allObjects];
+//    NSLog(@"手指个数%lu",(unsigned long)[touchesArr count]);
+//    
+////    2.检测两指的坐标，从而计算两指的距离。
+//    CGPoint p1=[[touchesArr objectAtIndex:0] locationInView:self];
+//    CGPoint p2=[[touchesArr objectAtIndex:1] locationInView:self];
+//    
+//
+//    CGFloat kuan = sqrt((p1.x-p2.x)*(p1.x-p2.x) + (p1.y-p2.y)*(p1.y-p2.y));
+//
+//    //    3.计算距离增加，则增大图片，距离减小则缩小图片。用imageview的frame来控制图片的大小。
+//    self.frame=CGRectMake(self.frame.origin.x-kuan/2.0f, self.frame.origin.y-kuan/2.0f, self.frame.size.width, self.frame.size.height);
+//    
+//}
 @end

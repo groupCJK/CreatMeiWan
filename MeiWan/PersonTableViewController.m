@@ -171,12 +171,6 @@
     userInfoSingleRecognizer.numberOfTapsRequired = 1; // 单击
     [self.userInfoHeaderView addGestureRecognizer:userInfoSingleRecognizer];
     
-    //单击修改头像
-    self.headimage.userInteractionEnabled = YES;
-    UITapGestureRecognizer* headImageSingleRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(SingleHeadImageTap:)];
-    headImageSingleRecognizer.numberOfTapsRequired = 1; // 单击
-    [self.headimage addGestureRecognizer:headImageSingleRecognizer];
-    
     NSDate *today = [NSDate date];
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     formatter.dateFormat = @"yyyy";
@@ -422,20 +416,8 @@
     [self performSegueWithIdentifier:@"userInfo" sender:self.userInfoDic];
 }
 
-- (void)SingleHeadImageTap:(UITapGestureRecognizer*)recognizer{
-    NSLog(@"点击头像");
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"选择图片" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从相册选取", nil];
-    [alert show];
-}
-
 - (IBAction)jumptoUserInfo:(UITapGestureRecognizer *)sender {
     [self performSegueWithIdentifier:@"userInfo" sender:nil];
-}
-
-//点击设置头像
-- (IBAction)getHeadImage:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"选择图片" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从相册选取", nil];
-    [alert show];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -462,135 +444,6 @@
     }
     
 }
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary*)info{
-    
-    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-    
-    if ([mediaType isEqualToString:@"public.image"]){
-        
-        //切忌不可直接使用originImage，因为这是没有经过格式化的图片数据，可能会导致选择的图片颠倒或是失真等现象的发生，从UIImagePickerControllerOriginalImage中的Origin可以看出，很原始，哈哈
-        UIImage *originImage = [info objectForKey:UIImagePickerControllerEditedImage];
-        
-        //图片压缩，因为原图都是很大的，不必要传原图
-        UIImage *scaleImage = [CompressImage compressImage:originImage];
-        if (scaleImage == nil) {
-            [ShowMessage showMessage:@"不支持该类型图片"];
-        }else{
-            [self passImage:scaleImage];
-        }
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
-}
-
-#pragma mark 图片上传
--(void)passImage:(UIImage *)image{
-    MBProgressHUD*HUDImage = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    HUDImage.delegate = self;
-    
-    //常用的设置
-    //小矩形的背景色
-    HUDImage.color = [UIColor grayColor];//这儿表示无背景
-    //显示的文字
-    HUDImage.labelText = @"正在上传";
-    //是否有庶罩
-    HUDImage.dimBackground = NO;
-    
-    NSData *data = UIImagePNGRepresentation(image);
-    NSDictionary * fileInfo = [UMUUploaderManager fetchFileInfoDictionaryWith:data];
-    NSDictionary * signaturePolicyDic =[self constructingSignatureAndPolicyWithFileInfo:fileInfo];
-    
-    NSString * signature = signaturePolicyDic[@"signature"];
-    NSString * policy = signaturePolicyDic[@"policy"];
-    NSString * bucket = signaturePolicyDic[@"bucket"];
-    
-    UMUUploaderManager * manager = [UMUUploaderManager managerWithBucket:bucket];
-    [manager uploadWithFile:data policy:policy signature:signature progressBlock:^(CGFloat percent, long long requestDidSendBytes) {
-        //NSLog(@"%f",percent);
-    } completeBlock:^(NSError *error, NSDictionary *result, BOOL completed) {
-        if (completed) {
-            //[ShowMessage showMessage:@"头像上传成功"];
-            NSString *headUrl;
-            if (isTest){
-                headUrl = [NSString stringWithFormat:@"http://chuangjike-img.b0.upaiyun.com%@",[result objectForKey:@"path"]];
-            }else{
-                headUrl = [NSString stringWithFormat:@"http://chuangjike-img-real.b0.upaiyun.com%@",[result objectForKey:@"path"]];
-            }
-            NSMutableDictionary *userInfoDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:headUrl,@"headUrl", nil];
-            NSString *session = [PersistenceManager getLoginSession];
-            [UserConnector update:session parameters:userInfoDic receiver:^(NSData *data, NSError *error){
-                if (error) {
-                    [ShowMessage showMessage:@"服务器未响应"];
-                }else{
-                    SBJsonParser*parser=[[SBJsonParser alloc]init];
-                    NSMutableDictionary *json=[parser objectWithData:data];
-                    //NSLog(@"%@",json);
-                    int status = [[json objectForKey:@"status"]intValue];
-                    if (status == 0) {
-                        [HUDImage hide:YES afterDelay:0];
-                        self.headimage.image = image;
-                        [ShowMessage showMessage:@"头像上传成功"];
-                        self.userInfoDic = [json objectForKey:@"entity"];
-                        self.userinfo = [[UserInfo alloc]initWithDictionary:self.userInfoDic];
-                        [self updateUI];
-                    }else if(status == 1){
-                        [PersistenceManager setLoginSession:@""];
-                        
-                        LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
-                        lv.hidesBottomBarWhenPushed = YES;
-                        [self.navigationController pushViewController:lv animated:YES];
-                    }
-                }
-            }];
-            
-            //NSLog(@"%@",result);
-        }else {
-            [HUDImage hide:YES afterDelay:0];
-            [ShowMessage showMessage:@"头像上传失败"];
-            //NSLog(@"%@",error);
-        }
-        
-    }];
-}
-
-- (NSDictionary *)constructingSignatureAndPolicyWithFileInfo:(NSDictionary *)fileInfo
-{
-    //#warning 您需要加上自己的bucket和secret
-    NSString * bucket = [setting getImgBuketName];
-    NSString * secret = [setting getSecret];
-    
-    NSMutableDictionary * mutableDic = [[NSMutableDictionary alloc]initWithDictionary:fileInfo];
-    [mutableDic setObject:@(ceil([[NSDate date] timeIntervalSince1970])+60) forKey:@"expiration"];//设置授权过期时间
-    UInt64 recordTime = [[NSDate date] timeIntervalSince1970]*1000;
-    NSString *time = [NSString stringWithFormat:@"%lld",recordTime];
-    //NSLog(@"%lld",recordTime);
-    NSString *strNumber = [RandNumber getRandNumberString];
-    //NSLog(@"%@,%d",strNumber,strNumber.length);
-    NSString *headUrl = [NSString stringWithFormat:@"%@_%@.jpeg",time,strNumber];
-    [mutableDic setObject:headUrl forKey:@"path"];//设置保存路径
-    /**
-     *  这个 mutableDic 可以塞入其他可选参数 见：     */
-    NSString * signature = @"";
-    NSArray * keys = [mutableDic allKeys];
-    keys= [keys sortedArrayUsingSelector:@selector(compare:)];
-    for (NSString * key in keys) {
-        NSString * value = mutableDic[key];
-        signature = [NSString stringWithFormat:@"%@%@%@",signature,key,value];
-    }
-    signature = [signature stringByAppendingString:secret];
-    
-    return @{@"signature":[signature MD5],
-             @"policy":[self dictionaryToJSONStringBase64Encoding:mutableDic],
-             @"bucket":bucket};
-}
-
-- (NSString *)dictionaryToJSONStringBase64Encoding:(NSDictionary *)dic
-{
-    id paramesData = [NSJSONSerialization dataWithJSONObject:dic options:0 error:nil];
-    NSString *jsonString = [[NSString alloc] initWithData:paramesData encoding:NSUTF8StringEncoding];
-    return [jsonString base64encode];
-}
-
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     self.tabBarController.tabBar.hidden = NO;
