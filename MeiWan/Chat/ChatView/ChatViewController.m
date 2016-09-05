@@ -700,23 +700,29 @@
                                         [self.view addSubview:chatOrder];
                                         self.tableView.frame = CGRectMake(0, 64, dtScreenWidth, dtScreenHeight-180);
                                     }else{
-                                        ChatTOPView * topView = [[ChatTOPView alloc]initWithFrame:CGRectMake(0, 0, dtScreenWidth, 60)];
+                                        
                                         if (userTimetags.count>0) {
+                                            ChatTOPView * topView = [[ChatTOPView alloc]initWithFrame:CGRectMake(0, 0, dtScreenWidth, 60)];
                                             topView.userTimeTags = userTimetags;
+                                            topView.delegate = self;
+                                            [self.view addSubview:topView];
+                                            self.tableView.frame = CGRectMake(0, 64, dtScreenWidth, dtScreenHeight-180);
                                         }
-                                        topView.delegate = self;
-                                        [self.view addSubview:topView];
-                                        self.tableView.frame = CGRectMake(0, 64, dtScreenWidth, dtScreenHeight-180);
+                                        
                                     }
                                     
                                 }else{
-                                    ChatTOPView * topView = [[ChatTOPView alloc]initWithFrame:CGRectMake(0, 0, dtScreenWidth, 60)];
+                                    
                                     if (userTimetags.count>0) {
+                                        ChatTOPView * topView = [[ChatTOPView alloc]initWithFrame:CGRectMake(0, 0, dtScreenWidth, 60)];
                                         topView.userTimeTags = userTimetags;
+                                        topView.delegate = self;
+                                        [self.view addSubview:topView];
+                                        self.tableView.frame = CGRectMake(0, 64, dtScreenWidth, dtScreenHeight-180);
+
+                                    }else{
+                                        self.tableView.frame = CGRectMake(0, 0, dtScreenWidth, dtScreenHeight-180);
                                     }
-                                    topView.delegate = self;
-                                    [self.view addSubview:topView];
-                                    self.tableView.frame = CGRectMake(0, 64, dtScreenWidth, dtScreenHeight-180);
                                 }
                             }else{
                                 self.tableView.frame = CGRectMake(0, 0, dtScreenWidth, dtScreenHeight-180);
@@ -829,6 +835,7 @@
 /** 拒绝 */
 -(void)RejectButtonClick:(UIButton *)sender
 {
+    NSLog(@"%@",self.OrderDic[@"id"]);
     NSString * session = [PersistenceManager getLoginSession];
     [UserConnector rejectOrder:session orderId:self.OrderDic[@"id"] receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
        
@@ -843,12 +850,13 @@
                 [ShowMessage showMessage:@"订单取消成功"];
                 
             }else{
-                
+                [ShowMessage showMessage:@"拒绝失败"];
                 NSLog(@"拒绝订单 status = %d",status);
             }
         }
         
     }];
+    self.tableView.frame = CGRectMake(0, 0, dtScreenWidth, dtScreenHeight-40);
 }
 /** 申请退款 */
 - (void)applyRequestButtonClick:(UIButton *)sender

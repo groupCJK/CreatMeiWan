@@ -66,7 +66,7 @@
     self.title = [self.playerInfo objectForKey:@"nickname"];
     
     [self playerTableView];
-    
+    [self headerRereshing];
     
     NSString *session= [PersistenceManager getLoginSession];
     [UserConnector findPeiwanById:session userId:[self.playerInfo objectForKey:@"id"] receiver:^(NSData *data,NSError *error){

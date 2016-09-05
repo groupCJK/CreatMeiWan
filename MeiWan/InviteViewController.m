@@ -683,10 +683,10 @@
 - (void)aliPay
 {
     NSString *session = [PersistenceManager getLoginSession];
-    NSLog(@"陪玩ID%@",[self.playerInfo objectForKey:@"id"]);
-    NSLog(@"时间%@",[NSNumber numberWithInt:_playTime]);
-    NSLog(@"索引%@",[NSNumber numberWithInteger:self.tagIndex]);
-    NSLog(@"车费%@",[NSNumber numberWithFloat:_carFeeNumber]);
+//    NSLog(@"陪玩ID%@",[self.playerInfo objectForKey:@"id"]);
+//    NSLog(@"时间%@",[NSNumber numberWithInt:_playTime]);
+//    NSLog(@"索引%@",[NSNumber numberWithInteger:self.tagIndex]);
+//    NSLog(@"车费%@",[NSNumber numberWithFloat:_carFeeNumber]);
 //    NSLog(@"用户公会%@",_userUnionID);
 //    NSLog(@"陪玩公会%@",_peiwanUnionID);
     if (_userUnionID==nil) {
@@ -695,7 +695,6 @@
     if (_peiwanUnionID == nil) {
         _peiwanUnionID = 0;
     }
-
     [UserConnector aliOrderSign:session peiwanId:[self.playerInfo objectForKey:@"id"] price:[NSNumber numberWithFloat:_riceDownline] hours:[NSNumber numberWithInt:_playTime] tagIndex:[NSNumber numberWithInteger:self.tagIndex] carFee:[NSNumber numberWithFloat:_carFeeNumber] userUnionId:_userUnionID peiwanUnionId:_peiwanUnionID receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
         if (error) {
             
@@ -713,6 +712,7 @@
                         if (resultNum == 9000) {
                             
                             [self showMessageAlert:@"支付成功"];
+                            
                             [self.navigationController popViewControllerAnimated:YES];
                             
                         }else{
@@ -755,12 +755,12 @@
 {
     NSString *session = [PersistenceManager getLoginSession];
     
-    NSLog(@"陪玩ID%@",[self.playerInfo objectForKey:@"id"]);
-    NSLog(@"时间%@",[NSNumber numberWithInt:_playTime]);
-    NSLog(@"索引%@",[NSNumber numberWithInteger:self.tagIndex]);
-    NSLog(@"车费%@",[NSNumber numberWithFloat:_carFeeNumber]);
-    NSLog(@"用户公会%@",_userUnionID);
-    NSLog(@"陪玩公会%@",_peiwanUnionID);
+//    NSLog(@"陪玩ID%@",[self.playerInfo objectForKey:@"id"]);
+//    NSLog(@"时间%@",[NSNumber numberWithInt:_playTime]);
+//    NSLog(@"索引%@",[NSNumber numberWithInteger:self.tagIndex]);
+//    NSLog(@"车费%@",[NSNumber numberWithFloat:_carFeeNumber]);
+//    NSLog(@"用户公会%@",_userUnionID);
+//    NSLog(@"陪玩公会%@",_peiwanUnionID);
     if (_userUnionID==nil) {
         _userUnionID = 0;
     }
@@ -793,18 +793,13 @@
                     request.timeStamp= timeStamp;
                     
                     /** 随机字符串 */
-                    ;
                     NSString * str = [NSString stringWithFormat:@"appid=%@&package=Sign=WXPay&partnerid=%@&prepayid=%@&timestamp=%u",request.openID,request.partnerId,request.prepayId,(unsigned int)request.timeStamp];
                     NSString * str2 = [NSString stringWithFormat:@"%@&key=IJR4681LYNZD1QHZOC3MOHL3KGW42W96",str];
                     request.nonceStr= [[MD5 md5:str2] uppercaseString];
                     // 签名加密
-                    
-                    
                     NSString * string = [NSString stringWithFormat:@"appid=%@&noncestr=%@&package=Sign=WXPay&partnerid=%@&prepayid=%@&timestamp=%u",request.openID,request.nonceStr,request.partnerId,request.prepayId,(unsigned int)request.timeStamp];
                     NSString * string2 = [NSString stringWithFormat:@"%@&key=IJR4681LYNZD1QHZOC3MOHL3KGW42W96",string];
                     request.sign = [[MD5 md5:string2] uppercaseString];
-                    
-                    NSLog(@"%@",request.sign);
                     [WXApi sendReq:request];
 
                 }

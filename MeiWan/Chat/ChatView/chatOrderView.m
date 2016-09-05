@@ -293,7 +293,10 @@
 - (void)TouSuButtonClick:(UIButton *)sender
 {
     if ([sender.titleLabel.text isEqualToString:@"拒绝"]) {
+        
         [self.delegate RejectButtonClick:sender];
+        self.hidden = YES;
+        
     }
     if ([sender.titleLabel.text isEqualToString:@"申请退款"]) {
         [self.delegate applyRequestButtonClick:sender];

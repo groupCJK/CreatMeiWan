@@ -490,6 +490,8 @@
 		2BDEE4391D5B0C1300767F8B /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2BDEE4351D5B0C1300767F8B /* TencentOpenApi_IOS_Bundle.bundle */; };
 		2BDEE4411D5B0C2100767F8B /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BDEE43B1D5B0C2100767F8B /* libSocialWechat.a */; };
 		2BDEE4421D5B0C2100767F8B /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BDEE43C1D5B0C2100767F8B /* libWeChatSDK.a */; };
+		2BDF0DBA1D7D5CEA00EA4467 /* UIScrollView+ScalableCover.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDF0DB91D7D5CEA00EA4467 /* UIScrollView+ScalableCover.m */; };
+		2BDF0DBE1D7D6C1700EA4467 /* userEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDF0DBD1D7D6C1700EA4467 /* userEditCell.m */; };
 		2BDFA94D1D32404400E33681 /* UICollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDFA94C1D32404400E33681 /* UICollectionViewWaterfallLayout.m */; };
 		2BDFA9501D3240E200E33681 /* CJKNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDFA94F1D3240E200E33681 /* CJKNavigationView.m */; };
 		2BDFA9551D32416900E33681 /* CJKCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDFA9521D32416900E33681 /* CJKCollectionViewCell.m */; };
@@ -1517,6 +1519,10 @@
 		2BDEE43E1D5B0C2100767F8B /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
 		2BDEE43F1D5B0C2100767F8B /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		2BDEE4401D5B0C2100767F8B /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		2BDF0DB81D7D5CEA00EA4467 /* UIScrollView+ScalableCover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+ScalableCover.h"; sourceTree = "<group>"; };
+		2BDF0DB91D7D5CEA00EA4467 /* UIScrollView+ScalableCover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+ScalableCover.m"; sourceTree = "<group>"; };
+		2BDF0DBC1D7D6C1700EA4467 /* userEditCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = userEditCell.h; sourceTree = "<group>"; };
+		2BDF0DBD1D7D6C1700EA4467 /* userEditCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = userEditCell.m; sourceTree = "<group>"; };
 		2BDFA94B1D32404400E33681 /* UICollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
 		2BDFA94C1D32404400E33681 /* UICollectionViewWaterfallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewWaterfallLayout.m; sourceTree = "<group>"; };
 		2BDFA94E1D3240E200E33681 /* CJKNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJKNavigationView.h; sourceTree = "<group>"; };
@@ -2662,10 +2668,12 @@
 				27587CB61CF5A7A500B78F92 /* PersonTableViewController.m */,
 				183D53401B871C6900500663 /* UserInfoViewController.h */,
 				183D53411B871C6900500663 /* UserInfoViewController.m */,
+				2BDF0DBB1D7D6BE900EA4467 /* 用户资料编辑cell */,
 				2B2D084D1D519E4D00139467 /* guildCenterViewController.h */,
 				2B2D084E1D519E4D00139467 /* guildCenterViewController.m */,
 				98BB8B7F1D570FCB001C79A4 /* GreatGuildViewController.h */,
 				98BB8B801D570FCB001C79A4 /* GreatGuildViewController.m */,
+				2BDF0DB71D7D5CDB00EA4467 /* 表下拉头部放大 */,
 				2B4698C91D6950F10059B140 /* 商城 */,
 				2B409A7A1D5C9CD800408431 /* 搜索好友 */,
 				2B2D08531D530C0E00139467 /* 公会中心 */,
@@ -3841,6 +3849,24 @@
 			path = ../Wechat;
 			sourceTree = "<group>";
 		};
+		2BDF0DB71D7D5CDB00EA4467 /* 表下拉头部放大 */ = {
+			isa = PBXGroup;
+			children = (
+				2BDF0DB81D7D5CEA00EA4467 /* UIScrollView+ScalableCover.h */,
+				2BDF0DB91D7D5CEA00EA4467 /* UIScrollView+ScalableCover.m */,
+			);
+			name = "表下拉头部放大";
+			sourceTree = "<group>";
+		};
+		2BDF0DBB1D7D6BE900EA4467 /* 用户资料编辑cell */ = {
+			isa = PBXGroup;
+			children = (
+				2BDF0DBC1D7D6C1700EA4467 /* userEditCell.h */,
+				2BDF0DBD1D7D6C1700EA4467 /* userEditCell.m */,
+			);
+			name = "用户资料编辑cell";
+			sourceTree = "<group>";
+		};
 		2BDF98B81D66F0D400612F9B /* 第三方库 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4670,6 +4696,7 @@
 				2B2D09631D532BC300139467 /* split.c in Sources */,
 				2B0C70821D547394001AB100 /* creatAlbum.m in Sources */,
 				279B86EE1CED93DF00EA2737 /* MYIntroductionPanel.m in Sources */,
+				2BDF0DBE1D7D6C1700EA4467 /* userEditCell.m in Sources */,
 				2BD3C5EF1D73DCC0008CFE23 /* MJRefreshAutoNormalFooter.m in Sources */,
 				2BD3C6381D73DCC0008CFE23 /* EaseUsersListViewController.m in Sources */,
 				18824A151B85CD980063EC03 /* FriendListTableViewCell.m in Sources */,
@@ -4682,6 +4709,7 @@
 				18E57A101B7DE22700771063 /* AFSecurityPolicy.m in Sources */,
 				2BE39EAD1D729E0D00CC3F0F /* ContactView.m in Sources */,
 				2BE39E701D72981D00CC3F0F /* UserProfileManager.m in Sources */,
+				2BDF0DBA1D7D5CEA00EA4467 /* UIScrollView+ScalableCover.m in Sources */,
 				18EF7A261B74B67F005A4F64 /* AppDelegate.m in Sources */,
 				2BD3C60A1D73DCC0008CFE23 /* EMSDWebImageManager.m in Sources */,
 				2BE39EF51D72A04000CC3F0F /* UIViewController+HUD.m in Sources */,

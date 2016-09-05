@@ -59,8 +59,9 @@
     showlabel.attributedText = changeText;
     showlabel.numberOfLines = 2;
     showlabel.textAlignment = NSTextAlignmentCenter;
+    showlabel.font = [UIFont systemFontOfSize:14.0];
     CGSize size_show = [showlabel.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:showlabel.font,NSFontAttributeName, nil]];
-    showlabel.frame = CGRectMake(imageView.frame.origin.x+imageView.frame.size.width+10, imageView.frame.origin.y, size_show.width, imageView.frame.size.height);
+    showlabel.frame = CGRectMake(imageView.frame.origin.x+imageView.frame.size.width+10, imageView.frame.origin.y, size_show.width+10, imageView.frame.size.height);
     [self.view addSubview:showlabel];
     
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
