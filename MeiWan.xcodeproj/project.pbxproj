@@ -542,6 +542,9 @@
 		2BE3BC991D780F8C0004501D /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BE3BC941D780F8C0004501D /* libWeChatSDK.a */; };
 		2BE3BC9A1D780F8C0004501D /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2BE3BC951D780F8C0004501D /* README.txt */; };
 		2BE3BCA01D781A260004501D /* WXApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE3BC9F1D781A260004501D /* WXApiManager.m */; };
+		2BE542051D7E9C2700BB5C43 /* editOwnMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE542041D7E9C2700BB5C43 /* editOwnMessage.m */; };
+		2BE542081D7EBD5B00BB5C43 /* editdescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE542071D7EBD5B00BB5C43 /* editdescription.m */; };
+		2BE5420B1D7EBF0700BB5C43 /* emotionalState.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5420A1D7EBF0700BB5C43 /* emotionalState.m */; };
 		2BE5E2661D1A40790031361C /* HotCountCellChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5E2651D1A40790031361C /* HotCountCellChange.m */; };
 		2BEDB3121D72BE19001B99AC /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BEDB3111D72BE19001B99AC /* Social.framework */; };
 		2BEDB3141D72BE29001B99AC /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BEDB3131D72BE29001B99AC /* Accounts.framework */; };
@@ -1621,6 +1624,12 @@
 		2BE3BC981D780F8C0004501D /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		2BE3BC9E1D781A260004501D /* WXApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiManager.h; sourceTree = "<group>"; };
 		2BE3BC9F1D781A260004501D /* WXApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXApiManager.m; sourceTree = "<group>"; };
+		2BE542031D7E9C2700BB5C43 /* editOwnMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = editOwnMessage.h; sourceTree = "<group>"; };
+		2BE542041D7E9C2700BB5C43 /* editOwnMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = editOwnMessage.m; sourceTree = "<group>"; };
+		2BE542061D7EBD5B00BB5C43 /* editdescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = editdescription.h; sourceTree = "<group>"; };
+		2BE542071D7EBD5B00BB5C43 /* editdescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = editdescription.m; sourceTree = "<group>"; };
+		2BE542091D7EBF0700BB5C43 /* emotionalState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = emotionalState.h; sourceTree = "<group>"; };
+		2BE5420A1D7EBF0700BB5C43 /* emotionalState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = emotionalState.m; sourceTree = "<group>"; };
 		2BE5E2641D1A40790031361C /* HotCountCellChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotCountCellChange.h; sourceTree = "<group>"; };
 		2BE5E2651D1A40790031361C /* HotCountCellChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotCountCellChange.m; sourceTree = "<group>"; };
 		2BEDB3111D72BE19001B99AC /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -2668,6 +2677,7 @@
 				27587CB61CF5A7A500B78F92 /* PersonTableViewController.m */,
 				183D53401B871C6900500663 /* UserInfoViewController.h */,
 				183D53411B871C6900500663 /* UserInfoViewController.m */,
+				2BE542021D7E9BED00BB5C43 /* 编辑昵称 */,
 				2BDF0DBB1D7D6BE900EA4467 /* 用户资料编辑cell */,
 				2B2D084D1D519E4D00139467 /* guildCenterViewController.h */,
 				2B2D084E1D519E4D00139467 /* guildCenterViewController.m */,
@@ -4065,6 +4075,19 @@
 			path = openSDK1.7.3;
 			sourceTree = "<group>";
 		};
+		2BE542021D7E9BED00BB5C43 /* 编辑昵称 */ = {
+			isa = PBXGroup;
+			children = (
+				2BE542031D7E9C2700BB5C43 /* editOwnMessage.h */,
+				2BE542041D7E9C2700BB5C43 /* editOwnMessage.m */,
+				2BE542061D7EBD5B00BB5C43 /* editdescription.h */,
+				2BE542071D7EBD5B00BB5C43 /* editdescription.m */,
+				2BE542091D7EBF0700BB5C43 /* emotionalState.h */,
+				2BE5420A1D7EBF0700BB5C43 /* emotionalState.m */,
+			);
+			name = "编辑昵称";
+			sourceTree = "<group>";
+		};
 		45BCC003E365D0C4121A79F9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -4470,6 +4493,7 @@
 				98EFD3551D4AE816002A1913 /* FansViewController.m in Sources */,
 				2BD3C5DF1D73DCC0008CFE23 /* EMCDDeviceManager+ProximitySensor.m in Sources */,
 				2B5B7D2C1D3893C700CF5354 /* playerInfoTableViewCell.m in Sources */,
+				2BE5420B1D7EBF0700BB5C43 /* emotionalState.m in Sources */,
 				2BDFA9551D32416900E33681 /* CJKCollectionViewCell.m in Sources */,
 				18F6D2C21B8FF2D900B1F0C3 /* MoveActionFrame.m in Sources */,
 				2B5B7D1E1D38932500CF5354 /* PlagerinfoViewController.m in Sources */,
@@ -4552,6 +4576,7 @@
 				98EFD35C1D4AE82C002A1913 /* FocusTableViewCell.m in Sources */,
 				2BD3C5F51D73DCC0008CFE23 /* MJRefreshNormalHeader.m in Sources */,
 				2BD3C6181D73DCC0008CFE23 /* PSTCollectionViewController.m in Sources */,
+				2BE542051D7E9C2700BB5C43 /* editOwnMessage.m in Sources */,
 				2BD3C60E1D73DCC0008CFE23 /* UIButton+EMWebCache.m in Sources */,
 				98EFD35E1D4AE82C002A1913 /* FansTableViewCell.m in Sources */,
 				18DDB9BA1BB4E548003E4163 /* PeiwanHeadViewController.m in Sources */,
@@ -4573,6 +4598,7 @@
 				2B2D085C1D530C8F00139467 /* QRCodeViewController.m in Sources */,
 				2B2D095C1D532BC300139467 /* bitstream.c in Sources */,
 				2BD3C6431D73DCC0008CFE23 /* EaseBubbleView+Text.m in Sources */,
+				2BE542081D7EBD5B00BB5C43 /* editdescription.m in Sources */,
 				27CA60DC1CEEBAF300CC6956 /* CWStarRateView.m in Sources */,
 				2BD3C64D1D73DCC0008CFE23 /* EaseChatBarMoreView.m in Sources */,
 				2BB14C071D728B0D00F6425D /* ChatViewController.m in Sources */,

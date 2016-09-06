@@ -38,6 +38,7 @@
     CLLocationManager *_locationManager;
     
     PalyListViewController * mainViewController;
+    
 }
 @property (strong, nonatomic) NSDictionary * sendPlayerDic;
 @property (strong, nonatomic)  UIScrollView *playersScollview;

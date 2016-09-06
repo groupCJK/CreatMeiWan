@@ -15,9 +15,10 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         self.showMessage = [[UILabel alloc]init];
-        [self addSubview:_showMessage];
-        
-        self.title = [[UILabel alloc]init];
+        self.showMessage.frame = CGRectMake(150, 0, dtScreenWidth-30-150, self.frame.size.height);
+        self.showMessage.textAlignment = NSTextAlignmentRight;
+        self.showMessage.font = [UIFont systemFontOfSize:12.0];
+        self.showMessage.textColor = [UIColor blackColor];
         [self addSubview:_showMessage];
         
     }
