@@ -35,6 +35,7 @@
 #import "editdescription.h"
 #import "editOwnMessage.h"
 #import "emotionalState.h"
+#import "ChangeImageController.h"
 
 @interface UserInfoViewController ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate,MBProgressHUDDelegate,UITextFieldDelegate,CLLocationManagerDelegate>
 {
@@ -93,7 +94,6 @@
     [self.view addSubview:tableview];
     tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     [tableview addScalableCoverWithImage:[UIImage imageNamed:@"img_setting0"]];
-
     
     _titleone = @[@"用户名",@"年龄",@"个人签名",@"情感状态",@"职业",@"学校",@"兴趣爱好"];
     _titletwo = @[@"所在地",@"工作地点",@"常出没地"];
@@ -102,6 +102,23 @@
     
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishSaveNickname:) name:@"finish_nickname" object:nil];
+    
+    UIButton * changeImage = [UIButton buttonWithType:UIButtonTypeCustom];
+    changeImage.backgroundColor = [CorlorTransform colorWithHexString:@"#6495ED"];
+    changeImage.frame = CGRectMake(dtScreenWidth-100, 100, 80, 44);
+    changeImage.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    changeImage.layer.cornerRadius = 5;
+    changeImage.clipsToBounds = YES;
+    [changeImage setTitle:@"更改背景" forState:UIControlStateNormal];
+    [changeImage addTarget:self action:@selector(changeImage) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:changeImage];
+}
+- (void)changeImage
+{
+    ChangeImageController * changeImage = [[ChangeImageController alloc]init];
+    changeImage.title = @"更改背景";
+    [self.navigationController pushViewController:changeImage animated:YES];
+
 }
 - (void)initializeLocationService {
     // 初始化定位管理器
@@ -310,4 +327,151 @@
 {
     [tableview reloadData];
 }
+
+#pragma mark headerView
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section==0) {
+        
+        UIImageView * imageview = [[UIImageView alloc]initWithFrame:CGRectMake(10, 0, (dtScreenWidth-80)/4, (dtScreenWidth-80)/4)];
+        imageview.image = [UIImage imageNamed:@"btn_add_papers"];
+        imageview.userInteractionEnabled = YES;
+        UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addPhoto:)];
+        [imageview addGestureRecognizer:tapGesture];
+        UIView * headerView = [[UIView alloc]init];
+        [headerView addSubview:imageview];
+
+        return headerView;
+        
+    }else{
+        return nil;
+    }
+
+}
+
+
+- (void)addPhoto:(UITapGestureRecognizer *)gesture
+{
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"选择图片" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从相册选取", nil];
+    [alert show];
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    UIImagePickerController *ipc = [[UIImagePickerController alloc]init];
+    ipc.delegate = self;
+    [[ipc navigationBar] setTintColor:[CorlorTransform colorWithHexString:@"#3f90a4"]];
+    if (buttonIndex == 1) {
+        //NSLog(@"1");
+        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+        {
+            [ipc setSourceType:UIImagePickerControllerSourceTypeCamera];
+            ipc.allowsEditing = YES;
+            ipc.showsCameraControls  = YES;
+            [self presentViewController:ipc animated:YES completion:nil];
+            
+        }else{
+            //NSLog(@"硬件不支持");
+        }
+    }
+    if (buttonIndex == 2) {
+        [ipc setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+        ipc.allowsEditing = YES;
+        [self presentViewController:ipc animated:YES completion:nil];
+    }
+    
+}
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary*)info{
+    
+    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+    
+    if ([mediaType isEqualToString:@"public.image"]){
+        
+        //切忌不可直接使用originImage，因为这是没有经过格式化的图片数据，可能会导致选择的图片颠倒或是失真等现象的发生，从UIImagePickerControllerOriginalImage中的Origin可以看出，很原始，哈哈
+        UIImage *originImage = [info objectForKey:UIImagePickerControllerEditedImage];
+        
+        //图片压缩，因为原图都是很大的，不必要传原图
+        UIImage *scaleImage = [CompressImage compressImage:originImage];
+        if (scaleImage == nil) {
+            [ShowMessage showMessage:@"不支持该类型图片"];
+        }else{
+            [self passImage:scaleImage];
+        }
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+#pragma mark 图片上传
+-(void)passImage:(UIImage *)image{
+    MBProgressHUD*HUDImage = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUDImage.delegate = self;
+    HUDImage.labelText = @"正在上传";
+    HUDImage.dimBackground = NO;
+    
+    NSData *data = UIImagePNGRepresentation(image);
+    NSDictionary * fileInfo = [UMUUploaderManager fetchFileInfoDictionaryWith:data];
+    NSDictionary * signaturePolicyDic =[self constructingSignatureAndPolicyWithFileInfo:fileInfo];
+    
+    NSString * signature = signaturePolicyDic[@"signature"];
+    NSString * policy = signaturePolicyDic[@"policy"];
+    NSString * bucket = signaturePolicyDic[@"bucket"];
+    
+    UMUUploaderManager * manager = [UMUUploaderManager managerWithBucket:bucket];
+    [manager uploadWithFile:data policy:policy signature:signature progressBlock:^(CGFloat percent, long long requestDidSendBytes) {
+
+    } completeBlock:^(NSError *error, NSDictionary *result, BOOL completed) {
+        if (completed) {
+
+            NSString *headUrl;
+            if (isTest){
+                headUrl = [NSString stringWithFormat:@"http://chuangjike-img.b0.upaiyun.com%@",[result objectForKey:@"path"]];
+            }else{
+                headUrl = [NSString stringWithFormat:@"http://chuangjike-img-real.b0.upaiyun.com%@",[result objectForKey:@"path"]];
+            }
+            
+            /**
+             
+             
+             上传照片
+             
+             
+             */
+            
+        }else {
+            [HUDImage hide:YES afterDelay:0];
+            [ShowMessage showMessage:@"头像上传失败"];
+        }
+        
+    }];
+}
+- (NSDictionary *)constructingSignatureAndPolicyWithFileInfo:(NSDictionary *)fileInfo
+{
+    NSString * bucket = [setting getImgBuketName];
+    NSString * secret = [setting getSecret];
+    
+    NSMutableDictionary * mutableDic = [[NSMutableDictionary alloc]initWithDictionary:fileInfo];
+    [mutableDic setObject:@(ceil([[NSDate date] timeIntervalSince1970])+60) forKey:@"expiration"];//设置授权过期时间
+    UInt64 recordTime = [[NSDate date] timeIntervalSince1970]*1000;
+    NSString *time = [NSString stringWithFormat:@"%lld",recordTime];
+    NSString *strNumber = [RandNumber getRandNumberString];
+    NSString *headUrl = [NSString stringWithFormat:@"%@_%@.jpeg",time,strNumber];
+    [mutableDic setObject:headUrl forKey:@"path"];//设置保存路径
+    NSString * signature = @"";
+    NSArray * keys = [mutableDic allKeys];
+    keys= [keys sortedArrayUsingSelector:@selector(compare:)];
+    for (NSString * key in keys) {
+        NSString * value = mutableDic[key];
+        signature = [NSString stringWithFormat:@"%@%@%@",signature,key,value];
+    }
+    signature = [signature stringByAppendingString:secret];
+    
+    return @{@"signature":[signature MD5],
+             @"policy":[self dictionaryToJSONStringBase64Encoding:mutableDic],
+             @"bucket":bucket};
+}
+- (NSString *)dictionaryToJSONStringBase64Encoding:(NSDictionary *)dic
+{
+    id paramesData = [NSJSONSerialization dataWithJSONObject:dic options:0 error:nil];
+    NSString *jsonString = [[NSString alloc] initWithData:paramesData encoding:NSUTF8StringEncoding];
+    return [jsonString base64encode];
+}
+
 @end

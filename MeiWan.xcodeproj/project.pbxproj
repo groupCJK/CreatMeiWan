@@ -545,6 +545,8 @@
 		2BE542051D7E9C2700BB5C43 /* editOwnMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE542041D7E9C2700BB5C43 /* editOwnMessage.m */; };
 		2BE542081D7EBD5B00BB5C43 /* editdescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE542071D7EBD5B00BB5C43 /* editdescription.m */; };
 		2BE5420B1D7EBF0700BB5C43 /* emotionalState.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5420A1D7EBF0700BB5C43 /* emotionalState.m */; };
+		2BE5420E1D7ECC1D00BB5C43 /* ChangeImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5420D1D7ECC1D00BB5C43 /* ChangeImageController.m */; };
+		2BE542151D7ECEA800BB5C43 /* changeImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE542141D7ECEA800BB5C43 /* changeImageCollectionViewCell.m */; };
 		2BE5E2661D1A40790031361C /* HotCountCellChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5E2651D1A40790031361C /* HotCountCellChange.m */; };
 		2BEDB3121D72BE19001B99AC /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BEDB3111D72BE19001B99AC /* Social.framework */; };
 		2BEDB3141D72BE29001B99AC /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BEDB3131D72BE29001B99AC /* Accounts.framework */; };
@@ -1630,6 +1632,10 @@
 		2BE542071D7EBD5B00BB5C43 /* editdescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = editdescription.m; sourceTree = "<group>"; };
 		2BE542091D7EBF0700BB5C43 /* emotionalState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = emotionalState.h; sourceTree = "<group>"; };
 		2BE5420A1D7EBF0700BB5C43 /* emotionalState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = emotionalState.m; sourceTree = "<group>"; };
+		2BE5420C1D7ECC1D00BB5C43 /* ChangeImageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeImageController.h; sourceTree = "<group>"; };
+		2BE5420D1D7ECC1D00BB5C43 /* ChangeImageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeImageController.m; sourceTree = "<group>"; };
+		2BE542131D7ECEA800BB5C43 /* changeImageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = changeImageCollectionViewCell.h; sourceTree = "<group>"; };
+		2BE542141D7ECEA800BB5C43 /* changeImageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = changeImageCollectionViewCell.m; sourceTree = "<group>"; };
 		2BE5E2641D1A40790031361C /* HotCountCellChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotCountCellChange.h; sourceTree = "<group>"; };
 		2BE5E2651D1A40790031361C /* HotCountCellChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotCountCellChange.m; sourceTree = "<group>"; };
 		2BEDB3111D72BE19001B99AC /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -4084,8 +4090,20 @@
 				2BE542071D7EBD5B00BB5C43 /* editdescription.m */,
 				2BE542091D7EBF0700BB5C43 /* emotionalState.h */,
 				2BE5420A1D7EBF0700BB5C43 /* emotionalState.m */,
+				2BE5420C1D7ECC1D00BB5C43 /* ChangeImageController.h */,
+				2BE5420D1D7ECC1D00BB5C43 /* ChangeImageController.m */,
+				2BE542121D7ECE9200BB5C43 /* collectionViewcell */,
 			);
 			name = "编辑昵称";
+			sourceTree = "<group>";
+		};
+		2BE542121D7ECE9200BB5C43 /* collectionViewcell */ = {
+			isa = PBXGroup;
+			children = (
+				2BE542131D7ECEA800BB5C43 /* changeImageCollectionViewCell.h */,
+				2BE542141D7ECEA800BB5C43 /* changeImageCollectionViewCell.m */,
+			);
+			name = collectionViewcell;
 			sourceTree = "<group>";
 		};
 		45BCC003E365D0C4121A79F9 /* Pods */ = {
@@ -4616,6 +4634,7 @@
 				18F14BD11B8DE20000C74E37 /* PayInfo.m in Sources */,
 				2BE39EB41D729E0D00CC3F0F /* PublicGroupListViewController.m in Sources */,
 				2BD3C6211D73DCC0008CFE23 /* PSTGridLayoutSection.m in Sources */,
+				2BE542151D7ECEA800BB5C43 /* changeImageCollectionViewCell.m in Sources */,
 				2BE39ECC1D729EEB00CC3F0F /* ApplyViewController.m in Sources */,
 				18CC8EE51BC39CE1000281CE /* ResponseSerialization.swift in Sources */,
 				2B0C70861D5481D1001AB100 /* GuildRankCell.m in Sources */,
@@ -4628,6 +4647,7 @@
 				2BE39EAF1D729E0D00CC3F0F /* GroupBansViewController.m in Sources */,
 				2B4698CC1D69513E0059B140 /* MallViewController.m in Sources */,
 				18C3E26F1B783FED004B02BB /* RandNumber.m in Sources */,
+				2BE5420E1D7ECC1D00BB5C43 /* ChangeImageController.m in Sources */,
 				18875B781BC5F592002E7224 /* ConnectTableViewController.m in Sources */,
 				18841F2C1B8C390700E2728B /* NSData+MD5Digest.m in Sources */,
 				182DB6F31B74A85E00C73C54 /* RegistViewController.m in Sources */,
