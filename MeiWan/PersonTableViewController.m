@@ -314,7 +314,7 @@
         [setting getOpen];
     }
     if (self.userinfo.isAudit == 0) {
-        self.askfor.text = @"达人申请";
+        self.askfor.text = @"我要出售时间";
     }else{
         self.askfor.text = @"达人设置";
     }
@@ -471,10 +471,8 @@
     
     if ([mediaType isEqualToString:@"public.image"]){
         
-        //切忌不可直接使用originImage，因为这是没有经过格式化的图片数据，可能会导致选择的图片颠倒或是失真等现象的发生，从UIImagePickerControllerOriginalImage中的Origin可以看出，很原始，哈哈
         UIImage *originImage = [info objectForKey:UIImagePickerControllerEditedImage];
-        
-        //图片压缩，因为原图都是很大的，不必要传原图
+
         UIImage *scaleImage = [CompressImage compressImage:originImage];
         if (scaleImage == nil) {
             [ShowMessage showMessage:@"不支持该类型图片"];
@@ -489,14 +487,8 @@
 -(void)passImage:(UIImage *)image{
     MBProgressHUD*HUDImage = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     HUDImage.delegate = self;
-    
-    //常用的设置
-    //小矩形的背景色
-    HUDImage.color = [UIColor grayColor];//这儿表示无背景
-    //显示的文字
     HUDImage.labelText = @"正在上传";
-    //是否有庶罩
-    HUDImage.dimBackground = NO;
+    HUDImage.dimBackground = YES;
     
     NSData *data = UIImagePNGRepresentation(image);
     NSDictionary * fileInfo = [UMUUploaderManager fetchFileInfoDictionaryWith:data];

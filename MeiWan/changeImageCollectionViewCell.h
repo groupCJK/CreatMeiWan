@@ -10,4 +10,7 @@
 
 @interface changeImageCollectionViewCell : UICollectionViewCell
 
+@property(nonatomic,strong)NSString * imagename;
+@property(nonatomic,strong)UIImageView * imageview;
+
 @end

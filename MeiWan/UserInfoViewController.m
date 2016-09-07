@@ -29,8 +29,6 @@
 #import "CompressImage.h"
 #import "CorlorTransform.h"
 #import "SDWebImage/SDImageCache.h"
-
-#import "UIScrollView+ScalableCover.h"
 #import "userEditCell.h"
 #import "editdescription.h"
 #import "editOwnMessage.h"
@@ -42,6 +40,7 @@
     CLLocationManager *_locationManager;
     userEditCell * cell;
     UITableView * tableview;
+    
 }
 @property (nonatomic, strong)NSArray *dataSource;
 @property (nonatomic, strong)UIView *userInfoHeadView;
@@ -69,6 +68,10 @@
 /** 街道 */
 @property (nonatomic,strong)NSString *street;
 
+@property (nonatomic,strong)NSString * IMAGE;
+
+@property (nonatomic,strong)UIImageView * headerImageView;
+
 @end
 
 @implementation UserInfoViewController
@@ -85,16 +88,16 @@
             }
         }
     }];
+    
 }
 - (void)viewDidLoad
 {
-    tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, dtScreenWidth, dtScreenHeight-64) style:UITableViewStyleGrouped];
+    tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, dtScreenWidth, dtScreenHeight) style:UITableViewStyleGrouped];
     tableview.delegate = self;
     tableview.dataSource = self;
     [self.view addSubview:tableview];
     tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [tableview addScalableCoverWithImage:[UIImage imageNamed:@"img_setting0"]];
-    
+
     _titleone = @[@"用户名",@"年龄",@"个人签名",@"情感状态",@"职业",@"学校",@"兴趣爱好"];
     _titletwo = @[@"所在地",@"工作地点",@"常出没地"];
     _titlethree = @[@"书籍",@"电影",@"音乐"];
@@ -102,16 +105,7 @@
     
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishSaveNickname:) name:@"finish_nickname" object:nil];
-    
-    UIButton * changeImage = [UIButton buttonWithType:UIButtonTypeCustom];
-    changeImage.backgroundColor = [CorlorTransform colorWithHexString:@"#6495ED"];
-    changeImage.frame = CGRectMake(dtScreenWidth-100, 100, 80, 44);
-    changeImage.titleLabel.font = [UIFont systemFontOfSize:14.0];
-    changeImage.layer.cornerRadius = 5;
-    changeImage.clipsToBounds = YES;
-    [changeImage setTitle:@"更改背景" forState:UIControlStateNormal];
-    [changeImage addTarget:self action:@selector(changeImage) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:changeImage];
+        
 }
 - (void)changeImage
 {
@@ -292,7 +286,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section==0) {
-        return 180;
+        return 200;
     }else{
         return 0.1;
     }
@@ -333,15 +327,21 @@
 {
     if (section==0) {
         
-        UIImageView * imageview = [[UIImageView alloc]initWithFrame:CGRectMake(10, 0, (dtScreenWidth-80)/4, (dtScreenWidth-80)/4)];
+        UIView *aView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 200)];
+
+        UIImageView * imageview = [[UIImageView alloc]initWithFrame:CGRectMake(10, 200-((dtScreenWidth-80)/2)-20, (dtScreenWidth-80)/4, (dtScreenWidth-80)/4)];
         imageview.image = [UIImage imageNamed:@"btn_add_papers"];
         imageview.userInteractionEnabled = YES;
         UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addPhoto:)];
         [imageview addGestureRecognizer:tapGesture];
-        UIView * headerView = [[UIView alloc]init];
-        [headerView addSubview:imageview];
-
-        return headerView;
+        
+        self.headerImageView = [[UIImageView alloc]initWithFrame:aView.frame];
+        self.headerImageView.image = [UIImage imageNamed:@"img_setting0"];
+        [aView addSubview:self.headerImageView];
+//        tableview.tableHeaderView = aView;
+        
+        [aView addSubview:imageview];
+        return aView;
         
     }else{
         return nil;
@@ -349,7 +349,20 @@
 
 }
 
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    //获取偏移量
+    CGPoint offset = scrollView.contentOffset;
+    //判断是否改变
+    if (offset.y < 0) {
+        CGRect rect = self.headerImageView.frame;
 
+        rect.origin.y = offset.y;
+        rect.size.height = 200 - offset.y;
+        rect.size.width = dtScreenWidth-offset.y/3;
+        self.headerImageView.frame = rect;
+    }
+    
+}
 - (void)addPhoto:(UITapGestureRecognizer *)gesture
 {
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"选择图片" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从相册选取", nil];
@@ -385,9 +398,7 @@
     
     if ([mediaType isEqualToString:@"public.image"]){
         
-        //切忌不可直接使用originImage，因为这是没有经过格式化的图片数据，可能会导致选择的图片颠倒或是失真等现象的发生，从UIImagePickerControllerOriginalImage中的Origin可以看出，很原始，哈哈
         UIImage *originImage = [info objectForKey:UIImagePickerControllerEditedImage];
-        
         //图片压缩，因为原图都是很大的，不必要传原图
         UIImage *scaleImage = [CompressImage compressImage:originImage];
         if (scaleImage == nil) {
@@ -426,7 +437,7 @@
             }else{
                 headUrl = [NSString stringWithFormat:@"http://chuangjike-img-real.b0.upaiyun.com%@",[result objectForKey:@"path"]];
             }
-            
+            NSLog(@"");
             /**
              
              
