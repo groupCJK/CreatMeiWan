@@ -72,6 +72,9 @@
 
 @property (nonatomic,strong)UIImageView * headerImageView;
 
+
+@property (nonatomic,strong)UIImageView * touchesImageView;
+
 @end
 
 @implementation UserInfoViewController
@@ -328,19 +331,202 @@
     if (section==0) {
         
         UIView *aView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 200)];
-
+/**第一个*/
         UIImageView * imageview = [[UIImageView alloc]initWithFrame:CGRectMake(10, 200-((dtScreenWidth-80)/2)-20, (dtScreenWidth-80)/4, (dtScreenWidth-80)/4)];
         imageview.image = [UIImage imageNamed:@"btn_add_papers"];
         imageview.userInteractionEnabled = YES;
+        imageview.tag = 0;
         UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addPhoto:)];
         [imageview addGestureRecognizer:tapGesture];
+/**第二个*/
+        UIImageView * imageview1 = [[UIImageView alloc]initWithFrame:CGRectMake(imageview.frame.origin.x+imageview.frame.size.width+20, imageview.frame.origin.y, imageview.frame.size.width, imageview.frame.size.height)];
+        imageview1.image = [UIImage imageNamed:@"btn_add_papers"];
+        imageview1.userInteractionEnabled = YES;
+        imageview1.tag = 1;
+        UITapGestureRecognizer * tapGesture1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addPhoto:)];
+        [imageview1 addGestureRecognizer:tapGesture1];
+/**第三个*/
+        UIImageView * imageview2 = [[UIImageView alloc]initWithFrame:CGRectMake(imageview1.frame.origin.x+imageview1.frame.size.width+20, imageview1.frame.origin.y, imageview1.frame.size.width, imageview1.frame.size.height)];
+        imageview2.image = [UIImage imageNamed:@"btn_add_papers"];
+        imageview2.userInteractionEnabled = YES;
+        imageview2.tag = 2;
+        UITapGestureRecognizer * tapGesture2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addPhoto:)];
+        [imageview2 addGestureRecognizer:tapGesture2];
+/**第四个*/
+        UIImageView * imageview3 = [[UIImageView alloc]initWithFrame:CGRectMake(imageview2.frame.origin.x+imageview2.frame.size.width+20, imageview2.frame.origin.y, imageview2.frame.size.width, imageview2.frame.size.height)];
+        imageview3.image = [UIImage imageNamed:@"btn_add_papers"];
+        imageview3.userInteractionEnabled = YES;
+        imageview3.tag = 3;
+        UITapGestureRecognizer * tapGesture3 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addPhoto:)];
+        [imageview3 addGestureRecognizer:tapGesture3];
+/**第五个*/
+        UIImageView * imageview4 = [[UIImageView alloc]initWithFrame:CGRectMake(imageview.frame.origin.x, imageview.frame.origin.y+imageview.frame.size.height+15, imageview.frame.size.width, imageview.frame.size.height)];
+        imageview4.image = [UIImage imageNamed:@"btn_add_papers"];
+        imageview4.userInteractionEnabled = YES;
+        imageview4.tag = 4;
+        UITapGestureRecognizer * tapGesture4 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addPhoto:)];
+        [imageview4 addGestureRecognizer:tapGesture4];
+/**第六个*/
+        UIImageView * imageview5 = [[UIImageView alloc]initWithFrame:CGRectMake(imageview4.frame.origin.x+imageview4.frame.size.width+20, imageview4.frame.origin.y, imageview4.frame.size.width, imageview4.frame.size.height)];
+        imageview5.image = [UIImage imageNamed:@"btn_add_papers"];
+        imageview5.userInteractionEnabled = YES;
+        imageview5.tag = 5;
+        UITapGestureRecognizer * tapGesture5 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addPhoto:)];
+        [imageview5 addGestureRecognizer:tapGesture5];
+/**第七个*/
+        UIImageView * imageview6 = [[UIImageView alloc]initWithFrame:CGRectMake(imageview5.frame.origin.x+imageview5.frame.size.width+20, imageview5.frame.origin.y, imageview5.frame.size.width, imageview5.frame.size.height)];
+        imageview6.image = [UIImage imageNamed:@"btn_add_papers"];
+        imageview6.userInteractionEnabled = YES;
+        imageview6.tag = 6;
+        UITapGestureRecognizer * tapGesture6 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addPhoto:)];
+        [imageview6 addGestureRecognizer:tapGesture6];
+/**第八个*/
+        UIImageView * imageview7 = [[UIImageView alloc]initWithFrame:CGRectMake(imageview6.frame.origin.x+imageview6.frame.size.width+20, imageview6.frame.origin.y, imageview6.frame.size.width, imageview6.frame.size.height)];
+        imageview7.image = [UIImage imageNamed:@"btn_add_papers"];
+        imageview7.userInteractionEnabled = YES;
+        imageview7.tag = 7;
+        UITapGestureRecognizer * tapGesture7 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addPhoto:)];
+        [imageview7 addGestureRecognizer:tapGesture7];
+
+        NSString * session = [PersistenceManager getLoginSession];
+        [UserConnector findMyPhotoes:session receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+            if (!error) {
+                SBJsonParser * parser = [[SBJsonParser alloc]init];
+                NSDictionary * json = [parser objectWithData:data];
+                NSArray * photosArray = json[@"entity"];
+                [photosArray enumerateObjectsUsingBlock:^(NSDictionary *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                   
+                    if ([obj[@"index"] intValue]==0) {
+                        [imageview sd_setImageWithURL:obj[@"url"]];
+                    }
+                    if ([obj[@"index"] intValue]==1) {
+                        [imageview1 sd_setImageWithURL:obj[@"url"]];
+                    }
+                    if ([obj[@"index"] intValue]==2) {
+                        [imageview2 sd_setImageWithURL:obj[@"url"]];
+                    }
+                    if ([obj[@"index"] intValue]==3) {
+                        [imageview3 sd_setImageWithURL:obj[@"url"]];
+                    }
+                    if ([obj[@"index"] intValue]==4) {
+                        [imageview4 sd_setImageWithURL:obj[@"url"]];
+                    }
+                    if ([obj[@"index"] intValue]==5) {
+                        [imageview5 sd_setImageWithURL:obj[@"url"]];
+                    }
+                    if ([obj[@"index"] intValue]==6) {
+                        [imageview6 sd_setImageWithURL:obj[@"url"]];
+                    }
+                    if ([obj[@"index"] intValue]==7) {
+                        [imageview7 sd_setImageWithURL:obj[@"url"]];
+                    }
+                    
+                }];
+                if (photosArray.count==0) {
+                    imageview1.hidden = YES;
+                    imageview2.hidden = YES;
+                    imageview3.hidden = YES;
+                    imageview4.hidden = YES;
+                    imageview5.hidden = YES;
+                    imageview6.hidden = YES;
+                    imageview7.hidden = YES;
+                }else if (photosArray.count==1){
+                    imageview1.hidden = NO;
+                    imageview2.hidden = YES;
+                    imageview3.hidden = YES;
+                    imageview4.hidden = YES;
+                    imageview5.hidden = YES;
+                    imageview6.hidden = YES;
+                    imageview7.hidden = YES;
+                }else if (photosArray.count==2){
+                    imageview1.hidden = NO;
+                    imageview2.hidden = NO;
+                    imageview3.hidden = YES;
+                    imageview4.hidden = YES;
+                    imageview5.hidden = YES;
+                    imageview6.hidden = YES;
+                    imageview7.hidden = YES;
+                }else if (photosArray.count==3){
+                    imageview1.hidden = NO;
+                    imageview2.hidden = NO;
+                    imageview3.hidden = NO;
+                    imageview4.hidden = YES;
+                    imageview5.hidden = YES;
+                    imageview6.hidden = YES;
+                    imageview7.hidden = YES;
+                }else if (photosArray.count==4){
+                    imageview1.hidden = NO;
+                    imageview2.hidden = NO;
+                    imageview3.hidden = NO;
+                    imageview4.hidden = NO;
+                    imageview5.hidden = YES;
+                    imageview6.hidden = YES;
+                    imageview7.hidden = YES;
+                }else if (photosArray.count==5){
+                    imageview1.hidden = NO;
+                    imageview2.hidden = NO;
+                    imageview3.hidden = NO;
+                    imageview4.hidden = NO;
+                    imageview5.hidden = NO;
+                    imageview6.hidden = YES;
+                    imageview7.hidden = YES;
+                }else if (photosArray.count==6){
+                    imageview1.hidden = NO;
+                    imageview2.hidden = NO;
+                    imageview3.hidden = NO;
+                    imageview4.hidden = NO;
+                    imageview5.hidden = NO;
+                    imageview6.hidden = NO;
+                    imageview7.hidden = YES;
+                }else if (photosArray.count==7){
+                    imageview1.hidden = NO;
+                    imageview2.hidden = NO;
+                    imageview3.hidden = NO;
+                    imageview4.hidden = NO;
+                    imageview5.hidden = NO;
+                    imageview6.hidden = NO;
+                    imageview7.hidden = NO;
+                }
+            }
+        }];
         
         self.headerImageView = [[UIImageView alloc]initWithFrame:aView.frame];
         self.headerImageView.image = [UIImage imageNamed:@"img_setting0"];
         [aView addSubview:self.headerImageView];
-//        tableview.tableHeaderView = aView;
+        
+        imageview.layer.cornerRadius = 5;
+        imageview.clipsToBounds = YES;
+        
+        imageview1.layer.cornerRadius = 5;
+        imageview1.clipsToBounds = YES;
+        
+        imageview2.layer.cornerRadius = 5;
+        imageview2.clipsToBounds = YES;
+        
+        imageview3.layer.cornerRadius = 5;
+        imageview3.clipsToBounds = YES;
+        
+        imageview4.layer.cornerRadius = 5;
+        imageview4.clipsToBounds = YES;
+        
+        imageview5.layer.cornerRadius = 5;
+        imageview5.clipsToBounds = YES;
+        
+        imageview6.layer.cornerRadius = 5;
+        imageview6.clipsToBounds = YES;
+        
+        imageview7.layer.cornerRadius = 5;
+        imageview7.clipsToBounds = YES;
+        
         
         [aView addSubview:imageview];
+        [aView addSubview:imageview1];
+        [aView addSubview:imageview2];
+        [aView addSubview:imageview3];
+        [aView addSubview:imageview4];
+        [aView addSubview:imageview5];
+        [aView addSubview:imageview6];
+        [aView addSubview:imageview7];
         return aView;
         
     }else{
@@ -365,6 +551,11 @@
 }
 - (void)addPhoto:(UITapGestureRecognizer *)gesture
 {
+    self.touchesImageView = (UIImageView *)[gesture view];
+    NSLog(@"%@",self.touchesImageView.sd_imageURL);
+    /***
+     标记 判断是否有图片 有图片时提示的信息不一样
+     */
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"选择图片" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从相册选取", nil];
     [alert show];
 }
@@ -374,6 +565,8 @@
     [[ipc navigationBar] setTintColor:[CorlorTransform colorWithHexString:@"#3f90a4"]];
     if (buttonIndex == 1) {
         //NSLog(@"1");
+        
+
         if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
         {
             [ipc setSourceType:UIImagePickerControllerSourceTypeCamera];
@@ -445,6 +638,18 @@
              
              
              */
+            NSString * session = [PersistenceManager getLoginSession];
+            
+            [UserConnector updateUserPhoto:session url:headUrl index:[NSNumber numberWithInteger:self.touchesImageView.tag] receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+                if (!error) {
+                    SBJsonParser * parser = [[SBJsonParser alloc]init];
+                    NSDictionary * json = [parser objectWithData:data];
+                    NSLog(@"%@",json);
+                    self.touchesImageView.image = image;
+                    [HUDImage hide:YES afterDelay:0.5];
+                    [tableview reloadData];
+                }
+            }];
             
         }else {
             [HUDImage hide:YES afterDelay:0];

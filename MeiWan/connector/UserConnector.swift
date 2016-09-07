@@ -1736,6 +1736,76 @@ import UIKit
         }
     }
 
+    
+    /** 上传图片 */
+    public static func updateUserPhoto(session:String!,url:String!,index:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
+        
+        
+        var parameters:Dictionary<String,AnyObject> = [:]
+        if (session != nil) {
+            parameters["session"] = session
+        }
+        if (url != nil) {
+            parameters["url"]=url
+        }
+        if (index != nil) {
+            parameters["index"] = index;
+        }
+        request(.GET, userUrl+"updateUserPhoto", parameters:parameters as? [String : NSObject])
+            .response { request, r, data, error in
+                
+                if (error==nil){
+                    
+                }else{
+                    setting .adjustIps()
+                    userUrl=setting.getIp()+"peiwan-server/rest/users/"
+                }
+                receiver(data:data, error:error)
+        }
+
+        
+    }
+    /** 发现照片 */
+    public static func findMyPhotoes(session:String!,receiver:(data:NSData?,error:NSError?)->()){
+    
+        var parameters:Dictionary<String,AnyObject> = [:]
+        if (session != nil) {
+            parameters["session"] = session
+        }
+        request(.GET, userUrl+"findMyPhotoes", parameters:parameters as? [String : NSObject])
+            .response { request, r, data, error in
+                
+                if (error==nil){
+                    
+                }else{
+                    setting .adjustIps()
+                    userUrl=setting.getIp()+"peiwan-server/rest/users/"
+                }
+                receiver(data:data!.gunzippedData(), error:error)
+        }
+    }
+    
+    /** 删除照片 */
+    public static func deleteUserPhoto(userPhotoId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
+        var parameters:Dictionary<String,AnyObject> = [:]
+        if (userPhotoId != nil) {
+            parameters["userPhotoId"] = userPhotoId
+        }
+        request(.GET, userUrl+"deleteUserPhoto", parameters:parameters as? [String : NSObject])
+            .response { request, r, data, error in
+                
+                if (error==nil){
+                    
+                }else{
+                    setting .adjustIps()
+                    userUrl=setting.getIp()+"peiwan-server/rest/users/"
+                }
+                receiver(data:data, error:error)
+        }
+
+    
+    
+    }
 }
 
 
