@@ -166,7 +166,15 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(payauthorizedfail:) name:@"wx_payauthorizedfail" object:nil];
     
 }
-
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"wx_paysuccess" object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"wx_payfail" object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"wx_paycancel" object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"wx_paysendFail" object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"wx_paynotsupport" object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"wx_payauthorizedfail" object:nil];
+}
 - (void)labelPush:(UIButton *)sender
 {
     [self performSegueWithIdentifier:@"labelPush" sender:nil];

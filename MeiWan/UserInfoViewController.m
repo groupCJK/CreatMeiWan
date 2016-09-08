@@ -40,6 +40,7 @@
     CLLocationManager *_locationManager;
     userEditCell * cell;
     UITableView * tableview;
+    NSInteger tagIndex;
     
 }
 @property (nonatomic, strong)NSArray *dataSource;
@@ -75,6 +76,8 @@
 
 @property (nonatomic,strong)UIImageView * touchesImageView;
 
+@property (nonatomic,copy)NSString * headerimageTag;
+
 @end
 
 @implementation UserInfoViewController
@@ -109,6 +112,10 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishSaveNickname:) name:@"finish_nickname" object:nil];
         
+}
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 - (void)changeImage
 {
@@ -396,28 +403,28 @@
                 NSArray * photosArray = json[@"entity"];
                 [photosArray enumerateObjectsUsingBlock:^(NSDictionary *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                    
-                    if ([obj[@"index"] intValue]==0) {
+                    if (idx==0) {
                         [imageview sd_setImageWithURL:obj[@"url"]];
                     }
-                    if ([obj[@"index"] intValue]==1) {
+                    if (idx==1) {
                         [imageview1 sd_setImageWithURL:obj[@"url"]];
                     }
-                    if ([obj[@"index"] intValue]==2) {
+                    if (idx==2) {
                         [imageview2 sd_setImageWithURL:obj[@"url"]];
                     }
-                    if ([obj[@"index"] intValue]==3) {
+                    if (idx==3) {
                         [imageview3 sd_setImageWithURL:obj[@"url"]];
                     }
-                    if ([obj[@"index"] intValue]==4) {
+                    if (idx==4) {
                         [imageview4 sd_setImageWithURL:obj[@"url"]];
                     }
-                    if ([obj[@"index"] intValue]==5) {
+                    if (idx==5) {
                         [imageview5 sd_setImageWithURL:obj[@"url"]];
                     }
-                    if ([obj[@"index"] intValue]==6) {
+                    if (idx==6) {
                         [imageview6 sd_setImageWithURL:obj[@"url"]];
                     }
-                    if ([obj[@"index"] intValue]==7) {
+                    if (idx==7) {
                         [imageview7 sd_setImageWithURL:obj[@"url"]];
                     }
                     
@@ -527,6 +534,15 @@
         [aView addSubview:imageview5];
         [aView addSubview:imageview6];
         [aView addSubview:imageview7];
+        
+        UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 200-((dtScreenWidth-80)/2)-20-30, dtScreenWidth, 30)];
+        
+        label.textColor = [UIColor grayColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.text = [NSString stringWithFormat:@"ID:%@",self.userInfoDic[@"id"]];
+        [aView addSubview:label];
+
+        
         return aView;
         
     }else{
@@ -552,31 +568,75 @@
 - (void)addPhoto:(UITapGestureRecognizer *)gesture
 {
     self.touchesImageView = (UIImageView *)[gesture view];
+    tagIndex = self.touchesImageView.tag;
     NSLog(@"%@",self.touchesImageView.sd_imageURL);
     /***
      标记 判断是否有图片 有图片时提示的信息不一样
      */
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"选择图片" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从相册选取", nil];
-    [alert show];
+    if (self.touchesImageView.sd_imageURL==nil) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"选择图片" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从相册选取", nil];
+        alert.tag=11;
+        [alert show];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"选择图片" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"删除",@"替换", nil];
+        alert.tag=10;
+        self.headerimageTag = [NSString stringWithFormat:@"%ld",self.touchesImageView.tag];
+        [alert show];
+    }
+
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     UIImagePickerController *ipc = [[UIImagePickerController alloc]init];
     ipc.delegate = self;
     [[ipc navigationBar] setTintColor:[CorlorTransform colorWithHexString:@"#3f90a4"]];
+  
     if (buttonIndex == 1) {
-        //NSLog(@"1");
         
-
-        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-        {
-            [ipc setSourceType:UIImagePickerControllerSourceTypeCamera];
-            ipc.allowsEditing = YES;
-            ipc.showsCameraControls  = YES;
-            [self presentViewController:ipc animated:YES completion:nil];
+        if (alertView.tag==10) {
+                NSString * session = [PersistenceManager getLoginSession];
+                [UserConnector findMyPhotoes:session receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
             
+                    if (!error) {
+                        SBJsonParser * parser = [[SBJsonParser alloc]init];
+                        NSDictionary * json = [parser objectWithData:data];
+                        [json[@"entity"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                            
+                            if ([self.headerimageTag integerValue]==idx) {
+                                [UserConnector deleteUserPhoto:session userPhotoId:obj[@"id"] receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+                                    if (!error) {
+                                        SBJsonParser * parser = [[SBJsonParser alloc]init];
+                                        NSDictionary * json = [parser objectWithData:data];
+                                        NSLog(@"%@",json);
+                                        int status = [json[@"status"] intValue];
+                                        if (status==0) {
+                                            [tableview reloadData];
+                                        }else if (status==1){
+            
+                                        }else{
+                                            
+                                        }
+                                    }
+                                }];
+                            }
+                        }];
+                    }
+                    
+                }];
+
         }else{
-            //NSLog(@"硬件不支持");
+            
+            if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+            {
+                [ipc setSourceType:UIImagePickerControllerSourceTypeCamera];
+                ipc.allowsEditing = YES;
+                ipc.showsCameraControls  = YES;
+                [self presentViewController:ipc animated:YES completion:nil];
+                
+            }else{
+                //NSLog(@"硬件不支持");
+            }
         }
+        
     }
     if (buttonIndex == 2) {
         [ipc setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];

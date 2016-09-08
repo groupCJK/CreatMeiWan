@@ -10,9 +10,8 @@
 #import "CorlorTransform.h"
 #import "ShowMessage.h"
 #import "Meiwan-Swift.h"
-#import "MYIntroductionView.h"
 
-@interface LoginViewController ()<UIWebViewDelegate,MYIntroductionDelegate>
+@interface LoginViewController ()<UIWebViewDelegate,UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *loginbtn;
 @property (weak, nonatomic) IBOutlet UIButton *registbtn;
 @property (nonatomic, strong) UIWebView *wb;
@@ -21,43 +20,48 @@
 @implementation LoginViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.loginbtn.layer.cornerRadius = 5.0;
-//    self.loginbtn.layer.borderWidth = 1.0;
-//    self.loginbtn.layer.borderColor = [UIColor whiteColor].CGColor;
-//    self.registbtn.layer.cornerRadius = 5.0;
-//    self.registbtn.backgroundColor = [CorlorTransform colorWithHexString:@"#36C8FF"];
-    // Do any additional setup after loading the view.
     
-}
-
-- (void)viewDidAppear:(BOOL)animated{
     //读取沙盒数据
     NSUserDefaults * settings1 = [NSUserDefaults standardUserDefaults];
     NSString *key1 = [NSString stringWithFormat:@"is_first"];
     NSString *value = [settings1 objectForKey:key1];
     if ((!value)) {
-        MYIntroductionPanel *panel = [[MYIntroductionPanel alloc] initWithimage:[UIImage imageNamed:@"2_loadingҳ"] description:@"Welcome to MYIntroductionView, your 100 percent customizable interface for introductions and tutorials! Simply add a few classes to your project, and you are ready to go!"];
-    MYIntroductionPanel *panel2 = [[MYIntroductionPanel alloc] initWithimage:[UIImage imageNamed:@"3_loadingҳ"] title:@"Your Ticket!" description:@"MYIntroductionView is your ticket to a great tutorial or introduction!"];
         
-         MYIntroductionPanel *panel3 = [[MYIntroductionPanel alloc] initWithimage:[UIImage imageNamed:@"4_loadingҳ"] title:@"Your Ticket!" description:@"MYIntroductionView is your ticket to a great tutorial or introduction!"];
+        UIScrollView * scrollview = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, dtScreenWidth, dtScreenHeight)];
+        scrollview.contentSize = CGSizeMake(dtScreenWidth*3, dtScreenHeight);
+        scrollview.delegate = self;
+        scrollview.pagingEnabled = YES;
+        scrollview.showsVerticalScrollIndicator = NO;
+        scrollview.showsHorizontalScrollIndicator = NO;
+        [self.view addSubview:scrollview];
         
-    MYIntroductionView *introductionView = [[MYIntroductionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) headerText:@"MYIntroductionView" panels:@[panel, panel2 ,panel3] languageDirection:MYLanguageDirectionLeftToRight];
+        for (int i = 0; i<3; i++) {
+            UIImageView * imageview = [[UIImageView alloc]initWithFrame:CGRectMake(dtScreenWidth*i, 0, dtScreenWidth, dtScreenHeight)];
+            imageview.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d_loadingҳ",i+2]];
+            [scrollview addSubview:imageview];
+        }
         
-//    [introductionView setBackgroundImage:[UIImage imageNamed:@"1_loadingҳ"]];
-    
-    
-    //Set delegate to self for callbacks (optional)
-    introductionView.delegate = self;
-    
-    //STEP 3: Show introduction view
-    [introductionView showInView:self.view];
-    
-    //写入数据
-    NSUserDefaults * setting = [NSUserDefaults standardUserDefaults];
-    NSString * key = [NSString stringWithFormat:@"is_first"];
-    [setting setObject:[NSString stringWithFormat:@"false"] forKey:key];
-    [setting synchronize];
+        //写入数据
+        NSUserDefaults * setting = [NSUserDefaults standardUserDefaults];
+        NSString * key = [NSString stringWithFormat:@"is_first"];
+        [setting setObject:[NSString stringWithFormat:@"false"] forKey:key];
+        [setting synchronize];
     }
+
+    
+    
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    //获取偏移量
+    CGPoint offset = scrollView.contentOffset;
+    NSLog(@"%f",offset.x);
+    if (offset.x>760) {
+        scrollView.hidden = YES;
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+   
 }
 
 -(void)viewWillAppear:(BOOL)animated{

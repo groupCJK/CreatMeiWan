@@ -1786,8 +1786,11 @@ import UIKit
     }
     
     /** 删除照片 */
-    public static func deleteUserPhoto(userPhotoId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
+    public static func deleteUserPhoto(session:String!,userPhotoId:NSNumber!,receiver:(data:NSData?,error:NSError?)->()){
         var parameters:Dictionary<String,AnyObject> = [:]
+        if (session != nil) {
+            parameters["session"] = session
+        }
         if (userPhotoId != nil) {
             parameters["userPhotoId"] = userPhotoId
         }

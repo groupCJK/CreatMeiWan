@@ -60,6 +60,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSLog(@"用户信息:%@",self.playerInfo);
+    
     self.page = 0;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"更多" style:UIBarButtonItemStylePlain target:self action:@selector(more)];
 
@@ -233,7 +236,7 @@
         if (!infoCell) {
             infoCell = [[playerInfoTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"infoCell"];
             infoCell.playerInfo = self.playerInfo;
-            self.headerImageUrl = self.playerInfo[@"headUrl"];
+//            self.headerImageUrl = self.playerInfo[@"headUrl"];
         }
         infoCell.playerHeadImage.userInteractionEnabled = YES;
         UITapGestureRecognizer * tapgesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesture:)];
@@ -777,6 +780,11 @@
     UIWindow *windows = [UIApplication sharedApplication].keyWindow;
     CGRect startRect = [imageview convertRect:imageview.bounds toView:windows];
     [PreviewImageView showPreviewImage:imageview.image startImageFrame:startRect inView:windows viewFrame:self.view.bounds];
+    
+    NSString * imageUrl = [NSString stringWithFormat:@"%@",imageview.sd_imageURL];
+    
+    self.headerImageUrl = [imageUrl stringByReplacingOccurrencesOfString:@"!1" withString:@""];
+    NSLog(@"%@",self.headerImageUrl);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"image_url" object:self.headerImageUrl];
 }
 - (void)pinglunAFNetworking:(int)page
