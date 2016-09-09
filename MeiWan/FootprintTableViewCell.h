@@ -8,12 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol PhotosTouchImageDelegate <NSObject>
+
+- (void)PhotosTouchImage:(UITapGestureRecognizer *)gesture;
+
+@end
+
 @interface FootprintTableViewCell : UITableViewCell
 
-@property (nonatomic, strong)UIImageView *titleImage;
-@property (nonatomic, strong)UILabel *footprintTitleLabel;
+@property(nonatomic,strong)UIImageView * imageview;
+@property(nonatomic,strong)UILabel * label;
+@property(nonatomic,strong)UIScrollView * scrollview;
+@property(nonatomic,strong)NSMutableArray * photosarray;
+@property(nonatomic,strong)NSDictionary * photos;
 
-@property (nonatomic, strong)UILabel *footprintName;
-@property (nonatomic, strong)UIImageView *footprintImage;
+@property(nonatomic,weak)id<PhotosTouchImageDelegate>delegate;
 
 @end

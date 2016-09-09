@@ -286,6 +286,13 @@
 		2B0C70861D5481D1001AB100 /* GuildRankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B0C70851D5481D1001AB100 /* GuildRankCell.m */; };
 		2B1C111E1D751B0100184BD3 /* ChatTOPView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C111D1D751B0100184BD3 /* ChatTOPView.m */; };
 		2B1C11221D752DE000184BD3 /* chatOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C11211D752DE000184BD3 /* chatOrderView.m */; };
+		2B28F1931D82617800EF5EFD /* schoolChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B28F1921D82617800EF5EFD /* schoolChooseVC.m */; };
+		2B28F1961D82619000EF5EFD /* insterestChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B28F1951D82619000EF5EFD /* insterestChooseVC.m */; };
+		2B28F1991D8261A100EF5EFD /* bookChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B28F1981D8261A100EF5EFD /* bookChooseVC.m */; };
+		2B28F19C1D8261C800EF5EFD /* movieChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B28F19B1D8261C800EF5EFD /* movieChooseVC.m */; };
+		2B28F19F1D8261D400EF5EFD /* musicChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B28F19E1D8261D400EF5EFD /* musicChooseVC.m */; };
+		2B28F1A31D82A0B200EF5EFD /* books.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B28F1A21D82A0B200EF5EFD /* books.m */; };
+		2B28F1A71D82B16A00EF5EFD /* huadongAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B28F1A61D82B16A00EF5EFD /* huadongAnimation.m */; };
 		2B2B56C71D473D170048AA20 /* PrepaidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2B56C61D473D170048AA20 /* PrepaidViewController.m */; };
 		2B2D084F1D519E4D00139467 /* guildCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D084E1D519E4D00139467 /* guildCenterViewController.m */; };
 		2B2D08521D51F98E00139467 /* changeArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2D08511D51F98E00139467 /* changeArray.m */; };
@@ -316,6 +323,7 @@
 		2B5805B81D2A386800721653 /* label7.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805AF1D2A386800721653 /* label7.png */; };
 		2B5805B91D2A386800721653 /* label8.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805B01D2A386800721653 /* label8.png */; };
 		2B5805BA1D2A386800721653 /* label9.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5805B11D2A386800721653 /* label9.png */; };
+		2B5B12601D815F3C006E2A32 /* JobChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5B125F1D815F3C006E2A32 /* JobChooseViewController.m */; };
 		2B5B7D1E1D38932500CF5354 /* PlagerinfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5B7D1D1D38932500CF5354 /* PlagerinfoViewController.m */; };
 		2B5B7D2A1D3893C700CF5354 /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5B7D211D3893C700CF5354 /* CommentTableViewCell.m */; };
 		2B5B7D2B1D3893C700CF5354 /* FootprintTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5B7D231D3893C700CF5354 /* FootprintTableViewCell.m */; };
@@ -1076,6 +1084,20 @@
 		2B1C111D1D751B0100184BD3 /* ChatTOPView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTOPView.m; sourceTree = "<group>"; };
 		2B1C11201D752DE000184BD3 /* chatOrderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chatOrderView.h; sourceTree = "<group>"; };
 		2B1C11211D752DE000184BD3 /* chatOrderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = chatOrderView.m; sourceTree = "<group>"; };
+		2B28F1911D82617800EF5EFD /* schoolChooseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = schoolChooseVC.h; sourceTree = "<group>"; };
+		2B28F1921D82617800EF5EFD /* schoolChooseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = schoolChooseVC.m; sourceTree = "<group>"; };
+		2B28F1941D82619000EF5EFD /* insterestChooseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = insterestChooseVC.h; sourceTree = "<group>"; };
+		2B28F1951D82619000EF5EFD /* insterestChooseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = insterestChooseVC.m; sourceTree = "<group>"; };
+		2B28F1971D8261A100EF5EFD /* bookChooseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bookChooseVC.h; sourceTree = "<group>"; };
+		2B28F1981D8261A100EF5EFD /* bookChooseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bookChooseVC.m; sourceTree = "<group>"; };
+		2B28F19A1D8261C800EF5EFD /* movieChooseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = movieChooseVC.h; sourceTree = "<group>"; };
+		2B28F19B1D8261C800EF5EFD /* movieChooseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = movieChooseVC.m; sourceTree = "<group>"; };
+		2B28F19D1D8261D400EF5EFD /* musicChooseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = musicChooseVC.h; sourceTree = "<group>"; };
+		2B28F19E1D8261D400EF5EFD /* musicChooseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = musicChooseVC.m; sourceTree = "<group>"; };
+		2B28F1A11D82A0B200EF5EFD /* books.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = books.h; sourceTree = "<group>"; };
+		2B28F1A21D82A0B200EF5EFD /* books.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = books.m; sourceTree = "<group>"; };
+		2B28F1A51D82B16A00EF5EFD /* huadongAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = huadongAnimation.h; sourceTree = "<group>"; };
+		2B28F1A61D82B16A00EF5EFD /* huadongAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = huadongAnimation.m; sourceTree = "<group>"; };
 		2B2B56C51D473D170048AA20 /* PrepaidViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrepaidViewController.h; sourceTree = "<group>"; };
 		2B2B56C61D473D170048AA20 /* PrepaidViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrepaidViewController.m; sourceTree = "<group>"; };
 		2B2D084D1D519E4D00139467 /* guildCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = guildCenterViewController.h; sourceTree = "<group>"; };
@@ -1125,6 +1147,8 @@
 		2B5805AF1D2A386800721653 /* label7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label7.png; sourceTree = "<group>"; };
 		2B5805B01D2A386800721653 /* label8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label8.png; sourceTree = "<group>"; };
 		2B5805B11D2A386800721653 /* label9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label9.png; sourceTree = "<group>"; };
+		2B5B125E1D815F3C006E2A32 /* JobChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobChooseViewController.h; sourceTree = "<group>"; };
+		2B5B125F1D815F3C006E2A32 /* JobChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobChooseViewController.m; sourceTree = "<group>"; };
 		2B5B7D1C1D38932500CF5354 /* PlagerinfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlagerinfoViewController.h; sourceTree = "<group>"; };
 		2B5B7D1D1D38932500CF5354 /* PlagerinfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlagerinfoViewController.m; sourceTree = "<group>"; };
 		2B5B7D201D3893C700CF5354 /* CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewCell.h; sourceTree = "<group>"; };
@@ -2815,6 +2839,101 @@
 			name = "下单View";
 			sourceTree = "<group>";
 		};
+		2B28F1891D8260AF00EF5EFD /* 照片墙 */ = {
+			isa = PBXGroup;
+			children = (
+				2BE5420C1D7ECC1D00BB5C43 /* ChangeImageController.h */,
+				2BE5420D1D7ECC1D00BB5C43 /* ChangeImageController.m */,
+			);
+			name = "照片墙";
+			sourceTree = "<group>";
+		};
+		2B28F18A1D8260B100EF5EFD /* 工作 */ = {
+			isa = PBXGroup;
+			children = (
+				2B5B125E1D815F3C006E2A32 /* JobChooseViewController.h */,
+				2B5B125F1D815F3C006E2A32 /* JobChooseViewController.m */,
+			);
+			name = "工作";
+			sourceTree = "<group>";
+		};
+		2B28F18B1D8260B500EF5EFD /* 情感 */ = {
+			isa = PBXGroup;
+			children = (
+				2BE542091D7EBF0700BB5C43 /* emotionalState.h */,
+				2BE5420A1D7EBF0700BB5C43 /* emotionalState.m */,
+			);
+			name = "情感";
+			sourceTree = "<group>";
+		};
+		2B28F18C1D8260B800EF5EFD /* 签名 */ = {
+			isa = PBXGroup;
+			children = (
+				2BE542061D7EBD5B00BB5C43 /* editdescription.h */,
+				2BE542071D7EBD5B00BB5C43 /* editdescription.m */,
+			);
+			name = "签名";
+			sourceTree = "<group>";
+		};
+		2B28F18D1D8260C400EF5EFD /* 昵称 */ = {
+			isa = PBXGroup;
+			children = (
+				2BE542031D7E9C2700BB5C43 /* editOwnMessage.h */,
+				2BE542041D7E9C2700BB5C43 /* editOwnMessage.m */,
+			);
+			name = "昵称";
+			sourceTree = "<group>";
+		};
+		2B28F18E1D82612600EF5EFD /* 学校 */ = {
+			isa = PBXGroup;
+			children = (
+				2B28F1911D82617800EF5EFD /* schoolChooseVC.h */,
+				2B28F1921D82617800EF5EFD /* schoolChooseVC.m */,
+			);
+			name = "学校";
+			sourceTree = "<group>";
+		};
+		2B28F18F1D82612F00EF5EFD /* 兴趣爱好 */ = {
+			isa = PBXGroup;
+			children = (
+				2B28F1941D82619000EF5EFD /* insterestChooseVC.h */,
+				2B28F1951D82619000EF5EFD /* insterestChooseVC.m */,
+			);
+			name = "兴趣爱好";
+			sourceTree = "<group>";
+		};
+		2B28F1901D82614200EF5EFD /* 书籍。电影。音乐 */ = {
+			isa = PBXGroup;
+			children = (
+				2B28F1971D8261A100EF5EFD /* bookChooseVC.h */,
+				2B28F1981D8261A100EF5EFD /* bookChooseVC.m */,
+				2B28F1A01D82A09A00EF5EFD /* cell */,
+				2B28F19A1D8261C800EF5EFD /* movieChooseVC.h */,
+				2B28F19B1D8261C800EF5EFD /* movieChooseVC.m */,
+				2B28F19D1D8261D400EF5EFD /* musicChooseVC.h */,
+				2B28F19E1D8261D400EF5EFD /* musicChooseVC.m */,
+			);
+			name = "书籍。电影。音乐";
+			sourceTree = "<group>";
+		};
+		2B28F1A01D82A09A00EF5EFD /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				2B28F1A11D82A0B200EF5EFD /* books.h */,
+				2B28F1A21D82A0B200EF5EFD /* books.m */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
+		2B28F1A41D82B14500EF5EFD /* 动画 */ = {
+			isa = PBXGroup;
+			children = (
+				2B28F1A51D82B16A00EF5EFD /* huadongAnimation.h */,
+				2B28F1A61D82B16A00EF5EFD /* huadongAnimation.m */,
+			);
+			name = "动画";
+			sourceTree = "<group>";
+		};
 		2B2B56C41D473CC70048AA20 /* 充值 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2966,6 +3085,7 @@
 				2B5B7D211D3893C700CF5354 /* CommentTableViewCell.m */,
 				2B5B7D221D3893C700CF5354 /* FootprintTableViewCell.h */,
 				2B5B7D231D3893C700CF5354 /* FootprintTableViewCell.m */,
+				2B28F1A41D82B14500EF5EFD /* 动画 */,
 				2B5B7D241D3893C700CF5354 /* playerInfoTableViewCell.h */,
 				2B5B7D251D3893C700CF5354 /* playerInfoTableViewCell.m */,
 				2B5B7D261D3893C700CF5354 /* TimeLabelTableViewCell.h */,
@@ -4074,14 +4194,14 @@
 		2BE542021D7E9BED00BB5C43 /* 编辑昵称 */ = {
 			isa = PBXGroup;
 			children = (
-				2BE542031D7E9C2700BB5C43 /* editOwnMessage.h */,
-				2BE542041D7E9C2700BB5C43 /* editOwnMessage.m */,
-				2BE542061D7EBD5B00BB5C43 /* editdescription.h */,
-				2BE542071D7EBD5B00BB5C43 /* editdescription.m */,
-				2BE542091D7EBF0700BB5C43 /* emotionalState.h */,
-				2BE5420A1D7EBF0700BB5C43 /* emotionalState.m */,
-				2BE5420C1D7ECC1D00BB5C43 /* ChangeImageController.h */,
-				2BE5420D1D7ECC1D00BB5C43 /* ChangeImageController.m */,
+				2B28F1901D82614200EF5EFD /* 书籍。电影。音乐 */,
+				2B28F18F1D82612F00EF5EFD /* 兴趣爱好 */,
+				2B28F18E1D82612600EF5EFD /* 学校 */,
+				2B28F18D1D8260C400EF5EFD /* 昵称 */,
+				2B28F18C1D8260B800EF5EFD /* 签名 */,
+				2B28F18B1D8260B500EF5EFD /* 情感 */,
+				2B28F18A1D8260B100EF5EFD /* 工作 */,
+				2B28F1891D8260AF00EF5EFD /* 照片墙 */,
 				2BE542121D7ECE9200BB5C43 /* collectionViewcell */,
 			);
 			name = "编辑昵称";
@@ -4500,6 +4620,7 @@
 				2BE39E6F1D72981D00CC3F0F /* InvitationManager.m in Sources */,
 				98EFD3551D4AE816002A1913 /* FansViewController.m in Sources */,
 				2BD3C5DF1D73DCC0008CFE23 /* EMCDDeviceManager+ProximitySensor.m in Sources */,
+				2B28F1961D82619000EF5EFD /* insterestChooseVC.m in Sources */,
 				2B5B7D2C1D3893C700CF5354 /* playerInfoTableViewCell.m in Sources */,
 				2BE5420B1D7EBF0700BB5C43 /* emotionalState.m in Sources */,
 				2BDFA9551D32416900E33681 /* CJKCollectionViewCell.m in Sources */,
@@ -4575,6 +4696,7 @@
 				18841F2F1B8C390700E2728B /* UMUUploaderManager.m in Sources */,
 				987E7F811D4EE79C00613C6F /* UserInfoTableViewCell.m in Sources */,
 				2BE39EEB1D729F4A00CC3F0F /* XHMessageTextView.m in Sources */,
+				2B28F1A71D82B16A00EF5EFD /* huadongAnimation.m in Sources */,
 				18F6D2C51B8FF42A00B1F0C3 /* MoveActionViewCell.m in Sources */,
 				2BD3C6091D73DCC0008CFE23 /* EMSDWebImageDownloaderOperation.m in Sources */,
 				2B2D08681D530D3200139467 /* CashManagementViewController.m in Sources */,
@@ -4622,6 +4744,7 @@
 				2BD3C6171D73DCC0008CFE23 /* PSTCollectionViewCell.m in Sources */,
 				18F14BD11B8DE20000C74E37 /* PayInfo.m in Sources */,
 				2BE39EB41D729E0D00CC3F0F /* PublicGroupListViewController.m in Sources */,
+				2B5B12601D815F3C006E2A32 /* JobChooseViewController.m in Sources */,
 				2BD3C6211D73DCC0008CFE23 /* PSTGridLayoutSection.m in Sources */,
 				2BE542151D7ECEA800BB5C43 /* changeImageCollectionViewCell.m in Sources */,
 				2BE39ECC1D729EEB00CC3F0F /* ApplyViewController.m in Sources */,
@@ -4675,11 +4798,13 @@
 				1820A7001BF47F12000E4C06 /* DiscussView.m in Sources */,
 				2BD3C6071D73DCC0008CFE23 /* EMSDWebImageDecoder.m in Sources */,
 				2BD3C5EE1D73DCC0008CFE23 /* MJRefreshAutoGifFooter.m in Sources */,
+				2B28F1991D8261A100EF5EFD /* bookChooseVC.m in Sources */,
 				18E579F21B7DDDB000771063 /* UIAlertView+AFNetworking.m in Sources */,
 				04B138A81BA07EAF00AAD93F /* DataSigner.m in Sources */,
 				2BE39E671D7297F100CC3F0F /* ChatroomDetailViewController.m in Sources */,
 				2BD3C6021D73DCC0008CFE23 /* MWTapDetectingView.m in Sources */,
 				18EB4E491B802C72000AE087 /* PlayerBeingTableViewController.m in Sources */,
+				2B28F19C1D8261C800EF5EFD /* movieChooseVC.m in Sources */,
 				2BD3C6481D73DCC0008CFE23 /* EaseChatToolbarItem.m in Sources */,
 				2BE39ECD1D729EEB00CC3F0F /* RealtimeSearchUtil.m in Sources */,
 				2BD3C6361D73DCC0008CFE23 /* EaseMessageViewController.m in Sources */,
@@ -4692,6 +4817,7 @@
 				18C1FBC51B9ECB3700151BB2 /* DetailOrderViewController.m in Sources */,
 				2BD3C61F1D73DCC0008CFE23 /* PSTGridLayoutItem.m in Sources */,
 				189D8AA51BEB50C800493766 /* InviteMeViewController.m in Sources */,
+				2B28F1931D82617800EF5EFD /* schoolChooseVC.m in Sources */,
 				2BD3C6051D73DCC0008CFE23 /* EMSDImageCache.m in Sources */,
 				18C05CDA1BC8FA700028A220 /* FindPassWordViewController.m in Sources */,
 				2BA4F75D1D4DCB6700A6F68C /* fansCell.m in Sources */,
@@ -4754,6 +4880,7 @@
 				189F44B41B9D3143006BBC99 /* ImageViewController.m in Sources */,
 				2BD3C6281D73DCC0008CFE23 /* NSDateFormatter+Category.m in Sources */,
 				2BD3C62D1D73DCC0008CFE23 /* EaseConvertToCommonEmoticonsHelper.m in Sources */,
+				2B28F1A31D82A0B200EF5EFD /* books.m in Sources */,
 				2BD3C5E71D73DCC0008CFE23 /* MBProgressHUD+Add.m in Sources */,
 				2BCE86281D77DB2E007B0358 /* SRRefreshView.m in Sources */,
 				1872A6F41BF418A6007EC158 /* ButtonLable.m in Sources */,
@@ -4792,6 +4919,7 @@
 				2BD3C6451D73DCC0008CFE23 /* EaseBubbleView+Voice.m in Sources */,
 				2BD3C4B11D73D799008CFE23 /* EMRobotChatTextBubbleView.m in Sources */,
 				18824A4F1B85D5920063EC03 /* SBJsonStreamWriter.m in Sources */,
+				2B28F19F1D8261D400EF5EFD /* musicChooseVC.m in Sources */,
 				18824A4C1B85D5920063EC03 /* SBJsonStreamParserAccumulator.m in Sources */,
 				27587CB81CF5A7A500B78F92 /* PersonTableViewController.m in Sources */,
 				2BCE86231D77DB2E007B0358 /* EMAlertView.m in Sources */,

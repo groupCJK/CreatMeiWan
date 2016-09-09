@@ -30,7 +30,7 @@
 #import "ImageViewController.h"
 #import "PreviewImageView.h"
 
-@interface PlagerinfoViewController ()<UITableViewDataSource,UITableViewDelegate,UserDynamicDelegate>
+@interface PlagerinfoViewController ()<UITableViewDataSource,UITableViewDelegate,UserDynamicDelegate,PhotosTouchImageDelegate>
 
 @property (nonatomic, strong) UserInfo *userInfo;
 @property (nonatomic, strong) NSDictionary *userInfoDic;
@@ -51,6 +51,7 @@
 @property (nonatomic, strong) NSMutableArray * MyfriendArray;
 @property (nonatomic,strong)NSMutableArray * myEvaluateArray;
 @property (nonatomic,strong)NSMutableArray * userTimetagArray;
+@property (nonatomic,strong)NSMutableArray * userPhotosArray;
 @property (nonatomic,assign)int page;
 @property (nonatomic,assign)NSString * headerImageUrl;
 
@@ -82,6 +83,7 @@
             if (status == 0) {
                 self.playerInfo = [json objectForKey:@"entity"];
                 self.userTimetagArray = self.playerInfo[@"userTimeTags"];
+                self.userPhotosArray = self.playerInfo[@"userPhotos"];
             }else if (status == 1){
                 
             }else{
@@ -221,8 +223,12 @@
             return 155;
         }
     }else if (indexPath.section == 3){
-//        return 130;
-        return 0;
+
+        if (self.userPhotosArray.count>0) {
+            return 130;
+        }else{
+         return 0;
+        }
     }else if (indexPath.section == 4){
         return 80;
     }
@@ -268,7 +274,12 @@
         if (!FootprintCell) {
             FootprintCell = [[FootprintTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"FootprintCell"];
         }
-        FootprintCell.hidden = YES;
+        if (self.userPhotosArray.count>0) {
+            FootprintCell.photos = self.playerInfo;
+        }else{
+            FootprintCell.hidden = YES;
+        }
+        FootprintCell.delegate = self;
         return FootprintCell;
     }else{
         CommentTableViewCell * Commentcell = [tableView dequeueReusableCellWithIdentifier:@"commentCell"];
@@ -291,6 +302,18 @@
         return Commentcell;
     }
 }
+//点击展览秀查看图片
+-(void)PhotosTouchImage:(UITapGestureRecognizer *)gesture
+{
+    UIImageView * imageview = (UIImageView *)[gesture view];
+    UIWindow *windows = [UIApplication sharedApplication].keyWindow;
+    CGRect startRect = [imageview convertRect:imageview.bounds toView:windows];
+    [PreviewImageView showPreviewImage:imageview.image startImageFrame:startRect inView:windows viewFrame:self.view.bounds];
+    NSString * imageUrl = [NSString stringWithFormat:@"%@",imageview.sd_imageURL];
+    
+    self.headerImageUrl = [imageUrl stringByReplacingOccurrencesOfString:@"!1" withString:@""];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"image_url" object:self.headerImageUrl];
+}
 /**点击动态图片跳转*/
 -(void)showPicture:(UITapGestureRecognizer *)gesture
 {
@@ -301,7 +324,6 @@
     NSString * imageUrl = [NSString stringWithFormat:@"%@",imageview.sd_imageURL];
 
     self.headerImageUrl = [imageUrl stringByReplacingOccurrencesOfString:@"!1" withString:@""];
-    NSLog(@"%@",self.headerImageUrl);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"image_url" object:self.headerImageUrl];
 }
 

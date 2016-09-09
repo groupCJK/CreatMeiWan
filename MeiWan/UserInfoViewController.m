@@ -33,7 +33,13 @@
 #import "editdescription.h"
 #import "editOwnMessage.h"
 #import "emotionalState.h"
+#import "JobChooseViewController.h"
 #import "ChangeImageController.h"
+#import "schoolChooseVC.h"
+#import "insterestChooseVC.h"
+#import "bookChooseVC.h"
+#import "movieChooseVC.h"
+#import "musicChooseVC.h"
 
 @interface UserInfoViewController ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate,MBProgressHUDDelegate,UITextFieldDelegate,CLLocationManagerDelegate>
 {
@@ -105,7 +111,7 @@
     tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
 
     _titleone = @[@"用户名",@"年龄",@"个人签名",@"情感状态",@"职业",@"学校",@"兴趣爱好"];
-    _titletwo = @[@"所在地",@"工作地点",@"常出没地"];
+    _titletwo = @[@"所在地",@"工作地点",@"游荡地"];
     _titlethree = @[@"书籍",@"电影",@"音乐"];
     [self initializeLocationService];
     
@@ -140,7 +146,6 @@
 }
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
 {
-    //    NSLog(@"%@",locations);
     //取出当前位置的坐标
     static int i = 0;
     i++;
@@ -155,11 +160,27 @@
             NSString *state=[addressDic objectForKey:@"State"];
             self.state = state;
             NSString *city=[addressDic objectForKey:@"City"];
-            self.city = city;
+
             NSString *subLocality=[addressDic objectForKey:@"SubLocality"];
-            self.subLocality = subLocality;
+
             NSString *street=[addressDic objectForKey:@"Street"];
             self.street = street;
+
+            NSString * session = [PersistenceManager getLoginSession];
+            NSMutableDictionary *userInfoDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:city,@"location",subLocality,@"jobLocation", nil];
+            [UserConnector update:session parameters:userInfoDic receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+                if (!error) {
+                    SBJsonParser * parser = [[SBJsonParser alloc]init];
+                    NSDictionary * json = [parser objectWithData:data];
+                    int status = [json[@"status"] intValue];
+                    if (status==0) {
+                        [PersistenceManager setLoginUser:json[@"entity"]];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"finish_nickname" object:nil];
+                        [self.navigationController popViewControllerAnimated:YES];
+                        
+                    }
+                }
+            }];
 
         }
         
@@ -214,28 +235,41 @@
             case 3:
             {
                 /** 情感状态 */
-                cell.showMessage.text = @"未开放";
+                cell.showMessage.text = self.userInfoDic[@"love"];
             }
                 break;
                 
             case 4:
             {
                 /** 职业 */
-                cell.showMessage.text = @"未开放";
+                if ([self.userInfoDic[@"job"] isEqualToString:@""]) {
+                  cell.showMessage.text = @"未设置";
+                }else{
+                  cell.showMessage.text = self.userInfoDic[@"job"];
+                }
+                
             }
                 break;
                 
             case 5:
             {
                 /** 学校 */
-                cell.showMessage.text = @"未开放";
+                if ([self.userInfoDic[@"school"] isEqualToString:@""]) {
+                    cell.showMessage.text = @"未设置";
+                }else{
+                    cell.showMessage.text = self.userInfoDic[@"school"];
+                }
             }
                 break;
                 
             case 6:
             {
                 /** 兴趣爱好 */
-                cell.showMessage.text = @"未开放";
+                if ([self.userInfoDic[@"interest"] isEqualToString:@""]) {
+                    cell.showMessage.text = @"未设置";
+                }else{
+                    cell.showMessage.text = self.userInfoDic[@"interest"];
+                }
             }
                 break;
                 
@@ -246,29 +280,45 @@
         cell.showMessage.textColor = [UIColor grayColor];
         
     }else if (indexPath.section==1){
-        
         cell.textLabel.text = _titletwo[indexPath.row];
-        
+        cell.showMessage.textColor = [UIColor blackColor];
+
         if (indexPath.row==0) {
-            cell.showMessage.text = self.state;
-        }else if (indexPath.row==1){
-            cell.showMessage.text = self.city;
+            if ([self.userInfoDic[@"location"] isEqualToString:@""]) {
+                cell.showMessage.text = @"未设置";
+            }else{
+                cell.showMessage.text = self.userInfoDic[@"location"];
+            }
+        }else if (indexPath.row == 1){
+            if ([self.userInfoDic[@"jobLocation"] isEqualToString:@""]) {
+                cell.showMessage.text = @"未设置";
+            }else{
+                cell.showMessage.text = self.userInfoDic[@"jobLocation"];
+            }
         }else{
             cell.showMessage.text = self.street;
         }
-        
-    
-        
-        cell.showMessage.textColor = [UIColor blackColor];
    
     }else if (indexPath.section==2){
         cell.textLabel.text = _titlethree[indexPath.row];
         if (indexPath.row==0) {
-            cell.showMessage.text = @"未开放";
+            if ([self.userInfoDic[@"book"] isEqualToString:@""]) {
+                cell.showMessage.text = @"未设置";
+            }else{
+                cell.showMessage.text = self.userInfoDic[@"book"];
+            }
         }else if (indexPath.row==1){
-            cell.showMessage.text = @"未开放";
+            if ([self.userInfoDic[@"movie"] isEqualToString:@""]) {
+                cell.showMessage.text = @"未设置";
+            }else{
+                cell.showMessage.text = self.userInfoDic[@"movie"];
+            }
         }else{
-            cell.showMessage.text = @"未开放";
+            if ([self.userInfoDic[@"music"] isEqualToString:@""]) {
+                cell.showMessage.text = @"未设置";
+            }else{
+                cell.showMessage.text = self.userInfoDic[@"music"];
+            }
         }
         cell.showMessage.textColor = [UIColor grayColor];
     }
@@ -319,11 +369,48 @@
             emotionalState * emotional = [[emotionalState alloc]init];
             emotional.title = @"情感状态";
             [self.navigationController pushViewController:emotional animated:YES];
+        }else if (indexPath.row==4){
+            JobChooseViewController * jobChoose = [[JobChooseViewController alloc]init];
+            jobChoose.title = @"职业";
+            [self.navigationController pushViewController:jobChoose animated:YES];
+        }else if (indexPath.row==5){
+            schoolChooseVC * schoolVC = [[schoolChooseVC alloc]init];
+            schoolVC.title = @"学校";
+            [self.navigationController pushViewController:schoolVC animated:YES];
+        }else if (indexPath.row==6){
+            insterestChooseVC * insterest = [[ insterestChooseVC alloc]init];
+            insterest.title = @"兴趣爱好";
+            [self.navigationController pushViewController:insterest animated:YES];
+
         }
         
     }else if (indexPath.section==1){
         
+        if (indexPath.row==0) {
+            
+        }else if (indexPath.row==1){
+            
+        }else{
+            
+        }
+
     }else{
+        
+        if (indexPath.row==0) {
+            bookChooseVC * book  = [[bookChooseVC alloc]init];
+            book.title = @"书籍";
+            [self.navigationController pushViewController:book animated:YES];
+            
+        }else if (indexPath.row==1){
+            movieChooseVC * movie = [[movieChooseVC alloc]init];
+            movie.title = @"电影";
+            [self.navigationController pushViewController:movie animated:YES];
+            
+        }else{
+            musicChooseVC * music = [[musicChooseVC alloc]init];
+            music.title = @"音乐";
+            [self.navigationController pushViewController:music animated:YES];
+        }
         
     }
 }
@@ -403,28 +490,28 @@
                 NSArray * photosArray = json[@"entity"];
                 [photosArray enumerateObjectsUsingBlock:^(NSDictionary *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                    
-                    if (idx==0) {
+                    if ([obj[@"index"] intValue]==0) {
                         [imageview sd_setImageWithURL:obj[@"url"]];
                     }
-                    if (idx==1) {
+                    if ([obj[@"index"] intValue]==1) {
                         [imageview1 sd_setImageWithURL:obj[@"url"]];
                     }
-                    if (idx==2) {
+                    if ([obj[@"index"] intValue]==2) {
                         [imageview2 sd_setImageWithURL:obj[@"url"]];
                     }
-                    if (idx==3) {
+                    if ([obj[@"index"] intValue]==3) {
                         [imageview3 sd_setImageWithURL:obj[@"url"]];
                     }
-                    if (idx==4) {
+                    if ([obj[@"index"] intValue]==4) {
                         [imageview4 sd_setImageWithURL:obj[@"url"]];
                     }
-                    if (idx==5) {
+                    if ([obj[@"index"] intValue]==5) {
                         [imageview5 sd_setImageWithURL:obj[@"url"]];
                     }
-                    if (idx==6) {
+                    if ([obj[@"index"] intValue]==6) {
                         [imageview6 sd_setImageWithURL:obj[@"url"]];
                     }
-                    if (idx==7) {
+                    if ([obj[@"index"] intValue]==7) {
                         [imageview7 sd_setImageWithURL:obj[@"url"]];
                     }
                     
@@ -569,7 +656,6 @@
 {
     self.touchesImageView = (UIImageView *)[gesture view];
     tagIndex = self.touchesImageView.tag;
-    NSLog(@"%@",self.touchesImageView.sd_imageURL);
     /***
      标记 判断是否有图片 有图片时提示的信息不一样
      */
@@ -606,7 +692,6 @@
                                     if (!error) {
                                         SBJsonParser * parser = [[SBJsonParser alloc]init];
                                         NSDictionary * json = [parser objectWithData:data];
-                                        NSLog(@"%@",json);
                                         int status = [json[@"status"] intValue];
                                         if (status==0) {
                                             [tableview reloadData];
@@ -633,7 +718,7 @@
                 [self presentViewController:ipc animated:YES completion:nil];
                 
             }else{
-                //NSLog(@"硬件不支持");
+
             }
         }
         
@@ -690,7 +775,6 @@
             }else{
                 headUrl = [NSString stringWithFormat:@"http://chuangjike-img-real.b0.upaiyun.com%@",[result objectForKey:@"path"]];
             }
-            NSLog(@"");
             /**
              
              
@@ -704,7 +788,6 @@
                 if (!error) {
                     SBJsonParser * parser = [[SBJsonParser alloc]init];
                     NSDictionary * json = [parser objectWithData:data];
-                    NSLog(@"%@",json);
                     self.touchesImageView.image = image;
                     [HUDImage hide:YES afterDelay:0.5];
                     [tableview reloadData];
