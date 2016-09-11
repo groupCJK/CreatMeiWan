@@ -50,7 +50,7 @@
 }
 - (void)tapGesture:(UITapGestureRecognizer *)gesture
 {
-    [self.delegate PhotosTouchImage:gesture];
+    [self.delegate PhotosTouchImage:gesture images:self.photosarray];
 }
 
 @end

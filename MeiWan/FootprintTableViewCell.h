@@ -10,7 +10,7 @@
 
 @protocol PhotosTouchImageDelegate <NSObject>
 
-- (void)PhotosTouchImage:(UITapGestureRecognizer *)gesture;
+- (void)PhotosTouchImage:(UITapGestureRecognizer *)gesture images:(NSArray *)imagesArray;
 
 @end
 

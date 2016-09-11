@@ -16,7 +16,7 @@
 -(void)showInvite;
 -(void)showState;
 -(void)showpicture;
-- (void)showPicture:(UITapGestureRecognizer*)gesture;
+- (void)showPicture:(UITapGestureRecognizer*)gesture imageArray:(NSArray *)array;
 
 @end
 
@@ -37,6 +37,7 @@
 @property (nonatomic, strong)UILabel *errerLabel;
 
 @property (nonatomic, strong)UILabel *imageErrer;
+@property (nonatomic, strong)NSArray * imageArray;
 
 
 @end

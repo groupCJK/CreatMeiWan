@@ -28,6 +28,8 @@
 #import "SBJson.h"
 //#import "EaseMessageReadManager.h"
 #import "ImageViewController.h"
+#import "dycussImageShow.h"
+#import "showImageController.h"
 #import "PreviewImageView.h"
 
 @interface PlagerinfoViewController ()<UITableViewDataSource,UITableViewDelegate,UserDynamicDelegate,PhotosTouchImageDelegate>
@@ -303,28 +305,32 @@
     }
 }
 //点击展览秀查看图片
--(void)PhotosTouchImage:(UITapGestureRecognizer *)gesture
+-(void)PhotosTouchImage:(UITapGestureRecognizer *)gesture images:(NSArray *)imagesArray
 {
-    UIImageView * imageview = (UIImageView *)[gesture view];
-    UIWindow *windows = [UIApplication sharedApplication].keyWindow;
-    CGRect startRect = [imageview convertRect:imageview.bounds toView:windows];
-    [PreviewImageView showPreviewImage:imageview.image startImageFrame:startRect inView:windows viewFrame:self.view.bounds];
-    NSString * imageUrl = [NSString stringWithFormat:@"%@",imageview.sd_imageURL];
-    
-    self.headerImageUrl = [imageUrl stringByReplacingOccurrencesOfString:@"!1" withString:@""];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"image_url" object:self.headerImageUrl];
+    showImageController * showImage = [[showImageController alloc]init];
+    showImage.imagesArray = imagesArray;
+    showImage.imageNumber = [gesture view].tag-1;
+    showImage.title = @"展览秀";
+    [self.navigationController pushViewController:showImage animated:YES];
 }
 /**点击动态图片跳转*/
--(void)showPicture:(UITapGestureRecognizer *)gesture
+-(void)showPicture:(UITapGestureRecognizer *)gesture imageArray:(NSMutableArray *)array
 {
-    UIImageView * imageview = (UIImageView *)[gesture view];
-    UIWindow *windows = [UIApplication sharedApplication].keyWindow;
-    CGRect startRect = [imageview convertRect:imageview.bounds toView:windows];
-    [PreviewImageView showPreviewImage:imageview.image startImageFrame:startRect inView:windows viewFrame:self.view.bounds];
-    NSString * imageUrl = [NSString stringWithFormat:@"%@",imageview.sd_imageURL];
-
-    self.headerImageUrl = [imageUrl stringByReplacingOccurrencesOfString:@"!1" withString:@""];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"image_url" object:self.headerImageUrl];
+    
+    [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isEqual:[NSNull null]]) {
+            [array removeObject:obj];
+        }else{
+            
+        }
+    }];
+    
+    dycussImageShow * showImage = [[dycussImageShow alloc]init];
+    showImage.imagesArray = array;
+    showImage.imageNumber = [gesture view].tag;
+    showImage.title = @"展览秀";
+    [self.navigationController pushViewController:showImage animated:YES];
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

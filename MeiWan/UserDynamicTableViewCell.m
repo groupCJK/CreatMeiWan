@@ -63,10 +63,12 @@
                 if (obj==[NSNull null]) {
                     
                 }else{
+                    self.imageArray = imagearrs;
                     UIImageView *dynamicImage = [[UIImageView alloc] initWithFrame:CGRectMake(24+idx * (kuan+5), dynamicLabel.frame.origin.y+dynamicLabel.frame.size.height+8, kuan, kuan)];
                     [dynamicImage setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@!1",obj]]];
                     dynamicImage.contentMode = UIViewContentModeScaleAspectFill;
                     dynamicImage.clipsToBounds = YES;
+                    dynamicImage.tag = idx;
                     [self addSubview:dynamicImage];
                     self.dynamicImage = dynamicImage;
                     self.dynamicImage.userInteractionEnabled = YES;
@@ -104,7 +106,7 @@
 }
 - (void)showPicture:(UITapGestureRecognizer*)gesture
 {
-    [self.delegate showPicture:gesture];
+    [self.delegate showPicture:gesture imageArray:self.imageArray];
 }
 
 - (void)awakeFromNib {
