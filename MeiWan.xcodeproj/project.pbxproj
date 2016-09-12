@@ -332,7 +332,6 @@
 		2B5B7D2E1D3893C700CF5354 /* UserDynamicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5B7D291D3893C700CF5354 /* UserDynamicTableViewCell.m */; };
 		2B6D634B1D6043EF00B3E3BC /* pw_visible.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B6D63491D6043EF00B3E3BC /* pw_visible.png */; };
 		2B6D634D1D6045E600B3E3BC /* pw_hide.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B6D634C1D6045E600B3E3BC /* pw_hide.png */; };
-		2B7A8DC51D797012001DABA2 /* PreviewImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7A8DC41D797012001DABA2 /* PreviewImageView.m */; };
 		2B7E9F801D5D6F9100207CB7 /* findPeiWanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7E9F7F1D5D6F9100207CB7 /* findPeiWanCell.m */; };
 		2B7E9F821D5DAEC500207CB7 /* sharefenxiang@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B7E9F811D5DAEC500207CB7 /* sharefenxiang@2x.png */; };
 		2BA4F75D1D4DCB6700A6F68C /* fansCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA4F75C1D4DCB6700A6F68C /* fansCell.m */; };
@@ -503,6 +502,8 @@
 		2BDFA9551D32416900E33681 /* CJKCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDFA9521D32416900E33681 /* CJKCollectionViewCell.m */; };
 		2BDFA9561D32416900E33681 /* firstPage_scrollViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDFA9541D32416900E33681 /* firstPage_scrollViewCell.m */; };
 		2BDFA9581D33485F00E33681 /* PlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDFA9571D33485F00E33681 /* PlayerView.xib */; };
+		2BE035D81D85630400CDA3FA /* dycussImageShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE035D71D85630400CDA3FA /* dycussImageShow.m */; };
+		2BE035DB1D85639800CDA3FA /* PreviewImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE035DA1D85639800CDA3FA /* PreviewImageView.m */; };
 		2BE0FB371D77016C0097A895 /* EaseUIResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2BE0FB361D77016C0097A895 /* EaseUIResource.bundle */; };
 		2BE236BB1D508F6600D7A859 /* WGS84TOGCJ02.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE236BA1D508F6600D7A859 /* WGS84TOGCJ02.m */; };
 		2BE25BF81D2B53A400D2AEAF /* animationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE25BF71D2B53A400D2AEAF /* animationCell.m */; };
@@ -548,6 +549,7 @@
 		2BE3BC991D780F8C0004501D /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BE3BC941D780F8C0004501D /* libWeChatSDK.a */; };
 		2BE3BC9A1D780F8C0004501D /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2BE3BC951D780F8C0004501D /* README.txt */; };
 		2BE3BCA01D781A260004501D /* WXApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE3BC9F1D781A260004501D /* WXApiManager.m */; };
+		2BE42F991D8506CA0062EC6E /* showImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE42F981D8506CA0062EC6E /* showImageController.m */; };
 		2BE542051D7E9C2700BB5C43 /* editOwnMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE542041D7E9C2700BB5C43 /* editOwnMessage.m */; };
 		2BE542081D7EBD5B00BB5C43 /* editdescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE542071D7EBD5B00BB5C43 /* editdescription.m */; };
 		2BE5420B1D7EBF0700BB5C43 /* emotionalState.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE5420A1D7EBF0700BB5C43 /* emotionalState.m */; };
@@ -1163,8 +1165,6 @@
 		2B5B7D291D3893C700CF5354 /* UserDynamicTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDynamicTableViewCell.m; sourceTree = "<group>"; };
 		2B6D63491D6043EF00B3E3BC /* pw_visible.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pw_visible.png; path = ../pw_visible.png; sourceTree = "<group>"; };
 		2B6D634C1D6045E600B3E3BC /* pw_hide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pw_hide.png; path = ../pw_hide.png; sourceTree = "<group>"; };
-		2B7A8DC31D797012001DABA2 /* PreviewImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewImageView.h; sourceTree = "<group>"; };
-		2B7A8DC41D797012001DABA2 /* PreviewImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewImageView.m; sourceTree = "<group>"; };
 		2B7E9F7E1D5D6F9100207CB7 /* findPeiWanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = findPeiWanCell.h; sourceTree = "<group>"; };
 		2B7E9F7F1D5D6F9100207CB7 /* findPeiWanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = findPeiWanCell.m; sourceTree = "<group>"; };
 		2B7E9F811D5DAEC500207CB7 /* sharefenxiang@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sharefenxiang@2x.png"; sourceTree = "<group>"; };
@@ -1555,6 +1555,10 @@
 		2BDFA9531D32416900E33681 /* firstPage_scrollViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = firstPage_scrollViewCell.h; sourceTree = "<group>"; };
 		2BDFA9541D32416900E33681 /* firstPage_scrollViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = firstPage_scrollViewCell.m; sourceTree = "<group>"; };
 		2BDFA9571D33485F00E33681 /* PlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerView.xib; sourceTree = "<group>"; };
+		2BE035D61D85630400CDA3FA /* dycussImageShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dycussImageShow.h; sourceTree = "<group>"; };
+		2BE035D71D85630400CDA3FA /* dycussImageShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dycussImageShow.m; sourceTree = "<group>"; };
+		2BE035D91D85639800CDA3FA /* PreviewImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewImageView.h; sourceTree = "<group>"; };
+		2BE035DA1D85639800CDA3FA /* PreviewImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewImageView.m; sourceTree = "<group>"; };
 		2BE0FB361D77016C0097A895 /* EaseUIResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = EaseUIResource.bundle; sourceTree = "<group>"; };
 		2BE236B91D508F6600D7A859 /* WGS84TOGCJ02.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WGS84TOGCJ02.h; sourceTree = "<group>"; };
 		2BE236BA1D508F6600D7A859 /* WGS84TOGCJ02.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WGS84TOGCJ02.m; sourceTree = "<group>"; };
@@ -1644,6 +1648,8 @@
 		2BE3BC981D780F8C0004501D /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		2BE3BC9E1D781A260004501D /* WXApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiManager.h; sourceTree = "<group>"; };
 		2BE3BC9F1D781A260004501D /* WXApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXApiManager.m; sourceTree = "<group>"; };
+		2BE42F971D8506CA0062EC6E /* showImageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = showImageController.h; sourceTree = "<group>"; };
+		2BE42F981D8506CA0062EC6E /* showImageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = showImageController.m; sourceTree = "<group>"; };
 		2BE542031D7E9C2700BB5C43 /* editOwnMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = editOwnMessage.h; sourceTree = "<group>"; };
 		2BE542041D7E9C2700BB5C43 /* editOwnMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = editOwnMessage.m; sourceTree = "<group>"; };
 		2BE542061D7EBD5B00BB5C43 /* editdescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = editdescription.h; sourceTree = "<group>"; };
@@ -3099,8 +3105,12 @@
 		2B7D0EA11D6BF942009B4278 /* 展示图片 */ = {
 			isa = PBXGroup;
 			children = (
-				2B7A8DC31D797012001DABA2 /* PreviewImageView.h */,
-				2B7A8DC41D797012001DABA2 /* PreviewImageView.m */,
+				2BE035D91D85639800CDA3FA /* PreviewImageView.h */,
+				2BE035DA1D85639800CDA3FA /* PreviewImageView.m */,
+				2BE035D61D85630400CDA3FA /* dycussImageShow.h */,
+				2BE035D71D85630400CDA3FA /* dycussImageShow.m */,
+				2BE42F971D8506CA0062EC6E /* showImageController.h */,
+				2BE42F981D8506CA0062EC6E /* showImageController.m */,
 			);
 			name = "展示图片";
 			sourceTree = "<group>";
@@ -4593,6 +4603,7 @@
 				18F0E8291BAA6D96007A8DD2 /* CompressImage.m in Sources */,
 				2BD3C5DD1D73DCC0008CFE23 /* EMCDDeviceManager+Media.m in Sources */,
 				2BD3C60F1D73DCC0008CFE23 /* UIImage+EMGIF.m in Sources */,
+				2BE42F991D8506CA0062EC6E /* showImageController.m in Sources */,
 				18CD050B1B91538E00B56288 /* GZIP.m in Sources */,
 				18824A521B85D5920063EC03 /* SBJsonTokeniser.m in Sources */,
 				18F1CC131B952A3D003EF78A /* NetBarViewController.m in Sources */,
@@ -4705,6 +4716,7 @@
 				98EFD35C1D4AE82C002A1913 /* FocusTableViewCell.m in Sources */,
 				2BD3C5F51D73DCC0008CFE23 /* MJRefreshNormalHeader.m in Sources */,
 				2BD3C6181D73DCC0008CFE23 /* PSTCollectionViewController.m in Sources */,
+				2BE035D81D85630400CDA3FA /* dycussImageShow.m in Sources */,
 				2BE542051D7E9C2700BB5C43 /* editOwnMessage.m in Sources */,
 				2BD3C60E1D73DCC0008CFE23 /* UIButton+EMWebCache.m in Sources */,
 				98EFD35E1D4AE82C002A1913 /* FansTableViewCell.m in Sources */,
@@ -4781,11 +4793,11 @@
 				18841F361B8C441A00E2728B /* setting.m in Sources */,
 				2BE39EC71D729EEB00CC3F0F /* ContactListSelectViewController.m in Sources */,
 				18CC8EE41BC39CE1000281CE /* Response.swift in Sources */,
+				2BE035DB1D85639800CDA3FA /* PreviewImageView.m in Sources */,
 				2BD794EB1D6B05DC00F852E2 /* shopViewController.m in Sources */,
 				2BE39EE71D729F4A00CC3F0F /* BaseViewController.m in Sources */,
 				18824A4E1B85D5920063EC03 /* SBJsonStreamParserState.m in Sources */,
 				18CC8EE81BC39CE1000281CE /* Stream.swift in Sources */,
-				2B7A8DC51D797012001DABA2 /* PreviewImageView.m in Sources */,
 				2BD3C6251D73DCC0008CFE23 /* EaseMessageModel.m in Sources */,
 				2B0C707D1D546F84001AB100 /* OrderLiseCell.m in Sources */,
 				18824A121B85CBC80063EC03 /* FriendListTableViewController.m in Sources */,

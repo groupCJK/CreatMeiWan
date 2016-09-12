@@ -144,8 +144,11 @@ static EaseMessageReadManager *detailInstance = nil;
         self.photos = photoArray;
     }
     
-    UIViewController *rootController = [self.keyWindow rootViewController];
-    [rootController presentViewController:self.photoNavigationController animated:YES completion:nil];
+    UIViewController *vc = [[UIViewController alloc] init];
+    vc.view.hidden = YES; // 在回来之后上面会覆盖一层view所以要设为hidden, 否则界面无法操作
+    [self.keyWindow addSubview:vc.view];
+    [vc presentViewController:self.photoNavigationController animated:YES completion:nil];
+
 }
 
 - (BOOL)prepareMessageAudioModel:(EaseMessageModel *)messageModel

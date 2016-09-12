@@ -176,8 +176,6 @@
                     if (status==0) {
                         [PersistenceManager setLoginUser:json[@"entity"]];
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"finish_nickname" object:nil];
-                        [self.navigationController popViewControllerAnimated:YES];
-                        
                     }
                 }
             }];
@@ -374,9 +372,9 @@
             jobChoose.title = @"职业";
             [self.navigationController pushViewController:jobChoose animated:YES];
         }else if (indexPath.row==5){
-            schoolChooseVC * schoolVC = [[schoolChooseVC alloc]init];
-            schoolVC.title = @"学校";
-            [self.navigationController pushViewController:schoolVC animated:YES];
+//            schoolChooseVC * schoolVC = [[schoolChooseVC alloc]init];
+//            schoolVC.title = @"学校";
+//            [self.navigationController pushViewController:schoolVC animated:YES];
         }else if (indexPath.row==6){
             insterestChooseVC * insterest = [[ insterestChooseVC alloc]init];
             insterest.title = @"兴趣爱好";

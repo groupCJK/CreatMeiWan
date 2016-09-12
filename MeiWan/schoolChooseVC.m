@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSArray * statusArray = @[@"农民",@"学生",@"教师",@"上班族",@"多金族",@"夜猫子",@"中医",@"西医",@"护士"];
+    NSArray * statusArray = @[@"学前班",@"小学",@"初中",@"高中",@"大专",@"三本",@"二本",@"一本",@"超本"];
     
     self.view.backgroundColor  = [UIColor whiteColor];
     CGFloat ButtonWidth = (dtScreenWidth-15)/3;

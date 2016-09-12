@@ -407,19 +407,19 @@
     [[EMCDDeviceManager sharedInstance] disableProximitySensor];
     [EMCDDeviceManager sharedInstance].delegate = nil;
     
-    //    MessageModel *playingModel = [self.EaseMessageReadManager stopMessageAudioModel];
-    //    NSIndexPath *indexPath = nil;
-    //    if (playingModel) {
-    //        indexPath = [NSIndexPath indexPathForRow:[self.dataSource indexOfObject:playingModel] inSection:0];
-    //    }
-    //
-    //    if (indexPath) {
-    //        dispatch_async(dispatch_get_main_queue(), ^{
-    //            [self.tableView beginUpdates];
-    //            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-    //            [self.tableView endUpdates];
-    //        });
-    //    }
+//        MessageModel *playingModel = [self.EaseMessageReadManager stopMessageAudioModel];
+//        NSIndexPath *indexPath = nil;
+//        if (playingModel) {
+//            indexPath = [NSIndexPath indexPathForRow:[self.dataSource indexOfObject:playingModel] inSection:0];
+//        }
+//    
+//        if (indexPath) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [self.tableView beginUpdates];
+//                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//                [self.tableView endUpdates];
+//            });
+//        }
 }
 
 - (NSURL *)_convert2Mp4:(NSURL *)movUrl

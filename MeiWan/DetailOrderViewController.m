@@ -84,16 +84,20 @@
 
     int status = [[self.detailOrderDic objectForKey:@"status"]intValue];
     if (self.orderTag == 888) {
-        if (status == 0) {
+        /** 100 用户支付 等待陪玩接受 */
+        if (status == 100) {
+            
             self.currentState.text = @"等待接受";
             self.currentState.textColor = [UIColor grayColor];
             self.actionView.hidden = YES;
-        }else if (status == 1){
-            self.currentState.text = @"等待支付";
+            
+        }else if (status == 101){
+            /** 等待支付没有了。不支付不形成订单 */
+            self.currentState.text = @"已经撤回";
             self.currentState.textColor = [UIColor orangeColor];
-            [self.actionBtn setTitle:@"支付" forState:UIControlStateNormal];
-            [self.actionBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
-        }else if (status == 2){
+
+        }else if (status == 200){
+            /** 200 陪玩同意订单 用户可以选择确认 */
             self.currentState.text = @"等待确认";
             self.currentState.textColor = [UIColor orangeColor];
             
@@ -109,113 +113,120 @@
              
             [self.actionView addSubview:makeSure];
             [self.actionView addSubview:accusation];
-        }else if (status == 3){
+        }else if (status == 400 || status == 600){
+            
+            /** 交易完成或者是陪玩胜诉 等待用户去评价 */
             self.currentState.text = @"等待评价";
-            if (evaluationDic) {
-                self.currentState.text = @"完成";
-                self.currentState.textColor = [UIColor grayColor];
-                self.actionView.hidden = YES;
-                self.actionBtn.enabled = NO;
-                UIView *evaluationVi = [[UIView alloc]initWithFrame:CGRectMake(0, self.actionView.frame.origin.y, self.view.bounds.size.width, 60)];
-                evaluationVi.backgroundColor = [UIColor whiteColor];
-                UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(15, 10, 100, 20)];
-                lab.text = @"订单评价";
-                lab.textColor = [UIColor orangeColor];
-                
-                UILabel *lab1 = [[UILabel alloc]initWithFrame:CGRectMake(15, 35, 50, 20)];
-                lab1.text = @"评分 ：";
-                lab1.font = [UIFont systemFontOfSize:14];
-                [evaluationVi addSubview:lab];
-                [evaluationVi addSubview:lab1];
-                [self.view addSubview:evaluationVi];
-                
-                CWStarRateView *starRateView = [[CWStarRateView alloc] initWithFrame:CGRectMake(55, 35, 70, 20) numberOfStars:5];
-                starRateView.scorePercent = [[evaluationDic objectForKey:@"point"]floatValue]/5.0;
-                starRateView.allowIncompleteStar = YES;
-                starRateView.hasAnimation = YES;
-                starRateView.userInteractionEnabled = NO;
-                [evaluationVi addSubview:starRateView];
- 
-            }else{
-                self.currentState.textColor = [UIColor orangeColor];
-                [self.actionBtn setTitle:@"评价" forState:UIControlStateNormal];
-                [self.actionBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
-            }
-        }else if (status == 4){
+            self.currentState.textColor = [UIColor orangeColor];
+
+            [self.actionBtn setTitle:@"评价" forState:UIControlStateNormal];
+            [self.actionBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+            
+            
+        }else if (status == 500){
             self.currentState.text = @"等待仲裁结果";
             self.currentState.textColor = [UIColor grayColor];
             self.actionView.hidden = YES;
-        }else if (status == 5){
+        }else if (status == 600){
             self.currentState.text = @"教官胜诉";
             self.currentState.textColor = [UIColor grayColor];
             self.actionView.hidden = YES;
-        }else if (status == 6){
+        }else if (status == 700){
             self.currentState.text = @"用户胜诉";
             self.currentState.textColor = [UIColor grayColor];
             self.actionView.hidden = YES;
-        }else{
+        }else if (status == 300){
+            self.currentState.text = @"已拒绝";
+            self.currentState.textColor = [UIColor grayColor];
+            self.actionView.hidden = YES;
+        }else if (status == 800){
+            self.currentState.text = @"已评价";
+            self.currentState.textColor = [UIColor grayColor];
+            self.actionView.hidden = YES;
+            UIView *evaluationVi = [[UIView alloc]initWithFrame:CGRectMake(0, self.actionView.frame.origin.y, self.view.bounds.size.width, 60)];
+            evaluationVi.backgroundColor = [UIColor whiteColor];
+            UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(15, 10, 100, 20)];
+            lab.text = @"订单评价";
+            lab.textColor = [UIColor orangeColor];
             
+            UILabel *lab1 = [[UILabel alloc]initWithFrame:CGRectMake(15, 35, 50, 20)];
+            lab1.text = @"评分 ：";
+            lab1.font = [UIFont systemFontOfSize:14];
+            [evaluationVi addSubview:lab];
+            [evaluationVi addSubview:lab1];
+            [self.view addSubview:evaluationVi];
+            
+            CWStarRateView *starRateView = [[CWStarRateView alloc] initWithFrame:CGRectMake(55, 35, 70, 20) numberOfStars:5];
+            starRateView.scorePercent = [[evaluationDic objectForKey:@"point"]floatValue]/5.0;
+            starRateView.allowIncompleteStar = YES;
+            starRateView.hasAnimation = YES;
+            starRateView.userInteractionEnabled = NO;
+            [evaluationVi addSubview:starRateView];
+
         }
     }else if(self.orderTag == 666){
-        if (status == 0) {
+        if (status == 100) {
+            /** 玩家已经支付 */
             self.currentState.text = @"等待接受";
             self.currentState.textColor = [UIColor orangeColor];
             [self.actionBtn setTitle:@"接受" forState:UIControlStateNormal];
             [self.actionBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
-        }else if (status == 1){
-            self.currentState.text = @"等待支付";
-            self.currentState.textColor = [UIColor grayColor];
-            self.actionView.hidden = YES;
-        }else if (status == 2){
-            self.currentState.text = @"已支付";
+        }else if (status == 200){
+            self.currentState.text = @"已经接受";
+            self.currentState.textColor = [UIColor orangeColor];
+            [self.actionBtn setTitle:@"已接受" forState:UIControlStateNormal];
+            [self.actionBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+            
+        }else if (status == 101){
+            self.currentState.text = @"对方撤回";
             self.currentState.textColor = [CorlorTransform  colorWithHexString:@"#00bb9c"];
             self.actionView.hidden = YES;
-        }else if (status == 3){
+        }else if (status == 400|| status ==600){
             self.currentState.text = @"等待评价";
             self.currentState.textColor = [UIColor grayColor];
             self.actionView.hidden = YES;
-            if (evaluationDic) {
-                self.currentState.text = @"完成";
-                self.actionView.hidden = YES;
-                self.actionBtn.enabled = NO;
-                UIView *evaluationVi = [[UIView alloc]initWithFrame:CGRectMake(0, self.actionView.frame.origin.y, self.view.bounds.size.width, 60)];
-                evaluationVi.backgroundColor = [UIColor whiteColor];
-                UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(15, 10, 100, 20)];
-                lab.text = @"订单评价";
-                lab.textColor = [UIColor orangeColor];
-                
-                UILabel *lab1 = [[UILabel alloc]initWithFrame:CGRectMake(15, 35, 50, 20)];
-                lab1.text = @"评分 ：";
-                lab1.font = [UIFont systemFontOfSize:14];
-                [evaluationVi addSubview:lab];
-                [evaluationVi addSubview:lab1];
-                [self.view addSubview:evaluationVi];
-                
-                CWStarRateView *starRateView = [[CWStarRateView alloc] initWithFrame:CGRectMake(55, 35, 70, 20) numberOfStars:5];
-                starRateView.scorePercent = [[evaluationDic objectForKey:@"point"]floatValue]/5.0;
-                starRateView.allowIncompleteStar = YES;
-                starRateView.hasAnimation = YES;
-                starRateView.userInteractionEnabled = NO;
-                [evaluationVi addSubview:starRateView];
-            }
+
             
-            
-        }else if (status == 4){
+        }else if (status == 500){
             self.currentState.text = @"等待仲裁结果";
             self.currentState.textColor = [UIColor grayColor];
             self.actionView.hidden = YES;
-        }else if (status == 5){
+        }else if (status == 600){
             self.currentState.text = @"教官胜诉";
             self.currentState.textColor = [UIColor grayColor];
             self.actionView.hidden = YES;
-        }else if (status == 6){
+        }else if (status == 700){
             self.currentState.text = @"用户胜诉";
             self.currentState.textColor = [UIColor grayColor];
             self.actionView.hidden = YES;
-        }else{
+        }else if (status == 300){
+            self.currentState.text = @"已拒绝";
+            self.currentState.textColor = [UIColor grayColor];
+            self.actionView.hidden = YES;
+        }else if (status == 800){
+            self.currentState.text = @"完成";
+            self.actionView.hidden = YES;
+            UIView *evaluationVi = [[UIView alloc]initWithFrame:CGRectMake(0, self.actionView.frame.origin.y, self.view.bounds.size.width, 60)];
+            evaluationVi.backgroundColor = [UIColor whiteColor];
+            UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(15, 10, 100, 20)];
+            lab.text = @"订单评价";
+            lab.textColor = [UIColor orangeColor];
             
+            UILabel *lab1 = [[UILabel alloc]initWithFrame:CGRectMake(15, 35, 50, 20)];
+            lab1.text = @"评分 ：";
+            lab1.font = [UIFont systemFontOfSize:14];
+            [evaluationVi addSubview:lab];
+            [evaluationVi addSubview:lab1];
+            [self.view addSubview:evaluationVi];
+            
+            CWStarRateView *starRateView = [[CWStarRateView alloc] initWithFrame:CGRectMake(55, 35, 70, 20) numberOfStars:5];
+            starRateView.scorePercent = [[evaluationDic objectForKey:@"point"]floatValue]/5.0;
+            starRateView.allowIncompleteStar = YES;
+            starRateView.hasAnimation = YES;
+            starRateView.userInteractionEnabled = NO;
+            [evaluationVi addSubview:starRateView];
+
         }
-        
     }
     self.orderId.text = [NSString stringWithFormat:@"%d",[[self.detailOrderDic objectForKey:@"id"]intValue]];
 
@@ -244,14 +255,14 @@
             NSString * money = [NSString stringWithFormat:@"余额（💰%.1f)",count];
             self.payAlert = [[UIAlertView alloc]initWithTitle:@"选择支付方式" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:money,@"支付宝",nil];
             [self.payAlert show];
-        }else if (status == 3){
+        }else if (status == 400){
             //跳转到评价页面
             [self performSegueWithIdentifier:@"assess" sender:self.detailOrderDic];
         }else{
             
         }
     }else if(self.orderTag == 666){
-        if (status == 0) {
+        if (status == 100) {
             NSString *session = [PersistenceManager getLoginSession];
             [UserConnector acceptOrder:session orderId:[self.detailOrderDic objectForKey:@"id"] receiver:^(NSData *data, NSError *error){
                 if (error) {
@@ -276,8 +287,10 @@
                     
                 }
             }];
-        }else if (status == 2){
- 
+        }else if (status == 200){
+            
+            [ShowMessage showMessage:@"已经接受"];
+            
         }else{
         
         }

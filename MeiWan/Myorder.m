@@ -153,16 +153,19 @@
     NSDictionary *evaluationDic = [orderDic objectForKey:@"evaluation"];
     int status = [[orderDic objectForKey:@"status"]intValue];
     if (self.mytag == 888) {
-        if (status == 0) {
+        if (status == 100) {
             currentState.text = @"等待接受";
             currentState.textColor = [UIColor grayColor];
-        }else if (status == 1){
-            currentState.text = @"等待支付";
+        }else if (status == 101){
+            currentState.text = @"已撤回";
             currentState.textColor = [UIColor orangeColor];
-        }else if (status == 2){
+        }else if (status == 200){
+            currentState.text = @"已经接受";
+            currentState.textColor = [UIColor orangeColor];
+        }else if (status == 200){
             currentState.text = @"等待确认";
             currentState.textColor = [UIColor orangeColor];
-        }else if (status == 3){
+        }else if (status == 400||status==600){
             currentState.text = @"等待评价";
             if (evaluationDic) {
                 currentState.textColor = [UIColor grayColor];
@@ -170,29 +173,36 @@
             }else{
                 currentState.textColor = [UIColor orangeColor];
             }
-        }else if (status == 4){
+        }else if (status == 500){
             currentState.text = @"等待仲裁结果";
             currentState.textColor = [UIColor grayColor];
-        }else if (status == 5){
+        }else if (status == 600){
             currentState.text = @"达人胜诉";
             currentState.textColor = [UIColor grayColor];
-        }else if (status == 6){
+        }else if (status == 700){
             currentState.text = @"用户胜诉";
             currentState.textColor = [UIColor grayColor];
-        }else{
-            
+        }else if (status == 800){
+            currentState.text = @"已评价";
+            currentState.textColor = [UIColor grayColor];
+        }else if (status == 300){
+            currentState.text = @"已拒绝";
+            currentState.textColor = [UIColor grayColor];
         }
     }else if(self.mytag == 666){
-        if (status == 0) {
+        if (status == 100) {
             currentState.text = @"等待接受";
             currentState.textColor = [UIColor orangeColor];
-        }else if (status == 1){
-            currentState.text = @"等待支付";
+        }else if (status == 101){
+            currentState.text = @"被撤回";
+            currentState.textColor = [UIColor orangeColor];
+        }else if (status == 200){
+            currentState.text = @"已经接受";
             currentState.textColor = [UIColor grayColor];
         }else if (status == 2){
             currentState.text = @"已支付";
             currentState.textColor = [CorlorTransform  colorWithHexString:@"#00bb9c"];
-        }else if (status == 3){
+        }else if (status == 400||status==600){
             currentState.text = @"等待评价";
             if (evaluationDic) {
                 currentState.textColor = [UIColor grayColor];
@@ -200,17 +210,21 @@
             }else{
                 currentState.textColor = [UIColor grayColor];
             }
-         }else if (status == 4){
+         }else if (status == 500){
             currentState.text = @"等待仲裁结果";
             currentState.textColor = [UIColor grayColor];
-        }else if (status == 5){
+        }else if (status == 600){
             currentState.text = @"达人胜诉";
             currentState.textColor = [UIColor grayColor];
-        }else if (status == 6){
+        }else if (status == 700){
             currentState.text = @"用户胜诉";
             currentState.textColor = [UIColor grayColor];
-        }else{
-            
+        }else if (status == 800){
+            currentState.text = @"已评价";
+            currentState.textColor = [UIColor grayColor];
+        }else if (status == 300){
+            currentState.text = @"已拒绝";
+            currentState.textColor = [UIColor grayColor];
         }
     }
     currentState.font = [UIFont systemFontOfSize:13.0f];

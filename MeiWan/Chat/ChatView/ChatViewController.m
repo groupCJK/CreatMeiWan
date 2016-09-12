@@ -194,7 +194,9 @@
 - (void)messageViewController:(EaseMessageViewController *)viewController
   didSelectAvatarMessageModel:(id<IMessageModel>)messageModel
 {
+    
     NSString* from = messageModel.message.from;
+ 
     
     if (messageModel.isSender) {
 
@@ -219,7 +221,6 @@
 }
 - (UITableViewCell *)messageViewController:(UITableView *)tableView cellForMessageModel:(id<IMessageModel>)model
 {
-    
     
     NSString * from = model.message.to;
     
@@ -283,10 +284,11 @@
     
     return nil;
 }
-
 - (void)messageViewController:(EaseMessageViewController *)viewController
                selectAtTarget:(EaseSelectAtTargetCallback)selectedCallback
 {
+    
+    
     _selectedCallback = selectedCallback;
     EMGroup *chatGroup = nil;
     NSArray *groupArray = [[EMClient sharedClient].groupManager getJoinedGroups];
@@ -721,12 +723,11 @@
                                         self.tableView.frame = CGRectMake(0, 64, dtScreenWidth, dtScreenHeight-180);
 
                                     }else{
-                                        self.tableView.frame = CGRectMake(0, 0, dtScreenWidth, dtScreenHeight-180);
+                                        self.tableView.frame = CGRectMake(0, 0, dtScreenWidth, dtScreenHeight-100);
                                     }
                                 }
                             }else{
-                                self.tableView.frame = CGRectMake(0, 0, dtScreenWidth, dtScreenHeight-180);
-                                self.tableView.backgroundColor = [UIColor greenColor];
+                                self.tableView.frame = CGRectMake(0, 0, dtScreenWidth, dtScreenHeight-100);
                             }
                         }
                     }];

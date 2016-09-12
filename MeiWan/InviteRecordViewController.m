@@ -136,10 +136,7 @@
                 [PersistenceManager setLoginSession:@""];
                LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
                lv.hidesBottomBarWhenPushed = YES;
-               [self.navigationController pushViewController:lv animated:YES];
-                
-                
-                
+               [self.navigationController pushViewController:lv animated:YES];                
             }else{
                 
             }
