@@ -41,6 +41,8 @@
 #import "UMSocial.h"
 #import "creatAlbum.h"
 #import "MJRefresh.h"
+#import "AFNetworking/AFNetworking.h"
+
 @interface PersonTableViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UserInfoDelegate,SettingUserInfoDelegate,MyburseDelegate,MBProgressHUDDelegate,UIGestureRecognizerDelegate>
 {
     MBProgressHUD * HUD;
@@ -88,7 +90,7 @@
     HUD.labelText = @"加载中";
     HUD.delegate = self;
     [HUD showAnimated:YES whileExecutingBlock:^{
-
+        
     }];
     
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -96,6 +98,7 @@
         
     }];
     [self loadUserData];
+    // http://api.cn.faceplusplus.com/detection/detect?api_key=c18c7df55febcf39feeb52681d40d9a3&api_secret=2QlutmPkapTPUTIPjINh5UaVC4Ex8SSU&url=
 }
 - (void)headRefresh
 {
@@ -108,19 +111,23 @@
     [self pushToLoginController];
 }
 -(void)pushToLoginController{
-    [PersistenceManager setLoginSession:@""];
     
+    [PersistenceManager setLoginSession:@""];
     LoginViewController *lv = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
     lv.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:lv animated:YES];
+    
 }
 -(void)burseInfo:(NSDictionary *)userInfo{
+    
     self.userinfo = [[UserInfo alloc]initWithDictionary:userInfo];
     self.userInfoDic = userInfo;
     [PersistenceManager setLoginUser:userInfo];
     [self updateUI];
+    
 }
 -(void)userInfo:(NSDictionary *)userInfo{
+    
     self.userinfo = [[UserInfo alloc]initWithDictionary:userInfo];
     self.userInfoDic = userInfo;
     [PersistenceManager setLoginUser:userInfo];
@@ -128,6 +135,7 @@
     
 }
 -(void)settingUserInfo:(NSDictionary *)userInfo{
+    
     self.userinfo = [[UserInfo alloc]initWithDictionary:userInfo];
     self.userInfoDic = userInfo;
     [PersistenceManager setLoginUser:userInfo];
@@ -145,9 +153,30 @@
     self.headimage.layer.masksToBounds = YES;
     self.headimage.layer.cornerRadius = 45.0f;
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",self.userinfo.headUrl]];
-    if (url==nil) {
-        [self showMessage:@"系统监测到您还没有上传头像，请您尽快完成。友情提示:真实头像更能约到朋友呢"];
-    }
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    [manager GET:[NSString stringWithFormat:@"http://api.cn.faceplusplus.com/detection/detect?api_key=c18c7df55febcf39feeb52681d40d9a3&api_secret=2QlutmPkapTPUTIPjINh5UaVC4Ex8SSU&url=%@",url] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        SBJsonParser * parser = [[SBJsonParser alloc]init];
+        NSDictionary * json = [parser objectWithData:responseObject];
+        NSLog(@"%@",json);
+        
+        NSArray * face = json[@"face"];
+        if (face.count>0) {
+            
+        }else{
+            [self showMessage:@"注意！请上传一张本人可看清脸的真实头像。"];
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"%@",error);
+        NSLog(@"---");
+    }];
+    self.headimage.backgroundColor = [UIColor grayColor];
     [self.headimage setImageWithURL:url];
     [self.userInfoHeaderView addSubview:self.headimage];
     
@@ -174,7 +203,7 @@
     UITapGestureRecognizer* headImageSingleRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(SingleHeadImageTap:)];
     headImageSingleRecognizer.numberOfTapsRequired = 1; // 单击
     [self.headimage addGestureRecognizer:headImageSingleRecognizer];
- 
+    
     NSDate *today = [NSDate date];
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     formatter.dateFormat = @"yyyy";
@@ -289,7 +318,7 @@
     fansSingleRecognizer.numberOfTapsRequired = 1; // 单击
     [fansView addGestureRecognizer:fansSingleRecognizer];
     
-//    [[EMClient sharedClient].chatManager setApnsNickname:self.userinfo.nickname];
+    //    [[EMClient sharedClient].chatManager setApnsNickname:self.userinfo.nickname];
     self.balanceLabel.text = [NSString stringWithFormat:@"余额:%.2f",[self.userInfoData[@"money2"]doubleValue]];
     self.balanceLabel.textColor = [UIColor grayColor];
     //公会管理今日收益
@@ -300,7 +329,7 @@
         self.mywallet.text = @"安全设置";
         self.balanceLabel.text = nil;
         self.imgwallet.image = [UIImage imageNamed:@"shezhi"];
-
+        
         self.recordCenter.hidden = YES;
         self.guildCenter.hidden = YES;
     }else{
@@ -308,8 +337,8 @@
             self.mywallet.text = @"安全设置";
             self.balanceLabel.text = nil;
             self.imgwallet.image = [UIImage imageNamed:@"shezhi"];
-//            self.recordCenter.hidden = YES;
-//            self.guildCenter.hidden = YES;
+            //            self.recordCenter.hidden = YES;
+            //            self.guildCenter.hidden = YES;
         }
         [setting getOpen];
     }
@@ -322,18 +351,14 @@
 
 - (void)loadUserData{
     //获得个人信息，更新界面
-    self.userInfoDic = [PersistenceManager getLoginUser];
-    self.userinfo = [[UserInfo alloc]initWithDictionary: [PersistenceManager getLoginUser]];
-
-    
     NSString *sesstion = [PersistenceManager getLoginSession];
     
     [UserConnector getLoginedUser:sesstion receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
         
         if (error) {
-        
+            
             [ShowMessage showMessage:@"服务器未响应"];
-       
+            
         }else{
             
             SBJsonParser*parser=[[SBJsonParser alloc]init];
@@ -345,13 +370,15 @@
             if (status == 0) {
                 
                 self.userInfoData = [json objectForKey:@"entity"];
+                self.userInfoDic = json[@"entity"];
+                self.userinfo = [[UserInfo alloc]initWithDictionary:json[@"entity"]];
                 
                 [self updateUI];
                 
                 [HUD hide:YES afterDelay:0.5];
                 
                 [self.tableView.mj_header endRefreshing];
-            
+                
             }
         }
     }];
@@ -472,7 +499,7 @@
     if ([mediaType isEqualToString:@"public.image"]){
         
         UIImage *originImage = [info objectForKey:UIImagePickerControllerEditedImage];
-
+        
         UIImage *scaleImage = [CompressImage compressImage:originImage];
         if (scaleImage == nil) {
             [ShowMessage showMessage:@"不支持该类型图片"];
@@ -645,7 +672,7 @@
         if(self.userinfo.isAudit == 0){
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"如果亲通过了美玩达人申请，亲就可以选择自己的专属标签，出售自己的闲暇时间" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
+                
             }];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 [self performSegueWithIdentifier:@"askfor" sender:nil];
@@ -671,7 +698,7 @@
             [setting getOpen];
         }
     }
-   
+    
     if (indexPath.row==2) {
         findFriendViewController * findVC = [[findFriendViewController alloc]init];
         findVC.title = @"搜索好友";
@@ -788,7 +815,7 @@
         
     }];
     UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-
+        
     }];
     [alertController addAction:cancelAction];
     [alertController addAction:sureAction];

@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSArray * statusArray = @[@"农民",@"学生",@"教师",@"上班族",@"多金族",@"夜猫子",@"中医",@"西医",@"护士"];
+    NSArray * statusArray = @[@"IT",@"投资／理财",@"个体经营",@"休闲娱乐",@"贸易",@"食品／药品",@"文化传媒",@"教育",@"政府机关"];
     
     self.view.backgroundColor  = [UIColor whiteColor];
     CGFloat ButtonWidth = (dtScreenWidth-15)/3;
@@ -81,7 +81,7 @@
                 }
             }
         }];
-
+        
     }
 }
 - (void)buttonClick:(UIButton *)sender

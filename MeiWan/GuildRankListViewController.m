@@ -96,12 +96,12 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    NSDictionary * dictionary = self.rankArray[indexPath.row];
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    PlagerinfoViewController *playerInfoCtr = [mainStoryboard instantiateViewControllerWithIdentifier:@"secondStory"];
-    playerInfoCtr.playerInfo= dictionary[@"user"];
-    [self.navigationController pushViewController:playerInfoCtr animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    NSDictionary * dictionary = self.rankArray[indexPath.row];
+//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    PlagerinfoViewController *playerInfoCtr = [mainStoryboard instantiateViewControllerWithIdentifier:@"secondStory"];
+//    playerInfoCtr.playerInfo= dictionary[@"user"];
+//    [self.navigationController pushViewController:playerInfoCtr animated:YES];
 
 }
 - (void)findUnionsRank:(int )type

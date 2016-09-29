@@ -21,7 +21,8 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
 #import "MD5.h"
-
+#import "AFNetworking/AFNetworking.h"
+#import "PersonTableViewController.h"
 @interface InviteViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,MBProgressHUDDelegate>
 {
     NSArray * titlelabel;
@@ -165,6 +166,60 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(payauthorizedfail:) name:@"wx_payauthorizedfail" object:nil];
     
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = YES;
+    
+    NSDictionary * userdic = [PersistenceManager getLoginUser];
+    NSString * headImageurlString = userdic[@"headUrl"];
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",headImageurlString]];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    [manager GET:[NSString stringWithFormat:@"http://api.cn.faceplusplus.com/detection/detect?api_key=c18c7df55febcf39feeb52681d40d9a3&api_secret=2QlutmPkapTPUTIPjINh5UaVC4Ex8SSU&url=%@",url] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        SBJsonParser * parser = [[SBJsonParser alloc]init];
+        NSDictionary * json = [parser objectWithData:responseObject];
+        NSLog(@"%@",json);
+        
+        NSArray * face = json[@"face"];
+        if (face.count>0) {
+            
+        }else{
+            [self pushToPersonPage];
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+    
+}
+/** 没有头像跳转到个人界面设置头像 */
+- (void)pushToPersonPage
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"注意！由于您没有使用可看清脸的真实照片作为头像，暂时无法邀请我们的达人。请到个人界面完善个人资料" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action){
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }];
+    UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"去设置" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        PersonTableViewController *personvc = [mainStoryboard instantiateViewControllerWithIdentifier:@"persontableview"];
+        [self.navigationController pushViewController:personvc animated:YES];
+        
+        
+    }];
+    
+    [alertController addAction:cancelAction];
+    [alertController addAction:sureAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 -(void)dealloc
 {
@@ -577,7 +632,7 @@
             [ShowMessage showMessage:@"你所邀请的人没有经过资质审核"];
         }else{
             
-            UIAlertView *payAlertView = [[UIAlertView alloc]initWithTitle:@"选择支付方式" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"余额支付",@"支付宝",@"微信",nil];
+            UIAlertView *payAlertView = [[UIAlertView alloc]initWithTitle:@"选择支付方式" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"余额支付",@"支付宝支付",@"微信支付",nil];
             
             [payAlertView show];
         }

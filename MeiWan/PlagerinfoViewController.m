@@ -68,11 +68,8 @@
     
     self.page = 0;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"更多" style:UIBarButtonItemStylePlain target:self action:@selector(more)];
-
-    self.title = [self.playerInfo objectForKey:@"nickname"];
     
-    [self playerTableView];
-    [self headerRereshing];
+    self.title = [self.playerInfo objectForKey:@"nickname"];
     
     NSString *session= [PersistenceManager getLoginSession];
     [UserConnector findPeiwanById:session userId:[self.playerInfo objectForKey:@"id"] receiver:^(NSData *data,NSError *error){
@@ -113,7 +110,7 @@
                 }
             }else if (status == 1){
             }else{
-               
+                
             }
         }
     }];
@@ -140,7 +137,7 @@
         [self.playerTableView.mj_header beginRefreshing];
         [self headerRereshing];
     }];
-
+    
     MJRefreshAutoGifFooter *footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRereshing)];
     self.playerTableView.mj_footer = footer;
     footer.refreshingTitleHidden = YES;
@@ -170,7 +167,11 @@
             
         }
     }];
-
+    
+    
+    [self playerTableView];
+    [self headerRereshing];
+    
 }
 /** 下拉刷新 */
 - (void)headerRereshing
@@ -225,11 +226,11 @@
             return 155;
         }
     }else if (indexPath.section == 3){
-
+        
         if (self.userPhotosArray.count>0) {
-            return 130;
+            return 160;
         }else{
-         return 0;
+            return 0;
         }
     }else if (indexPath.section == 4){
         return 80;
@@ -244,7 +245,7 @@
         if (!infoCell) {
             infoCell = [[playerInfoTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"infoCell"];
             infoCell.playerInfo = self.playerInfo;
-//            self.headerImageUrl = self.playerInfo[@"headUrl"];
+            //            self.headerImageUrl = self.playerInfo[@"headUrl"];
         }
         infoCell.playerHeadImage.userInteractionEnabled = YES;
         UITapGestureRecognizer * tapgesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesture:)];
@@ -255,7 +256,7 @@
         if (!timeCell) {
             timeCell = [[TimeLabelTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"timeCell"];
         }
-
+        
         if (self.userTimetagArray.count>0) {
             timeCell.playerInfo = self.playerInfo;
             return timeCell;
@@ -265,7 +266,7 @@
         }
         
     }else if (indexPath.section == 2){
-         _dynamicCell = [tableView dequeueReusableCellWithIdentifier:@"dynamicCell"];
+        _dynamicCell = [tableView dequeueReusableCellWithIdentifier:@"dynamicCell"];
         if (!_dynamicCell) {
             _dynamicCell = [[UserDynamicTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"dynamicCell"];
         }
@@ -296,9 +297,9 @@
                 Commentcell.commentTitleLabel.hidden = YES;
             }
         }else{
-
+            
             Commentcell.commentLabel.hidden = NO;
-
+            
         }
         
         return Commentcell;
@@ -345,13 +346,13 @@
     }else if (indexPath.section == 3){
         NSLog(@"足迹");
     }else if (indexPath.section == 4){
-
-//        NSDictionary * CommentPerson = self.myEvaluateArray[indexPath.row];
-//        /** 跳转评价用户详情页 */
-//        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//        PlagerinfoViewController *playerInfoCtr = [mainStoryboard instantiateViewControllerWithIdentifier:@"secondStory"];
-//        playerInfoCtr.playerInfo= CommentPerson[@"user"];
-//        [self.navigationController pushViewController:playerInfoCtr animated:YES];
+        
+        NSDictionary * CommentPerson = self.myEvaluateArray[indexPath.row];
+        /** 跳转评价用户详情页 */
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        PlagerinfoViewController *playerInfoCtr = [mainStoryboard instantiateViewControllerWithIdentifier:@"secondStory"];
+        playerInfoCtr.playerInfo= CommentPerson[@"user"];
+        [self.navigationController pushViewController:playerInfoCtr animated:YES];
     }
 }
 
@@ -391,7 +392,7 @@
         [focusButton setTitle:@"关注" forState:UIControlStateNormal];
         focusButton.backgroundColor = [CorlorTransform colorWithHexString:@"#FF69B4"];
         if (self.playerInfo != nil) {
-
+            
             
             [self.MyfriendArray enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 
@@ -400,7 +401,7 @@
                     focusButton.backgroundColor = [CorlorTransform colorWithHexString:@"3366cc"];
                 }
             }];
-
+            
         }
         [focusButton setTintColor:[UIColor whiteColor]];
         focusButton.layer.masksToBounds = YES;
@@ -470,7 +471,7 @@
 
 - (void)didTipChatButton:(UIButton *)sender{
     [self setUpLoaduserInfo];
-
+    
     NSString *product = [NSString stringWithFormat:@"%@%ld",
                          [setting getRongLianYun],[[self.playerInfo objectForKey:@"id"]longValue]];
     
@@ -486,7 +487,7 @@
         
     }else{
         show = [setting canOpen];
-
+        
         [setting getOpen];
     }
 }
@@ -494,11 +495,11 @@
 - (void)didTipfocusButton:(UIButton *)sender{
     
     NSString *sesstion = [PersistenceManager getLoginSession];
-
+    
     if ([sender.titleLabel.text isEqualToString:@"取消关注"]) {
         NSLog(@"删除好友");
         
-    
+        
         [UserConnector deleteFriend:sesstion friendId:[self.playerInfo objectForKey:@"id"] receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
             if (error) {
                 [ShowMessage showMessage:@"服务器未响应"];
@@ -539,7 +540,7 @@
                 }
             }
         }];
-
+        
     }
 }
 
@@ -598,7 +599,7 @@
     tap.numberOfTapsRequired = 1;
     [lab1 addGestureRecognizer:tap];
     [self.moreVi addSubview:lab1];
-
+    
     UILabel * label2 = [[UILabel alloc]initWithFrame:CGRectMake(0, 31, 60, 30)];
     label2.text = @"拉黑";
     label2.textColor = [UIColor whiteColor];
@@ -838,10 +839,10 @@
                 [self.playerTableView.mj_header endRefreshing];
                 [self.playerTableView.mj_footer endRefreshing];
                 [self.playerTableView reloadData];
-
+                
             }
         }
     }];
-
+    
 }
 @end

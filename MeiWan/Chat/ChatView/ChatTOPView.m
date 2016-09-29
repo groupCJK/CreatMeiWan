@@ -18,7 +18,7 @@
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(dtScreenWidth-10-70, frame.size.height/2-20, 70, 30);
         [button setTitle:@"邀请" forState:UIControlStateNormal];
-        button.backgroundColor = [CorlorTransform colorWithHexString:@"66ff66"];
+        button.backgroundColor = [CorlorTransform colorWithHexString:@"#87CEFA"];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         button.layer.cornerRadius = 5;
         button.clipsToBounds = YES;
