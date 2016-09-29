@@ -577,6 +577,7 @@
 		98EFD3671D4AF19A002A1913 /* Myorder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98EFD3651D4AF19A002A1913 /* Myorder.xib */; };
 		98F57EF01D4F409F001D3703 /* black2.png in Resources */ = {isa = PBXBuildFile; fileRef = 98F57EEF1D4F409F001D3703 /* black2.png */; };
 		C12454D4E5FAE708A007C06C /* libPods-MeiWan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E78385184BB25331F6F840D7 /* libPods-MeiWan.a */; };
+		D09C0FF01D9D072B00D2C8F5 /* useruse_protocol.htm in Resources */ = {isa = PBXBuildFile; fileRef = D09C0FEF1D9D072B00D2C8F5 /* useruse_protocol.htm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1689,6 +1690,7 @@
 		98EFD3641D4AF19A002A1913 /* Myorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Myorder.m; sourceTree = "<group>"; };
 		98EFD3651D4AF19A002A1913 /* Myorder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Myorder.xib; sourceTree = "<group>"; };
 		98F57EEF1D4F409F001D3703 /* black2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = black2.png; path = ../black2.png; sourceTree = "<group>"; };
+		D09C0FEF1D9D072B00D2C8F5 /* useruse_protocol.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = useruse_protocol.htm; path = Source/useruse_protocol.htm; sourceTree = "<group>"; };
 		D94EE7AF621BFE9480E8818D /* Pods-MeiWan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeiWan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MeiWan/Pods-MeiWan.debug.xcconfig"; sourceTree = "<group>"; };
 		E78385184BB25331F6F840D7 /* libPods-MeiWan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MeiWan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -2676,6 +2678,7 @@
 				18CC8ECB1BC39CE1000281CE /* alamofire */,
 				1897DAC71BADA060006EC039 /* peiwan_protocol.htm */,
 				182CE9BF1BE357A200D766E8 /* usermy_protocol.htm */,
+				D09C0FEF1D9D072B00D2C8F5 /* useruse_protocol.htm */,
 				04B138921BA07EAF00AAD93F /* AliOrder.h */,
 				04B138931BA07EAF00AAD93F /* AliOrder.m */,
 				18F1CC041B948C51003EF78A /* Ji */,
@@ -4404,6 +4407,7 @@
 				27CA5A631CEEACCB00CC6956 /* peiwan_me_dark@3x.png in Resources */,
 				27CA5A461CEEACCB00CC6956 /* icon.png in Resources */,
 				27CA5A6E1CEEACCB00CC6956 /* peiwan_wallet.png in Resources */,
+				D09C0FF01D9D072B00D2C8F5 /* useruse_protocol.htm in Resources */,
 				27CA5A3B1CEEACCB00CC6956 /* default@2x.png in Resources */,
 				27CA5A721CEEACCB00CC6956 /* qingtong.png in Resources */,
 				2B5805B31D2A386800721653 /* label2.png in Resources */,

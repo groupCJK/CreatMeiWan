@@ -346,12 +346,12 @@
         NSLog(@"足迹");
     }else if (indexPath.section == 4){
 
-        NSDictionary * CommentPerson = self.myEvaluateArray[indexPath.row];
-        /** 跳转评价用户详情页 */
-        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        PlagerinfoViewController *playerInfoCtr = [mainStoryboard instantiateViewControllerWithIdentifier:@"secondStory"];
-        playerInfoCtr.playerInfo= CommentPerson[@"user"];
-        [self.navigationController pushViewController:playerInfoCtr animated:YES];
+//        NSDictionary * CommentPerson = self.myEvaluateArray[indexPath.row];
+//        /** 跳转评价用户详情页 */
+//        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//        PlagerinfoViewController *playerInfoCtr = [mainStoryboard instantiateViewControllerWithIdentifier:@"secondStory"];
+//        playerInfoCtr.playerInfo= CommentPerson[@"user"];
+//        [self.navigationController pushViewController:playerInfoCtr animated:YES];
     }
 }
 

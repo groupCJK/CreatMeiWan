@@ -173,23 +173,23 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    PlagerinfoViewController *playerInfoCtr = [mainStoryboard instantiateViewControllerWithIdentifier:@"secondStory"];
-
-    if (tableView == guildMemberTableView) {
-
-        playerInfoCtr.playerInfo= _memberArray[indexPath.row];
-        
-    }else if (tableView == DaRenTableView){
-        
-        playerInfoCtr.playerInfo= _darenArray[indexPath.row];
-
-    }else{
-        NSDictionary * playerInfo = _subGuildArray[indexPath.row];
-        playerInfoCtr.playerInfo= playerInfo[@"user"];
-    }
-    
-    [self.navigationController pushViewController:playerInfoCtr animated:YES];
+//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    PlagerinfoViewController *playerInfoCtr = [mainStoryboard instantiateViewControllerWithIdentifier:@"secondStory"];
+//
+//    if (tableView == guildMemberTableView) {
+//
+//        playerInfoCtr.playerInfo= _memberArray[indexPath.row];
+//        
+//    }else if (tableView == DaRenTableView){
+//        
+//        playerInfoCtr.playerInfo= _darenArray[indexPath.row];
+//
+//    }else{
+//        NSDictionary * playerInfo = _subGuildArray[indexPath.row];
+//        playerInfoCtr.playerInfo= playerInfo[@"user"];
+//    }
+//    
+//    [self.navigationController pushViewController:playerInfoCtr animated:YES];
 }
 
 #pragma mark----netWorking

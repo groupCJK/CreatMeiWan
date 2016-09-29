@@ -845,7 +845,13 @@
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action){
             
         }];
-        UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:nil];
+        UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            if ([message isEqualToString:@"支付成功"]) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                
+            }
+        }];
         [alertController addAction:cancelAction];
         [alertController addAction:sureAction];
         [self presentViewController:alertController animated:YES completion:nil];
