@@ -188,7 +188,7 @@
         
         NSArray * face = json[@"face"];
         if (face.count>0) {
-            
+            [self creatHTM];
         }else{
             [self pushToPersonPage];
         }
@@ -197,6 +197,11 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
     }];
+    
+}
+/** 创建用户使用声明 */
+- (void)creatHTM
+{
     
 }
 /** 没有头像跳转到个人界面设置头像 */
