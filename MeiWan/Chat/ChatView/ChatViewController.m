@@ -158,31 +158,39 @@
     self.tabBarController.tabBar.hidden = YES;
     
     NSDictionary * userdic = [PersistenceManager getLoginUser];
-    NSString * headImageurlString = userdic[@"headUrl"];
-    
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",headImageurlString]];
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    
-    [manager GET:[NSString stringWithFormat:@"http://api.cn.faceplusplus.com/detection/detect?api_key=c18c7df55febcf39feeb52681d40d9a3&api_secret=2QlutmPkapTPUTIPjINh5UaVC4Ex8SSU&url=%@",url] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        SBJsonParser * parser = [[SBJsonParser alloc]init];
-        NSDictionary * json = [parser objectWithData:responseObject];
-        NSLog(@"%@",json);
-        
-        NSArray * face = json[@"face"];
-        if (face.count>0) {
+    NSString * session = [PersistenceManager getLoginSession];
+    [UserConnector findPeiwanById:session userId:userdic[@"id"] receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (!error) {
+            SBJsonParser * parserData = [[SBJsonParser alloc]init];
+            NSDictionary * json = [parserData objectWithData:data];
+            NSDictionary * loginUser = json[@"entity"];
+            NSString * loginUserHeaderImage = loginUser[@"headUrl"];
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",loginUserHeaderImage]];
             
-        }else{
-            [self pushToPersonPage];
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+            
+            [manager GET:[NSString stringWithFormat:@"http://api.cn.faceplusplus.com/detection/detect?api_key=c18c7df55febcf39feeb52681d40d9a3&api_secret=2QlutmPkapTPUTIPjINh5UaVC4Ex8SSU&url=%@",url] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                
+                SBJsonParser * parser = [[SBJsonParser alloc]init];
+                NSDictionary * json = [parser objectWithData:responseObject];
+                NSLog(@"%@",json);
+                
+                NSArray * face = json[@"face"];
+                if (face.count>0) {
+                    
+                }else{
+                    [self pushToPersonPage];
+                }
+                
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                
+                [self creatView];
+                
+            }];
+
         }
-        
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        [self creatView];
-        
     }];
     
 }

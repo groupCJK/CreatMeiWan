@@ -60,10 +60,10 @@
         scv.minimumZoomScale = 1.0;
         scv.bounces = NO;
         UIImageView *im = [[UIImageView alloc]initWithFrame:scv.bounds];
-        im.contentMode = UIViewContentModeScaleAspectFit;
         im.tag = idx+10;
         NSURL *url = [NSURL URLWithString:obj[@"url"]];
         [im setImageWithURL:url];
+        im.contentMode = UIViewContentModeScaleAspectFill;
         UILongPressGestureRecognizer * longpress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPressGerture:)];
         im.userInteractionEnabled = YES;
         longpress.minimumPressDuration = 0.8;

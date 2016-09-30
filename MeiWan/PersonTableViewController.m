@@ -152,7 +152,7 @@
     self.headimage = [[UIImageView alloc] initWithFrame:CGRectMake((dtScreenWidth-90)/2, 10, 90, 90)];
     self.headimage.layer.masksToBounds = YES;
     self.headimage.layer.cornerRadius = 45.0f;
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",self.userinfo.headUrl]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",self.userinfo.headUrl]];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];

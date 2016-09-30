@@ -41,7 +41,8 @@
         [imageview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@!1",obj[@"url"]]]];
         imageview.tag = idx+1;
         imageview.userInteractionEnabled = YES;
-        
+        imageview.contentMode = UIViewContentModeScaleAspectFill;
+
         UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesture:)];
         [imageview addGestureRecognizer:tapGesture];
         [self.scrollview addSubview:imageview];

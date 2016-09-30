@@ -20,6 +20,7 @@
     [head setImageWithURL:headUrl placeholderImage:nil];
     head.layer.masksToBounds = YES;
     head.layer.cornerRadius = 25.f;
+    head.contentMode = UIViewContentModeScaleAspectFill;
     [self addSubview:head];
     self.playerHeadImage = head;
     

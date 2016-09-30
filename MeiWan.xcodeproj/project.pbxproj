@@ -577,6 +577,7 @@
 		98EFD3671D4AF19A002A1913 /* Myorder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98EFD3651D4AF19A002A1913 /* Myorder.xib */; };
 		98F57EF01D4F409F001D3703 /* black2.png in Resources */ = {isa = PBXBuildFile; fileRef = 98F57EEF1D4F409F001D3703 /* black2.png */; };
 		C12454D4E5FAE708A007C06C /* libPods-MeiWan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E78385184BB25331F6F840D7 /* libPods-MeiWan.a */; };
+		D076DAC91D9E06BA002B0CAE /* HTMView.m in Sources */ = {isa = PBXBuildFile; fileRef = D076DAC81D9E06BA002B0CAE /* HTMView.m */; };
 		D09C0FF01D9D072B00D2C8F5 /* useruse_protocol.htm in Resources */ = {isa = PBXBuildFile; fileRef = D09C0FEF1D9D072B00D2C8F5 /* useruse_protocol.htm */; };
 /* End PBXBuildFile section */
 
@@ -1690,6 +1691,8 @@
 		98EFD3641D4AF19A002A1913 /* Myorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Myorder.m; sourceTree = "<group>"; };
 		98EFD3651D4AF19A002A1913 /* Myorder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Myorder.xib; sourceTree = "<group>"; };
 		98F57EEF1D4F409F001D3703 /* black2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = black2.png; path = ../black2.png; sourceTree = "<group>"; };
+		D076DAC71D9E06BA002B0CAE /* HTMView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMView.h; sourceTree = "<group>"; };
+		D076DAC81D9E06BA002B0CAE /* HTMView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMView.m; sourceTree = "<group>"; };
 		D09C0FEF1D9D072B00D2C8F5 /* useruse_protocol.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = useruse_protocol.htm; path = Source/useruse_protocol.htm; sourceTree = "<group>"; };
 		D94EE7AF621BFE9480E8818D /* Pods-MeiWan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeiWan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MeiWan/Pods-MeiWan.debug.xcconfig"; sourceTree = "<group>"; };
 		E78385184BB25331F6F840D7 /* libPods-MeiWan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MeiWan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2514,6 +2517,7 @@
 				18888E821BA3F11800F7FEEE /* StateTableViewController.m */,
 				18F359D51B7AFA2E005E3838 /* InviteViewController.h */,
 				18F359D61B7AFA2E005E3838 /* InviteViewController.m */,
+				D076DAC61D9E0699002B0CAE /* 自定义网页选择 */,
 				18F359DB1B7AFB07005E3838 /* ExploitsTableViewController.h */,
 				18F359DC1B7AFB07005E3838 /* ExploitsTableViewController.m */,
 				18EB4E4E1B8081C5000AE087 /* AssesserInfoViewController.h */,
@@ -4280,6 +4284,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D076DAC61D9E0699002B0CAE /* 自定义网页选择 */ = {
+			isa = PBXGroup;
+			children = (
+				D076DAC71D9E06BA002B0CAE /* HTMView.h */,
+				D076DAC81D9E06BA002B0CAE /* HTMView.m */,
+			);
+			name = "自定义网页选择";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -4661,6 +4674,7 @@
 				18F359DD1B7AFB07005E3838 /* ExploitsTableViewController.m in Sources */,
 				2BD3C6201D73DCC0008CFE23 /* PSTGridLayoutRow.m in Sources */,
 				2BD3C6011D73DCC0008CFE23 /* MWTapDetectingImageView.m in Sources */,
+				D076DAC91D9E06BA002B0CAE /* HTMView.m in Sources */,
 				2B1C11221D752DE000184BD3 /* chatOrderView.m in Sources */,
 				18824A511B85D5920063EC03 /* SBJsonStreamWriterState.m in Sources */,
 				2BD3C6101D73DCC0008CFE23 /* UIImage+EMMultiFormat.m in Sources */,
@@ -5149,7 +5163,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.chuangjike.MeiWan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6a8020ef-b990-4cb7-9215-fc89299ad68f";
+				PROVISIONING_PROFILE = "8804e2f2-67b4-482b-9208-c926740f7075";
 				SDKROOT = iphoneos9.3;
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "MeiWan/MeiWan-Bridging-Header.h";
@@ -5217,7 +5231,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.chuangjike.MeiWan;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6a8020ef-b990-4cb7-9215-fc89299ad68f";
+				PROVISIONING_PROFILE = "8804e2f2-67b4-482b-9208-c926740f7075";
 				SDKROOT = iphoneos9.3;
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "MeiWan/MeiWan-Bridging-Header.h";

@@ -23,7 +23,8 @@
 #import "MD5.h"
 #import "AFNetworking/AFNetworking.h"
 #import "PersonTableViewController.h"
-@interface InviteViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,MBProgressHUDDelegate>
+#import "HTMView.h"
+@interface InviteViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,MBProgressHUDDelegate,HTMViewButtonAction>
 {
     NSArray * titlelabel;
     //背景图
@@ -71,6 +72,8 @@
 @property (nonatomic,assign) float carFeeNumber;
 @property (nonatomic,retain) NSNumber * userUnionID;
 @property (nonatomic,retain) NSNumber * peiwanUnionID;
+/** 协议view */
+@property (nonatomic,strong)HTMView * htmlWebview;
 @end
 
 @implementation InviteViewController
@@ -172,37 +175,74 @@
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
     
-    NSDictionary * userdic = [PersistenceManager getLoginUser];
-    NSString * headImageurlString = userdic[@"headUrl"];
-    
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@!1",headImageurlString]];
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    
-    [manager GET:[NSString stringWithFormat:@"http://api.cn.faceplusplus.com/detection/detect?api_key=c18c7df55febcf39feeb52681d40d9a3&api_secret=2QlutmPkapTPUTIPjINh5UaVC4Ex8SSU&url=%@",url] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        SBJsonParser * parser = [[SBJsonParser alloc]init];
-        NSDictionary * json = [parser objectWithData:responseObject];
-        NSLog(@"%@",json);
-        
-        NSArray * face = json[@"face"];
-        if (face.count>0) {
-            [self creatHTM];
-        }else{
-            [self pushToPersonPage];
-        }
-        
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-    }];
+    NSUserDefaults * userdefaults = [NSUserDefaults standardUserDefaults];
+
+    if ([[userdefaults objectForKey:@"userAgreeDelegate"] isEqualToString:@"yes"]) {
+        [self judgeTheUserHasHead];
+    }else{
+        [self creatHTM];
+    }
+    [userdefaults synchronize];
     
 }
 /** 创建用户使用声明 */
 - (void)creatHTM
 {
+    HTMView * htmlWebview = [[HTMView alloc]initWithFrame:CGRectMake(20, 84, dtScreenWidth-40, dtScreenHeight-140)];
+    htmlWebview.backgroundColor = [UIColor blackColor];
+    htmlWebview.delegate = self;
+    [self.view addSubview:htmlWebview];
+    self.htmlWebview = htmlWebview;
+}
+-(void)agreeButtonAction:(UIButton *)sender
+{
+    self.htmlWebview.hidden = YES;
+    [self judgeTheUserHasHead];
+}
+/** 判断用户是否有真实人脸头像 */
+- (void)judgeTheUserHasHead
+{
     
+    NSDictionary * userdic = [PersistenceManager getLoginUser];
+    NSString * session = [PersistenceManager getLoginSession];
+    [UserConnector findPeiwanById:session userId:userdic[@"id"] receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (!error) {
+            SBJsonParser * parserData = [[SBJsonParser alloc]init];
+            NSDictionary * json = [parserData objectWithData:data];
+            NSDictionary * loginDic = json[@"entity"];
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",loginDic[@"headUrl"]]];
+            
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+            
+            [manager GET:[NSString stringWithFormat:@"http://api.cn.faceplusplus.com/detection/detect?api_key=c18c7df55febcf39feeb52681d40d9a3&api_secret=2QlutmPkapTPUTIPjINh5UaVC4Ex8SSU&url=%@",url] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                
+                SBJsonParser * parser = [[SBJsonParser alloc]init];
+                NSDictionary * json = [parser objectWithData:responseObject];
+                NSLog(@"%@",json);
+                
+                NSArray * face = json[@"face"];
+                if (face.count>0) {
+                    
+                }else{
+                    [self pushToPersonPage];
+                }
+                
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                
+                
+            }];
+            
+        }
+    }];
+    
+
+    
+}
+-(void)dontAgreeButtonAction:(UIButton *)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 /** 没有头像跳转到个人界面设置头像 */
 - (void)pushToPersonPage
