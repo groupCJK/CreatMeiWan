@@ -179,6 +179,8 @@
                 NSArray * face = json[@"face"];
                 if (face.count>0) {
                     
+                    [self creatView];
+                    
                 }else{
                     [self pushToPersonPage];
                 }
@@ -186,7 +188,6 @@
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 
-                [self creatView];
                 
             }];
 
@@ -712,9 +713,10 @@
     }
     
     if (messageType == EMMessageBodyTypeText) {
-        [self.menuController setMenuItems:@[_copyMenuItem, _deleteMenuItem,_transpondMenuItem]];
+//        [self.menuController setMenuItems:@[_copyMenuItem, _deleteMenuItem,_transpondMenuItem]];
+        [self.menuController setMenuItems:@[_copyMenuItem, _deleteMenuItem]];
     } else if (messageType == EMMessageBodyTypeImage){
-        [self.menuController setMenuItems:@[_deleteMenuItem,_transpondMenuItem]];
+        [self.menuController setMenuItems:@[_deleteMenuItem]];
     } else {
         [self.menuController setMenuItems:@[_deleteMenuItem]];
     }
@@ -949,13 +951,10 @@
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action){
         
     }];
-    UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"撤销" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
         
-    [alertController addAction:cancelAction];
-    [alertController addAction:sureAction];
-    [self presentViewController:alertController animated:YES completion:nil];
-    
+        
         NSString * session = [PersistenceManager getLoginSession];
         [UserConnector backOrder:session orderId:self.OrderDic[@"id"] receiver:^(NSData * _Nullable data, NSError * _Nullable error) {
             
@@ -979,6 +978,9 @@
         }];
         
     }];
+    [alertController addAction:cancelAction];
+    [alertController addAction:sureAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 
 }
 #pragma mark----举报
